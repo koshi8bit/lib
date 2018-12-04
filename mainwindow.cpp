@@ -69,8 +69,6 @@ void MainWindow::configurePlotLabel(QCustomPlot *plot, const QString &y1Label, c
 
     plot->setNoAntialiasingOnDrag(true);
 
-    plot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-    plot->xAxis->setDateTimeFormat("hh:mm:ss.z");
 
     connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
@@ -112,9 +110,13 @@ void MainWindow::configureGraph()
 void MainWindow::configurePlot()
 {
     configurePlotLabel(ui->plotEnergyCurrent, "Энергия (кВ)", "Ток (мА)");
+
     configurePlotLabel(ui->plotTemperaturePower, "Температура (С)", "Мощность (Вт)");
+
     configurePlotLabel(ui->plotVacuumRadiation, "Вакуум (Пa)", "Радиация (Зв)");
     ui->plotVacuumRadiation->yAxis->setScaleType(QCPAxis::stLogarithmic);
+//    QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
+//    ui->plotVacuumRadiation->yAxis->setTicker(logTicker);
 
     connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
     connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));

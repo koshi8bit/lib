@@ -11,8 +11,6 @@ namespace Ui {
 class MainWindow;
 }
 
-class QCPAxis;
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
