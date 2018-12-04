@@ -112,9 +112,13 @@ void MainWindow::configureGraph()
 void MainWindow::configurePlot()
 {
     configurePlotLabel(ui->plotEnergyCurrent, "Энергия (кВ)", "Ток (мА)");
+    
     configurePlotLabel(ui->plotTemperaturePower, "Температура (С)", "Мощность (Вт)");
+    
     configurePlotLabel(ui->plotVacuumRadiation, "Вакуум (Пa)", "Радиация (Зв)");
     ui->plotVacuumRadiation->yAxis->setScaleType(QCPAxis::stLogarithmic);
+    QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
+    ui->plotVacuumRadiation->yAxis->setTicker(logTicker);
 
     connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
     connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));

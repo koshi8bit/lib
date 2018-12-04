@@ -29,9 +29,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void configurePlotEnergyCurrent(QCustomPlot *plot, const QString &y1Label, const QString &y2Label);
+    void configurePlotLabel(QCustomPlot *plot, const QString &y1Label, const QString &y2Label);
     bool plotUpdateRealTIme;
-    int plotScreenBufferSEC = 120;
+    int plotScreenBufferSEC = 60*5;
     int plotUpdateIntervalMSEC = 100;
 
     QTimer *timer;
