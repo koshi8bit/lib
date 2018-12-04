@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QBoxLayout>
 #include <QTimer>
+#include <QRandomGenerator>
 #include "qcustomplot.h"
 
 namespace Ui {
@@ -24,11 +25,14 @@ public:
 
     void configureGraphEnergyCurrent();
 
+
+
 private:
     Ui::MainWindow *ui;
     void configurePlotEnergyCurrent(QCustomPlot *plot, const QString &y1Label, const QString &y2Label);
     bool plotUpdateRealTIme;
     int plotScreenBufferSEC = 120;
+    int plotUpdateIntervalMSEC = 100;
 
     QTimer *timer;
 
@@ -37,11 +41,14 @@ private:
 
     void configureGraph();
     void configurePlot();
+    void configurePlotBackground(QCustomPlot *plot);
 
+
+    void configurePlotAxis(QCPAxis *axis);
 
 private slots:
     void drawData();
-    void changeRanges(QCPRange range);
+    void changeRange(QCPRange range);
     void on_checkBox_stateChanged(int arg1);
 };
 
