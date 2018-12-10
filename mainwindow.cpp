@@ -42,9 +42,9 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     configurePlotBackground(plot);
 
     plot->xAxis->setLabel("Время");
-    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
-    timeTicker->setTimeFormat("%h:%m:%s");
-    plot->xAxis->setTicker(timeTicker);
+    QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
+    dateTicker->setDateTimeFormat("hh:mm:ss.zzz");
+    plot->xAxis->setTicker(dateTicker);
 
     plot->yAxis->setLabel(y1Label);
     plot->yAxis->setLabelPadding(20);
@@ -102,7 +102,7 @@ void MainWindow::configurePlotBackgroundAxis(QCPAxis *axis)
 void MainWindow::drawData()
 {
     auto now = QDateTime::currentDateTime();
-    auto time = now.toTime_t();// + static_cast<double>(now.time().msec())/1000;
+    auto time = now.toTime_t() + static_cast<double>(now.time().msec())/1000;
     //time = static_cast<double>(QTime::currentTime().elapsed());
 
 
@@ -110,8 +110,14 @@ void MainWindow::drawData()
     graphTemperature->addData(time, QRandomGenerator::global()->bounded(1.0));
     graphCurrent->addData(time, cos(time)*1000);
 
-//    if (ui->checkBox->isChecked())
-//        ui->plotEnergyCurrent->xAxis->setRange(time - plotScreenBufferSEC, time);
+    if (ui->checkBox->isChecked())
+    {
+        auto range = ui->plotEnergyCurrent->xAxis->range();
+        //ui->plotEnergyCurrent->xAxis->setRange(time - (range.maxRange - range.minRange) , time);
+
+        ui->plotEnergyCurrent->xAxis->setRange(time - plotScreenBufferSEC, time);
+
+    }
     ui->plotEnergyCurrent->replot();
 }
 
