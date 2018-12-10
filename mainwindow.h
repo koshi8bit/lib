@@ -45,11 +45,14 @@ private:
     void configurePlotBackgroundAxis(QCPAxis *axis);
 
     QCPMarginGroup *mg;
+    double rangeDelta = 200;
+    double now;
 
 private slots:
     void drawData();
     void changeRange(QCPRange range);
-    void on_checkBox_stateChanged(int arg1);
+    void on_checkBoxRealTime_stateChanged(int arg1);
+    void on_editRange_editingFinished();
 };
 
 #endif // MAINWINDOW_H

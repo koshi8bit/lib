@@ -34,7 +34,14 @@
        </spacer>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox">
+       <widget class="QDoubleSpinBox" name="editRange">
+        <property name="maximum">
+         <double>9999999999.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBoxRealTime">
         <property name="text">
          <string>Real-time</string>
         </property>

@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::configurePlots()
 {
+    ui->editRange->setEnabled(false);
     mg = new QCPMarginGroup(ui->plotEnergyCurrent);
 
     configurePlot(ui->plotEnergyCurrent, "Энергия (кВ)", "Ток (мА)", mg);
@@ -57,7 +58,7 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
 
     plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
 
-    plot->setNoAntialiasingOnDrag(true);
+    //plot->setNoAntialiasingOnDrag(true);
 
 
 
@@ -103,23 +104,22 @@ void MainWindow::configurePlotBackgroundAxis(QCPAxis *axis)
 
 void MainWindow::drawData()
 {
-    auto now = QDateTime::currentDateTime();
-    auto time = now.toTime_t() + static_cast<double>(now.time().msec())/1000;
+    auto time = QDateTime::currentDateTime();
+    now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
     //time = static_cast<double>(QTime::currentTime().elapsed());
 
 
-    graphEnergy->addData(time, sin(time));
-    graphTemperature->addData(time, QRandomGenerator::global()->bounded(1.0));
-    graphCurrent->addData(time, cos(time)*1000);
+    graphEnergy->addData(now, sin(now));
+    graphTemperature->addData(now, QRandomGenerator::global()->bounded(1.0));
+    graphCurrent->addData(now, cos(now)*1000);
 
-    if (ui->checkBox->isChecked())
+
+
+    if (ui->checkBoxRealTime->isChecked())
     {
-        auto range = ui->plotEnergyCurrent->xAxis->range();
-        //ui->plotEnergyCurrent->xAxis->setRange(time - (range.maxRange - range.minRange) , time);
-
-        ui->plotEnergyCurrent->xAxis->setRange(time - plotScreenBufferSEC, time);
-
+        ui->plotEnergyCurrent->xAxis->setRange(now - rangeDelta, now);
     }
+
     ui->plotEnergyCurrent->replot();
 }
 
@@ -153,7 +153,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::changeRange(QCPRange range)
 {
-    QCPAxis* axis = (QCPAxis*)QObject::sender();
+    QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
 
     if(axis != ui->plotEnergyCurrent->xAxis)
         ui->plotEnergyCurrent->xAxis->setRange(range);
@@ -162,15 +162,19 @@ void MainWindow::changeRange(QCPRange range)
     if(axis != ui->plotVacuumRadiation->xAxis)
         ui->plotVacuumRadiation->xAxis->setRange(range);
 
+    rangeDelta = range.upper - range.lower;
+    ui->editRange->setValue(rangeDelta);
+
     ui->plotEnergyCurrent->replot();
 }
 
 
 
-
-void MainWindow::on_checkBox_stateChanged(int arg1)
+void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 {
     plotUpdateRealTIme = static_cast<bool>(arg1);
+
+    ui->editRange->setEnabled(!plotUpdateRealTIme);
 
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
@@ -180,5 +184,10 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 
     ui->plotVacuumRadiation->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotVacuumRadiation->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
+}
 
+void MainWindow::on_editRange_editingFinished()
+{
+    rangeDelta = ui->editRange->value();
+    ui->plotEnergyCurrent->xAxis->setRange(now - rangeDelta, now);
 }
