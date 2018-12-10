@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    configurePlot();
-    configureGraph();
+    configurePlots();
+    configureGraphs();
 
     timer = new QTimer(this);
     timer->setInterval(plotUpdateIntervalMSEC);
@@ -17,27 +17,57 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start();
 }
 
-void MainWindow::configurePlotAxis(QCPAxis *axis)
+
+void MainWindow::configurePlots()
 {
-    axis->setLabelColor(Qt::white);
-    axis->setBasePen(QPen(Qt::white, 1));
-    axis->setSubTickPen(QPen(Qt::white, 1));
-    axis->setTickLabelColor(Qt::white);
-    axis->setTickPen(QPen(Qt::white, 1));
-    axis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
-    axis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
-    axis->grid()->setSubGridVisible(true);
-    axis->grid()->setZeroLinePen(Qt::NoPen);
+    mg = new QCPMarginGroup(ui->plotEnergyCurrent);
+
+    configurePlot(ui->plotEnergyCurrent, "Энергия (кВ)", "Ток (мА)", mg);
+
+    configurePlot(ui->plotTemperaturePower, "Температура (С)", "Мощность (Вт)", mg);
+
+    configurePlot(ui->plotVacuumRadiation, "Вакуум (Пa)", "Радиация (Зв)", mg);
+    ui->plotVacuumRadiation->yAxis->setScaleType(QCPAxis::stLogarithmic);
+    QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
+    ui->plotVacuumRadiation->yAxis->setTicker(logTicker);
+
+    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
+    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
+
 }
+
+
+void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg)
+{
+    configurePlotBackground(plot);
+
+    plot->xAxis->setLabel("Время");
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    plot->xAxis->setTicker(timeTicker);
+
+    plot->yAxis->setLabel(y1Label);
+    plot->yAxis->setLabelPadding(20);
+
+    plot->yAxis2->setVisible(true);
+    plot->yAxis2->setLabelPadding(30);
+    plot->yAxis2->setLabel(y2Label);
+
+    plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
+
+    plot->setNoAntialiasingOnDrag(true);
+
+
+
+    connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+}
+
 
 void MainWindow::configurePlotBackground(QCustomPlot *plot)
 {
-    configurePlotAxis(plot->xAxis);
-    configurePlotAxis(plot->yAxis);
-    configurePlotAxis(plot->yAxis2);
-
-    plot->axisRect()->setRangeDrag(Qt::Horizontal);
-    plot->axisRect()->setRangeZoom(Qt::Horizontal);
+    configurePlotBackgroundAxis(plot->xAxis);
+    configurePlotBackgroundAxis(plot->yAxis);
+    configurePlotBackgroundAxis(plot->yAxis2);
 
 
     QLinearGradient plotGradient;
@@ -54,39 +84,45 @@ void MainWindow::configurePlotBackground(QCustomPlot *plot)
     plot->axisRect()->setBackground(axisRectGradient);
 }
 
-void MainWindow::configurePlotLabel(QCustomPlot *plot, const QString &y1Label, const QString &y2Label)
+void MainWindow::configurePlotBackgroundAxis(QCPAxis *axis)
 {
-    configurePlotBackground(plot);
-
-    plot->xAxis->setLabel("Время");
-
-    plot->yAxis->setLabel(y1Label);
-    plot->yAxis->setLabelPadding(20);
-
-    plot->yAxis2->setVisible(true);
-    plot->yAxis2->setLabelPadding(30);
-    plot->yAxis2->setLabel(y2Label);
-
-    plot->setNoAntialiasingOnDrag(true);
-
-
-    connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
-    connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+    axis->setLabelColor(Qt::white);
+    axis->setBasePen(QPen(Qt::white, 1));
+    axis->setSubTickPen(QPen(Qt::white, 1));
+    axis->setTickLabelColor(Qt::white);
+    axis->setTickPen(QPen(Qt::white, 1));
+    axis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+    axis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+    axis->grid()->setSubGridVisible(true);
+    axis->grid()->setZeroLinePen(Qt::NoPen);
 }
+
+
 
 void MainWindow::drawData()
 {
     auto now = QDateTime::currentDateTime();
-    auto time = now.toTime_t() + static_cast<double>(now.time().msec())/1000;
+    auto time = now.toTime_t();// + static_cast<double>(now.time().msec())/1000;
+    //time = static_cast<double>(QTime::currentTime().elapsed());
 
 
     graphEnergy->addData(time, sin(time));
     graphTemperature->addData(time, QRandomGenerator::global()->bounded(1.0));
     graphCurrent->addData(time, cos(time)*1000);
 
-    if (ui->checkBox->isChecked())
-        ui->plotEnergyCurrent->xAxis->setRange(time - plotScreenBufferSEC, time);
+//    if (ui->checkBox->isChecked())
+//        ui->plotEnergyCurrent->xAxis->setRange(time - plotScreenBufferSEC, time);
     ui->plotEnergyCurrent->replot();
+}
+
+
+
+void MainWindow::configureGraphs()
+{
+    configureGraphEnergyCurrent();
+
+    graphTemperature = ui->plotTemperaturePower->addGraph();
+    graphTemperature->setPen(QColor(255, 255, 255));
 }
 
 void MainWindow::configureGraphEnergyCurrent()
@@ -96,36 +132,14 @@ void MainWindow::configureGraphEnergyCurrent()
 
     graphCurrent = ui->plotEnergyCurrent->addGraph();
     graphCurrent->setPen(QColor(255, 66, 66));
-    //graphCurrent->
 }
 
-void MainWindow::configureGraph()
-{
-    configureGraphEnergyCurrent();
 
-    graphTemperature = ui->plotTemperaturePower->addGraph();
-    graphTemperature->setPen(QColor(255, 255, 255));
-}
-
-void MainWindow::configurePlot()
-{
-    configurePlotLabel(ui->plotEnergyCurrent, "Энергия (кВ)", "Ток (мА)");
-
-    configurePlotLabel(ui->plotTemperaturePower, "Температура (С)", "Мощность (Вт)");
-
-    configurePlotLabel(ui->plotVacuumRadiation, "Вакуум (Пa)", "Радиация (Зв)");
-    ui->plotVacuumRadiation->yAxis->setScaleType(QCPAxis::stLogarithmic);
-//    QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
-//    ui->plotVacuumRadiation->yAxis->setTicker(logTicker);
-
-    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
-    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
-
-}
 
 
 MainWindow::~MainWindow()
 {
+    mg->deleteLater();
     delete ui;
 }
 
@@ -139,6 +153,8 @@ void MainWindow::changeRange(QCPRange range)
         ui->plotTemperaturePower->xAxis->setRange(range);
     if(axis != ui->plotVacuumRadiation->xAxis)
         ui->plotVacuumRadiation->xAxis->setRange(range);
+
+    ui->plotEnergyCurrent->replot();
 }
 
 

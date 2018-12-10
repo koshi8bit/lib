@@ -27,7 +27,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void configurePlotLabel(QCustomPlot *plot, const QString &y1Label, const QString &y2Label);
+    void configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg);
     bool plotUpdateRealTIme;
     int plotScreenBufferSEC = 60*5;
     int plotUpdateIntervalMSEC = 100;
@@ -37,12 +37,14 @@ private:
     QCPGraph *graphEnergy, *graphCurrent, *graphTemperature;
 
 
-    void configureGraph();
-    void configurePlot();
+    void configureGraphs();
+    void configurePlots();
     void configurePlotBackground(QCustomPlot *plot);
 
 
-    void configurePlotAxis(QCPAxis *axis);
+    void configurePlotBackgroundAxis(QCPAxis *axis);
+
+    QCPMarginGroup *mg;
 
 private slots:
     void drawData();
