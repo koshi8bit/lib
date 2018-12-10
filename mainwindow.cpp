@@ -30,6 +30,8 @@ void MainWindow::configurePlots()
     ui->plotVacuumRadiation->yAxis->setScaleType(QCPAxis::stLogarithmic);
     QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
     ui->plotVacuumRadiation->yAxis->setTicker(logTicker);
+    ui->plotVacuumRadiation->yAxis->setNumberFormat("eb");
+    ui->plotVacuumRadiation->yAxis->setNumberPrecision(0);
 
     connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
     connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
@@ -43,7 +45,7 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
 
     plot->xAxis->setLabel("Время");
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat("hh:mm:ss.zzz");
+    dateTicker->setDateTimeFormat("hh:mm:ss.z");
     plot->xAxis->setTicker(dateTicker);
 
     plot->yAxis->setLabel(y1Label);
@@ -79,7 +81,7 @@ void MainWindow::configurePlotBackground(QCustomPlot *plot)
     QLinearGradient axisRectGradient;
     axisRectGradient.setStart(0, 0);
     axisRectGradient.setFinalStop(0, 350);
-    axisRectGradient.setColorAt(0, QColor(80, 80, 80));
+    axisRectGradient.setColorAt(0, QColor(60, 60, 60));
     axisRectGradient.setColorAt(1, QColor(30, 30, 30));
     plot->axisRect()->setBackground(axisRectGradient);
 }
