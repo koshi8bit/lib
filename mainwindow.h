@@ -47,6 +47,7 @@ private:
     QCPMarginGroup *mg;
     double rangeDelta = 200;
     double now;
+    QDateTime time;
 
 private slots:
     void drawData();

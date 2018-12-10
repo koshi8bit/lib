@@ -104,10 +104,8 @@ void MainWindow::configurePlotBackgroundAxis(QCPAxis *axis)
 
 void MainWindow::drawData()
 {
-    auto time = QDateTime::currentDateTime();
+    time = QDateTime::currentDateTime();
     now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
-    //time = static_cast<double>(QTime::currentTime().elapsed());
-
 
     graphEnergy->addData(now, sin(now));
     graphTemperature->addData(now, QRandomGenerator::global()->bounded(1.0));
