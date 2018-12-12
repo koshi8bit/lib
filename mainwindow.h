@@ -5,7 +5,9 @@
 #include <QBoxLayout>
 #include <QTimer>
 #include <QRandomGenerator>
+
 #include "qcustomplot.h"
+#include "axisconfig.h"
 
 namespace Ui {
 class MainWindow;
