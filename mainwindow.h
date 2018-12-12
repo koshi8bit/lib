@@ -25,6 +25,10 @@ public:
 
 
 
+    void configureGraphTemperaturePower();
+
+    void configurePlotVacuumRadiation();
+
 private:
     Ui::MainWindow *ui;
     void configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg);
@@ -49,6 +53,10 @@ private:
     QDateTime time;
 
     
+    void configurePlotEnergyCurrent();
+
+    void configurePlotTemperaturePower();
+
 private slots:
     void drawData();
     void changeRange(QCPRange range);
