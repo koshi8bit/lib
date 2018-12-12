@@ -60,8 +60,6 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     configurePlotZoomAndDrag(plot, false);
     configurePlotBackground(plot);
 
-
-
     plot->xAxis->setLabel("Время");
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
     dateTicker->setDateTimeFormat("hh:mm:ss.z");
@@ -75,6 +73,9 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     plot->yAxis2->setLabel(y2Label);
 
     plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
+
+    plot->legend->setVisible(true);
+    plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
 
     //plot->setNoAntialiasingOnDrag(true);
 
@@ -141,9 +142,11 @@ void MainWindow::drawData()
     time = QDateTime::currentDateTime();
     now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
 
-    graphHighVoltageElvFull->addData(now, sin(now));
-    graphTemperature->addData(now, QRandomGenerator::global()->bounded(1.0));
-    graphCurrentBergozHebt->addData(now, cos(now)*1000);
+    graphHighVoltageElvFull->addData(now, sin(5.0f/2*cos(now)));
+    graphHighVoltageElvFirstSection->addData(now, sin(now));
+    graphCurrentBergozHebt->addData(now, QRandomGenerator::global()->bounded(1.0));
+    graphTemperaturePyrometer->addData(now, sin(9.0f/2*cos(now)));
+    graphVacuumTandem->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
 
 
     if (ui->checkBoxRealTime->isChecked())
@@ -158,43 +161,62 @@ void MainWindow::drawData()
 
 void MainWindow::configureGraphs()
 {
-    configureGraphEnergyCurrent();
+    configureGraphsEnergyCurrent();
 
-    configureGraphTemperaturePower();
+    configureGraphsTemperaturePower();
+
+    configureGraphsVacuumRadiation();
 }
 
-void MainWindow::configureGraphEnergyCurrent()
+void MainWindow::configureGraphsEnergyCurrent()
 {
     //FIXME ?tima
-    auto xAxis = ui->plotHighVoltageCurrent->xAxis;
-    auto yAxis = ui->plotHighVoltageCurrent->yAxis;
-    auto yAxis2 = ui->plotHighVoltageCurrent->yAxis2;
+    auto plot = ui->plotHighVoltageCurrent;
+    auto xAxis = plot->xAxis;
+    auto yAxis = plot->yAxis;
+    auto yAxis2 = plot->yAxis2;
 
     ColorSetter cs(this);
 
-    graphHighVoltageElvFull = ui->plotHighVoltageCurrent->addGraph(xAxis, yAxis);
+    graphHighVoltageElvFull = plot->addGraph(xAxis, yAxis);
     graphHighVoltageElvFull->setName("ЭЛВ (полное напряжение)");
     graphHighVoltageElvFull->setPen(cs.getColor());
 
-    graphHighVoltageElvFirstSection = ui->plotHighVoltageCurrent->addGraph(xAxis, yAxis);
+    graphHighVoltageElvFirstSection = plot->addGraph(xAxis, yAxis);
     graphHighVoltageElvFirstSection->setName("ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setPen(cs.getColor());
 
-    graphCurrentBergozHebt = ui->plotHighVoltageCurrent->addGraph(xAxis, yAxis2);
-    graphHighVoltageElvFirstSection->setName("Bergoz (выс. эн. тракт)");
+    graphCurrentBergozHebt = plot->addGraph(xAxis, yAxis2);
+    graphCurrentBergozHebt->setName("Bergoz (выс. эн. тракт)");
     graphCurrentBergozHebt->setPen(cs.getColor());
 }
 
-void MainWindow::configureGraphTemperaturePower()
+void MainWindow::configureGraphsTemperaturePower()
 {
-    auto xAxis = ui->plotTemperaturePower->xAxis;
-    auto yAxis = ui->plotTemperaturePower->yAxis;
-    auto yAxis2 = ui->plotTemperaturePower->yAxis2;
+    auto plot = ui->plotTemperaturePower;
+    auto xAxis = plot->xAxis;
+    auto yAxis = plot->yAxis;
+    auto yAxis2 = plot->yAxis2;
 
     ColorSetter cs(this);
 
-    graphTemperature = ui->plotTemperaturePower->addGraph(xAxis, yAxis);
-    graphTemperature->setPen(cs.getColor());
+    graphTemperaturePyrometer = plot->addGraph(xAxis, yAxis);
+    graphTemperaturePyrometer->setName("Пирометр");
+    graphTemperaturePyrometer->setPen(cs.getColor());
+}
+
+void MainWindow::configureGraphsVacuumRadiation()
+{
+    auto plot = ui->plotVacuumRadiation;
+    auto xAxis = plot->xAxis;
+    auto yAxis = plot->yAxis;
+    auto yAxis2 = plot->yAxis2;
+
+    ColorSetter cs(this);
+
+    graphVacuumTandem = plot->addGraph(xAxis, yAxis);
+    graphVacuumTandem->setName("Тандем");
+    graphVacuumTandem->setPen(cs.getColor());
 }
 
 

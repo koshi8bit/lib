@@ -5,6 +5,7 @@
 #include <QBoxLayout>
 #include <QTimer>
 #include <QRandomGenerator>
+#include <QtMath>
 
 #include "qcustomplot.h"
 #include "axisconfig.h"
@@ -22,9 +23,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void configureGraphEnergyCurrent();
-    void configureGraphTemperaturePower();
-    void configurePlotVacuumRadiation();
 
 private:
     Ui::MainWindow *ui;
@@ -35,7 +33,7 @@ private:
 
     QTimer *timer;
 
-    QCPGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt, *graphTemperature;
+    QCPGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt, *graphTemperaturePyrometer, *graphVacuumTandem;
 
 
     void configureGraphs();
@@ -48,10 +46,14 @@ private:
     double now;
     QDateTime time;
 
-    
     void configurePlotEnergyCurrent();
-
     void configurePlotTemperaturePower();
+    void configurePlotVacuumRadiation();
+
+
+    void configureGraphsEnergyCurrent();
+    void configureGraphsTemperaturePower();
+    void configureGraphsVacuumRadiation();
 
 
 private slots:
