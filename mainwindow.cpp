@@ -177,6 +177,21 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
 
+    ui->plotEnergyCurrent->axisRect()->setRangeDragAxes(
+                QList<QCPAxis*>()
+                << ui->plotEnergyCurrent->xAxis
+                << ui->plotEnergyCurrent->yAxis
+                << ui->plotEnergyCurrent->yAxis2
+                );
+
+    ui->plotEnergyCurrent->axisRect()->setRangeZoomAxes(
+                QList<QCPAxis*>()
+                << ui->plotEnergyCurrent->xAxis
+                << ui->plotEnergyCurrent->yAxis
+                << ui->plotEnergyCurrent->yAxis2
+                );
+
+
     ui->plotTemperaturePower->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotTemperaturePower->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
 
