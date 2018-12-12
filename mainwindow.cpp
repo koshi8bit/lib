@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::configurePlots()
 {
-    mg = new QCPMarginGroup(ui->plotEnergyCurrent);
+    mg = new QCPMarginGroup(ui->plotHighVoltageCurrent);
 
     configurePlotEnergyCurrent();
     configurePlotTemperaturePower();
@@ -32,9 +32,9 @@ void MainWindow::configurePlots()
 
 void MainWindow::configurePlotEnergyCurrent()
 {
-    configurePlot(ui->plotEnergyCurrent, "Энергия (кВ)", "Ток (мА)", mg);
-    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
-    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
+    configurePlot(ui->plotHighVoltageCurrent, "Энергия (кВ)", "Ток (мА)", mg);
+    connect(ui->plotHighVoltageCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
+    connect(ui->plotHighVoltageCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
 }
 
 void MainWindow::configurePlotTemperaturePower()
@@ -141,17 +141,17 @@ void MainWindow::drawData()
     time = QDateTime::currentDateTime();
     now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
 
-    graphEnergyFull->addData(now, sin(now));
+    graphHighVoltageElvFull->addData(now, sin(now));
     graphTemperature->addData(now, QRandomGenerator::global()->bounded(1.0));
-    graphCurrent->addData(now, cos(now)*1000);
+    graphCurrentBergozHebt->addData(now, cos(now)*1000);
 
 
     if (ui->checkBoxRealTime->isChecked())
     {
-        ui->plotEnergyCurrent->xAxis->setRange(now - plotScreenBufferSEC, now);
+        ui->plotHighVoltageCurrent->xAxis->setRange(now - plotScreenBufferSEC, now);
     }
 
-    ui->plotEnergyCurrent->replot();
+    ui->plotHighVoltageCurrent->replot();
 }
 
 
@@ -166,26 +166,35 @@ void MainWindow::configureGraphs()
 void MainWindow::configureGraphEnergyCurrent()
 {
     //FIXME ?tima
-    auto xAxis = ui->plotEnergyCurrent->xAxis;
-    auto yAxis = ui->plotEnergyCurrent->yAxis;
-    auto yAxis2 = ui->plotEnergyCurrent->yAxis2;
+    auto xAxis = ui->plotHighVoltageCurrent->xAxis;
+    auto yAxis = ui->plotHighVoltageCurrent->yAxis;
+    auto yAxis2 = ui->plotHighVoltageCurrent->yAxis2;
 
-    graphEnergyFull = ui->plotEnergyCurrent->addGraph(xAxis, yAxis);
-    graphEnergyFull->setName("ЭЛВ (полное напряжение)");
-    graphEnergyFull->setPen(QColor(255, 255, 255));
+    ColorSetter cs(this);
 
-    graphEnergyFirstSection= ui->plotEnergyCurrent->addGraph(xAxis, yAxis);
-    graphEnergyFirstSection->setName("ЭЛВ (первая секция)");
-    graphEnergyFirstSection->setPen(QColor(255, 255, 255));
+    graphHighVoltageElvFull = ui->plotHighVoltageCurrent->addGraph(xAxis, yAxis);
+    graphHighVoltageElvFull->setName("ЭЛВ (полное напряжение)");
+    graphHighVoltageElvFull->setPen(cs.getColor());
 
-    graphCurrent = ui->plotEnergyCurrent->addGraph(xAxis, yAxis2);
-    graphCurrent->setPen(QColor(255, 66, 66));
+    graphHighVoltageElvFirstSection = ui->plotHighVoltageCurrent->addGraph(xAxis, yAxis);
+    graphHighVoltageElvFirstSection->setName("ЭЛВ (первая секция)");
+    graphHighVoltageElvFirstSection->setPen(cs.getColor());
+
+    graphCurrentBergozHebt = ui->plotHighVoltageCurrent->addGraph(xAxis, yAxis2);
+    graphHighVoltageElvFirstSection->setName("Bergoz (выс. эн. тракт)");
+    graphCurrentBergozHebt->setPen(cs.getColor());
 }
 
 void MainWindow::configureGraphTemperaturePower()
 {
-    graphTemperature = ui->plotTemperaturePower->addGraph();
-    graphTemperature->setPen(QColor(255, 255, 255));
+    auto xAxis = ui->plotTemperaturePower->xAxis;
+    auto yAxis = ui->plotTemperaturePower->yAxis;
+    auto yAxis2 = ui->plotTemperaturePower->yAxis2;
+
+    ColorSetter cs(this);
+
+    graphTemperature = ui->plotTemperaturePower->addGraph(xAxis, yAxis);
+    graphTemperature->setPen(cs.getColor());
 }
 
 
@@ -199,8 +208,8 @@ void MainWindow::changeRange(QCPRange range)
 {
     QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
 
-    if(axis != ui->plotEnergyCurrent->xAxis)
-        ui->plotEnergyCurrent->xAxis->setRange(range);
+    if(axis != ui->plotHighVoltageCurrent->xAxis)
+        ui->plotHighVoltageCurrent->xAxis->setRange(range);
     if(axis != ui->plotTemperaturePower->xAxis)
         ui->plotTemperaturePower->xAxis->setRange(range);
     if(axis != ui->plotVacuumRadiation->xAxis)
@@ -208,7 +217,7 @@ void MainWindow::changeRange(QCPRange range)
 
     plotScreenBufferSEC = range.upper - range.lower;
 
-    ui->plotEnergyCurrent->replot();
+    ui->plotHighVoltageCurrent->replot();
 }
 
 
@@ -219,7 +228,7 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 {
     plotUpdateRealTIme = static_cast<bool>(arg1);
 
-    configurePlotZoomAndDrag(ui->plotEnergyCurrent, !plotUpdateRealTIme);
+    configurePlotZoomAndDrag(ui->plotHighVoltageCurrent, !plotUpdateRealTIme);
     configurePlotZoomAndDrag(ui->plotTemperaturePower, !plotUpdateRealTIme);
     configurePlotZoomAndDrag(ui->plotVacuumRadiation, !plotUpdateRealTIme);
 }

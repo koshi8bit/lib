@@ -8,6 +8,7 @@
 
 #include "qcustomplot.h"
 #include "axisconfig.h"
+#include "colorsetter.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,14 +22,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
-
     void configureGraphEnergyCurrent();
-
-
-
     void configureGraphTemperaturePower();
-
     void configurePlotVacuumRadiation();
 
 private:
@@ -40,7 +35,7 @@ private:
 
     QTimer *timer;
 
-    QCPGraph *graphEnergyFull, *graphEnergyFirstSection, *graphCurrent, *graphTemperature;
+    QCPGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt, *graphTemperature;
 
 
     void configureGraphs();
