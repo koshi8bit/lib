@@ -244,5 +244,8 @@ void MainWindow::on_editRange_editingFinished()
 
 void MainWindow::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
+    AxisConfig ac(axis, this);
+    ac.setModal(true);
+    ac.exec();
     qDebug() << axis->label();
 }
