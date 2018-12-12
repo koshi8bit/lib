@@ -40,7 +40,7 @@ private:
 
     QTimer *timer;
 
-    QCPGraph *graphEnergy, *graphCurrent, *graphTemperature;
+    QCPGraph *graphEnergyFull, *graphEnergyFirstSection, *graphCurrent, *graphTemperature;
 
 
     void configureGraphs();

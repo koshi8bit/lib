@@ -141,7 +141,7 @@ void MainWindow::drawData()
     time = QDateTime::currentDateTime();
     now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
 
-    graphEnergy->addData(now, sin(now));
+    graphEnergyFull->addData(now, sin(now));
     graphTemperature->addData(now, QRandomGenerator::global()->bounded(1.0));
     graphCurrent->addData(now, cos(now)*1000);
 
@@ -170,8 +170,13 @@ void MainWindow::configureGraphEnergyCurrent()
     auto yAxis = ui->plotEnergyCurrent->yAxis;
     auto yAxis2 = ui->plotEnergyCurrent->yAxis2;
 
-    graphEnergy = ui->plotEnergyCurrent->addGraph(xAxis, yAxis);
-    graphEnergy->setPen(QColor(255, 255, 255));
+    graphEnergyFull = ui->plotEnergyCurrent->addGraph(xAxis, yAxis);
+    graphEnergyFull->setName("ЭЛВ (полное напряжение)");
+    graphEnergyFull->setPen(QColor(255, 255, 255));
+
+    graphEnergyFirstSection= ui->plotEnergyCurrent->addGraph(xAxis, yAxis);
+    graphEnergyFirstSection->setName("ЭЛВ (первая секция)");
+    graphEnergyFirstSection->setPen(QColor(255, 255, 255));
 
     graphCurrent = ui->plotEnergyCurrent->addGraph(xAxis, yAxis2);
     graphCurrent->setPen(QColor(255, 66, 66));

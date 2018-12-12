@@ -46,7 +46,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QCustomPlot" name="plotEnergyCurrent" native="true"/>
+     <widget class="QCustomPlot" name="plotHighVoltageCurrent" native="true"/>
     </item>
     <item>
      <widget class="QCustomPlot" name="plotTemperaturePower" native="true"/>
