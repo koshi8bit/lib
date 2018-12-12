@@ -62,6 +62,7 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     configurePlotBackground(plot);
 
 
+    connect(plot, &QCustomPlot::axisDoubleClick, this, &MainWindow::axisDoubleClick);
 
     plot->xAxis->setLabel("Время");
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
@@ -239,4 +240,9 @@ void MainWindow::on_editRange_editingFinished()
 {
     rangeDelta = ui->editRange->value();
     ui->plotEnergyCurrent->xAxis->setRange(now - rangeDelta, now);
+}
+
+void MainWindow::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    qDebug() << axis->label();
 }

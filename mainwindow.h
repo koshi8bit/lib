@@ -62,6 +62,7 @@ private slots:
     void changeRange(QCPRange range);
     void on_checkBoxRealTime_stateChanged(int arg1);
     void on_editRange_editingFinished();
+    void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
 };
 
 #endif // MAINWINDOW_H
