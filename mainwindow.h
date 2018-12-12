@@ -46,7 +46,7 @@ private:
     void configureGraphs();
     void configurePlots();
     void configurePlotBackground(QCustomPlot *plot);
-    void configurePlotZoomAndDrag(QCustomPlot *plot);
+    void configurePlotZoomAndDrag(QCustomPlot *plot, bool zoomAndDragTimeAxis);
     void configurePlotBackgroundAxis(QCPAxis *axis);
 
     QCPMarginGroup *mg;
@@ -57,6 +57,7 @@ private:
     void configurePlotEnergyCurrent();
 
     void configurePlotTemperaturePower();
+
 
 private slots:
     void drawData();

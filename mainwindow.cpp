@@ -57,7 +57,7 @@ void MainWindow::configurePlotVacuumRadiation()
 
 void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg)
 {
-    configurePlotZoomAndDrag(plot);
+    configurePlotZoomAndDrag(plot, false);
     configurePlotBackground(plot);
 
 
@@ -85,22 +85,19 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     connect(plot, &QCustomPlot::axisDoubleClick, this, &MainWindow::axisDoubleClick);
 }
 
-
-void MainWindow::configurePlotZoomAndDrag(QCustomPlot *plot)
+void MainWindow::configurePlotZoomAndDrag(QCustomPlot *plot, bool zoomAndDragTimeAxis)
 {
-
     auto axes = QList<QCPAxis*>()
-            << plot->xAxis
             << plot->yAxis
             << plot->yAxis2;
 
+    if (zoomAndDragTimeAxis)
+        axes << plot->xAxis;
+
     plot->setInteraction(QCP::iRangeZoom, true);
     plot->setInteraction(QCP::iRangeDrag, true);
-
     plot->axisRect()->setRangeZoomAxes(axes);
     plot->axisRect()->setRangeDragAxes(axes);
-//    plot->axisRect()->setRangeDrag(Qt::Horizontal);
-//    plot->axisRect()->setRangeZoom(Qt::Horizontal);
 }
 
 void MainWindow::configurePlotBackground(QCustomPlot *plot)
@@ -211,15 +208,15 @@ void MainWindow::changeRange(QCPRange range)
 
 
 
+
+
 void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 {
     plotUpdateRealTIme = static_cast<bool>(arg1);
 
-    ui->plotEnergyCurrent->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
-
-    ui->plotTemperaturePower->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
-
-    ui->plotVacuumRadiation->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
+    configurePlotZoomAndDrag(ui->plotEnergyCurrent, !plotUpdateRealTIme);
+    configurePlotZoomAndDrag(ui->plotTemperaturePower, !plotUpdateRealTIme);
+    configurePlotZoomAndDrag(ui->plotVacuumRadiation, !plotUpdateRealTIme);
 }
 
 
