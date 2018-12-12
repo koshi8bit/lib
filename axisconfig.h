@@ -17,7 +17,7 @@ public:
     ~AxisConfig();
 
 private slots:
-    void on_lineEditLabel_editingFinished();
+    void on_buttonBox_accepted();
 
 private:
     Ui::AxisConfig *ui;

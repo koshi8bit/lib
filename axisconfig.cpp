@@ -7,7 +7,6 @@ AxisConfig::AxisConfig(QCPAxis *axis, QWidget *parent) :
 {
     ui->setupUi(this);
 
-
     this->axis = axis;
     ui->dateTimeEditMin->setVisible(false);
     ui->dateTimeEditMax->setVisible(false);
@@ -21,7 +20,7 @@ AxisConfig::~AxisConfig()
     delete ui;
 }
 
-void AxisConfig::on_lineEditLabel_editingFinished()
+void AxisConfig::on_buttonBox_accepted()
 {
     axis->setLabel(ui->lineEditLabel->text());
 }
