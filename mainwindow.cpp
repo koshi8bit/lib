@@ -61,7 +61,6 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     configurePlotBackground(plot);
 
 
-    connect(plot, &QCustomPlot::axisDoubleClick, this, &MainWindow::axisDoubleClick);
 
     plot->xAxis->setLabel("Время");
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
@@ -80,8 +79,10 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     //plot->setNoAntialiasingOnDrag(true);
 
 
-
     connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+    //connect(plot->xAxis, &QCPAxis::rangeChanged, this, &MainWindow::changeRange);
+    connect(plot, &QCustomPlot::axisClick, this, &MainWindow::axisClick);
+    connect(plot, &QCustomPlot::axisDoubleClick, this, &MainWindow::axisDoubleClick);
 }
 
 
@@ -98,8 +99,8 @@ void MainWindow::configurePlotZoomAndDrag(QCustomPlot *plot)
 
     plot->axisRect()->setRangeZoomAxes(axes);
     plot->axisRect()->setRangeDragAxes(axes);
-    plot->axisRect()->setRangeDrag(Qt::Horizontal);
-    plot->axisRect()->setRangeZoom(Qt::Horizontal);
+//    plot->axisRect()->setRangeDrag(Qt::Horizontal);
+//    plot->axisRect()->setRangeZoom(Qt::Horizontal);
 }
 
 void MainWindow::configurePlotBackground(QCustomPlot *plot)
@@ -203,6 +204,8 @@ void MainWindow::changeRange(QCPRange range)
     if(axis != ui->plotVacuumRadiation->xAxis)
         ui->plotVacuumRadiation->xAxis->setRange(range);
 
+    plotScreenBufferSEC = range.upper - range.lower;
+
     ui->plotEnergyCurrent->replot();
 }
 
@@ -212,21 +215,29 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 {
     plotUpdateRealTIme = static_cast<bool>(arg1);
 
-    ui->plotEnergyCurrent->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
 
-    ui->plotTemperaturePower->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotTemperaturePower->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
 
-    ui->plotVacuumRadiation->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotVacuumRadiation->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
 }
 
 
 void MainWindow::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
-    qDebug() << axis->label();
     AxisConfig ac(axis, this);
     ac.setModal(true);
     ac.exec();
+}
+
+void MainWindow::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    qDebug() << event;
+    if (event->button() == Qt::RightButton)
+    {
+        foreach(auto graph, axis->graphs())
+        {
+            graph->rescaleValueAxis(false, true);
+        }
+    }
 }
