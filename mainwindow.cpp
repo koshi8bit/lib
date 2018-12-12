@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::configurePlots()
 {
-    ui->editRange->setEnabled(false);
     mg = new QCPMarginGroup(ui->plotEnergyCurrent);
 
     configurePlotEnergyCurrent();
@@ -99,6 +98,8 @@ void MainWindow::configurePlotZoomAndDrag(QCustomPlot *plot)
 
     plot->axisRect()->setRangeZoomAxes(axes);
     plot->axisRect()->setRangeDragAxes(axes);
+    plot->axisRect()->setRangeDrag(Qt::Horizontal);
+    plot->axisRect()->setRangeZoom(Qt::Horizontal);
 }
 
 void MainWindow::configurePlotBackground(QCustomPlot *plot)
@@ -146,20 +147,10 @@ void MainWindow::drawData()
     graphTemperature->addData(now, QRandomGenerator::global()->bounded(1.0));
     graphCurrent->addData(now, cos(now)*1000);
 
-    if (ui->checkBoxRescale->isChecked())
-    {
-        graphEnergy->rescaleValueAxis(false, true);
-        graphTemperature->rescaleValueAxis(false, true);
-        graphCurrent->rescaleValueAxis(false, true);
-
-    }
-
-
-
 
     if (ui->checkBoxRealTime->isChecked())
     {
-        ui->plotEnergyCurrent->xAxis->setRange(now - rangeDelta, now);
+        ui->plotEnergyCurrent->xAxis->setRange(now - plotScreenBufferSEC, now);
     }
 
     ui->plotEnergyCurrent->replot();
@@ -176,7 +167,7 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphEnergyCurrent()
 {
-    //FIXME tima
+    //FIXME ?tima
     auto xAxis = ui->plotEnergyCurrent->xAxis;
     auto yAxis = ui->plotEnergyCurrent->yAxis;
     auto yAxis2 = ui->plotEnergyCurrent->yAxis2;
@@ -212,9 +203,6 @@ void MainWindow::changeRange(QCPRange range)
     if(axis != ui->plotVacuumRadiation->xAxis)
         ui->plotVacuumRadiation->xAxis->setRange(range);
 
-    rangeDelta = range.upper - range.lower;
-    ui->editRange->setValue(rangeDelta);
-
     ui->plotEnergyCurrent->replot();
 }
 
@@ -223,8 +211,6 @@ void MainWindow::changeRange(QCPRange range)
 void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 {
     plotUpdateRealTIme = static_cast<bool>(arg1);
-
-    ui->editRange->setEnabled(!plotUpdateRealTIme);
 
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
@@ -236,16 +222,11 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
     ui->plotVacuumRadiation->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
 }
 
-void MainWindow::on_editRange_editingFinished()
-{
-    rangeDelta = ui->editRange->value();
-    ui->plotEnergyCurrent->xAxis->setRange(now - rangeDelta, now);
-}
 
 void MainWindow::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
+    qDebug() << axis->label();
     AxisConfig ac(axis, this);
     ac.setModal(true);
     ac.exec();
-    qDebug() << axis->label();
 }

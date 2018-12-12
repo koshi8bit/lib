@@ -35,7 +35,7 @@ private:
     Ui::MainWindow *ui;
     void configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg);
     bool plotUpdateRealTIme;
-    int plotScreenBufferSEC = 60*5;
+    int plotScreenBufferSEC = 60*2;
     int plotUpdateIntervalMSEC = 100;
 
     QTimer *timer;
@@ -50,7 +50,6 @@ private:
     void configurePlotBackgroundAxis(QCPAxis *axis);
 
     QCPMarginGroup *mg;
-    double rangeDelta = 200;
     double now;
     QDateTime time;
 
@@ -63,7 +62,6 @@ private slots:
     void drawData();
     void changeRange(QCPRange range);
     void on_checkBoxRealTime_stateChanged(int arg1);
-    void on_editRange_editingFinished();
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
 };
 

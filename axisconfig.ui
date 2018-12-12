@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>378</width>
-    <height>150</height>
+    <width>438</width>
+    <height>145</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Axis config</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -47,6 +47,29 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="labelSecOnScreen">
+         <property name="text">
+          <string>Seconds on screen:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinBoxSec">
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximum">
+          <number>999999999</number>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="labelMin">
          <property name="text">
           <string>Min:</string>
@@ -63,6 +86,15 @@
            <width>65</width>
            <height>0</height>
           </size>
+         </property>
+         <property name="prefix">
+          <string/>
+         </property>
+         <property name="minimum">
+          <double>-9999999999.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>9999999999.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -84,6 +116,12 @@
            <height>0</height>
           </size>
          </property>
+         <property name="minimum">
+          <double>-9999999999.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>9999999999.000000000000000</double>
+         </property>
         </widget>
        </item>
       </layout>
@@ -91,14 +129,11 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QDateTimeEdit" name="dateTimeEditMin"/>
-     </item>
-     <item>
-      <widget class="QDateTimeEdit" name="dateTimeEditMax"/>
-     </item>
-    </layout>
+    <widget class="QCheckBox" name="checkBoxLog10">
+     <property name="text">
+      <string>Log10</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
