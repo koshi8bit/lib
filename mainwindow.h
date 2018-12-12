@@ -40,8 +40,7 @@ private:
     void configureGraphs();
     void configurePlots();
     void configurePlotBackground(QCustomPlot *plot);
-
-
+    void configurePlotZoomAndDrag(QCustomPlot *plot);
     void configurePlotBackgroundAxis(QCPAxis *axis);
 
     QCPMarginGroup *mg;
@@ -49,6 +48,7 @@ private:
     double now;
     QDateTime time;
 
+    
 private slots:
     void drawData();
     void changeRange(QCPRange range);

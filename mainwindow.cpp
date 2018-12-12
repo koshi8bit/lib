@@ -24,6 +24,8 @@ void MainWindow::configurePlots()
     mg = new QCPMarginGroup(ui->plotEnergyCurrent);
 
     configurePlot(ui->plotEnergyCurrent, "Энергия (кВ)", "Ток (мА)", mg);
+    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
+    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
 
     configurePlot(ui->plotTemperaturePower, "Температура (С)", "Мощность (Вт)", mg);
 
@@ -33,15 +35,13 @@ void MainWindow::configurePlots()
     ui->plotVacuumRadiation->yAxis->setTicker(logTicker);
     ui->plotVacuumRadiation->yAxis->setNumberFormat("eb");
     ui->plotVacuumRadiation->yAxis->setNumberPrecision(0);
-
-    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
-    connect(ui->plotEnergyCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
-
 }
+
 
 
 void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg)
 {
+    configurePlotZoomAndDrag(plot);
     configurePlotBackground(plot);
 
     plot->xAxis->setLabel("Время");
@@ -65,6 +65,17 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
 }
 
+
+void MainWindow::configurePlotZoomAndDrag(QCustomPlot *plot)
+{
+    auto axes = QList<QCPAxis*>()
+            << plot->xAxis
+            << plot->yAxis
+            << plot->yAxis2;
+
+    plot->axisRect()->setRangeZoomAxes(axes);
+    plot->axisRect()->setRangeDragAxes(axes);
+}
 
 void MainWindow::configurePlotBackground(QCustomPlot *plot)
 {
@@ -111,6 +122,15 @@ void MainWindow::drawData()
     graphTemperature->addData(now, QRandomGenerator::global()->bounded(1.0));
     graphCurrent->addData(now, cos(now)*1000);
 
+    if (ui->checkBoxRescale->isChecked())
+    {
+        graphEnergy->rescaleValueAxis();
+        graphTemperature->rescaleValueAxis();
+        graphCurrent->rescaleValueAxis();
+
+    }
+
+
 
 
     if (ui->checkBoxRealTime->isChecked())
@@ -127,8 +147,7 @@ void MainWindow::configureGraphs()
 {
     configureGraphEnergyCurrent();
 
-    graphTemperature = ui->plotTemperaturePower->addGraph();
-    graphTemperature->setPen(QColor(255, 255, 255));
+    configureGraphTemperaturePower();
 }
 
 void MainWindow::configureGraphEnergyCurrent()
@@ -140,7 +159,11 @@ void MainWindow::configureGraphEnergyCurrent()
     graphCurrent->setPen(QColor(255, 66, 66));
 }
 
-
+void MainWindow::configureGraphTemperaturePower()
+{
+    graphTemperature = ui->plotTemperaturePower->addGraph();
+    graphTemperature->setPen(QColor(255, 255, 255));
+}
 
 
 MainWindow::~MainWindow()
@@ -177,19 +200,7 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
     ui->plotEnergyCurrent->setInteraction(QCP::iRangeZoom, !plotUpdateRealTIme);
 
-    ui->plotEnergyCurrent->axisRect()->setRangeDragAxes(
-                QList<QCPAxis*>()
-                << ui->plotEnergyCurrent->xAxis
-                << ui->plotEnergyCurrent->yAxis
-                << ui->plotEnergyCurrent->yAxis2
-                );
 
-    ui->plotEnergyCurrent->axisRect()->setRangeZoomAxes(
-                QList<QCPAxis*>()
-                << ui->plotEnergyCurrent->xAxis
-                << ui->plotEnergyCurrent->yAxis
-                << ui->plotEnergyCurrent->yAxis2
-                );
 
 
     ui->plotTemperaturePower->setInteraction(QCP::iRangeDrag, !plotUpdateRealTIme);
