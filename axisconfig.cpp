@@ -12,6 +12,12 @@ AxisConfig::AxisConfig(QCPAxis *axis, QWidget *parent) :
 
     ui->lineEditLabel->setText(axis->label());
 
+    // { TESTS
+
+
+    // } TESTS
+
+
     auto t1 = QDateTime(QDate(2018, 12, 12), QTime(22, 54, 00)).toTime_t();
     auto t2 = axis->range().lower;
 
@@ -52,6 +58,8 @@ void AxisConfig::on_buttonBox_accepted()
 {
     axis->setLabel(ui->lineEditLabel->text());
 
+    qDebug() << ui->widget->value();
+
     if (ui->radioButtonAuto->isChecked())
     {
         foreach(auto graph, axis->graphs())
@@ -83,4 +91,10 @@ void AxisConfig::on_radioButtonAuto_toggled(bool checked)
     qDebug() << checked;
     ui->doubleSpinBoxMin->setEnabled(!checked);
     ui->doubleSpinBoxMax->setEnabled(!checked);
+}
+
+void AxisConfig::on_pushButton_clicked()
+{
+    ui->widget->setValue(0.00053);
+
 }

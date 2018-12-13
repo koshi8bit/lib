@@ -29,13 +29,15 @@ SOURCES += \
         mainwindow.cpp \
     qcustomplot.cpp \
     axisconfig.cpp \
-    colorsetter.cpp
+    colorsetter.cpp \
+    scientificnotationedit.cpp
 
 HEADERS += \
         mainwindow.h \
     qcustomplot.h \
     axisconfig.h \
-    colorsetter.h
+    colorsetter.h \
+    scientificnotationedit.h
 
 FORMS += \
         mainwindow.ui \

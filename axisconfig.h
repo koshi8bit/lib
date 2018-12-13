@@ -31,6 +31,8 @@ private slots:
 
     void on_radioButtonAuto_toggled(bool checked);
 
+    void on_pushButton_clicked();
+
 private:
 
 
