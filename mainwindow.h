@@ -34,6 +34,7 @@ private:
     QTimer *timer;
 
     QCPGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt, *graphTemperaturePyrometer, *graphVacuumTandem;
+    QCPItemTracer *graphHighVoltageElvFullTracer;
 
 
     void configureGraphs();
@@ -62,6 +63,7 @@ private slots:
     void on_checkBoxRealTime_stateChanged(int arg1);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+    void mouseMove(QMouseEvent *event);
 };
 
 #endif // MAINWINDOW_H

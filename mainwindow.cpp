@@ -81,9 +81,11 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
 
 
     connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+    //FIXME ?tima
     //connect(plot->xAxis, &QCPAxis::rangeChanged, this, &MainWindow::changeRange);
     connect(plot, &QCustomPlot::axisClick, this, &MainWindow::axisClick);
     connect(plot, &QCustomPlot::axisDoubleClick, this, &MainWindow::axisDoubleClick);
+    connect(plot, &QCustomPlot::mouseMove, this, &MainWindow::mouseMove);
 }
 
 void MainWindow::configurePlotZoomAndDrag(QCustomPlot *plot, bool zoomAndDragTimeAxis)
@@ -182,6 +184,17 @@ void MainWindow::configureGraphsEnergyCurrent()
     graphHighVoltageElvFull->setName("ЭЛВ (полное напряжение)");
     graphHighVoltageElvFull->setPen(cs.getColor());
 
+    graphHighVoltageElvFullTracer = new QCPItemTracer(plot);
+    graphHighVoltageElvFullTracer->setGraph(graphHighVoltageElvFull);
+    graphHighVoltageElvFullTracer->setGraphKey(5.5);
+    graphHighVoltageElvFullTracer->setInterpolating(true);
+    graphHighVoltageElvFullTracer->setStyle(QCPItemTracer::tsCircle);
+    graphHighVoltageElvFullTracer->setPen(graphHighVoltageElvFull->pen());
+    graphHighVoltageElvFullTracer->setBrush(graphHighVoltageElvFull->pen().color());
+    graphHighVoltageElvFullTracer->setSize(7);
+
+
+
     graphHighVoltageElvFirstSection = plot->addGraph(xAxis, yAxis);
     graphHighVoltageElvFirstSection->setName("ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setPen(cs.getColor());
@@ -273,4 +286,11 @@ void MainWindow::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEv
             graph->rescaleValueAxis(false, true);
         }
     }
+}
+
+void MainWindow::mouseMove(QMouseEvent *event)
+{
+    auto plot = static_cast<QCustomPlot*>(sender());
+    auto time = plot->xAxis->pixelToCoord(event->x());
+    graphHighVoltageElvFullTracer->setGraphKey(time);
 }
