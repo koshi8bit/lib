@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>438</width>
-    <height>226</height>
+    <height>196</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -80,6 +80,9 @@
         </widget>
        </item>
        <item>
+        <widget class="ScientificNotationEdit" name="scientificNotationEditMin" native="true"/>
+       </item>
+       <item>
         <widget class="QDoubleSpinBox" name="doubleSpinBoxMin">
          <property name="minimumSize">
           <size>
@@ -109,6 +112,9 @@
         </widget>
        </item>
        <item>
+        <widget class="ScientificNotationEdit" name="scientificNotationEditMax" native="true"/>
+       </item>
+       <item>
         <widget class="QDoubleSpinBox" name="doubleSpinBoxMax">
          <property name="minimumSize">
           <size>
@@ -134,9 +140,6 @@
       <string>Log10</string>
      </property>
     </widget>
-   </item>
-   <item>
-    <widget class="ScientificNotationEdit" name="widget" native="true"/>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">

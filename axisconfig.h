@@ -20,8 +20,9 @@ public:
 
     enum AxisType
     {
-        aeNumeric,
-        aeDateTime
+        NumericStandardNotation,
+        NumericScientificNotation,
+        DateTime
     };
     Q_ENUM(AxisType)
 
@@ -32,6 +33,8 @@ private slots:
     void on_radioButtonAuto_toggled(bool checked);
 
     void on_pushButton_clicked();
+
+    void on_checkBoxLog10_stateChanged(int arg1);
 
 private:
 
