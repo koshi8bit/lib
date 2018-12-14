@@ -178,7 +178,6 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    //FIXME ?tima
     auto plot = ui->plotHighVoltageCurrent;
     auto xAxis = plot->xAxis;
     auto yAxis = plot->yAxis;

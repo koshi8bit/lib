@@ -30,18 +30,21 @@ SOURCES += \
     qcustomplot.cpp \
     axisconfig.cpp \
     colorsetter.cpp \
-    scientificnotationedit.cpp
+    scientificnotationedit.cpp \
+    plot\rtplotwithlegend.cpp
 
 HEADERS += \
         mainwindow.h \
     qcustomplot.h \
     axisconfig.h \
     colorsetter.h \
-    scientificnotationedit.h
+    scientificnotationedit.h \
+    plot\rtplotwithlegend.h
 
 FORMS += \
         mainwindow.ui \
-    axisconfig.ui
+    axisconfig.ui \
+    plot\rtplotwithlegend.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
