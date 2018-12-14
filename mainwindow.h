@@ -26,17 +26,18 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    void configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg);
+    void configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg, QCPItemLine **line);
     bool plotUpdateRealTIme;
     int plotScreenBufferSEC = 60*2;
-    int plotUpdateIntervalMSEC = 100;
+    int plotUpdateIntervalMSEC = 10;
 
 
     QTimer *timer;
 
     QCPGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt, *graphTemperaturePyrometer, *graphVacuumTandem;
-    QCPItemTracer *graphHighVoltageElvFullTracer;
+    QCPItemTracer *tracerHighVoltageElvFull, *tracerHighVoltageElvFirstSection, *tracerCurrentBergozHebt, *tracerTemperaturePyrometer, *tracerVacuumTandem;
 
+    QCPItemLine *lineHighVoltageCurrent, *lineTemperaturePower, *lineVacuumRadiation;
 
     void configureGraphs();
 
@@ -49,7 +50,7 @@ private:
     double now;
     QDateTime time;
 
-    void configurePlotEnergyCurrent();
+    void configurePlotHighVoltageCurrent();
     void configurePlotTemperaturePower();
     void configurePlotVacuumRadiation();
 

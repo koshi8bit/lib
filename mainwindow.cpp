@@ -24,28 +24,28 @@ void MainWindow::configurePlots()
 {
     mg = new QCPMarginGroup(ui->plotHighVoltageCurrent);
 
-    configurePlotEnergyCurrent();
+    configurePlotHighVoltageCurrent();
     configurePlotTemperaturePower();
     configurePlotVacuumRadiation();
 }
 
 
-void MainWindow::configurePlotEnergyCurrent()
+void MainWindow::configurePlotHighVoltageCurrent()
 {
-    configurePlot(ui->plotHighVoltageCurrent, "Энергия (кВ)", "Ток (мА)", mg);
+    configurePlot(ui->plotHighVoltageCurrent, "Энергия (кВ)", "Ток (мА)", mg, &lineHighVoltageCurrent);
     connect(ui->plotHighVoltageCurrent,SIGNAL(afterReplot()),ui->plotTemperaturePower,SLOT(replot()));
     connect(ui->plotHighVoltageCurrent,SIGNAL(afterReplot()),ui->plotVacuumRadiation,SLOT(replot()));
 }
 
 void MainWindow::configurePlotTemperaturePower()
 {
-    configurePlot(ui->plotTemperaturePower, "Температура (С)", "Мощность (Вт)", mg);
+    configurePlot(ui->plotTemperaturePower, "Температура (С)", "Мощность (Вт)", mg, &lineTemperaturePower);
 }
 
 
 void MainWindow::configurePlotVacuumRadiation()
 {
-    configurePlot(ui->plotVacuumRadiation, "Вакуум (Пa)", "Радиация (Зв)", mg);
+    configurePlot(ui->plotVacuumRadiation, "Вакуум (Пa)", "Радиация (Зв)", mg, &lineVacuumRadiation);
     ui->plotVacuumRadiation->yAxis->setScaleType(QCPAxis::stLogarithmic);
     QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
     ui->plotVacuumRadiation->yAxis->setTicker(logTicker);
@@ -55,7 +55,7 @@ void MainWindow::configurePlotVacuumRadiation()
 
 
 
-void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg)
+void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const QString &y2Label, QCPMarginGroup *mg, QCPItemLine **line)
 {
     configurePlotZoomAndDrag(plot, false);
     configurePlotBackground(plot);
@@ -79,6 +79,12 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
 
     //plot->setNoAntialiasingOnDrag(true);
 
+    *line = new QCPItemLine(plot);
+    auto pen = QPen();
+    pen.setColor("#C0C0C0");
+    pen.setStyle(Qt::PenStyle::DashDotLine);
+    auto tmp = *line;
+    tmp->setPen(pen);
 
     connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     //FIXME ?tima
@@ -184,20 +190,27 @@ void MainWindow::configureGraphsEnergyCurrent()
     graphHighVoltageElvFull->setName("ЭЛВ (полное напряжение)");
     graphHighVoltageElvFull->setPen(cs.getColor());
 
-    graphHighVoltageElvFullTracer = new QCPItemTracer(plot);
-    graphHighVoltageElvFullTracer->setGraph(graphHighVoltageElvFull);
-    graphHighVoltageElvFullTracer->setGraphKey(5.5);
-    graphHighVoltageElvFullTracer->setInterpolating(true);
-    graphHighVoltageElvFullTracer->setStyle(QCPItemTracer::tsCircle);
-    graphHighVoltageElvFullTracer->setPen(graphHighVoltageElvFull->pen());
-    graphHighVoltageElvFullTracer->setBrush(graphHighVoltageElvFull->pen().color());
-    graphHighVoltageElvFullTracer->setSize(7);
-
+    tracerHighVoltageElvFull = new QCPItemTracer(plot);
+    tracerHighVoltageElvFull->setGraph(graphHighVoltageElvFull);
+    tracerHighVoltageElvFull->setInterpolating(true);
+    tracerHighVoltageElvFull->setStyle(QCPItemTracer::tsCircle);
+    tracerHighVoltageElvFull->setPen(graphHighVoltageElvFull->pen());
+    tracerHighVoltageElvFull->setBrush(graphHighVoltageElvFull->pen().color());
+    tracerHighVoltageElvFull->setSize(5);
 
 
     graphHighVoltageElvFirstSection = plot->addGraph(xAxis, yAxis);
     graphHighVoltageElvFirstSection->setName("ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setPen(cs.getColor());
+
+    tracerHighVoltageElvFirstSection = new QCPItemTracer(plot);
+    tracerHighVoltageElvFirstSection->setGraph(graphHighVoltageElvFirstSection);
+    tracerHighVoltageElvFirstSection->setInterpolating(true);
+    tracerHighVoltageElvFirstSection->setStyle(QCPItemTracer::TracerStyle::tsSquare);
+    tracerHighVoltageElvFirstSection->setPen(graphHighVoltageElvFirstSection->pen());
+    tracerHighVoltageElvFirstSection->setBrush(graphHighVoltageElvFirstSection->pen().color());
+    tracerHighVoltageElvFirstSection->setSize(5);
+
 
     graphCurrentBergozHebt = plot->addGraph(xAxis, yAxis2);
     graphCurrentBergozHebt->setName("Bergoz (выс. эн. тракт)");
@@ -293,5 +306,31 @@ void MainWindow::mouseMove(QMouseEvent *event)
 {
     auto plot = static_cast<QCustomPlot*>(sender());
     auto time = plot->xAxis->pixelToCoord(event->x());
-    graphHighVoltageElvFullTracer->setGraphKey(time);
+    tracerHighVoltageElvFull->setGraphKey(time);
+    tracerHighVoltageElvFirstSection->setGraphKey(time);
+
+    auto lower = qMin(
+                ui->plotHighVoltageCurrent->yAxis->range().lower,
+                ui->plotHighVoltageCurrent->yAxis2->range().lower);
+
+    auto upper = qMax(
+                ui->plotHighVoltageCurrent->yAxis->range().upper,
+                ui->plotHighVoltageCurrent->yAxis2->range().upper);
+
+
+    lineHighVoltageCurrent->start->setCoords(time, lower);
+    lineHighVoltageCurrent->end->setCoords(time, upper);
+
+
+    auto lower1 = qMin(
+                ui->plotTemperaturePower->yAxis->range().lower,
+                ui->plotTemperaturePower->yAxis2->range().lower);
+
+    auto upper1 = qMax(
+                ui->plotTemperaturePower->yAxis->range().upper,
+                ui->plotTemperaturePower->yAxis2->range().upper);
+
+
+    lineTemperaturePower->start->setCoords(time, lower1);
+    lineTemperaturePower->end->setCoords(time, upper1);
 }

@@ -158,8 +158,3 @@ void AxisConfig::on_checkBoxLog10_stateChanged(int arg1)
     }
 
 }
-
-void AxisConfig::on_pushButton_clicked()
-{
-
-}
