@@ -18,10 +18,7 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
     // } TESTS
 
 
-    auto t1 = QDateTime(QDate(2018, 12, 12), QTime(22, 54, 00)).toTime_t();
-    auto t2 = axis->range().lower;
-
-    if (t2 > t1)
+    if (isXAxis)
     {
         axisType = AxisType::DateTime;
 

@@ -272,7 +272,7 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 void MainWindow::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     auto plot = static_cast<QCustomPlot *>(sender());
-    AxisConfig ac(axis, this);
+    AxisConfig ac(axis, plot->xAxis == axis, this);
     ac.setModal(true);
     ac.exec();
 }
