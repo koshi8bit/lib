@@ -1,7 +1,7 @@
 #include "axisconfig.h"
 #include "ui_axisconfig.h"
 
-AxisConfig::AxisConfig(QCPAxis *axis, QWidget *parent) :
+AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AxisConfig)
 {

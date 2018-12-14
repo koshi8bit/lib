@@ -15,7 +15,7 @@ class AxisConfig : public QDialog
 
 
 public:
-    explicit AxisConfig(QCPAxis *axis, QWidget *parent = nullptr);
+    explicit AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent = nullptr);
     ~AxisConfig();
 
     enum AxisType

@@ -31,6 +31,7 @@ private:
     int plotScreenBufferSEC = 60*2;
     int plotUpdateIntervalMSEC = 100;
 
+
     QTimer *timer;
 
     QCPGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt, *graphTemperaturePyrometer, *graphVacuumTandem;
@@ -38,6 +39,7 @@ private:
 
 
     void configureGraphs();
+
     void configurePlots();
     void configurePlotBackground(QCustomPlot *plot);
     void configurePlotZoomAndDrag(QCustomPlot *plot, bool zoomAndDragTimeAxis);
@@ -64,6 +66,7 @@ private slots:
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void mouseMove(QMouseEvent *event);
+    //void configureGraphs1();
 };
 
 #endif // MAINWINDOW_H
