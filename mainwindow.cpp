@@ -27,6 +27,7 @@ void MainWindow::configureNewPlots()
     ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)");
     ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
     connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
 
@@ -34,11 +35,13 @@ void MainWindow::configureNewPlots()
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)");
     ui->rtPlotTemperaturePower->setMarginGroup(mg);
     connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+    connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
 
     ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Вакуум (Пa)", QCPAxis::ScaleType::stLogarithmic);
     ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Радиация (Зв)");
     ui->rtPlotVacuumRadiation->setMarginGroup(mg);
     connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+    connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
 
 }
 
@@ -146,4 +149,19 @@ void MainWindow::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEv
             graph->rescaleValueAxis(false, true);
         }
     }
+}
+
+void MainWindow::mouseMove(QMouseEvent *event)
+{
+    auto plot = static_cast<QCustomPlot*>(sender());
+    auto time = plot->xAxis->pixelToCoord(event->x());
+
+    if (plot != ui->rtPlotHighVoltageCurrent->plot())
+        ui->rtPlotHighVoltageCurrent->mouseMove(time);
+    if (plot != ui->rtPlotTemperaturePower->plot())
+        ui->rtPlotTemperaturePower->mouseMove(time);
+    if (plot != ui->rtPlotVacuumRadiation->plot())
+        ui->rtPlotVacuumRadiation->mouseMove(time);
+
+    ui->rtPlotHighVoltageCurrent->plot()->replot();
 }

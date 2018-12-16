@@ -49,10 +49,14 @@ private:
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
     QVector<GraphElement *> graphElements;
 
+public slots:
+    void mouseMove(double time);
+
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void mouseMove(QMouseEvent *event);
+
 };
 
 #endif // RTPLOTWITHLEGEND_H

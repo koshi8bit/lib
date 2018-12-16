@@ -7,7 +7,7 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
-#include "qcustomplot.h"
+#include "plot/qcustomplot.h"
 #include "plot/axisconfig.h"
 #include "plot/colorsetter.h"
 #include "plot/graphelement.h"
@@ -28,7 +28,7 @@ public:
 private:
     Ui::MainWindow *ui;
     bool plotUpdateRealTIme;
-    int plotScreenBufferSEC = 60*2;
+    int plotScreenBufferSEC = 90;
     int plotUpdateIntervalMSEC = 10;
 
 
@@ -55,6 +55,7 @@ private slots:
     void on_checkBoxRealTime_stateChanged(int arg1);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+    void mouseMove(QMouseEvent *event);
     //void mouseMove(QMouseEvent *event);
     //void configureGraphs1();
 };
