@@ -17,8 +17,10 @@ public:
     explicit RTPlotWithLegend(QWidget *parent = nullptr);
     ~RTPlotWithLegend();
     void setMarginGroup(QCPMarginGroup *mg);
-    void setYAxisLabel(const QString &label);
-    void setYAxis2Label(const QString &label);
+    void setYAxisLabel(const QString &label, QCPAxis::ScaleType type = QCPAxis::stLinear);
+    void setYAxis2Label(const QString &label, QCPAxis::ScaleType type = QCPAxis::stLinear);
+
+    void setAxisType(QCPAxis *axis, QCPAxis::ScaleType type);
 
     QCustomPlot* getPlot();
 
@@ -27,11 +29,11 @@ private:
     QCustomPlot *plot;
     QCPItemLine *line;
 
-    void configurePlotZoomAndDrag(QCustomPlot *plot, bool zoomAndDragTimeAxis);
-    void configurePlotBackground(QCustomPlot *plot);
+    void configurePlotZoomAndDrag(bool zoomAndDragTimeAxis);
+    void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);
-    void configurePlotTimeAxis(QCustomPlot *plot);
-    void configurePlotLine(QCustomPlot *plot);
+    void configurePlotTimeAxis();
+    void configurePlotLine();
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);

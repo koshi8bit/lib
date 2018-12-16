@@ -60,6 +60,7 @@ private:
     void configureGraphsVacuumRadiation();
 
     void configureNewPlots();
+    void configureRTPlotHighVoltageCurrent();
 
 
 private slots:

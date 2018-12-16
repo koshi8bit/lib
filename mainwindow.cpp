@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     configurePlots();
+    configureNewPlots();
     configureGraphs();
 
     timer = new QTimer(this);
@@ -242,6 +243,23 @@ void MainWindow::configureGraphsVacuumRadiation()
     graphVacuumTandem = plot->addGraph(xAxis, yAxis);
     graphVacuumTandem->setName("Тандем");
     graphVacuumTandem->setPen(cs.getColor());
+}
+
+void MainWindow::configureNewPlots()
+{
+    configureRTPlotHighVoltageCurrent();
+
+}
+
+void MainWindow::configureRTPlotHighVoltageCurrent()
+{
+    ui->rtPlotHighVoltageCurrent->setYAxisLabel("Энергия (кВ)");
+    ui->rtPlotHighVoltageCurrent->setYAxis2Label("Ток (мА)");
+    ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
+
+    //connect(ui->rtPlotHighVoltageCurrent->getPlot(), SIGNAL(afterReplot()), ui->plotTemperaturePower, SLOT(replot()));
+    //connect(ui->rtPlotHighVoltageCurrent->getPlot(), SIGNAL(afterReplot()), ui->plotVacuumRadiation, SLOT(replot()));
+
 }
 
 
