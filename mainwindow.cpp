@@ -253,8 +253,8 @@ void MainWindow::configureNewPlots()
 
 void MainWindow::configureRTPlotHighVoltageCurrent()
 {
-    ui->rtPlotHighVoltageCurrent->setYAxisLabel("Энергия (кВ)");
-    ui->rtPlotHighVoltageCurrent->setYAxis2Label("Ток (мА)");
+    ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Энергия (кВ)");
+    ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)");
     ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
 
     //connect(ui->rtPlotHighVoltageCurrent->getPlot(), SIGNAL(afterReplot()), ui->plotTemperaturePower, SLOT(replot()));

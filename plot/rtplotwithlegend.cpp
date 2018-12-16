@@ -27,7 +27,10 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
 
 RTPlotWithLegend::~RTPlotWithLegend()
 {
+    plot->deleteLater();
+    line->deleteLater();
     delete ui;
+
 }
 
 void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
@@ -43,6 +46,19 @@ void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
     plot->setInteraction(QCP::iRangeDrag, true);
     plot->axisRect()->setRangeZoomAxes(axes);
     plot->axisRect()->setRangeDragAxes(axes);
+}
+
+GraphElement *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label)
+{
+
+    auto graphElement = new GraphElement(label,
+                            colorSetter.getColor(),
+                            plot,
+                            getAxis(axis),
+                            this);
+
+    graphElements.append(graphElement);
+    return graphElement;
 }
 
 void RTPlotWithLegend::configurePlotBackground()
@@ -92,11 +108,24 @@ void RTPlotWithLegend::configurePlotLine()
     line = new QCPItemLine(plot);
     auto pen = QPen();
     pen.setColor("#C0C0C0");
-    pen.setStyle(Qt::PenStyle::DashDotLine);
+    pen.setStyle(Qt::PenStyle::DashLine);
     line->setPen(pen);
 
     line->start->setCoords(plot->xAxis->range().upper, plot->yAxis->range().upper);
     line->end->setCoords(plot->xAxis->range().upper, plot->yAxis->range().lower);
+}
+
+QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
+{
+    QCPAxis *result = plot->yAxis;
+    if (axis == Axis::yAxis)
+        result = plot->yAxis;
+
+    if (axis == Axis::yAxis2)
+        result = plot->yAxis2;
+
+    return result;
+
 }
 
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
@@ -125,7 +154,10 @@ void RTPlotWithLegend::mouseMove(QMouseEvent *event)
     auto plot = static_cast<QCustomPlot*>(sender());
     auto time = plot->xAxis->pixelToCoord(event->x());
 
-    //trassers
+    foreach (auto graphElement, graphElements)
+    {
+        graphElement->tracer()->setGraphKey(time);
+    }
 
     auto lower = qMin(
                 plot->yAxis->range().lower,
@@ -137,6 +169,7 @@ void RTPlotWithLegend::mouseMove(QMouseEvent *event)
 
     line->start->setCoords(time, lower);
     line->end->setCoords(time, upper);
+    //NOTE check cpu usege too big
     plot->replot();
 }
 
@@ -145,25 +178,17 @@ void RTPlotWithLegend::setMarginGroup(QCPMarginGroup *mg)
     plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
 }
 
-void RTPlotWithLegend::setYAxisLabel(const QString &label, QCPAxis::ScaleType type)
+void RTPlotWithLegend::setAxisLabel(RTPlotWithLegend::Axis axis, const QString &label, QCPAxis::ScaleType type)
 {
-    auto axis = plot->yAxis;
-    axis->setLabel(label);
+
+    auto _axis = RTPlotWithLegend::getAxis(axis);
+    _axis->setVisible(true);
+    _axis->setLabel(label);
     //axis->setLabelPadding(20);
 
-    setAxisType(axis, type);
-
+    setAxisType(_axis, type);
 }
 
-void RTPlotWithLegend::setYAxis2Label(const QString &label, QCPAxis::ScaleType type)
-{
-    auto axis = plot->yAxis2;
-    axis->setVisible(true);
-    //axis->setLabelPadding(30);
-    axis->setLabel(label);
-
-    setAxisType(axis, type);
-}
 
 void RTPlotWithLegend::setAxisType(QCPAxis *axis, QCPAxis::ScaleType type)
 {
