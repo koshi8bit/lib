@@ -18,7 +18,7 @@
     <widget class="QCustomPlot" name="plot" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>2</horstretch>
+       <horstretch>3</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
@@ -46,7 +46,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>266</width>
+        <width>199</width>
         <height>477</height>
        </rect>
       </property>

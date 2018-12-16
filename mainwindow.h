@@ -52,12 +52,8 @@ private:
 private slots:
     void drawData();
     void changeRange(QCPRange range);
-    void on_checkBoxRealTime_stateChanged(int arg1);
-    void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
-    void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+    void on_checkBoxRealTime_stateChanged(int arg1); 
     void mouseMove(QMouseEvent *event);
-    //void mouseMove(QMouseEvent *event);
-    //void configureGraphs1();
 };
 
 #endif // MAINWINDOW_H
