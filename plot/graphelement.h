@@ -13,6 +13,8 @@ public:
     virtual ~GraphElement();
 
     QCPItemTracer *tracer();
+    QCPGraph *graph();
+    void addData(double key, double value);
 
 private:
     QString label;
@@ -21,7 +23,7 @@ private:
     bool visible;
     //ValueScaler valueScaler;
     //QCustomPlot *plot;
-    QCPGraph *graph;
+    QCPGraph *_graph;
     QCPItemTracer *_tracer;
 
 signals:
