@@ -26,16 +26,20 @@ void MainWindow::configureNewPlots()
     ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Энергия (кВ)");
     ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)");
     ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
+    connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
 
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Температура (С)");
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)");
     ui->rtPlotTemperaturePower->setMarginGroup(mg);
+    connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
 
     ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Вакуум (Пa)", QCPAxis::ScaleType::stLogarithmic);
     ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Радиация (Зв)");
     ui->rtPlotVacuumRadiation->setMarginGroup(mg);
+    connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+
 }
 
 
@@ -96,24 +100,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::changeRange(QCPRange range)
 {
-//    QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
+    QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
 
-//    if(axis != ui->plotHighVoltageCurrent->xAxis)
-//        ui->plotHighVoltageCurrent->xAxis->setRange(range);
-//    if(axis != ui->plotTemperaturePower->xAxis)
-//        ui->plotTemperaturePower->xAxis->setRange(range);
-//    if(axis != ui->plotVacuumRadiation->xAxis)
-//        ui->plotVacuumRadiation->xAxis->setRange(range);
+    if (axis != ui->rtPlotHighVoltageCurrent->plot()->xAxis)
+        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(range);
+    if (axis != ui->rtPlotTemperaturePower->plot()->xAxis)
+        ui->rtPlotTemperaturePower->plot()->xAxis->setRange(range);
+    if (axis != ui->rtPlotVacuumRadiation->plot()->xAxis)
+        ui->rtPlotVacuumRadiation->plot()->xAxis->setRange(range);
 
-//    plotScreenBufferSEC = range.upper - range.lower;
+    plotScreenBufferSEC = range.upper - range.lower;
 
-//    ui->plotHighVoltageCurrent->replot();
+    ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
-
-
-
 
 
 void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)

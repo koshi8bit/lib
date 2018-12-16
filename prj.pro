@@ -26,23 +26,23 @@ QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    qcustomplot.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    plot\qcustomplot.cpp \
     plot\axisconfig.cpp \
     plot\colorsetter.cpp \
     scientificnotationedit.cpp \
     plot\rtplotwithlegend.cpp \
-    plot/graphelement.cpp
+    plot\graphelement.cpp
 
 HEADERS += \
-        mainwindow.h \
-    qcustomplot.h \
+    mainwindow.h \
+    plot\qcustomplot.h \
     plot\axisconfig.h \
     plot\colorsetter.h \
     scientificnotationedit.h \
     plot\rtplotwithlegend.h \
-    plot/graphelement.h
+    plot\graphelement.h
 
 FORMS += \
         mainwindow.ui \
