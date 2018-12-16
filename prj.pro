@@ -28,7 +28,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     qcustomplot.cpp \
-    axisconfig.cpp \
+    plot\axisconfig.cpp \
     colorsetter.cpp \
     scientificnotationedit.cpp \
     plot\rtplotwithlegend.cpp
@@ -36,14 +36,14 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     qcustomplot.h \
-    axisconfig.h \
+    plot\axisconfig.h \
     colorsetter.h \
     scientificnotationedit.h \
     plot\rtplotwithlegend.h
 
 FORMS += \
         mainwindow.ui \
-    axisconfig.ui \
+    plot\axisconfig.ui \
     plot\rtplotwithlegend.ui
 
 # Default rules for deployment.

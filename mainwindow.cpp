@@ -87,7 +87,7 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
     tmp->setPen(pen);
 
     connect(plot->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
-    //FIXME ?tima
+    //FIXME ?tima connect
     //connect(plot->xAxis, &QCPAxis::rangeChanged, this, &MainWindow::changeRange);
     connect(plot, &QCustomPlot::axisClick, this, &MainWindow::axisClick);
     connect(plot, &QCustomPlot::axisDoubleClick, this, &MainWindow::axisDoubleClick);
