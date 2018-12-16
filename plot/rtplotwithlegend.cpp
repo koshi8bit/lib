@@ -15,10 +15,12 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     configurePlotBackground(plot);
 
     configurePlotTimeAxis(plot);
+    configurePlotLine(plot);
     plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
 
     connect(plot, &QCustomPlot::axisClick, this, &RTPlotWithLegend::axisClick);
     connect(plot, &QCustomPlot::axisDoubleClick, this, &RTPlotWithLegend::axisDoubleClick);
+    connect(plot, &QCustomPlot::mouseMove, this, &RTPlotWithLegend::mouseMove);
 }
 
 RTPlotWithLegend::~RTPlotWithLegend()
@@ -113,6 +115,26 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
 
 }
 
+void RTPlotWithLegend::mouseMove(QMouseEvent *event)
+{
+    auto plot = static_cast<QCustomPlot*>(sender());
+    auto time = plot->xAxis->pixelToCoord(event->x());
+
+    //trassers
+
+    auto lower = qMin(
+                plot->yAxis->range().lower,
+                plot->yAxis2->range().lower);
+
+    auto upper = qMax(
+                plot->yAxis->range().upper,
+                plot->yAxis2->range().upper);
+
+    line->start->setCoords(time, lower);
+    line->end->setCoords(time, upper);
+    //plot->replot();
+}
+
 void RTPlotWithLegend::setMarginGroup(QCPMarginGroup *mg)
 {
     ui->plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
@@ -129,4 +151,9 @@ void RTPlotWithLegend::setYAxis2Label(const QString &label)
     plot->yAxis2->setVisible(true);
     plot->yAxis2->setLabelPadding(30);
     plot->yAxis2->setLabel(label);
+}
+
+QCustomPlot *RTPlotWithLegend::getPlot()
+{
+    return plot;
 }

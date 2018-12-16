@@ -17,9 +17,10 @@ public:
     explicit RTPlotWithLegend(QWidget *parent = nullptr);
     ~RTPlotWithLegend();
     void setMarginGroup(QCPMarginGroup *mg);
-
     void setYAxisLabel(const QString &label);
     void setYAxis2Label(const QString &label);
+
+    QCustomPlot* getPlot();
 
 private:
     Ui::RTPlotWithLegend *ui;
@@ -35,6 +36,7 @@ private:
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+    void mouseMove(QMouseEvent *event);
 };
 
 #endif // RTPLOTWITHLEGEND_H

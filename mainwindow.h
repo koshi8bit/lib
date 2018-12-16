@@ -59,6 +59,8 @@ private:
     void configureGraphsTemperaturePower();
     void configureGraphsVacuumRadiation();
 
+    void configureNewPlots();
+
 
 private slots:
     void drawData();
