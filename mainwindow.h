@@ -8,7 +8,7 @@
 #include <QtMath>
 
 #include "qcustomplot.h"
-#include "axisconfig.h"
+#include "plot/axisconfig.h"
 #include "colorsetter.h"
 
 namespace Ui {
