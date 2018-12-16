@@ -26,17 +26,16 @@ public:
     explicit RTPlotWithLegend(QWidget *parent = nullptr);
     virtual ~RTPlotWithLegend();
     void setMarginGroup(QCPMarginGroup *mg);
-    void setAxisLabel(Axis axis, const QString &label, QCPAxis::ScaleType type = QCPAxis::stLinear);
+    void setAxisLabel(RTPlotWithLegend::Axis axis, const QString &label, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
 
-    void setAxisType(QCPAxis *axis, QCPAxis::ScaleType type);
     void configurePlotZoomAndDrag(bool zoomAndDragTimeAxis);
 
-    GraphElement *addGraph(Axis axis, const QString &label);
-    QCustomPlot *getPlot();
+    GraphElement *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
+    QCustomPlot *plot();
 
 private:
     Ui::RTPlotWithLegend *ui;
-    QCustomPlot *plot;
+    QCustomPlot *_plot;
     QCPItemLine *line;
 
     void configurePlotBackground();
@@ -47,6 +46,7 @@ private:
 
     QCPAxis *getAxis(Axis axis);
 
+    void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
     QVector<GraphElement *> graphElements;
 
 private slots:

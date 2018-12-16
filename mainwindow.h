@@ -10,6 +10,7 @@
 #include "qcustomplot.h"
 #include "plot/axisconfig.h"
 #include "plot/colorsetter.h"
+#include "plot/graphelement.h"
 
 namespace Ui {
 class MainWindow;
@@ -34,34 +35,19 @@ private:
 
     QTimer *timer;
 
-    QCPGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt, *graphTemperaturePyrometer, *graphVacuumTandem;
-    QCPItemTracer *tracerHighVoltageElvFull, *tracerHighVoltageElvFirstSection, *tracerCurrentBergozHebt, *tracerTemperaturePyrometer, *tracerVacuumTandem;
+    GraphElement *geHighVoltageElvFull, *geHighVoltageElvFirstSection, *gehCurrentBergozHebt, *geTemperaturePyrometer, *geVacuumTandem;
 
-    QCPItemLine *lineHighVoltageCurrent, *lineTemperaturePower, *lineVacuumRadiation;
-
-    void configureGraphs();
-
-    void configurePlots();
-    void configurePlotBackground(QCustomPlot *plot);
-    void configurePlotZoomAndDrag(QCustomPlot *plot, bool zoomAndDragTimeAxis);
-    void configurePlotBackgroundAxis(QCPAxis *axis);
 
     QCPMarginGroup *mg;
     double now;
     QDateTime time;
 
-    void configurePlotHighVoltageCurrent();
-    void configurePlotTemperaturePower();
-    void configurePlotVacuumRadiation();
-
-
     void configureGraphsEnergyCurrent();
     void configureGraphsTemperaturePower();
     void configureGraphsVacuumRadiation();
 
+    //////////////
     void configureNewPlots();
-    void configureRTPlotHighVoltageCurrent();
-
 
 private slots:
     void drawData();
@@ -69,7 +55,7 @@ private slots:
     void on_checkBoxRealTime_stateChanged(int arg1);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
-    void mouseMove(QMouseEvent *event);
+    //void mouseMove(QMouseEvent *event);
     //void configureGraphs1();
 };
 

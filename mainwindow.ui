@@ -46,16 +46,13 @@
      </layout>
     </item>
     <item>
-     <widget class="QCustomPlot" name="plotHighVoltageCurrent" native="true"/>
-    </item>
-    <item>
-     <widget class="QCustomPlot" name="plotTemperaturePower" native="true"/>
-    </item>
-    <item>
-     <widget class="QCustomPlot" name="plotVacuumRadiation" native="true"/>
-    </item>
-    <item>
      <widget class="RTPlotWithLegend" name="rtPlotHighVoltageCurrent" native="true"/>
+    </item>
+    <item>
+     <widget class="RTPlotWithLegend" name="rtPlotTemperaturePower" native="true"/>
+    </item>
+    <item>
+     <widget class="RTPlotWithLegend" name="rtPlotVacuumRadiation" native="true"/>
     </item>
    </layout>
   </widget>
@@ -81,12 +78,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
-  <customwidget>
-   <class>QCustomPlot</class>
-   <extends>QWidget</extends>
-   <header>qcustomplot.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>RTPlotWithLegend</class>
    <extends>QWidget</extends>
