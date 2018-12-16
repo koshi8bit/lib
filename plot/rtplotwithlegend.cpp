@@ -95,8 +95,8 @@ void RTPlotWithLegend::configurePlotLine()
     pen.setStyle(Qt::PenStyle::DashDotLine);
     line->setPen(pen);
 
-//    line->start->setCoords(time, lower);
-//    line->end->setCoords(time, upper);
+    line->start->setCoords(plot->xAxis->range().upper, plot->yAxis->range().upper);
+    line->end->setCoords(plot->xAxis->range().upper, plot->yAxis->range().lower);
 }
 
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
