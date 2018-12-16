@@ -83,7 +83,7 @@ void RTPlotWithLegend::configurePlotTimeAxis()
 {
     plot->xAxis->setLabel("Время");
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat("hh:mm:ss.z");
+    dateTicker->setDateTimeFormat("hh:mm:ss");
     plot->xAxis->setTicker(dateTicker);
 }
 
@@ -137,12 +137,12 @@ void RTPlotWithLegend::mouseMove(QMouseEvent *event)
 
     line->start->setCoords(time, lower);
     line->end->setCoords(time, upper);
-    //plot->replot();
+    plot->replot();
 }
 
 void RTPlotWithLegend::setMarginGroup(QCPMarginGroup *mg)
 {
-    ui->plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
+    plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
 }
 
 void RTPlotWithLegend::setYAxisLabel(const QString &label, QCPAxis::ScaleType type)

@@ -10,7 +10,7 @@ ScientificNotationEdit::ScientificNotationEdit(QWidget *parent)
 
 void ScientificNotationEdit::setValue(double value)
 {
-    auto textValue = QString("%1").arg(value, 4, 'e', 2, '0').replace('.', ',');
+    auto textValue = QString("%1").arg(value, 0, 'e', 3, '0').replace('.', ',');
     setText(textValue);
 }
 

@@ -63,7 +63,7 @@ void MainWindow::configurePlot(QCustomPlot *plot, const QString &y1Label, const 
 
     plot->xAxis->setLabel("Время");
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat("hh:mm:ss.z");
+    dateTicker->setDateTimeFormat("hh:mm:ss");
     plot->xAxis->setTicker(dateTicker);
 
     plot->yAxis->setLabel(y1Label);
@@ -296,6 +296,7 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
     configurePlotZoomAndDrag(ui->plotHighVoltageCurrent, !plotUpdateRealTIme);
     configurePlotZoomAndDrag(ui->plotTemperaturePower, !plotUpdateRealTIme);
     configurePlotZoomAndDrag(ui->plotVacuumRadiation, !plotUpdateRealTIme);
+    ui->rtPlotHighVoltageCurrent->configurePlotZoomAndDrag(!plotUpdateRealTIme);
 }
 
 

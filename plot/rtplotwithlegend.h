@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "qcustomplot.h"
 #include "axisconfig.h"
+#include "colorsetter.h"
 
 namespace Ui {
 class RTPlotWithLegend;
@@ -21,6 +22,7 @@ public:
     void setYAxis2Label(const QString &label, QCPAxis::ScaleType type = QCPAxis::stLinear);
 
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType type);
+    void configurePlotZoomAndDrag(bool zoomAndDragTimeAxis);
 
     QCustomPlot* getPlot();
 
@@ -29,11 +31,11 @@ private:
     QCustomPlot *plot;
     QCPItemLine *line;
 
-    void configurePlotZoomAndDrag(bool zoomAndDragTimeAxis);
     void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);
     void configurePlotTimeAxis();
     void configurePlotLine();
+    ColorSetter colorSetter;
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);

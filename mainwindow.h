@@ -9,7 +9,7 @@
 
 #include "qcustomplot.h"
 #include "plot/axisconfig.h"
-#include "colorsetter.h"
+#include "plot/colorsetter.h"
 
 namespace Ui {
 class MainWindow;
