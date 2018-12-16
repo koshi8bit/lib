@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    configurePlots();
     configureNewPlots();
     configureGraphs();
 
