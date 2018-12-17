@@ -42,6 +42,9 @@ private:
     void configurePlotBackgroundAxis(QCPAxis *axis);
     void configurePlotTimeAxis();
     void configurePlotLine();
+
+    void configureLegend();
+
     ColorSetter colorSetter;
 
     QCPAxis *getAxis(Axis axis);

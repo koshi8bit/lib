@@ -19,6 +19,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     _plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     //plot->setNoAntialiasingOnDrag(true);
 
+    configureLegend();
 
     connect(_plot, &QCustomPlot::axisClick, this, &RTPlotWithLegend::axisClick);
     connect(_plot, &QCustomPlot::axisDoubleClick, this, &RTPlotWithLegend::axisDoubleClick);
@@ -31,6 +32,10 @@ RTPlotWithLegend::~RTPlotWithLegend()
 {
     _plot->deleteLater();
     line->deleteLater();
+
+//    foreach (auto graphElement, graphElements)
+//        graphElement->deleteLater();
+
     delete ui;
 
 }
@@ -115,6 +120,37 @@ void RTPlotWithLegend::configurePlotLine()
 
     line->start->setCoords(_plot->xAxis->range().upper, _plot->yAxis->range().upper);
     line->end->setCoords(_plot->xAxis->range().upper, _plot->yAxis->range().lower);
+}
+
+void RTPlotWithLegend::configureLegend()
+{
+    auto vLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
+
+    auto btn = new QPushButton(this);
+    vLayout->addWidget(btn);
+    auto btn2 = new QPushButton(this);
+    vLayout->addWidget(btn2);
+    auto btn3 = new QPushButton(this);
+    vLayout->addWidget(btn3);
+    auto btn4 = new QPushButton(this);
+    vLayout->addWidget(btn4);
+    auto btn5 = new QPushButton(this);
+    vLayout->addWidget(btn5);
+    auto btn6 = new QPushButton(this);
+    vLayout->addWidget(btn6);
+    auto btn7 = new QPushButton(this);
+    vLayout->addWidget(btn7);
+    auto btn8 = new QPushButton(this);
+    vLayout->addWidget(btn8);
+    auto btn9 = new QPushButton(this);
+    vLayout->addWidget(btn9);
+    auto btn10 = new QPushButton(this);
+    vLayout->addWidget(btn10);
+    auto btn11 = new QPushButton(this);
+    vLayout->addWidget(btn11);
+    auto btn12 = new QPushButton(this);
+    vLayout->addWidget(btn12);
+
 }
 
 QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
