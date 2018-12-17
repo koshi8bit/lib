@@ -8,10 +8,8 @@ GraphLegendItem::GraphLegendItem(const QString &label, QColor color, QWidget *pa
     ui->setupUi(this);
     this->label = label;
 
-    QString css = QString("background:rgb(%1,%2,%3);")
-            .arg(color.red())
-            .arg(color.green())
-            .arg(color.blue());
+    QString css = QString("background: %1;") // border: 1px solid #ccc;
+            .arg(color.name());
     ui->pushButtonColor->setStyleSheet(css);
     ui->checkBoxVisible->setChecked(true);
     setValue(0);
