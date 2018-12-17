@@ -35,6 +35,8 @@ private:
 signals:
 
 public slots:
+private slots:
+    void visibleChanged(bool newValue);
 };
 
 #endif // GRAPHWITHVALUE_H

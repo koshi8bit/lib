@@ -18,6 +18,13 @@ public:
     void setValue(double value);
     void setValue(const QString &value);
 
+private slots:
+    void on_checkBoxVisible_stateChanged(int arg1);
+
+    void on_pushButtonColor_clicked();
+
+signals:
+    void visibleChanged(bool newValue);
 private:
     Ui::GraphLegendItem *ui;
     QString label;

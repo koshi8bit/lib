@@ -19,6 +19,7 @@ GraphElement::GraphElement(const QString &label, QColor color, QCustomPlot *plot
 
     //_graphLegendItem = new GraphLegendItem(label, color, plot);
     _graphLegendItem = new GraphLegendItem(label, color);
+    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &GraphElement::visibleChanged);
 
 }
 
@@ -53,4 +54,11 @@ void GraphElement::setGraphKey(double key)
 {
     _tracer->setGraphKey(key);
     _graphLegendItem->setValue(_tracer->position->value());
+}
+
+void GraphElement::visibleChanged(bool newValue)
+{
+    visible = newValue;
+    _graph->setVisible(visible);
+    _tracer->setVisible(visible);
 }

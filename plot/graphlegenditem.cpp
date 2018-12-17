@@ -13,7 +13,7 @@ GraphLegendItem::GraphLegendItem(const QString &label, QColor color, QWidget *pa
             .arg(color.green())
             .arg(color.blue());
     ui->pushButtonColor->setStyleSheet(css);
-
+    ui->checkBoxVisible->setChecked(true);
     setValue(0);
 
 }
@@ -35,4 +35,15 @@ void GraphLegendItem::setValue(const QString &value)
     ui->label->setText(QString("%1: %2")
                        .arg(label)
                        .arg(value));
+}
+
+void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
+{
+    auto visible = static_cast<bool>(arg1);
+    emit visibleChanged(visible);
+}
+
+void GraphLegendItem::on_pushButtonColor_clicked()
+{
+
 }
