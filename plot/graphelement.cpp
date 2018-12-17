@@ -52,4 +52,5 @@ void GraphElement::addData(double key, double value)
 void GraphElement::setGraphKey(double key)
 {
     _tracer->setGraphKey(key);
+    _graphLegendItem->setValue(_tracer->position->value());
 }
