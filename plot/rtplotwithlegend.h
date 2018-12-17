@@ -37,6 +37,7 @@ private:
     Ui::RTPlotWithLegend *ui;
     QCustomPlot *_plot;
     QCPItemLine *line;
+    QVBoxLayout *legendLayout;
 
     void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);

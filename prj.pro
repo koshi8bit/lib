@@ -33,7 +33,8 @@ SOURCES += \
     plot\colorsetter.cpp \
     scientificnotationedit.cpp \
     plot\rtplotwithlegend.cpp \
-    plot\graphelement.cpp
+    plot\graphelement.cpp \
+    plot/graphlegenditem.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -42,12 +43,14 @@ HEADERS += \
     plot\colorsetter.h \
     scientificnotationedit.h \
     plot\rtplotwithlegend.h \
-    plot\graphelement.h
+    plot\graphelement.h \
+    plot/graphlegenditem.h
 
 FORMS += \
         mainwindow.ui \
     plot\axisconfig.ui \
-    plot\rtplotwithlegend.ui
+    plot\rtplotwithlegend.ui \
+    plot/graphlegenditem.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

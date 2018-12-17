@@ -11,6 +11,7 @@
 #include "plot/axisconfig.h"
 #include "plot/colorsetter.h"
 #include "plot/graphelement.h"
+#include "plot/graphlegenditem.h"
 
 namespace Ui {
 class MainWindow;

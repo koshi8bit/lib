@@ -3,6 +3,7 @@
 
 #include <QColor>
 #include "qcustomplot.h"
+#include "graphlegenditem.h"
 
 
 class GraphElement : public QObject
@@ -12,9 +13,11 @@ public:
     explicit GraphElement(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent = nullptr);
     virtual ~GraphElement();
 
-    QCPItemTracer *tracer();
     QCPGraph *graph();
+    GraphLegendItem *graphLegendItem();
     void addData(double key, double value);
+
+    void setGraphKey(double key);
 
 private:
     QString label;
@@ -25,6 +28,9 @@ private:
     //QCustomPlot *plot;
     QCPGraph *_graph;
     QCPItemTracer *_tracer;
+    GraphLegendItem *_graphLegendItem;
+
+    QCPItemTracer *tracer();
 
 signals:
 
