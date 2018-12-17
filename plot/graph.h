@@ -6,12 +6,12 @@
 #include "graphlegenditem.h"
 
 
-class GraphElement : public QObject
+class Graph : public QObject
 {
     Q_OBJECT
 public:
-    explicit GraphElement(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent = nullptr);
-    virtual ~GraphElement();
+    explicit Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent = nullptr);
+    virtual ~Graph();
 
     QCPGraph *graph();
     GraphLegendItem *graphLegendItem();
@@ -35,8 +35,10 @@ private:
 signals:
 
 public slots:
+
 private slots:
     void visibleChanged(bool newValue);
+    void colorChanged(QColor newColor);
 };
 
 #endif // GRAPHWITHVALUE_H

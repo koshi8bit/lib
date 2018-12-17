@@ -33,7 +33,7 @@ SOURCES += \
     plot\colorsetter.cpp \
     scientificnotationedit.cpp \
     plot\rtplotwithlegend.cpp \
-    plot\graphelement.cpp \
+    plot\graph.cpp \
     plot/graphlegenditem.cpp
 
 HEADERS += \
@@ -43,7 +43,7 @@ HEADERS += \
     plot\colorsetter.h \
     scientificnotationedit.h \
     plot\rtplotwithlegend.h \
-    plot\graphelement.h \
+    plot\graph.h \
     plot/graphlegenditem.h
 
 FORMS += \

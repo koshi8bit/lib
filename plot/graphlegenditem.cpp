@@ -7,6 +7,7 @@ GraphLegendItem::GraphLegendItem(const QString &label, QColor color, QWidget *pa
 {
     ui->setupUi(this);
     this->label = label;
+    this->color = color;
 
     QString css = QString("background: %1;") // border: 1px solid #ccc;
             .arg(color.name());
@@ -43,5 +44,14 @@ void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
 
 void GraphLegendItem::on_pushButtonColor_clicked()
 {
+    auto color = QColorDialog::getColor(this->color, this, tr("Select Color"));
+    if (color.isValid())
+    {
+        QString css = QString("background: %1;") // border: 1px solid #ccc;
+                .arg(color.name());
+        ui->pushButtonColor->setStyleSheet(css);
+
+        emit colorChanged(color);
+    }
 
 }

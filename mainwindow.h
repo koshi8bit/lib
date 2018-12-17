@@ -10,7 +10,7 @@
 #include "plot/qcustomplot.h"
 #include "plot/axisconfig.h"
 #include "plot/colorsetter.h"
-#include "plot/graphelement.h"
+#include "plot/graph.h"
 #include "plot/graphlegenditem.h"
 
 namespace Ui {
@@ -35,7 +35,7 @@ private:
 
     QTimer *timer;
 
-    GraphElement *geHighVoltageElvFull, *geHighVoltageElvFirstSection, *gehCurrentBergozHebt, *geTemperaturePyrometer, *geVacuumTandem;
+    Graph *geHighVoltageElvFull, *geHighVoltageElvFirstSection, *gehCurrentBergozHebt, *geTemperaturePyrometer, *geVacuumTandem;
 
 
     QCPMarginGroup *mg;

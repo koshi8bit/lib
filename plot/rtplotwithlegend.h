@@ -5,7 +5,7 @@
 #include "qcustomplot.h"
 #include "axisconfig.h"
 #include "colorsetter.h"
-#include "graphelement.h"
+#include "graph.h"
 
 namespace Ui {
 class RTPlotWithLegend;
@@ -30,7 +30,7 @@ public:
 
     void configurePlotZoomAndDrag(bool zoomAndDragTimeAxis);
 
-    GraphElement *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
+    Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
     QCustomPlot *plot();
 
 private:
@@ -51,7 +51,7 @@ private:
     QCPAxis *getAxis(Axis axis);
 
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
-    QVector<GraphElement *> graphElements;
+    QVector<Graph *> graphElements;
 
 public slots:
     void mouseMove(double time);

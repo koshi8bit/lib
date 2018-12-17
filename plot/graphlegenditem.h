@@ -2,6 +2,7 @@
 #define GRAPHLEGENDITEM_H
 
 #include <QWidget>
+#include <QColorDialog>
 
 namespace Ui {
 class GraphLegendItem;
@@ -25,9 +26,12 @@ private slots:
 
 signals:
     void visibleChanged(bool newValue);
+    void colorChanged(QColor newColor);
+
 private:
     Ui::GraphLegendItem *ui;
     QString label;
+    QColor color;
 };
 
 #endif // GRAPHLEGENDITEM_H

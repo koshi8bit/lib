@@ -55,10 +55,10 @@ void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
     _plot->axisRect()->setRangeDragAxes(axes);
 }
 
-GraphElement *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label)
+Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label)
 {
 
-    auto graphElement = new GraphElement(label,
+    auto graphElement = new Graph(label,
                             colorSetter.getColor(),
                             _plot,
                             getAxis(axis),

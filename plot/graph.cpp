@@ -1,7 +1,7 @@
-#include "graphelement.h"
+#include "graph.h"
 
 
-GraphElement::GraphElement(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent)
+Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent)
     : QObject(parent)
 {
     _graph = plot->addGraph(plot->xAxis, yAxis);
@@ -19,46 +19,53 @@ GraphElement::GraphElement(const QString &label, QColor color, QCustomPlot *plot
 
     //_graphLegendItem = new GraphLegendItem(label, color, plot);
     _graphLegendItem = new GraphLegendItem(label, color);
-    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &GraphElement::visibleChanged);
+    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::visibleChanged);
+    connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::colorChanged);
 
 }
 
-GraphElement::~GraphElement()
+Graph::~Graph()
 {
     _graph->deleteLater();
     _tracer->deleteLater();
     //_graphLegendItem->deleteLater();
 }
 
-QCPItemTracer *GraphElement::tracer()
+QCPItemTracer *Graph::tracer()
 {
     return _tracer;
 }
 
-QCPGraph *GraphElement::graph()
+QCPGraph *Graph::graph()
 {
     return _graph;
 }
 
-GraphLegendItem *GraphElement::graphLegendItem()
+GraphLegendItem *Graph::graphLegendItem()
 {
     return _graphLegendItem;
 }
 
-void GraphElement::addData(double key, double value)
+void Graph::addData(double key, double value)
 {
     _graph->addData(key, value);
 }
 
-void GraphElement::setGraphKey(double key)
+void Graph::setGraphKey(double key)
 {
     _tracer->setGraphKey(key);
     _graphLegendItem->setValue(_tracer->position->value());
 }
 
-void GraphElement::visibleChanged(bool newValue)
+void Graph::visibleChanged(bool newValue)
 {
     visible = newValue;
     _graph->setVisible(visible);
     _tracer->setVisible(visible);
+}
+
+void Graph::colorChanged(QColor newColor)
+{
+    _graph->setPen(newColor);
+    _tracer->setBrush(newColor);
 }
