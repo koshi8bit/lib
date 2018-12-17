@@ -144,7 +144,6 @@ QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
-    qDebug() << event;
     if (event->button() == Qt::RightButton)
     {
         foreach(auto graph, axis->graphs())
