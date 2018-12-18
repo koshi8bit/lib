@@ -2,8 +2,6 @@
 #define RTPLOTWITHLEGEND_H
 
 #include <QWidget>
-#include <QSpacerItem>
-
 #include "qcustomplot.h"
 #include "axisconfig.h"
 #include "colorsetter.h"
