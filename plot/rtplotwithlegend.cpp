@@ -192,6 +192,7 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
 
 void RTPlotWithLegend::mousePress(QMouseEvent *event)
 {
+    //FIXME tima45 RMB click
     if (event->button() == Qt::MouseButton::MiddleButton)
     {
         auto newValue = !realTime();

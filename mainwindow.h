@@ -36,8 +36,9 @@ private:
 
     QTimer *timerAddData1, *timerAddData2, *timerReplot;
 
-    Graph *geHighVoltageElvFull, *geHighVoltageElvFirstSection, *gehCurrentBergozHebt, *geTemperaturePyrometer, *geVacuumTandem;
-
+    Graph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt;
+    Graph *graphTemperaturePyrometer;
+    Graph *graphVacuumTandem;
 
     QCPMarginGroup *mg;
     double now;
@@ -55,8 +56,9 @@ private slots:
     void addData1();
     void addData2();
     void replot();
+    void on_checkBoxRealTime_stateChanged(int arg1);
+
     void changeRange(QCPRange range);
-    void on_checkBoxRealTime_stateChanged(int arg1); 
     void mouseMove(QMouseEvent *event);
     void plotRealTimeChanged(bool newValue);
 };

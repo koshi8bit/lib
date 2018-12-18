@@ -69,17 +69,17 @@ void MainWindow::configureNewPlots()
 
 void MainWindow::addData1()
 {
-    geHighVoltageElvFull->addData(now, sin(5.0f/2*cos(now)));
-    geTemperaturePyrometer->addData(now, sin(9.0f/2*cos(now)));
+    graphHighVoltageElvFull->addData(now, sin(5.0f/2*cos(now)));
+    graphTemperaturePyrometer->addData(now, sin(9.0f/2*cos(now)));
 
 
 }
 
 void MainWindow::addData2()
 {
-    gehCurrentBergozHebt->addData(now, QRandomGenerator::global()->bounded(1.0));
-    geHighVoltageElvFirstSection->addData(now, sin(now));
-    geVacuumTandem->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
+    graphCurrentBergozHebt->addData(now, QRandomGenerator::global()->bounded(1.0));
+    graphHighVoltageElvFirstSection->addData(now, sin(now));
+    graphVacuumTandem->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
 
 }
 
@@ -106,19 +106,19 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    geHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis, "ЭЛВ (полное напряжение)");
-    geHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis, "ЭЛВ (первая секция)");
-    gehCurrentBergozHebt = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis2, "Bergoz (выс. эн. тракт)");
+    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis, "ЭЛВ (полное напряжение)");
+    graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis, "ЭЛВ (первая секция)");
+    graphCurrentBergozHebt = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis2, "Bergoz (выс. эн. тракт)");
 }
 
 void MainWindow::configureGraphsTemperaturePower()
 {
-    geTemperaturePyrometer = ui->rtPlotTemperaturePower->addGraph(RTPlotWithLegend::Axis::yAxis, "Пирометр");
+    graphTemperaturePyrometer = ui->rtPlotTemperaturePower->addGraph(RTPlotWithLegend::Axis::yAxis, "Пирометр");
 }
 
 void MainWindow::configureGraphsVacuumRadiation()
 {
-    geVacuumTandem = ui->rtPlotVacuumRadiation->addGraph(RTPlotWithLegend::Axis::yAxis, "Тандем");
+    graphVacuumTandem = ui->rtPlotVacuumRadiation->addGraph(RTPlotWithLegend::Axis::yAxis, "Тандем");
 }
 
 
@@ -156,7 +156,6 @@ void MainWindow::changeRange(QCPRange range)
     ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
 
-
 void MainWindow::mouseMove(QMouseEvent *event)
 {
     auto plot = static_cast<QCustomPlot*>(sender());
@@ -172,7 +171,6 @@ void MainWindow::mouseMove(QMouseEvent *event)
     ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
 
-
 void MainWindow::plotRealTimeChanged(bool newValue)
 {
     ui->checkBoxRealTime->setChecked(newValue);
@@ -184,6 +182,4 @@ void MainWindow::plotRealTimeChanged(bool newValue)
         ui->rtPlotTemperaturePower->setRealTime(newValue);
     if (plot != ui->rtPlotVacuumRadiation)
         ui->rtPlotVacuumRadiation->setRealTime(newValue);
-
 }
-
