@@ -37,9 +37,9 @@ void MainWindow::configurePlots()
     ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)");
     ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
     //FIXME tima45 to new style
-    connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
+    connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(plotRangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     //connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis, &QCPAxis::rangeChanged, this, &MainWindow::rangeChanged);
-    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
+    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(plotMouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
     connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
 
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
@@ -49,8 +49,8 @@ void MainWindow::configurePlots()
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Температура (С)");
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)");
     ui->rtPlotTemperaturePower->setMarginGroup(mg);
-    connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(rangeChanged(QCPRange)));
-    connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
+    connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(plotRangeChanged(QCPRange)),this,SLOT(plotRangeChanged(QCPRange)));
+    connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(plotMouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
     connect(ui->rtPlotTemperaturePower, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
 
 
@@ -58,8 +58,8 @@ void MainWindow::configurePlots()
     ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Вакуум (Пa)", QCPAxis::ScaleType::stLogarithmic);
     ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Радиация (Зв)");
     ui->rtPlotVacuumRadiation->setMarginGroup(mg);
-    connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(rangeChanged(QCPRange)));
-    connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
+    connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(plotRangeChanged(QCPRange)),this,SLOT(plotRangeChanged(QCPRange)));
+    connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(plotMouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
     connect(ui->rtPlotVacuumRadiation, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
 
 
@@ -91,7 +91,7 @@ void MainWindow::replot()
 
     if (ui->rtPlotHighVoltageCurrent->realTime())
     {
-        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - plotScreenBufferSEC, now);
+        //ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - ui->rtPlotHighVoltageCurrent->plotScreenBufferSEC(), now);
     }
 
     ui->rtPlotHighVoltageCurrent->plot()->replot();
@@ -133,7 +133,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::rangeChanged(QCPRange range)
+void MainWindow::plotRangeChanged(QCPRange range)
 {
     QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
 
@@ -143,8 +143,6 @@ void MainWindow::rangeChanged(QCPRange range)
         ui->rtPlotTemperaturePower->plot()->xAxis->setRange(range);
     if (axis != ui->rtPlotVacuumRadiation->plot()->xAxis)
         ui->rtPlotVacuumRadiation->plot()->xAxis->setRange(range);
-
-    plotScreenBufferSEC = range.upper - range.lower;
 
     ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
@@ -162,7 +160,7 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 
 
 
-void MainWindow::mouseMove(QMouseEvent *event)
+void MainWindow::plotMouseMove(QMouseEvent *event)
 {
     auto plot = static_cast<QCustomPlot*>(sender());
     auto time = plot->xAxis->pixelToCoord(event->x());

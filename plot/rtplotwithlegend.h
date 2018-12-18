@@ -31,6 +31,9 @@ public:
 
 
     bool realTime();
+    int plotScreenBufferSEC();
+
+    void setTimeAxisRange(QCPRange range);
 
 
     Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
@@ -58,6 +61,8 @@ private:
 
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
     QVector<Graph *> graphElements;
+
+    int _plotScreenBufferSEC = 90;
 
 signals:
     void realTimeChanged(bool newValue);

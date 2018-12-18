@@ -63,6 +63,17 @@ bool RTPlotWithLegend::realTime()
     return _realTime;
 }
 
+int RTPlotWithLegend::plotScreenBufferSEC()
+{
+    return _plotScreenBufferSEC;
+}
+
+void RTPlotWithLegend::setTimeAxisRange(QCPRange range)
+{
+    _plot->xAxis->setRange(range);
+    _plotScreenBufferSEC = range.upper - range.lower;
+}
+
 void RTPlotWithLegend::setRealTime(bool newValue)
 {
     _realTime = newValue;
