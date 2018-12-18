@@ -66,6 +66,9 @@ void Graph::visibleChanged(bool newValue)
 
 void Graph::colorChanged(QColor newColor)
 {
-    _graph->setPen(newColor);
-    _tracer->setBrush(newColor);
+    color = newColor;
+    _graph->setPen(color);
+
+    _tracer->setBrush(color);
+    _tracer->setPen(color);
 }

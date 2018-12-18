@@ -31,7 +31,7 @@ SOURCES += \
     plot\qcustomplot.cpp \
     plot\axisconfig.cpp \
     plot\colorsetter.cpp \
-    scientificnotationedit.cpp \
+    plot\scientificnotationedit.cpp \
     plot\rtplotwithlegend.cpp \
     plot\graph.cpp \
     plot/graphlegenditem.cpp
@@ -41,7 +41,7 @@ HEADERS += \
     plot\qcustomplot.h \
     plot\axisconfig.h \
     plot\colorsetter.h \
-    scientificnotationedit.h \
+    plot\scientificnotationedit.h \
     plot\rtplotwithlegend.h \
     plot\graph.h \
     plot/graphlegenditem.h

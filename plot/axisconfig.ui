@@ -157,7 +157,7 @@
   <customwidget>
    <class>ScientificNotationEdit</class>
    <extends>QWidget</extends>
-   <header>scientificnotationedit.h</header>
+   <header>plot/scientificnotationedit.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -47,6 +47,7 @@ void GraphLegendItem::on_pushButtonColor_clicked()
     auto color = QColorDialog::getColor(this->color, this, tr("Select Color"));
     if (color.isValid())
     {
+        this->color = color;
         QString css = QString("background: %1;") // border: 1px solid #ccc;
                 .arg(color.name());
         ui->pushButtonColor->setStyleSheet(css);
