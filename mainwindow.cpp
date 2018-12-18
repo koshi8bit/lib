@@ -82,19 +82,32 @@ void MainWindow::addData2()
 
 }
 
+//FIXME tima45 diff?
+//void MainWindow::replot()
+//{
+//    auto now = RTPlotWithLegend::now();
+//    auto rtPlot = ui->rtPlotHighVoltageCurrent;
+
+//    if (rtPlot->realTime())
+//    {
+//        rtPlot->plot()->xAxis->setRange(
+//                    now - rtPlot->timeAxisRangeSEC(),
+//                    now);
+//    }
+
+//    rtPlot->plot()->replot();
+//}
+
 void MainWindow::replot()
 {
-    auto now = RTPlotWithLegend::now();
-    auto rtPlot = ui->rtPlotHighVoltageCurrent;
+    now = RTPlotWithLegend::now();
 
-    if (rtPlot->realTime())
+    if (ui->rtPlotHighVoltageCurrent->realTime())
     {
-        rtPlot->plot()->xAxis->setRange(
-                    now - rtPlot->timeAxisRangeSEC(),
-                    now);
+        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - ui->rtPlotHighVoltageCurrent->timeAxisRangeSEC(), now);
     }
 
-    rtPlot->plot()->replot();
+    ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
 
 
