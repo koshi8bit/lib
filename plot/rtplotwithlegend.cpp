@@ -47,17 +47,34 @@ RTPlotWithLegend::~RTPlotWithLegend()
 
 void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
 {
-    auto axes = QList<QCPAxis*>()
-            << _plot->yAxis
-            << _plot->yAxis2;
 
+
+
+    _plot->setInteraction(QCP::iRangeZoom, zoomAndDragTimeAxis);
+    _plot->setInteraction(QCP::iRangeDrag, zoomAndDragTimeAxis);
     if (zoomAndDragTimeAxis)
-        axes << _plot->xAxis;
+    {
+        auto axes = QList<QCPAxis*>()
+                << _plot->xAxis
+                << _plot->yAxis
+                << _plot->yAxis2;
 
-    _plot->setInteraction(QCP::iRangeZoom, true);
-    _plot->setInteraction(QCP::iRangeDrag, true);
-    _plot->axisRect()->setRangeZoomAxes(axes);
-    _plot->axisRect()->setRangeDragAxes(axes);
+        _plot->axisRect()->setRangeZoomAxes(axes);
+        _plot->axisRect()->setRangeDragAxes(axes);
+    }
+
+
+//    auto axes = QList<QCPAxis*>()
+//            << _plot->yAxis
+//            << _plot->yAxis2;
+
+//    if (zoomAndDragTimeAxis)
+//        axes << _plot->xAxis;
+
+//    _plot->setInteraction(QCP::iRangeZoom, true);
+//    _plot->setInteraction(QCP::iRangeDrag, true);
+//    _plot->axisRect()->setRangeZoomAxes(axes);
+//    _plot->axisRect()->setRangeDragAxes(axes);
 }
 
 bool RTPlotWithLegend::realTime()
@@ -206,10 +223,8 @@ void RTPlotWithLegend::beforeReplot()
 {
     if (_realTime)
     {
-        auto time = QDateTime::currentDateTime();
-        auto now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
-
-        mouseMove(now);
+        //BUG set to 1970 and don't move
+        mouseMove(RTPlotWithLegend::now());
     }
 }
 
