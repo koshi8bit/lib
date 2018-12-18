@@ -40,9 +40,9 @@ void MainWindow::configureNewPlots()
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
 
-
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
+
 
 
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Температура (С)");
@@ -130,6 +130,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
+{
+    plotUpdateRealTIme = static_cast<bool>(arg1);
+
+    ui->rtPlotHighVoltageCurrent->setRealTime(plotUpdateRealTIme);
+    ui->rtPlotTemperaturePower->setRealTime(plotUpdateRealTIme);
+    ui->rtPlotVacuumRadiation->setRealTime(plotUpdateRealTIme);
+}
+
+
+////////////////////////////////
 
 void MainWindow::changeRange(QCPRange range)
 {
@@ -144,18 +155,6 @@ void MainWindow::changeRange(QCPRange range)
 
     ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
-
-
-void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
-{
-    plotUpdateRealTIme = static_cast<bool>(arg1);
-
-    ui->rtPlotHighVoltageCurrent->setRealTime(plotUpdateRealTIme);
-    ui->rtPlotTemperaturePower->setRealTime(plotUpdateRealTIme);
-    ui->rtPlotVacuumRadiation->setRealTime(plotUpdateRealTIme);
-}
-
-
 
 
 void MainWindow::mouseMove(QMouseEvent *event)
