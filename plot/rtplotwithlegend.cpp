@@ -171,6 +171,7 @@ QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
+    qDebug() << "axisClick";
     if (event->button() == Qt::RightButton)
     {
         foreach(auto graph, axis->graphs())
@@ -252,17 +253,17 @@ void RTPlotWithLegend::setMarginGroup(QCPMarginGroup *mg)
     _plot->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
 }
 
-void RTPlotWithLegend::setAxisLabel(RTPlotWithLegend::Axis axis, const QString &label, QCPAxis::ScaleType scaleType)
+void RTPlotWithLegend::configureAxis(RTPlotWithLegend::Axis axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType)
 {
 
     auto _axis = RTPlotWithLegend::getAxis(axis);
     _axis->setVisible(true);
     _axis->setLabel(label);
+    _axis->setRange(min, max);
     //axis->setLabelPadding(20);
 
     setAxisType(_axis, scaleType);
 }
-
 
 void RTPlotWithLegend::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
 {

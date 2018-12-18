@@ -90,8 +90,8 @@
            <height>0</height>
           </size>
          </property>
-         <property name="prefix">
-          <string/>
+         <property name="decimals">
+          <number>3</number>
          </property>
          <property name="minimum">
           <double>-9999999999.000000000000000</double>
@@ -121,6 +121,9 @@
            <width>65</width>
            <height>0</height>
           </size>
+         </property>
+         <property name="decimals">
+          <number>3</number>
          </property>
          <property name="minimum">
           <double>-9999999999.000000000000000</double>

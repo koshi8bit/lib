@@ -27,7 +27,7 @@ public:
     explicit RTPlotWithLegend(QWidget *parent = nullptr);
     virtual ~RTPlotWithLegend();
     void setMarginGroup(QCPMarginGroup *mg);
-    void setAxisLabel(RTPlotWithLegend::Axis axis, const QString &label, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+    void configureAxis(RTPlotWithLegend::Axis axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
 
 
     bool realTime();

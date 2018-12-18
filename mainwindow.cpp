@@ -33,8 +33,8 @@ void MainWindow::configureNewPlots()
 {
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
-    ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Энергия (кВ)");
-    ui->rtPlotHighVoltageCurrent->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)");
+    ui->rtPlotHighVoltageCurrent->configureAxis(RTPlotWithLegend::Axis::yAxis, "Энергия (кВ)", 0, 1250);
+    ui->rtPlotHighVoltageCurrent->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)", 0, 10);
     ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
     connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
@@ -45,8 +45,8 @@ void MainWindow::configureNewPlots()
 
 
 
-    ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Температура (С)");
-    ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)");
+    ui->rtPlotTemperaturePower->configureAxis(RTPlotWithLegend::Axis::yAxis, "Температура (С)", 0, 100);
+    ui->rtPlotTemperaturePower->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)", 0, 700);
     ui->rtPlotTemperaturePower->setMarginGroup(mg);
     connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
@@ -54,13 +54,12 @@ void MainWindow::configureNewPlots()
 
 
 
-    ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Вакуум (Пa)", QCPAxis::ScaleType::stLogarithmic);
-    ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Радиация (Зв)");
+    ui->rtPlotVacuumRadiation->configureAxis(RTPlotWithLegend::Axis::yAxis, "Вакуум (Пa)", 0.00001, 1, QCPAxis::ScaleType::stLogarithmic);
+    ui->rtPlotVacuumRadiation->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Радиация (Зв)", 0.000001, 1, QCPAxis::ScaleType::stLogarithmic);
     ui->rtPlotVacuumRadiation->setMarginGroup(mg);
     connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     connect(ui->rtPlotVacuumRadiation, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
-
 
 }
 
