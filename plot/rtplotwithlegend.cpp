@@ -65,6 +65,7 @@ Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &la
                             this);
 
     graphElements.append(graphElement);
+    //legendLayout->insertWidget(legendLayout->count()-1, graphElement->graphLegendItem());
     legendLayout->addWidget(graphElement->graphLegendItem());
     return graphElement;
 }
@@ -127,6 +128,8 @@ void RTPlotWithLegend::configureLegend()
 {
     legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
 
+    //auto a = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //ui->scrollAreaLegend->widget()->addItem(a);
 }
 
 QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
