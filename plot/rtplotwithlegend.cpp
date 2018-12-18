@@ -150,8 +150,7 @@ void RTPlotWithLegend::configureLegend()
 {
     legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
     auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    //spacer->
-    //spacer->setAlignment()
+
     legendLayout->addItem(spacer);
 
 }
@@ -259,7 +258,7 @@ void RTPlotWithLegend::configureAxis(RTPlotWithLegend::Axis axis, const QString 
     auto _axis = RTPlotWithLegend::getAxis(axis);
     _axis->setVisible(true);
     _axis->setLabel(label);
-    //_axis->setRange(min, max);
+    _axis->setRange(min, max);
     //axis->setLabelPadding(20);
 
     setAxisType(_axis, scaleType);
