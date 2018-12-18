@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     timerAddData2->start();
 
     timerReplot = new QTimer(this);
-    timerReplot->setInterval(replotMSEC);
+    timerReplot->setInterval(plotUpdateIntervalMSEC);
     connect(timerReplot, SIGNAL(timeout()), this, SLOT(replot()));
     timerReplot->start();
 }
@@ -38,16 +38,20 @@ void MainWindow::configureNewPlots()
     ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
     connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
-    connect(ui->rtPlotHighVoltageCurrent->plot(), &QCustomPlot::mousePress, this, &MainWindow::plotMousePress);
+    connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
+
+
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
+
 
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Температура (С)");
     ui->rtPlotTemperaturePower->setAxisLabel(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)");
     ui->rtPlotTemperaturePower->setMarginGroup(mg);
     connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
-    connect(ui->rtPlotTemperaturePower->plot(), &QCustomPlot::mousePress, this, &MainWindow::plotMousePress);
+    connect(ui->rtPlotTemperaturePower, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
+
 
 
     ui->rtPlotVacuumRadiation->setAxisLabel(RTPlotWithLegend::Axis::yAxis, "Вакуум (Пa)", QCPAxis::ScaleType::stLogarithmic);
@@ -55,7 +59,8 @@ void MainWindow::configureNewPlots()
     ui->rtPlotVacuumRadiation->setMarginGroup(mg);
     connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(changeRange(QCPRange)));
     connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
-    connect(ui->rtPlotVacuumRadiation->plot(), &QCustomPlot::mousePress, this, &MainWindow::plotMousePress);
+    connect(ui->rtPlotVacuumRadiation, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
+
 
 }
 
@@ -83,7 +88,7 @@ void MainWindow::replot()
     time = QDateTime::currentDateTime();
     now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
 
-    if (ui->checkBoxRealTime->isChecked())
+    if (ui->rtPlotHighVoltageCurrent->realTime())
     {
         ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - plotScreenBufferSEC, now);
     }
@@ -171,11 +176,18 @@ void MainWindow::mouseMove(QMouseEvent *event)
     ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
 
-void MainWindow::plotMousePress(QMouseEvent *event)
+
+void MainWindow::plotRealTimeChanged(bool newValue)
 {
-    if (event->button() == Qt::MouseButton::RightButton)
-    {
-        ui->checkBoxRealTime->toggle();
-    }
+    ui->checkBoxRealTime->setChecked(newValue);
+    auto plot = static_cast<RTPlotWithLegend *>(sender());
+
+    if (plot != ui->rtPlotHighVoltageCurrent)
+        ui->rtPlotHighVoltageCurrent->setRealTime(newValue);
+    if (plot != ui->rtPlotTemperaturePower)
+        ui->rtPlotTemperaturePower->setRealTime(newValue);
+    if (plot != ui->rtPlotVacuumRadiation)
+        ui->rtPlotVacuumRadiation->setRealTime(newValue);
+
 }
 

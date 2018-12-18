@@ -31,10 +31,11 @@ public:
 
 
     bool realTime();
-    void setRealTime(bool newValue);
+
 
     Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
     QCustomPlot *plot();
+
 
 private:
     Ui::RTPlotWithLegend *ui;
@@ -58,14 +59,20 @@ private:
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
     QVector<Graph *> graphElements;
 
+signals:
+    void realTimeChanged(bool newValue);
+
 public slots:
     void mouseMove(double time);
+    void setRealTime(bool newValue);
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+    void mousePress(QMouseEvent *event);
     void mouseMove(QMouseEvent *event);
     void beforeReplot();
+
 
     
 };

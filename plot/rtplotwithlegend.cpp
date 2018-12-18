@@ -28,6 +28,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     connect(_plot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     //connect(_plot, &QCustomPlot::mouseMove(QMouseEvent *), this, &RTPlotWithLegend::mouseMove(QMouseEvent *));
     connect(_plot, &QCustomPlot::beforeReplot, this, &RTPlotWithLegend::beforeReplot);
+    connect(_plot, &QCustomPlot::mousePress, this, &RTPlotWithLegend::mousePress);
 }
 
 RTPlotWithLegend::~RTPlotWithLegend()
@@ -178,6 +179,17 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
     ac.setModal(true);
     ac.exec();
 
+}
+
+void RTPlotWithLegend::mousePress(QMouseEvent *event)
+{
+    if (event->button() == Qt::MouseButton::RightButton)
+    {
+        auto newValue = !realTime();
+        setRealTime(newValue);
+        emit realTimeChanged(newValue);
+
+    }
 }
 
 void RTPlotWithLegend::beforeReplot()
