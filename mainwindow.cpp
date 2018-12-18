@@ -85,12 +85,11 @@ void MainWindow::addData2()
 
 void MainWindow::replot()
 {
-    time = QDateTime::currentDateTime();
-    now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
+    now = RTPlotWithLegend::now();
 
     if (ui->rtPlotHighVoltageCurrent->realTime())
     {
-        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - plotScreenBufferSEC, now);
+        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - ui->rtPlotHighVoltageCurrent->timeAxisRangeSEC(), now);
     }
 
     ui->rtPlotHighVoltageCurrent->plot()->replot();
@@ -142,8 +141,6 @@ void MainWindow::changeRange(QCPRange range)
         ui->rtPlotTemperaturePower->plot()->xAxis->setRange(range);
     if (axis != ui->rtPlotVacuumRadiation->plot()->xAxis)
         ui->rtPlotVacuumRadiation->plot()->xAxis->setRange(range);
-
-    plotScreenBufferSEC = range.upper - range.lower;
 
     ui->rtPlotHighVoltageCurrent->plot()->replot();
 }

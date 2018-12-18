@@ -29,7 +29,6 @@ public:
 private:
     Ui::MainWindow *ui;
     bool plotUpdateRealTIme;
-    int plotScreenBufferSEC = 90;
     int plotUpdateIntervalMSEC = 10;
     int addData1MSEC = 50;
     int addData2MSEC = 1000;

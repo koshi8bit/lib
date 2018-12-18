@@ -18,6 +18,8 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     configurePlotTimeAxis();
     configurePlotLine();
     _plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
+    auto _now = RTPlotWithLegend::now();
+    _plot->xAxis->setRange(_now - 90, _now); //1min 30sec
     //plot->setNoAntialiasingOnDrag(true);
 
     configureLegend();
@@ -61,6 +63,13 @@ void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
 bool RTPlotWithLegend::realTime()
 {
     return _realTime;
+}
+
+double RTPlotWithLegend::timeAxisRangeSEC()
+{
+    auto range = _plot->xAxis->range();
+    return range.upper - range.lower;
+
 }
 
 void RTPlotWithLegend::setRealTime(bool newValue)
@@ -183,7 +192,7 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
 
 void RTPlotWithLegend::mousePress(QMouseEvent *event)
 {
-    if (event->button() == Qt::MouseButton::RightButton)
+    if (event->button() == Qt::MouseButton::MiddleButton)
     {
         auto newValue = !realTime();
         setRealTime(newValue);
@@ -278,4 +287,11 @@ void RTPlotWithLegend::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
 QCustomPlot *RTPlotWithLegend::plot()
 {
     return _plot;
+}
+
+double RTPlotWithLegend::now()
+{
+    auto time = QDateTime::currentDateTime();
+    auto now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
+    return now;
 }

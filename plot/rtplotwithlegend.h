@@ -31,10 +31,13 @@ public:
 
 
     bool realTime();
+    double timeAxisRangeSEC();
 
 
     Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
     QCustomPlot *plot();
+
+    static double now();
 
 
 private:
