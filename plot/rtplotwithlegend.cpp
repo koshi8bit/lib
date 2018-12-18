@@ -10,6 +10,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     ui->setupUi(this);
 
     _plot = ui->plot;
+    _realTime = true;
 
     configurePlotZoomAndDrag(false);
     configurePlotBackground();
@@ -26,6 +27,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     //FIXME tima signal
     connect(_plot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     //connect(_plot, &QCustomPlot::mouseMove(QMouseEvent *), this, &RTPlotWithLegend::mouseMove(QMouseEvent *));
+    connect(_plot, &QCustomPlot::beforeReplot, this, &RTPlotWithLegend::beforeReplot);
 }
 
 RTPlotWithLegend::~RTPlotWithLegend()
@@ -53,6 +55,17 @@ void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
     _plot->setInteraction(QCP::iRangeDrag, true);
     _plot->axisRect()->setRangeZoomAxes(axes);
     _plot->axisRect()->setRangeDragAxes(axes);
+}
+
+bool RTPlotWithLegend::realTime()
+{
+    return _realTime;
+}
+
+void RTPlotWithLegend::setRealTime(bool newValue)
+{
+    _realTime = newValue;
+    configurePlotZoomAndDrag(!newValue);
 }
 
 Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label)
@@ -159,11 +172,23 @@ void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QM
 
 void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
+    qDebug() << "axisDoubleClick";
     auto plot = static_cast<QCustomPlot *>(sender());
     AxisConfig ac(axis, plot->xAxis == axis, this);
     ac.setModal(true);
     ac.exec();
 
+}
+
+void RTPlotWithLegend::beforeReplot()
+{
+    if (_realTime)
+    {
+        auto time = QDateTime::currentDateTime();
+        auto now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
+
+        mouseMove(now);
+    }
 }
 
 void RTPlotWithLegend::mouseMove(QMouseEvent *event)
@@ -174,6 +199,7 @@ void RTPlotWithLegend::mouseMove(QMouseEvent *event)
     mouseMove(time);
 
 }
+
 
 void RTPlotWithLegend::mouseMove(double time)
 {

@@ -30,10 +30,12 @@ private:
     Ui::MainWindow *ui;
     bool plotUpdateRealTIme;
     int plotScreenBufferSEC = 90;
-    int plotUpdateIntervalMSEC = 10;
+    int replotMSEC = 10;
+    int addData1MSEC = 50;
+    int addData2MSEC = 1000;
 
 
-    QTimer *timer;
+    QTimer *timerAddData1, *timerAddData2, *timerReplot;
 
     Graph *geHighVoltageElvFull, *geHighVoltageElvFirstSection, *gehCurrentBergozHebt, *geTemperaturePyrometer, *geVacuumTandem;
 
@@ -51,10 +53,13 @@ private:
     void configureNewPlots();
 
 private slots:
-    void drawData();
+    void addData1();
+    void addData2();
+    void replot();
     void changeRange(QCPRange range);
     void on_checkBoxRealTime_stateChanged(int arg1); 
     void mouseMove(QMouseEvent *event);
+    void plotMousePress(QMouseEvent *event);
 };
 
 #endif // MAINWINDOW_H

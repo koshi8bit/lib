@@ -2,6 +2,7 @@
 #define RTPLOTWITHLEGEND_H
 
 #include <QWidget>
+#include <QDateTime>
 #include "qcustomplot.h"
 #include "axisconfig.h"
 #include "colorsetter.h"
@@ -28,7 +29,9 @@ public:
     void setMarginGroup(QCPMarginGroup *mg);
     void setAxisLabel(RTPlotWithLegend::Axis axis, const QString &label, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
 
-    void configurePlotZoomAndDrag(bool zoomAndDragTimeAxis);
+
+    bool realTime();
+    void setRealTime(bool newValue);
 
     Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
     QCustomPlot *plot();
@@ -38,9 +41,11 @@ private:
     QCustomPlot *_plot;
     QCPItemLine *line;
     QVBoxLayout *legendLayout;
+    bool _realTime;
 
     void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);
+    void configurePlotZoomAndDrag(bool zoomAndDragTimeAxis);
     void configurePlotTimeAxis();
     void configurePlotLine();
 
@@ -60,7 +65,10 @@ private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void mouseMove(QMouseEvent *event);
+    void beforeReplot();
 
+    
 };
+
 
 #endif // RTPLOTWITHLEGEND_H
