@@ -85,14 +85,17 @@ void MainWindow::addData2()
 
 void MainWindow::replot()
 {
-    now = RTPlotWithLegend::now();
+    auto now = RTPlotWithLegend::now();
+    auto rtPlot = ui->rtPlotHighVoltageCurrent;
 
-    if (ui->rtPlotHighVoltageCurrent->realTime())
+    if (rtPlot->realTime())
     {
-        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - ui->rtPlotHighVoltageCurrent->timeAxisRangeSEC(), now);
+        rtPlot->plot()->xAxis->setRange(
+                    now - rtPlot->timeAxisRangeSEC(),
+                    now);
     }
 
-    ui->rtPlotHighVoltageCurrent->plot()->replot();
+    rtPlot->plot()->replot();
 }
 
 
