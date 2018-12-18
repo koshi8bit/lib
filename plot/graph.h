@@ -21,7 +21,6 @@ public:
 
 private:
     QString label;
-    double value; // ?
     QColor color;
     bool visible;
     //ValueScaler valueScaler;
