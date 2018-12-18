@@ -29,6 +29,7 @@ public:
 private:
     Ui::MainWindow *ui;
     bool plotUpdateRealTIme;
+    int plotScreenBufferSEC = 90;
     int plotUpdateIntervalMSEC = 10;
     int addData1MSEC = 50;
     int addData2MSEC = 1000;
@@ -49,15 +50,15 @@ private:
     void configureGraphsVacuumRadiation();
 
     //////////////
-    void configurePlots();
+    void configureNewPlots();
 
 private slots:
     void addData1();
     void addData2();
     void replot();
-    void plotRangeChanged(QCPRange range);
+    void changeRange(QCPRange range);
     void on_checkBoxRealTime_stateChanged(int arg1); 
-    void plotMouseMove(QMouseEvent *event);
+    void mouseMove(QMouseEvent *event);
     void plotRealTimeChanged(bool newValue);
 };
 
