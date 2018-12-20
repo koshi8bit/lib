@@ -4,6 +4,9 @@
 Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent)
     : QObject(parent)
 {
+    _plot = plot;
+    _yAxis = yAxis;
+
     _graph = plot->addGraph(plot->xAxis, yAxis);
     _graph->setName(label);
     _graph->setPen(color);
@@ -61,6 +64,14 @@ void Graph::setGraphKey(double key)
 void Graph::visibleChanged(bool newValue)
 {
     visible = newValue;
+//    if (visible)
+//    {
+
+//    }
+//    else
+//    {
+//        _plot->removeGraph(_graph);
+//    }
     _graph->setVisible(visible);
     _tracer->setVisible(visible);
 }

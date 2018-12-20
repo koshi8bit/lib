@@ -24,7 +24,9 @@ private:
     QColor color;
     bool visible;
     //ValueScaler valueScaler;
-    //QCustomPlot *plot;
+    QCustomPlot *_plot;
+    QCPAxis *_yAxis;
+
     QCPGraph *_graph;
     QCPItemTracer *_tracer;
     GraphLegendItem *_graphLegendItem;

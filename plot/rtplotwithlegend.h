@@ -55,6 +55,8 @@ private:
 
     void configureLegend();
 
+    bool isInAxisRect(QPoint pos);
+
     ColorSetter colorSetter;
 
     QCPAxis *getAxis(Axis axis);

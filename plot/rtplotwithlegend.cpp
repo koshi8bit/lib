@@ -187,7 +187,6 @@ QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(part)
-    qDebug() << "axisClick";
     if (event->button() == Qt::RightButton)
     {
         foreach(auto graph, axis->graphs())
@@ -201,26 +200,30 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
 {
     Q_UNUSED(part)
     Q_UNUSED(event)
-    qDebug() << "axisDoubleClick";
-    auto plot = static_cast<QCustomPlot *>(sender());
-    AxisConfig ac(axis, plot->xAxis == axis, this);
-    ac.setModal(true);
-    ac.exec();
+    if (event->button() == Qt::MouseButton::LeftButton)
+    {
+        auto plot = static_cast<QCustomPlot *>(sender());
+        AxisConfig ac(axis, plot->xAxis == axis, this);
+        ac.setModal(true);
+        ac.exec();
+    }
 
 }
 
-
 void RTPlotWithLegend::mouseDoubleClick(QMouseEvent *event)
 {
-    //FIXME tima45 on RMB no option dialog
-    qDebug() << "mouseDoubleClick" << sender();
-    if (event->button() == Qt::MouseButton::MidButton)
+
+    if (isInAxisRect(event->pos()))
     {
         auto newValue = !realTime();
         setRealTime(newValue);
         emit realTimeChanged(newValue);
-
     }
+}
+
+bool RTPlotWithLegend::isInAxisRect(QPoint pos)
+{
+    return _plot->axisRect()->rect().contains(pos);
 }
 
 void RTPlotWithLegend::beforeReplot()
