@@ -63,7 +63,12 @@ void Graph::setGraphKey(double key)
 
 void Graph::visibleChanged(bool newValue)
 {
+    //TODO autoscale without unsivible graphs
     visible = newValue;
+
+    _graph->setVisible(visible);
+    _tracer->setVisible(visible);
+
 //    if (visible)
 //    {
 
@@ -72,8 +77,6 @@ void Graph::visibleChanged(bool newValue)
 //    {
 //        _plot->removeGraph(_graph);
 //    }
-    _graph->setVisible(visible);
-    _tracer->setVisible(visible);
 }
 
 void Graph::colorChanged(QColor newColor)
