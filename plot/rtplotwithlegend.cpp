@@ -12,6 +12,9 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     _plot = ui->plot;
     _realTime = true;
 
+    _plot->setInteraction(QCP::iRangeZoom, true);
+    _plot->setInteraction(QCP::iRangeDrag, true);
+
     configurePlotZoomAndDrag(false);
     configurePlotBackground();
 
@@ -19,7 +22,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     configurePlotLine();
     _plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     auto _now = RTPlotWithLegend::now();
-    _plot->xAxis->setRange(_now - 90, _now); //1min 30sec
+    _plot->xAxis->setRange(_now - 90, _now); //90=1min 30sec
     //plot->setNoAntialiasingOnDrag(true);
 
     configureLegend();
@@ -30,7 +33,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     connect(_plot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     //connect(_plot, &QCustomPlot::mouseMove(QMouseEvent *), this, &RTPlotWithLegend::mouseMove(QMouseEvent *));
     connect(_plot, &QCustomPlot::beforeReplot, this, &RTPlotWithLegend::beforeReplot);
-    connect(_plot, &QCustomPlot::mousePress, this, &RTPlotWithLegend::mousePress);
+    connect(_plot, &QCustomPlot::mouseDoubleClick, this, &RTPlotWithLegend::mouseDoubleClick);
 }
 
 RTPlotWithLegend::~RTPlotWithLegend()
@@ -47,34 +50,30 @@ RTPlotWithLegend::~RTPlotWithLegend()
 
 void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
 {
-
-
-
-    _plot->setInteraction(QCP::iRangeZoom, zoomAndDragTimeAxis);
-    _plot->setInteraction(QCP::iRangeDrag, zoomAndDragTimeAxis);
-    if (zoomAndDragTimeAxis)
-    {
         auto axes = QList<QCPAxis*>()
-                << _plot->xAxis
                 << _plot->yAxis
                 << _plot->yAxis2;
 
+        if (zoomAndDragTimeAxis)
+            axes << _plot->xAxis;
+
+
         _plot->axisRect()->setRangeZoomAxes(axes);
         _plot->axisRect()->setRangeDragAxes(axes);
-    }
 
 
-//    auto axes = QList<QCPAxis*>()
-//            << _plot->yAxis
-//            << _plot->yAxis2;
-
+//    _plot->setInteraction(QCP::iRangeZoom, zoomAndDragTimeAxis);
+//    _plot->setInteraction(QCP::iRangeDrag, zoomAndDragTimeAxis);
 //    if (zoomAndDragTimeAxis)
-//        axes << _plot->xAxis;
+//    {
+//        auto axes = QList<QCPAxis*>()
+//                << _plot->xAxis
+//                << _plot->yAxis
+//                << _plot->yAxis2;
 
-//    _plot->setInteraction(QCP::iRangeZoom, true);
-//    _plot->setInteraction(QCP::iRangeDrag, true);
-//    _plot->axisRect()->setRangeZoomAxes(axes);
-//    _plot->axisRect()->setRangeDragAxes(axes);
+//        _plot->axisRect()->setRangeZoomAxes(axes);
+//        _plot->axisRect()->setRangeDragAxes(axes);
+//    }
 }
 
 bool RTPlotWithLegend::realTime()
@@ -187,6 +186,7 @@ QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
+    Q_UNUSED(part)
     qDebug() << "axisClick";
     if (event->button() == Qt::RightButton)
     {
@@ -199,6 +199,8 @@ void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QM
 
 void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
+    Q_UNUSED(part)
+    Q_UNUSED(event)
     qDebug() << "axisDoubleClick";
     auto plot = static_cast<QCustomPlot *>(sender());
     AxisConfig ac(axis, plot->xAxis == axis, this);
@@ -207,10 +209,12 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
 
 }
 
-void RTPlotWithLegend::mousePress(QMouseEvent *event)
+
+void RTPlotWithLegend::mouseDoubleClick(QMouseEvent *event)
 {
-    //FIXME tima45 RMB click
-    if (event->button() == Qt::MouseButton::MiddleButton)
+    //FIXME tima45 on RMB no option dialog
+    qDebug() << "mouseDoubleClick" << sender();
+    if (event->button() == Qt::MouseButton::MidButton)
     {
         auto newValue = !realTime();
         setRealTime(newValue);
@@ -227,6 +231,7 @@ void RTPlotWithLegend::beforeReplot()
         mouseMove(RTPlotWithLegend::now());
     }
 }
+
 
 void RTPlotWithLegend::mouseMove(QMouseEvent *event)
 {

@@ -7,6 +7,7 @@ Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAx
     _graph = plot->addGraph(plot->xAxis, yAxis);
     _graph->setName(label);
     _graph->setPen(color);
+    //_graph->setLineStyle(QCPGraph::LineStyle::lsStepRight);
 
 
     _tracer = new QCPItemTracer(plot);

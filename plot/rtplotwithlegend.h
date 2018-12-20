@@ -72,7 +72,7 @@ public slots:
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
-    void mousePress(QMouseEvent *event);
+    void mouseDoubleClick(QMouseEvent *event);
     void mouseMove(QMouseEvent *event);
     void beforeReplot();
 
