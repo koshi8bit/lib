@@ -63,7 +63,7 @@ void Graph::setGraphKey(double key)
 
 void Graph::visibleChanged(bool newValue)
 {
-    //TODO autoscale without unsivible graphs
+    //TODO tima45 autoscale without unsivible graphs
     visible = newValue;
 
     _graph->setVisible(visible);

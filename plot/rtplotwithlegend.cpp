@@ -23,7 +23,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     _plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     auto _now = RTPlotWithLegend::now();
     _plot->xAxis->setRange(_now - 90, _now); //90=1min 30sec
-    //plot->setNoAntialiasingOnDrag(true);
+    _plot->setNoAntialiasingOnDrag(true);
 
     configureLegend();
 
@@ -187,12 +187,10 @@ QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(part)
-    if (event->button() == Qt::RightButton)
+    if (event->button() == Qt::MouseButton::RightButton)
     {
-        foreach(auto graph, axis->graphs())
-        {
-            graph->rescaleValueAxis(false, true);
-        }
+        _plot->yAxis->rescale(true);
+        _plot->yAxis2->rescale(true);
     }
 }
 
