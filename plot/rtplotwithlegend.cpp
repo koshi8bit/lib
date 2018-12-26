@@ -184,13 +184,22 @@ QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 
 }
 
+void RTPlotWithLegend::rescaleWithRange(QCPAxis *axis)
+{
+    axis->rescale(true);
+    axis->setRange(
+                axis->range().lower*0.99,
+                axis->range().upper*1.01);
+}
+
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(part)
     if (event->button() == Qt::MouseButton::RightButton)
     {
-        _plot->yAxis->rescale(true);
-        _plot->yAxis2->rescale(true);
+        rescaleWithRange(_plot->yAxis);
+        rescaleWithRange(_plot->yAxis2);
+
     }
 }
 
