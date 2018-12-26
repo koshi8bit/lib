@@ -187,9 +187,8 @@ QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 void RTPlotWithLegend::rescaleWithRange(QCPAxis *axis)
 {
     axis->rescale(true);
-    axis->setRange(
-                axis->range().lower*0.99,
-                axis->range().upper*1.01);
+    auto delta = (axis->range().upper - axis->range().lower)*0.05; // 5%
+    axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
@@ -219,12 +218,14 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
 
 void RTPlotWithLegend::mouseDoubleClick(QMouseEvent *event)
 {
-
     if (isInAxisRect(event->pos()))
     {
-        auto newValue = !realTime();
-        setRealTime(newValue);
-        emit realTimeChanged(newValue);
+        if (event->button() == Qt::MouseButton::LeftButton)
+        {
+            auto newValue = !realTime();
+            setRealTime(newValue);
+            emit realTimeChanged(newValue);
+        }
     }
 }
 
