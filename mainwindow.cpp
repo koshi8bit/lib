@@ -37,7 +37,7 @@ void MainWindow::configureNewPlots()
     ui->rtPlotHighVoltageCurrent->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)", 0, 10);
     ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
     connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(plotMouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
+    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
     connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
     connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::moveLineRealTimeChanged, this, &MainWindow::plotMoveLineRealTimeChanged);
 
@@ -50,7 +50,7 @@ void MainWindow::configureNewPlots()
     ui->rtPlotTemperaturePower->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)", 0, 700);
     ui->rtPlotTemperaturePower->setMarginGroup(mg);
     connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-    connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(plotMouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
+    connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
     connect(ui->rtPlotTemperaturePower, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
 
 
@@ -59,7 +59,7 @@ void MainWindow::configureNewPlots()
     ui->rtPlotVacuumRadiation->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Радиация (Зв)", 0.000001, 1, QCPAxis::ScaleType::stLogarithmic);
     ui->rtPlotVacuumRadiation->setMarginGroup(mg);
     connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-    connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(plotMouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
+    connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
     connect(ui->rtPlotVacuumRadiation, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
 
 }
