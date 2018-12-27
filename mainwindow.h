@@ -58,9 +58,10 @@ private slots:
     void replot();
     void on_checkBoxRealTime_stateChanged(int arg1);
 
-    void changeRange(QCPRange range);
-    void mouseMove(QMouseEvent *event);
+    void plotChangeRange(QCPRange range);
+    void plotMouseMove(QMouseEvent *event);
     void plotRealTimeChanged(bool newValue);
+    void plotMoveLineRealTimeChanged(bool newValue);
 };
 
 #endif // MAINWINDOW_H

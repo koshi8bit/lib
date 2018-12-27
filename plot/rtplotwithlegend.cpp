@@ -10,7 +10,8 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     ui->setupUi(this);
 
     _plot = ui->plot;
-    _realTime = true;
+    setRealTime(true);
+    setMoveLineRealTime(true);
 
     _plot->setInteraction(QCP::iRangeZoom, true);
     _plot->setInteraction(QCP::iRangeDrag, true);
@@ -33,6 +34,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     connect(_plot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     //connect(_plot, &QCustomPlot::mouseMove(QMouseEvent *), this, &RTPlotWithLegend::mouseMove(QMouseEvent *));
     connect(_plot, &QCustomPlot::beforeReplot, this, &RTPlotWithLegend::beforeReplot);
+    connect(_plot, &QCustomPlot::mousePress, this, &RTPlotWithLegend::mousePress);
     connect(_plot, &QCustomPlot::mouseDoubleClick, this, &RTPlotWithLegend::mouseDoubleClick);
 }
 
@@ -93,6 +95,17 @@ void RTPlotWithLegend::setRealTime(bool newValue)
     _realTime = newValue;
     configurePlotZoomAndDrag(!newValue);
 }
+
+void RTPlotWithLegend::setMoveLineRealTime(bool newValue)
+{
+    _moveLineRealTime = newValue;
+}
+
+bool RTPlotWithLegend::moveLineRealTime()
+{
+    return _moveLineRealTime;
+}
+
 
 Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label)
 {
@@ -193,6 +206,7 @@ void RTPlotWithLegend::rescaleWithRange(QCPAxis *axis)
 
 void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
+    Q_UNUSED(axis)
     Q_UNUSED(part)
     if (event->button() == Qt::MouseButton::RightButton)
     {
@@ -216,6 +230,19 @@ void RTPlotWithLegend::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart pa
 
 }
 
+void RTPlotWithLegend::mousePress(QMouseEvent *event)
+{
+    if (isInAxisRect(event->pos()))
+    {
+        if (event->button() == Qt::MouseButton::RightButton)
+        {
+            auto newValue = !moveLineRealTime();
+            setMoveLineRealTime(newValue);
+            emit moveLineRealTimeChanged(newValue);
+        }
+    }
+}
+
 void RTPlotWithLegend::mouseDoubleClick(QMouseEvent *event)
 {
     if (isInAxisRect(event->pos()))
@@ -225,6 +252,8 @@ void RTPlotWithLegend::mouseDoubleClick(QMouseEvent *event)
             auto newValue = !realTime();
             setRealTime(newValue);
             emit realTimeChanged(newValue);
+            setMoveLineRealTime(newValue);
+            emit moveLineRealTimeChanged(newValue);
         }
     }
 }
@@ -236,7 +265,7 @@ bool RTPlotWithLegend::isInAxisRect(QPoint pos)
 
 void RTPlotWithLegend::beforeReplot()
 {
-    if (_realTime)
+    if (moveLineRealTime())
     {
         //BUG set to 1970 and don't move
         mouseMove(RTPlotWithLegend::now());
