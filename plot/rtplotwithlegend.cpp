@@ -30,9 +30,9 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
 
     connect(_plot, &QCustomPlot::axisClick, this, &RTPlotWithLegend::axisClick);
     connect(_plot, &QCustomPlot::axisDoubleClick, this, &RTPlotWithLegend::axisDoubleClick);
-    //FIXME tima signal
+
     connect(_plot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
-    //connect(_plot, &QCustomPlot::mouseMove(QMouseEvent *), this, &RTPlotWithLegend::mouseMove(QMouseEvent *));
+    //connect(_plot, &QCustomPlot::mouseMove, this, &RTPlotWithLegend::mouseMove);
     connect(_plot, &QCustomPlot::beforeReplot, this, &RTPlotWithLegend::beforeReplot);
     connect(_plot, &QCustomPlot::mousePress, this, &RTPlotWithLegend::mousePress);
     connect(_plot, &QCustomPlot::mouseDoubleClick, this, &RTPlotWithLegend::mouseDoubleClick);
