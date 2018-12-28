@@ -12,6 +12,7 @@
 #include "plot/colorsetter.h"
 #include "plot/graph.h"
 #include "plot/graphlegenditem.h"
+#include "plot/rtplotwithlegend.h"
 
 namespace Ui {
 class MainWindow;
@@ -44,24 +45,24 @@ private:
     double now;
     QDateTime time;
 
+    void configurePlots();
+    void configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QString yAxis2Label, double yAxis2Min, double yAxis2Max);
+
     void configureGraphs();
     void configureGraphsEnergyCurrent();
     void configureGraphsTemperaturePower();
     void configureGraphsVacuumRadiation();
 
-    //////////////
-    void configureNewPlots();
-
 private slots:
     void addData1();
     void addData2();
-    void replot();
     void on_checkBoxRealTime_stateChanged(int arg1);
 
     void plotChangeRange(QCPRange range);
     void plotMouseMove(QMouseEvent *event);
     void plotRealTimeChanged(bool newValue);
     void plotMoveLineRealTimeChanged(bool newValue);
+    void plotReplotTimeout();
 };
 
 #endif // MAINWINDOW_H

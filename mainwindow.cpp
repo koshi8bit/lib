@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    configureNewPlots();
+    configurePlots();
     configureGraphs();
 
     timerAddData1 = new QTimer(this);
@@ -23,45 +23,33 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timerReplot = new QTimer(this);
     timerReplot->setInterval(plotUpdateIntervalMSEC);
-    connect(timerReplot, SIGNAL(timeout()), this, SLOT(replot()));
+    connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
     timerReplot->start();
 }
 
 
+void MainWindow::configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QString yAxis2Label, double yAxis2Min, double yAxis2Max)
+{
+    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis, yAxisLabel, yAxisMin, yAxisMax);
+    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis2, yAxis2Label, yAxis2Min, yAxis2Max);
+    rtPlot->setMarginGroup(mg);
+    connect(rtPlot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
+    connect(rtPlot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
+    connect(rtPlot, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
+    connect(rtPlot, &RTPlotWithLegend::moveLineRealTimeChanged, this, &MainWindow::plotMoveLineRealTimeChanged);
+}
 
-void MainWindow::configureNewPlots()
+void MainWindow::configurePlots()
 {
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
-    ui->rtPlotHighVoltageCurrent->configureAxis(RTPlotWithLegend::Axis::yAxis, "Энергия (кВ)", 0, 1250);
-    ui->rtPlotHighVoltageCurrent->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Ток (мА)", 0, 10);
-    ui->rtPlotHighVoltageCurrent->setMarginGroup(mg);
-    connect(ui->rtPlotHighVoltageCurrent->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
-    connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
-    connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::moveLineRealTimeChanged, this, &MainWindow::plotMoveLineRealTimeChanged);
-
+    configurePlot(ui->rtPlotHighVoltageCurrent, "Энергия (кВ)", 0, 1250, "Ток (мА)", 0, 10);
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
 
+    configurePlot(ui->rtPlotTemperaturePower, "Температура (С)", 0, 100, "Мощность (Вт)", 0, 700);
 
-
-    ui->rtPlotTemperaturePower->configureAxis(RTPlotWithLegend::Axis::yAxis, "Температура (С)", 0, 100);
-    ui->rtPlotTemperaturePower->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Мощность (Вт)", 0, 700);
-    ui->rtPlotTemperaturePower->setMarginGroup(mg);
-    connect(ui->rtPlotTemperaturePower->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-    connect(ui->rtPlotTemperaturePower->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
-    connect(ui->rtPlotTemperaturePower, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
-
-
-
-    ui->rtPlotVacuumRadiation->configureAxis(RTPlotWithLegend::Axis::yAxis, "Вакуум (Пa)", 0.00001, 1, QCPAxis::ScaleType::stLogarithmic);
-    ui->rtPlotVacuumRadiation->configureAxis(RTPlotWithLegend::Axis::yAxis2, "Радиация (Зв)", 0.000001, 1, QCPAxis::ScaleType::stLogarithmic);
-    ui->rtPlotVacuumRadiation->setMarginGroup(mg);
-    connect(ui->rtPlotVacuumRadiation->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-    connect(ui->rtPlotVacuumRadiation->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
-    connect(ui->rtPlotVacuumRadiation, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
-
+    configurePlot(ui->rtPlotVacuumRadiation, "Вакуум (Пa)", 1.0e-5, 1, "Радиация (Зв)", 1.0e-5, 1);
 }
 
 
@@ -99,7 +87,7 @@ void MainWindow::addData2()
 //    rtPlot->plot()->replot();
 //}
 
-void MainWindow::replot()
+void MainWindow::plotReplotTimeout()
 {
     now = RTPlotWithLegend::now();
 
