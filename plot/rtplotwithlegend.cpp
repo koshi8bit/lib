@@ -210,8 +210,8 @@ void RTPlotWithLegend::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QM
     Q_UNUSED(part)
     if (event->button() == Qt::MouseButton::RightButton)
     {
-        rescaleWithRange(_plot->yAxis);
-        rescaleWithRange(_plot->yAxis2);
+        //rescaleWithRange(_plot->yAxis);
+        rescaleWithRange(axis);
 
     }
 }
