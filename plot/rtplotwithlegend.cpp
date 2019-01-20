@@ -301,9 +301,7 @@ void RTPlotWithLegend::mouseMove(double time)
 
     line->start->setCoords(time, lower);
     line->end->setCoords(time, upper);
-
     //NOTE check cpu usage too big
-    //99% yes
     //plot->replot();
 }
 

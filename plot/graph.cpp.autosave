@@ -22,9 +22,9 @@ Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAx
     _tracer->setSize(5);
 
     //_graphLegendItem = new GraphLegendItem(label, color, plot);
-    _graphLegendItem = new GraphLegendItem(label, color);
-    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::visibleChanged);
-    connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::colorChanged);
+    _graphLegendItem = new LegendItem(label, color);
+    connect(_graphLegendItem, &LegendItem::visibleChanged, this, &Graph::visibleChanged);
+    connect(_graphLegendItem, &LegendItem::colorChanged, this, &Graph::colorChanged);
 
 }
 
@@ -45,7 +45,7 @@ QCPGraph *Graph::graph()
     return _graph;
 }
 
-GraphLegendItem *Graph::graphLegendItem()
+LegendItem *Graph::graphLegendItem()
 {
     return _graphLegendItem;
 }
@@ -63,20 +63,10 @@ void Graph::setGraphKey(double key)
 
 void Graph::visibleChanged(bool newValue)
 {
-    //TODO tima45 autoscale without unsivible graphs
     visible = newValue;
 
     _graph->setVisible(visible);
     _tracer->setVisible(visible);
-
-//    if (visible)
-//    {
-
-//    }
-//    else
-//    {
-//        _plot->removeGraph(_graph);
-//    }
 }
 
 void Graph::colorChanged(QColor newColor)
