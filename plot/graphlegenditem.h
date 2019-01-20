@@ -32,6 +32,7 @@ private:
     Ui::GraphLegendItem *ui;
     QString label;
     QColor color;
+    void changeColor();
 };
 
 #endif // GRAPHLEGENDITEM_H

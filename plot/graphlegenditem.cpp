@@ -1,20 +1,27 @@
 #include "graphlegenditem.h"
 #include "ui_graphlegenditem.h"
 
+//TODO change name to GraphLegendItem
+
+
 GraphLegendItem::GraphLegendItem(const QString &label, QColor color, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GraphLegendItem)
 {
     ui->setupUi(this);
     this->label = label;
-    this->color = color;
 
-    QString css = QString("background: %1;") // border: 1px solid #ccc;
-            .arg(color.name());
-    ui->pushButtonColor->setStyleSheet(css);
+    changeColor(color);
     ui->checkBoxVisible->setChecked(true);
     setValue(0);
 
+}
+
+void GraphLegendItem::changeColor(QColor &color)
+{
+    this->color = color;
+    QString css = QString("background: %1;").arg(color.name());
+    ui->pushButtonColor->setStyleSheet(css);
 }
 
 GraphLegendItem::~GraphLegendItem()
@@ -47,10 +54,7 @@ void GraphLegendItem::on_pushButtonColor_clicked()
     auto color = QColorDialog::getColor(this->color, this, tr("Select Color"));
     if (color.isValid())
     {
-        this->color = color;
-        QString css = QString("background: %1;") // border: 1px solid #ccc;
-                .arg(color.name());
-        ui->pushButtonColor->setStyleSheet(css);
+        changeColor(color);
 
         emit colorChanged(color);
     }
