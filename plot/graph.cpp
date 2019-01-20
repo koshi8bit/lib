@@ -55,10 +55,16 @@ void Graph::addData(double key, double value)
     _graph->addData(key, value);
 }
 
+double Graph::value()
+{
+    return _value;
+}
+
 void Graph::setGraphKey(double key)
 {
     _tracer->setGraphKey(key);
-    _graphLegendItem->setValue(_tracer->position->value());
+    _value = _tracer->position->value();
+    _graphLegendItem->setValue(_value);
 }
 
 void Graph::visibleChanged(bool newValue)

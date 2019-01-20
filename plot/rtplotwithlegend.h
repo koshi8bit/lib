@@ -71,6 +71,7 @@ private:
 signals:
     void realTimeChanged(bool newValue);
     void moveLineRealTimeChanged(bool newValue);
+    void lineRealTimeMoved();
 
 public slots:
     void mouseMove(double time);

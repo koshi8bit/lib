@@ -16,13 +16,14 @@ public:
     QCPGraph *graph();
     GraphLegendItem *graphLegendItem();
     void addData(double key, double value);
-
+    double value();
     void setGraphKey(double key);
 
 private:
     QString label;
     QColor color;
     bool visible;
+    double _value;
     //ValueScaler valueScaler;
     QCustomPlot *_plot;
     QCPAxis *_yAxis;

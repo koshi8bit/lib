@@ -2,8 +2,6 @@
 #include "ui_graphlegenditem.h"
 
 //TODO change name to GraphLegendItem
-
-
 GraphLegendItem::GraphLegendItem(const QString &label, QColor color, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GraphLegendItem)

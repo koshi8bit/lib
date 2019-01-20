@@ -63,6 +63,7 @@ private slots:
     void plotRealTimeChanged(bool newValue);
     void plotMoveLineRealTimeChanged(bool newValue);
     void plotReplotTimeout();
+    void plotLineRealTimeMoved();
 };
 
 #endif // MAINWINDOW_H

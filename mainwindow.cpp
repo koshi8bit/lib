@@ -46,6 +46,7 @@ void MainWindow::configurePlots()
     configurePlot(ui->rtPlotHighVoltageCurrent, "Энергия (кВ)", 0, 1250, "Ток (мА)", 0, 10);
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
+    connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::lineRealTimeMoved, this, &MainWindow::plotLineRealTimeMoved);
 
     configurePlot(ui->rtPlotTemperaturePower, "Температура (С)", 0, 100, "Мощность (Вт)", 0, 700);
 
@@ -97,6 +98,12 @@ void MainWindow::plotReplotTimeout()
     }
 
     ui->rtPlotHighVoltageCurrent->plot()->replot();
+}
+
+void MainWindow::plotLineRealTimeMoved()
+{
+    auto message = QString("%1").arg(graphHighVoltageElvFull->value());
+    this->setWindowTitle(message);
 }
 
 
