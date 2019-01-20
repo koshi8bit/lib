@@ -66,7 +66,7 @@ private:
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
     QVector<Graph *> graphElements;
 
-    void rescaleWithRange(QCPAxis *axis);
+    void rescale(QCPAxis *axis);
     
 signals:
     void realTimeChanged(bool newValue);
