@@ -63,20 +63,10 @@ void Graph::setGraphKey(double key)
 
 void Graph::visibleChanged(bool newValue)
 {
-    //TODO tima45 autoscale without unsivible graphs
     visible = newValue;
 
     _graph->setVisible(visible);
     _tracer->setVisible(visible);
-
-//    if (visible)
-//    {
-
-//    }
-//    else
-//    {
-//        _plot->removeGraph(_graph);
-//    }
 }
 
 void Graph::colorChanged(QColor newColor)
