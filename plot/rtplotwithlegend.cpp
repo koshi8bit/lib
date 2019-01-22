@@ -304,8 +304,8 @@ void RTPlotWithLegend::mouseMove(double time)
 
     emit lineRealTimeMoved();
 
-    //NOTE check cpu usage too big
-    //plot->replot();
+    //WARNING check cpu usage too big
+    plot->replot();
 }
 
 void RTPlotWithLegend::setMarginGroup(QCPMarginGroup *mg)
