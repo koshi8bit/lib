@@ -28,10 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
 }
 
 
-void MainWindow::configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QString yAxis2Label, double yAxis2Min, double yAxis2Max)
+void MainWindow::configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType)
 {
-    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis, yAxisLabel, yAxisMin, yAxisMax);
-    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis2, yAxis2Label, yAxis2Min, yAxis2Max);
+    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis, yAxisLabel, yAxisMin, yAxisMax, yAxisScaleType);
+    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis2, yAxis2Label, yAxis2Min, yAxis2Max, yAxis2ScaleType);
     rtPlot->setMarginGroup(mg);
     connect(rtPlot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
     connect(rtPlot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
@@ -43,14 +43,14 @@ void MainWindow::configurePlots()
 {
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
-    configurePlot(ui->rtPlotHighVoltageCurrent, "Энергия (кВ)", 0, 1250, "Ток (мА)", 0, 10);
+    configurePlot(ui->rtPlotHighVoltageCurrent, "Энергия (кВ)", 0, 1250, QCPAxis::ScaleType::stLinear, "Ток (мА)", 0, 10, QCPAxis::ScaleType::stLinear);
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::lineRealTimeMoved, this, &MainWindow::plotLineRealTimeMoved);
 
-    configurePlot(ui->rtPlotTemperaturePower, "Температура (С)", 0, 100, "Мощность (Вт)", 0, 700);
+    configurePlot(ui->rtPlotTemperaturePower, "Температура (С)", 10, 180, QCPAxis::ScaleType::stLinear, "Мощность (Вт)", 0, 700, QCPAxis::ScaleType::stLinear);
 
-    configurePlot(ui->rtPlotVacuumRadiation, "Вакуум (Пa)", 1.0e-5, 1, "Радиация (Зв)", 1.0e-5, 1);
+    configurePlot(ui->rtPlotVacuumRadiation, "Вакуум (Пa)", 1.0e-5, 1, QCPAxis::ScaleType::stLogarithmic, "Радиация (Зв)", 1.0e-5, 1, QCPAxis::ScaleType::stLogarithmic);
 }
 
 
