@@ -19,6 +19,9 @@ public:
     void setValue(double value);
     void setValue(const QString &value);
 
+public slots:
+    void setVisibleValue(bool newValue);
+
 private slots:
     void on_checkBoxVisible_stateChanged(int arg1);
 

@@ -29945,7 +29945,7 @@ void QCPItemTracer::updatePosition()
         position->setCoords(it->key, it->value);
       } else
       {
-        qDebug() << Q_FUNC_INFO << "graph has no data";
+        //qDebug() << Q_FUNC_INFO << "graph has no data";
       }
     } else
       qDebug() << Q_FUNC_INFO << "graph not contained in QCustomPlot instance (anymore)";

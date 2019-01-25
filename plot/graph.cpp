@@ -23,15 +23,18 @@ Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAx
 
     //_graphLegendItem = new GraphLegendItem(label, color, plot);
     _graphLegendItem = new GraphLegendItem(label, color);
-    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::visibleChanged);
+    connect(this, &Graph::visibleChanged, _graphLegendItem, &GraphLegendItem::setVisibleValue);
+    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::graphVisibleChanged);
     connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::colorChanged);
 
 }
 
 Graph::~Graph()
 {
-    _graph->deleteLater();
-    _tracer->deleteLater();
+    //FIXME exception
+    //_graph->deleteLater();
+    //_tracer->deleteLater();
+
     //_graphLegendItem->deleteLater();
 }
 
@@ -67,13 +70,16 @@ void Graph::setGraphKey(double key)
     _graphLegendItem->setValue(_value);
 }
 
-void Graph::visibleChanged(bool newValue)
+void Graph::setVisible(bool newValue, bool emitSignal)
 {
     //TODO tima45 autoscale without unsivible graphs
-    visible = newValue;
+    _graph->setVisible(newValue);
+    _tracer->setVisible(newValue);
 
-    _graph->setVisible(visible);
-    _tracer->setVisible(visible);
+    if (emitSignal)
+    {
+        emit visibleChanged(newValue);
+    }
 
 //    if (visible)
 //    {
@@ -83,6 +89,16 @@ void Graph::visibleChanged(bool newValue)
 //    {
 //        _plot->removeGraph(_graph);
 //    }
+}
+
+void Graph::setVisible(bool newValue)
+{
+    setVisible(newValue, true);
+}
+
+void Graph::graphVisibleChanged(bool newValue)
+{
+    setVisible(newValue, false);
 }
 
 void Graph::colorChanged(QColor newColor)

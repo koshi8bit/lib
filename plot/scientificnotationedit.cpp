@@ -3,7 +3,7 @@
 ScientificNotationEdit::ScientificNotationEdit(QWidget *parent)
     : QLineEdit (parent)
 {
-	//FIXME 0,99 íå ðàáîòàåò, íå ââîäèòñÿ, êîãäà ïóñòîå ïîëå
+    //FIXME 0,99 Ð½Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚, Ð½Ðµ Ð²Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ, ÐºÐ¾Ð³Ð´Ð° Ð¿ÑƒÑÑ‚Ð¾Ðµ Ð¿Ð¾Ð»Ðµ
     auto validator = new QDoubleValidator(-9999999999.0, 999999999.0, 2, parent);
     validator->setNotation(QDoubleValidator::Notation::ScientificNotation);
     this->setValidator(validator);

@@ -40,8 +40,9 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
 
 RTPlotWithLegend::~RTPlotWithLegend()
 {
-    _plot->deleteLater();
-    line->deleteLater();
+    //FIXME ?emit exception ??
+//    _plot->deleteLater();
+//    line->deleteLater();
 
 //    foreach (auto graphElement, graphElements)
 //        graphElement->deleteLater();
@@ -52,16 +53,16 @@ RTPlotWithLegend::~RTPlotWithLegend()
 
 void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
 {
-        auto axes = QList<QCPAxis*>()
-                << _plot->yAxis
-                << _plot->yAxis2;
+    auto axes = QList<QCPAxis*>()
+            << _plot->yAxis
+            << _plot->yAxis2;
 
-        if (zoomAndDragTimeAxis)
-            axes << _plot->xAxis;
+    if (zoomAndDragTimeAxis)
+        axes << _plot->xAxis;
 
 
-        _plot->axisRect()->setRangeZoomAxes(axes);
-        _plot->axisRect()->setRangeDragAxes(axes);
+    _plot->axisRect()->setRangeZoomAxes(axes);
+    _plot->axisRect()->setRangeDragAxes(axes);
 
 
 //    _plot->setInteraction(QCP::iRangeZoom, zoomAndDragTimeAxis);
@@ -305,7 +306,7 @@ void RTPlotWithLegend::mouseMove(double time)
     emit lineRealTimeMoved();
 
     //WARNING check cpu usage too big
-    plot->replot();
+    //plot->replot();
 }
 
 void RTPlotWithLegend::setMarginGroup(QCPMarginGroup *mg)

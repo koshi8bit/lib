@@ -18,6 +18,7 @@ public:
     void addData(double key, double value);
     double value();
     void setGraphKey(double key);
+    void setVisible(bool newValue);
 
 private:
     QString label;
@@ -34,12 +35,15 @@ private:
 
     QCPItemTracer *tracer();
 
+    void setVisible(bool newValue, bool emitSignal);
+
 signals:
+    void visibleChanged(bool newValue);
 
 public slots:
 
 private slots:
-    void visibleChanged(bool newValue);
+    void graphVisibleChanged(bool newValue);
     void colorChanged(QColor newColor);
 };
 

@@ -58,3 +58,8 @@ void GraphLegendItem::on_pushButtonColor_clicked()
     }
 
 }
+
+void GraphLegendItem::setVisibleValue(bool newValue)
+{
+    ui->checkBoxVisible->setChecked(newValue);
+}
