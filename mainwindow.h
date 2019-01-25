@@ -46,7 +46,7 @@ private:
     QDateTime time;
 
     void configurePlots();
-    void configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QString yAxis2Label, double yAxis2Min, double yAxis2Max);
+    void configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType);
 
     void configureGraphs();
     void configureGraphsEnergyCurrent();
