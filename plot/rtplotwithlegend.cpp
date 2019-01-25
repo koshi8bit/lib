@@ -40,9 +40,8 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
 
 RTPlotWithLegend::~RTPlotWithLegend()
 {
-    //FIXME ?emit exception ??
-//    _plot->deleteLater();
-//    line->deleteLater();
+    _plot->deleteLater();
+    line->deleteLater();
 
 //    foreach (auto graphElement, graphElements)
 //        graphElement->deleteLater();
@@ -305,7 +304,7 @@ void RTPlotWithLegend::mouseMove(double time)
 
     emit lineRealTimeMoved();
 
-    //WARNING check cpu usage too big
+    //NOTE check cpu usage too big
     //plot->replot();
 }
 
