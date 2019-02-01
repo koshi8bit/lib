@@ -28,28 +28,29 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    ui\rtplotwithlegend\axisconfig.cpp \
+    ui\rtplotwithlegend\graph.cpp \
+    ui\rtplotwithlegend\graphlegenditem.cpp \
+    ui\rtplotwithlegend\rtplotwithlegend.cpp \
     ui\qcustomplot.cpp \
-    ui\axisconfig.cpp \
     ui\colorsetter.cpp \
     ui\scientificnotationedit.cpp \
-    ui\rtplotwithlegend.cpp \
-    ui\graph.cpp \
-    ui/graphlegenditem.cpp
+
 
 HEADERS += \
     mainwindow.h \
+    ui\rtplotwithlegend\axisconfig.h \
+    ui\rtplotwithlegend\graph.h \
+    ui\rtplotwithlegend\graphlegenditem.h \
+    ui\rtplotwithlegend\rtplotwithlegend.h \
     ui\qcustomplot.h \
-    ui\axisconfig.h \
     ui\colorsetter.h \
     ui\scientificnotationedit.h \
-    ui\rtplotwithlegend.h \
-    ui\graph.h \
-    ui/graphlegenditem.h
 
 FORMS += \
         mainwindow.ui \
-    ui\axisconfig.ui \
-    ui\rtplotwithlegend.ui \
+    ui\rtplotwithlegend\axisconfig.ui \
+    ui\rtplotwithlegend\rtplotwithlegend.ui \
     ui/graphlegenditem.ui
 
 # Default rules for deployment.
