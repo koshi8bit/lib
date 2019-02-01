@@ -7,12 +7,12 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
-#include "plot/qcustomplot.h"
-#include "plot/axisconfig.h"
-#include "plot/colorsetter.h"
-#include "plot/graph.h"
-#include "plot/graphlegenditem.h"
-#include "plot/rtplotwithlegend.h"
+#include "ui/qcustomplot.h"
+#include "ui/axisconfig.h"
+#include "ui/colorsetter.h"
+#include "ui/graph.h"
+#include "ui/graphlegenditem.h"
+#include "ui/rtplotwithlegend.h"
 
 namespace Ui {
 class MainWindow;

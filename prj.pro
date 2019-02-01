@@ -28,29 +28,29 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    plot\qcustomplot.cpp \
-    plot\axisconfig.cpp \
-    plot\colorsetter.cpp \
-    plot\scientificnotationedit.cpp \
-    plot\rtplotwithlegend.cpp \
-    plot\graph.cpp \
-    plot/graphlegenditem.cpp
+    ui\qcustomplot.cpp \
+    ui\axisconfig.cpp \
+    ui\colorsetter.cpp \
+    ui\scientificnotationedit.cpp \
+    ui\rtplotwithlegend.cpp \
+    ui\graph.cpp \
+    ui/graphlegenditem.cpp
 
 HEADERS += \
     mainwindow.h \
-    plot\qcustomplot.h \
-    plot\axisconfig.h \
-    plot\colorsetter.h \
-    plot\scientificnotationedit.h \
-    plot\rtplotwithlegend.h \
-    plot\graph.h \
-    plot/graphlegenditem.h
+    ui\qcustomplot.h \
+    ui\axisconfig.h \
+    ui\colorsetter.h \
+    ui\scientificnotationedit.h \
+    ui\rtplotwithlegend.h \
+    ui\graph.h \
+    ui/graphlegenditem.h
 
 FORMS += \
         mainwindow.ui \
-    plot\axisconfig.ui \
-    plot\rtplotwithlegend.ui \
-    plot/graphlegenditem.ui
+    ui\axisconfig.ui \
+    ui\rtplotwithlegend.ui \
+    ui/graphlegenditem.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

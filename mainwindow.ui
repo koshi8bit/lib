@@ -78,7 +78,7 @@
   <customwidget>
    <class>RTPlotWithLegend</class>
    <extends>QWidget</extends>
-   <header>plot/rtplotwithlegend.h</header>
+   <header>ui/rtplotwithlegend.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

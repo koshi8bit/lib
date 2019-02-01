@@ -19,6 +19,7 @@ public:
     double value();
     void setGraphKey(double key);
     void setVisible(bool newValue);
+    void setColor(QColor newColor);
 
 private:
     QString label;
@@ -36,6 +37,7 @@ private:
     QCPItemTracer *tracer();
 
     void setVisible(bool newValue, bool emitSignal);
+    void setColor(QColor newColor, bool emitSignal);
 
 signals:
     void visibleChanged(bool newValue);

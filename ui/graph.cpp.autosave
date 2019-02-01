@@ -70,9 +70,14 @@ void Graph::setGraphKey(double key)
     _graphLegendItem->setValue(_value);
 }
 
+void Graph::setVisible(bool newValue)
+{
+    setVisible(newValue, true);
+}
+
 void Graph::setVisible(bool newValue, bool emitSignal)
 {
-    //TODO tima45 autoscale without unsivible graphs
+    //TODO autoscale without unsivible graphs
     _graph->setVisible(newValue);
     _tracer->setVisible(newValue);
 
@@ -88,13 +93,27 @@ void Graph::setVisible(bool newValue, bool emitSignal)
 //    else
 //    {
 //        _plot->removeGraph(_graph);
-//    }
+    //    }
 }
 
-void Graph::setVisible(bool newValue)
+void Graph::setColor(QColor newColor)
 {
-    setVisible(newValue, true);
+    setColor(newColor, true);
 }
+
+void Graph::setColor(QColor newColor, bool emitSignal)
+{
+    _graph->setVisible(newValue);
+    _tracer->setVisible(newValue);
+
+    if (emitSignal)
+    {
+        emit visibleChanged(newValue);
+    }
+}
+
+
+
 
 void Graph::graphVisibleChanged(bool newValue)
 {
