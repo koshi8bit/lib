@@ -33,7 +33,7 @@ SOURCES += \
     lib\kb4\ui\rtplotwithlegend\graph.cpp \
     lib\kb4\ui\rtplotwithlegend\graphlegenditem.cpp \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.cpp \
-    lib\kb4\ui\scientificnotationedit.cpp \
+    lib\kb4\ui\scientificnotationedit\scientificnotationedit.cpp \
     lib\qcustomplot\qcustomplot.cpp
 
 HEADERS += \
@@ -43,7 +43,7 @@ HEADERS += \
     lib\kb4\ui\rtplotwithlegend\graph.h \
     lib\kb4\ui\rtplotwithlegend\graphlegenditem.h \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.h \
-    lib\kb4\ui\scientificnotationedit.h \
+    lib\kb4\ui\scientificnotationedit\scientificnotationedit.h \
     lib\qcustomplot\qcustomplot.h
 
 FORMS += \
