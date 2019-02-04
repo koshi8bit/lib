@@ -25,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     timerReplot->setInterval(plotUpdateIntervalMSEC);
     connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
     timerReplot->start();
+
+    ui->widget->setMinMax(20, 50);
 }
 
 
@@ -206,4 +208,9 @@ void MainWindow::plotMoveLineRealTimeChanged(bool newValue)
         ui->rtPlotTemperaturePower->setMoveLineRealTime(newValue);
     if (plot != ui->rtPlotVacuumRadiation)
         ui->rtPlotVacuumRadiation->setMoveLineRealTime(newValue);
+}
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    ui->widget->display(value);
 }

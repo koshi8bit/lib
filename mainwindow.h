@@ -64,6 +64,7 @@ private slots:
     void plotMoveLineRealTimeChanged(bool newValue);
     void plotReplotTimeout();
     void plotLineRealTimeMoved();
+    void on_horizontalSlider_valueChanged(int value);
 };
 
 #endif // MAINWINDOW_H
