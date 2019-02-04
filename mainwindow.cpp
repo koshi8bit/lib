@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
     timerReplot->start();
 
+    ui->widget->configure();
     ui->widget->setMinMax(20, 50);
 }
 
