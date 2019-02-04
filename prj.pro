@@ -28,7 +28,7 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    lib\kb4\ui\qcustomplot.cpp \
+    lib\qcustomplot\qcustomplot.cpp \
     lib\kb4\ui\axisconfig.cpp \
     lib\kb4\ui\colorsetter.cpp \
     lib\kb4\ui\scientificnotationedit.cpp \
@@ -38,7 +38,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
-    lib\kb4\ui\qcustomplot.h \
+    lib\qcustomplot\qcustomplot.h \
     lib\kb4\ui\axisconfig.h \
     lib\kb4\ui\colorsetter.h \
     lib\kb4\ui\scientificnotationedit.h \

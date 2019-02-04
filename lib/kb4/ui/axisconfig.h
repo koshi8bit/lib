@@ -2,7 +2,7 @@
 #define AXISCONFIG_H
 
 #include <QDialog>
-#include "qcustomplot.h"
+#include <lib/qcustomplot/qcustomplot.h>
 
 namespace Ui {
 class AxisConfig;

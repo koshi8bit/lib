@@ -59,7 +59,7 @@
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header>lib/kb4/ui/qcustomplot.h</header>
+   <header>lib/qcustomplot/qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

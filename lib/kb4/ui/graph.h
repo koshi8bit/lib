@@ -1,8 +1,10 @@
-#ifndef GRAPHWITHVALUE_H
-#define GRAPHWITHVALUE_H
+#ifndef GRAPH_H
+#define GRAPH_H
 
 #include <QColor>
-#include "qcustomplot.h"
+
+#include <lib/qcustomplot/qcustomplot.h>
+
 #include "graphlegenditem.h"
 
 
@@ -49,4 +51,4 @@ private slots:
     void colorChanged(QColor newColor);
 };
 
-#endif // GRAPHWITHVALUE_H
+#endif // GRAPH_H

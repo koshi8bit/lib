@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include <QDateTime>
-#include "qcustomplot.h"
+
+#include <lib/qcustomplot/qcustomplot.h>
+
 #include "axisconfig.h"
 #include "colorsetter.h"
 #include "graph.h"
