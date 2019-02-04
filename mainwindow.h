@@ -9,7 +9,7 @@
 
 #include <lib/qcustomplot/qcustomplot.h>
 
-#include "lib/kb4/ui/axisconfig.h"
+#include "lib/kb4/ui/rtplotwithlegend/axisconfig.h"
 #include "lib/kb4/ui/colorsetter.h"
 #include "lib/kb4/ui/graph.h"
 #include "lib/kb4/ui/graphlegenditem.h"

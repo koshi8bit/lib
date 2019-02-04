@@ -29,7 +29,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     lib\qcustomplot\qcustomplot.cpp \
-    lib\kb4\ui\axisconfig.cpp \
+    lib\kb4\ui\rtplotwithlegend\axisconfig.cpp \
     lib\kb4\ui\colorsetter.cpp \
     lib\kb4\ui\scientificnotationedit.cpp \
     lib\kb4\ui\rtplotwithlegend.cpp \
@@ -39,7 +39,7 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     lib\qcustomplot\qcustomplot.h \
-    lib\kb4\ui\axisconfig.h \
+    lib\kb4\ui\rtplotwithlegend\axisconfig.h \
     lib\kb4\ui\colorsetter.h \
     lib\kb4\ui\scientificnotationedit.h \
     lib\kb4\ui\rtplotwithlegend.h \
@@ -48,7 +48,7 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui \
-    lib\kb4\ui\axisconfig.ui \
+    lib\kb4\ui\rtplotwithlegend\axisconfig.ui \
     lib\kb4\ui\rtplotwithlegend.ui \
     lib\kb4\ui/graphlegenditem.ui
 
