@@ -160,7 +160,7 @@
   <customwidget>
    <class>ScientificNotationEdit</class>
    <extends>QWidget</extends>
-   <header>lib/ui/scientificnotationedit.h</header>
+   <header>lib/kb4/ui/scientificnotationedit.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
