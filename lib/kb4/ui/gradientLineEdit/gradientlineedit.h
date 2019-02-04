@@ -12,11 +12,12 @@ public:
     GradientLineEdit(QWidget *parent);
 
     void configure();
+    void configure(QCPRange *range, QCPColorGradient *gradient);
     void configureRange();
     void configureGradient();
     void setMinMax(double min, double max);
     void setRange(QCPRange *range, bool deleteOld = true);
-    void setColorGradient(QCPColorGradient *gradient, bool deleteOld = true);
+    void setGradient(QCPColorGradient *gradient, bool deleteOld = true);
 
 private:
     QCPRange *_range = nullptr;

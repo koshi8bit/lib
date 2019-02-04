@@ -12,6 +12,12 @@ void GradientLineEdit::configure()
     configureGradient();
 }
 
+void GradientLineEdit::configure(QCPRange *range, QCPColorGradient *gradient)
+{
+    setRange(range, false);
+    setGradient(gradient, false);
+}
+
 void GradientLineEdit::configureRange()
 {
     _range = new QCPRange(0, 0);
@@ -47,7 +53,7 @@ void GradientLineEdit::setRange(QCPRange *range, bool deleteOld)
     _range = range;
 }
 
-void GradientLineEdit::setColorGradient(QCPColorGradient *gradient, bool deleteOld)
+void GradientLineEdit::setGradient(QCPColorGradient *gradient, bool deleteOld)
 {
     if (deleteOld && _gradient)
         delete _gradient;
