@@ -28,29 +28,29 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    lib\qcustomplot\qcustomplot.cpp \
     lib\kb4\ui\rtplotwithlegend\axisconfig.cpp \
-    lib\kb4\ui\colorsetter.cpp \
+    lib\kb4\ui\rtplotwithlegend\colorsetter.cpp \
+    lib\kb4\ui\rtplotwithlegend\graph.cpp \
+    lib\kb4\ui\rtplotwithlegend\graphlegenditem.cpp \
+    lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.cpp \
     lib\kb4\ui\scientificnotationedit.cpp \
-    lib\kb4\ui\rtplotwithlegend.cpp \
-    lib\kb4\ui\graph.cpp \
-    lib\kb4\ui/graphlegenditem.cpp
+    lib\qcustomplot\qcustomplot.cpp
 
 HEADERS += \
     mainwindow.h \
-    lib\qcustomplot\qcustomplot.h \
     lib\kb4\ui\rtplotwithlegend\axisconfig.h \
-    lib\kb4\ui\colorsetter.h \
+    lib\kb4\ui\rtplotwithlegend\colorsetter.h \
+    lib\kb4\ui\rtplotwithlegend\graph.h \
+    lib\kb4\ui\rtplotwithlegend\graphlegenditem.h \
+    lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.h \
     lib\kb4\ui\scientificnotationedit.h \
-    lib\kb4\ui\rtplotwithlegend.h \
-    lib\kb4\ui\graph.h \
-    lib\kb4\ui/graphlegenditem.h
+    lib\qcustomplot\qcustomplot.h
 
 FORMS += \
         mainwindow.ui \
     lib\kb4\ui\rtplotwithlegend\axisconfig.ui \
-    lib\kb4\ui\rtplotwithlegend.ui \
-    lib\kb4\ui/graphlegenditem.ui
+    lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.ui \
+    lib\kb4\ui\rtplotwithlegend\graphlegenditem.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

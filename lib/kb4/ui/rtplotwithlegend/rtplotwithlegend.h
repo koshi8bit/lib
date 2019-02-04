@@ -6,7 +6,7 @@
 
 #include <lib/qcustomplot/qcustomplot.h>
 
-#include "rtplotwithlegend/axisconfig.h"
+#include "axisconfig.h"
 #include "colorsetter.h"
 #include "graph.h"
 
