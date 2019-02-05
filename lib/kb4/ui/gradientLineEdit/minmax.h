@@ -17,8 +17,13 @@ public:
     explicit MinMax(QWidget *parent = nullptr);
     ~MinMax();
 
+
+
 signals:
     void rangeChanged(double min, double max);
+
+public slots:
+    void setRange(double min, double max);
 
 private slots:
     void on_doubleSpinBoxMin_valueChanged(double arg1);

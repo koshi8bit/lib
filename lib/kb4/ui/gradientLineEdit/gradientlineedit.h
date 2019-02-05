@@ -11,17 +11,23 @@ class GradientLineEdit : public QLineEdit
 public:
     GradientLineEdit(QWidget *parent);
 
-    void configure();
     void configure(QCPRange *range, QCPColorGradient *gradient);
+    void configure();
     void configureRange();
     void configureGradient();
     void setMinMax(double min, double max);
     void setRange(QCPRange *range, bool deleteOld = true);
     void setGradient(QCPColorGradient *gradient, bool deleteOld = true);
 
+    double min();
+    double max();
+
 private:
     QCPRange *_range = nullptr;
     QCPColorGradient *_gradient = nullptr;
+
+signals:
+    void rangeChanged(double min, double max);
 
 public slots:
     void display(double value);

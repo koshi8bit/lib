@@ -65,6 +65,7 @@ private slots:
     void plotReplotTimeout();
     void plotLineRealTimeMoved();
     void on_horizontalSlider_valueChanged(int value);
+    void gradientLineEdit_rangeChanged(double min, double max);
 };
 
 #endif // MAINWINDOW_H

@@ -10,6 +10,7 @@ void GradientLineEdit::configure()
 {
     configureRange();
     configureGradient();
+    display(0);
 }
 
 void GradientLineEdit::configure(QCPRange *range, QCPColorGradient *gradient)
@@ -21,6 +22,7 @@ void GradientLineEdit::configure(QCPRange *range, QCPColorGradient *gradient)
 void GradientLineEdit::configureRange()
 {
     _range = new QCPRange(0, 0);
+    emit rangeChanged(_range->lower, _range->upper);
 }
 
 void GradientLineEdit::configureGradient()
@@ -43,6 +45,8 @@ void GradientLineEdit::setMinMax(double min, double max)
 
     _range->lower = min;
     _range->upper = max;
+
+    emit rangeChanged(_range->lower, _range->upper);
 }
 
 void GradientLineEdit::setRange(QCPRange *range, bool deleteOld)
@@ -59,6 +63,28 @@ void GradientLineEdit::setGradient(QCPColorGradient *gradient, bool deleteOld)
         delete _gradient;
 
     _gradient = gradient;
+}
+
+double GradientLineEdit::min()
+{
+    if (!_range)
+    {
+        qDebug() << "ACHTUNG!" << Q_FUNC_INFO << "Range is not configured";
+        return 0;
+    }
+
+    return _range->lower;
+}
+
+double GradientLineEdit::max()
+{
+    if (!_range)
+    {
+        qDebug() << "ACHTUNG!" << Q_FUNC_INFO << "Range is not configured";
+        return 0;
+    }
+
+    return _range->upper;
 }
 
 void GradientLineEdit::display(double value)

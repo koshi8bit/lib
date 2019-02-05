@@ -26,8 +26,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
     timerReplot->start();
 
-    ui->widget->configure();
-    ui->widget->setMinMax(20, 50);
+
+    //connect(ui->gradientLineEdit, &GradientLineEdit::rangeChanged, ui->minMax, &MinMax::setRange);
+    ui->gradientLineEdit->configure();
+    ui->gradientLineEdit->setMinMax(20, 50);
+
+
+    connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
 }
 
 
@@ -213,5 +218,10 @@ void MainWindow::plotMoveLineRealTimeChanged(bool newValue)
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
-    ui->widget->display(value);
+    ui->gradientLineEdit->display(value);
+}
+
+void MainWindow::gradientLineEdit_rangeChanged(double min, double max)
+{
+    ui->gradientLineEdit->setMinMax(min, max);
 }

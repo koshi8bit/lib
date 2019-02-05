@@ -61,7 +61,14 @@
        </widget>
       </item>
       <item>
-       <widget class="GradientLineEdit" name="widget" native="true"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="GradientLineEdit" name="gradientLineEdit" native="true"/>
+        </item>
+        <item>
+         <widget class="MinMax" name="minMax" native="true"/>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -99,6 +106,12 @@
    <class>GradientLineEdit</class>
    <extends>QWidget</extends>
    <header>lib/kb4/ui/gradientlineedit/gradientlineedit.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MinMax</class>
+   <extends>QWidget</extends>
+   <header>lib/kb4/ui/gradientlineedit/minmax.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
