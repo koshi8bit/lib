@@ -8,6 +8,7 @@
 
 #include <lib/kb4/log/log.h>
 #include <lib/kb4/log/channelt.h>
+#include <lib/kb4/macro.h>
 
 #include "excelfile.h"
 

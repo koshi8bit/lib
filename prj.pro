@@ -64,7 +64,8 @@ HEADERS += \
     lib/kb4/log/channel.h \
     lib/kb4/log/channeldouble.h \
     lib/kb4/log/channelt.h \
-    lib/kb4/log/log.h
+    lib/kb4/log/log.h \
+    lob/kb4/macro.h
 
 FORMS += \
         mainwindow.ui \

@@ -94,7 +94,7 @@ void Excel::push()
 
 QString Excel::formatDoubleValue(double value)
 {
-    if (qAbs(value - 0) <= std::numeric_limits<double>::epsilon())
+    if (IS_EQUAL_DOUBLE(value, 0))
     {
         return QString("0");
     }
