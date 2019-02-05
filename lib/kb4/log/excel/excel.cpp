@@ -94,12 +94,12 @@ void Excel::push()
 
 QString Excel::formatDoubleValue(double value)
 {
-    if (value == 0)
+    if (qAbs(value - 0) <= std::numeric_limits<double>::epsilon())
     {
         return QString("0");
     }
 
-    if (value > 0.1)
+    if ((0.1 < value) && (value < 2000))
     {
         return  QLocale(QLocale::Russian).toString(value, 'f', 2);
     }

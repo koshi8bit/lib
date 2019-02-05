@@ -12,6 +12,8 @@ class ExcelFile : public QObject
     Q_OBJECT
 public:
     explicit ExcelFile(QDateTime dt, QString folder, QObject *parent = nullptr);
+    ~ExcelFile();
+
     void append(QString message);
     bool openFile();
     bool push();

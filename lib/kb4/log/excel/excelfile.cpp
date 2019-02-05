@@ -30,6 +30,14 @@ ExcelFile::ExcelFile(QDateTime dt, QString folder, QObject *parent) : QObject(pa
     }
 }
 
+ExcelFile::~ExcelFile()
+{
+    push();
+
+    //stream->close();
+    file->close();
+}
+
 void ExcelFile::append(QString message)
 {
     buffer.append(message);
@@ -40,10 +48,8 @@ bool ExcelFile::openFile()
     if (file->open(QIODevice::WriteOnly | QIODevice::Append))
     {
         stream = new QTextStream(file);
-        qDebug() << "file opened";
         return true;
     }
-    qDebug() << "file not opened";
     return false;
 }
 
