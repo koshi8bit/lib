@@ -6,16 +6,16 @@
 #include <lib/qcustomplot/qcustomplot.h>
 
 namespace Ui {
-class MinMaxWidget;
+class MinMax;
 }
 
-class MinMaxWidget : public QWidget
+class MinMax : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MinMaxWidget(QWidget *parent = nullptr);
-    ~MinMaxWidget();
+    explicit MinMax(QWidget *parent = nullptr);
+    ~MinMax();
 
 signals:
     void rangeChanged(double min, double max);
@@ -25,7 +25,7 @@ private slots:
     void on_doubleSpinBoxMax_valueChanged(double arg1);
 
 private:
-    Ui::MinMaxWidget *ui;
+    Ui::MinMax *ui;
 };
 
 #endif // GRADIENTLINEEDITWIDGET_H

@@ -34,8 +34,8 @@ SOURCES += \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.cpp \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.cpp \
     lib\qcustomplot\qcustomplot.cpp \
-    lib/kb4/ui/gradientlineedit/minmaxwidget.cpp \
-    lib/kb4/ui/gradientLineEdit/gradientlineedit.cpp
+    lib/kb4/ui/gradientLineEdit/gradientlineedit.cpp \
+    lib/kb4/ui/gradientlineedit/minmax.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -46,15 +46,15 @@ HEADERS += \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.h \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.h \
     lib\qcustomplot\qcustomplot.h \
-    lib/kb4/ui/gradientlineedit/minmaxwidget.h \
-    lib/kb4/ui/gradientLineEdit/gradientlineedit.h
+    lib/kb4/ui/gradientLineEdit/gradientlineedit.h \
+    lib/kb4/ui/gradientlineedit/minmax.h
 
 FORMS += \
         mainwindow.ui \
     lib\kb4\ui\rtplotwithlegend\axisconfig.ui \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.ui \
     lib\kb4\ui\rtplotwithlegend\graphlegenditem.ui \
-    lib/kb4/ui/gradientlineedit/minmaxwidget.ui
+    lib/kb4/ui/gradientlineedit/minmax.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
