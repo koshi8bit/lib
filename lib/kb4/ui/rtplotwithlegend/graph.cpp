@@ -23,6 +23,7 @@ Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAx
 
     _graphLegendItem = new GraphLegendItem(label, color);
     connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::setVisibleByWidget);
+    connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::setColorByWidget);
 
 }
 
@@ -75,10 +76,29 @@ void Graph::setVisible(bool newValue)
     _graphLegendItem->setVisibleValue(newValue);
 }
 
+
 void Graph::setVisibleByWidget(bool newValue)
 {
     _graph->setVisible(newValue);
     _tracer->setVisible(newValue);
     emit visibleChanged(newValue);
+}
+
+
+void Graph::setColor(QColor newValue)
+{
+    _graph->setPen(newValue);
+    _tracer->setPen(_graph->pen());
+    _tracer->setBrush(newValue);
+
+    _graphLegendItem->setColor(newValue);
+}
+
+void Graph::setColorByWidget(QColor newValue)
+{
+    _graph->setPen(newValue);
+    _tracer->setPen(_graph->pen());
+    _tracer->setBrush(newValue);
+    emit colorChanged(newValue);
 }
 

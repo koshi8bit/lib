@@ -39,12 +39,15 @@ private:
 
 signals:
     void visibleChanged(bool newValue);
+    void colorChanged(QColor newValue);
 
 public slots:
     void setVisible(bool newValue);
+    void setColor(QColor newValue);
 
 private slots:
     void setVisibleByWidget(bool newValue);
+    void setColorByWidget(QColor newValue);
 
 };
 
