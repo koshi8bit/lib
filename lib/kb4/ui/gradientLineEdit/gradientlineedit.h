@@ -26,6 +26,8 @@ private:
     QCPRange *_range = nullptr;
     QCPColorGradient *_gradient = nullptr;
 
+    double previousValue = 0;
+
 signals:
     void rangeChanged(double min, double max);
 

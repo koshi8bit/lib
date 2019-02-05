@@ -26,5 +26,5 @@ void MinMax::on_doubleSpinBoxMin_valueChanged(double arg1)
 
 void MinMax::on_doubleSpinBoxMax_valueChanged(double arg1)
 {
-    emit rangeChanged(ui->doubleSpinBoxMax->value(), arg1);
+    emit rangeChanged(ui->doubleSpinBoxMin->value(), arg1);
 }

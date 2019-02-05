@@ -22,7 +22,8 @@ void GradientLineEdit::configure(QCPRange *range, QCPColorGradient *gradient)
 void GradientLineEdit::configureRange()
 {
     _range = new QCPRange(0, 0);
-    emit rangeChanged(_range->lower, _range->upper);
+    //FIXME tima45
+    //emit rangeChanged(_range->lower, _range->upper);
 }
 
 void GradientLineEdit::configureGradient()
@@ -46,7 +47,10 @@ void GradientLineEdit::setMinMax(double min, double max)
     _range->lower = min;
     _range->upper = max;
 
-    emit rangeChanged(_range->lower, _range->upper);
+    display(previousValue);
+
+    //FIXME tima45
+    //emit rangeChanged(_range->lower, _range->upper);
 }
 
 void GradientLineEdit::setRange(QCPRange *range, bool deleteOld)
@@ -89,6 +93,7 @@ double GradientLineEdit::max()
 
 void GradientLineEdit::display(double value)
 {
+    previousValue = value;
     if (!_gradient || !_range)
     {
         qDebug() << "ACHTUNG!" << Q_FUNC_INFO << "Gradient or range is not configured";
