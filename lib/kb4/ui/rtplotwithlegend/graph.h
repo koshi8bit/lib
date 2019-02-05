@@ -35,8 +35,6 @@ private:
 
     QCPItemTracer *tracer();
 
-    void setColor(QColor newColor, bool emitSignal);
-
 signals:
     void visibleChanged(bool newValue);
     void colorChanged(QColor newValue);
