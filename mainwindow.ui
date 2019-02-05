@@ -63,7 +63,14 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="GradientLineEdit" name="gradientLineEdit" native="true"/>
+         <widget class="GradientLineEdit" name="gradientLineEdit" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>1</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="MinMax" name="minMax" native="true"/>
