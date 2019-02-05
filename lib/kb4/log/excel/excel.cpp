@@ -4,8 +4,6 @@ const QString Excel::elementDelimeter = "\t";
 const QString Excel::lineDelimeter = "\r\n";
 
 
-
-
 Excel::Excel(HeaderMode headerMode, QString externalFolder, QObject *parent)
     : Log(parent)
 {
@@ -15,8 +13,6 @@ Excel::Excel(HeaderMode headerMode, QString externalFolder, QObject *parent)
 
     this->headerMode = headerMode;
 }
-
-
 
 Excel::~Excel()
 {
@@ -79,12 +75,7 @@ void Excel::finishConfigure()
         appendToBuffers(lineDelimeter);
         line.clear();
     }
-
-
 }
-
-
-
 
 void Excel::push()
 {
