@@ -120,11 +120,11 @@ void Graph::graphVisibleChanged(bool newValue)
     setVisible(newValue, false);
 }
 
-void Graph::colorChanged(QColor newColor)
-{
-    color = newColor;
-    _graph->setPen(color);
+//void Graph::colorChanged(QColor newColor)
+//{
+//    color = newColor;
+//    _graph->setPen(color);
 
-    _tracer->setBrush(color);
-    _tracer->setPen(color);
-}
+//    _tracer->setBrush(color);
+//    _tracer->setPen(color);
+//}

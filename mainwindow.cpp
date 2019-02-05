@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(ui->gradientLineEdit, &GradientLineEdit::rangeChanged, ui->minMax, &MinMax::setRange);
     ui->gradientLineEdit->configure();
     ui->gradientLineEdit->setMinMax(20, 50);
+    ui->minMax->setRange(ui->gradientLineEdit->min(), ui->gradientLineEdit->max());
     connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
 }
 
