@@ -25,7 +25,7 @@ Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAx
     _graphLegendItem = new GraphLegendItem(label, color);
     connect(this, &Graph::visibleChanged, _graphLegendItem, &GraphLegendItem::setVisibleValue);
     connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::graphVisibleChanged);
-    connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::colorChanged);
+    //connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::graphСolorChanged);
 
 }
 
@@ -85,15 +85,6 @@ void Graph::setVisible(bool newValue, bool emitSignal)
     {
         emit visibleChanged(newValue);
     }
-
-//    if (visible)
-//    {
-
-//    }
-//    else
-//    {
-//        _plot->removeGraph(_graph);
-    //    }
 }
 
 void Graph::setColor(QColor newColor)
@@ -103,6 +94,14 @@ void Graph::setColor(QColor newColor)
 
 void Graph::setColor(QColor newColor, bool emitSignal)
 {
+    _graph->setPen(newColor);
+    _tracer->setBrush(newColor);
+
+    if (emitSignal)
+    {
+        //emit colorChanged(newValue);
+    }
+
     //TODO
 //    _graph->setVisible(newColor);
 //    _tracer->setVisible(newColor);

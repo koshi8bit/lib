@@ -43,13 +43,13 @@ private:
 
 signals:
     void visibleChanged(bool newValue);
-    void colorChanged(QColor newColor);
+    //void colorChanged(QColor newColor);
 
 public slots:
 
 private slots:
     void graphVisibleChanged(bool newValue);
-    void graphСolorChanged(QColor newColor);
+   // void graphСolorChanged(QColor newColor);
 };
 
 #endif // GRAPH_H
