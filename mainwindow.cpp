@@ -41,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     b  = new ChannelDouble("Центр", QStringList() << "b/middle", this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
+
+    excelLog->finishConfigure();
 }
 
 

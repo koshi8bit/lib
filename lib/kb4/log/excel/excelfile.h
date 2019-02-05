@@ -11,18 +11,20 @@ class ExcelFile : public QObject
 {
     Q_OBJECT
 public:
-    explicit ExcelFile(QDateTime dt, QString folder, QObject *parent = nullptr);
+    explicit ExcelFile(QDateTime dt, QString datePattern, QString folder, QObject *parent = nullptr);
     ~ExcelFile();
 
     void append(QString message);
     bool openFile();
     bool push();
+    bool isCreated();
     QString fileName;
 
 private:
     QFile *file;
     QTextStream *stream;
     QString buffer;
+    bool _isCreated;
 
 signals:
     void errorOcurred(QString message);

@@ -18,8 +18,7 @@ public:
     explicit Log(QObject *parent = nullptr);
 
     void addChannel(Channel *channel);
-
-
+    void finishConfigure();
 
     virtual void push() = 0;
     virtual void commit() = 0;
@@ -30,6 +29,7 @@ public:
 private:
     int intervalCommitMSEC = 1000;
     int intervalPushSEC = 5;
+    bool configureFinished = false;
 
     QTimer *timerCommit;
     QTimer *timerPush;
@@ -37,11 +37,11 @@ private:
 
     QString _error;
 
-    bool configureFinished = false;
 
 protected:
     QList<Channel *> channels;
-    virtual void finishConfigure() = 0;
+
+    virtual void finishConfigureChild() = 0;
 
     void setError(QString message);
 

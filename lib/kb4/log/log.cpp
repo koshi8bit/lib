@@ -20,17 +20,22 @@ void Log::addChannel(Channel *channel)
     channels.append(channel);
 }
 
+void Log::finishConfigure()
+{
+    if (!configureFinished)
+    {
+        finishConfigureChild();
+        configureFinished = true;
+    }
+}
+
 
 void Log::setAutoLog(bool newValue)
 {
-    if (!configureFinished && newValue)
-    {
-        finishConfigure();
-        configureFinished = true;
-    }
 
     if (newValue)
     {
+        finishConfigure();
         timerCommit->start();
         timerPush->start();
     }

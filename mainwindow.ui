@@ -142,6 +142,9 @@
             <property name="wrapping">
              <bool>false</bool>
             </property>
+            <property name="notchTarget">
+             <double>5.000000000000000</double>
+            </property>
             <property name="notchesVisible">
              <bool>true</bool>
             </property>

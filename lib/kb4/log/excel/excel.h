@@ -34,6 +34,7 @@ public:
     Excel(QString path, HeaderMode headerMode, QObject *parent = nullptr);
     ~Excel();
 
+
     void push() override;
     void commit() override;
 
@@ -42,21 +43,18 @@ protected:
     static const QString lineDelimeter;
     static QString formatDoubleValue(double value);
 
-
-    void finishConfigure() override;
-
     HeaderMode headerMode;
-
+    void finishConfigureChild() override;
 
     virtual QString headersPrefix(TimePrefixLanguage timePrefixLanguage) = 0;
     virtual QString commitPrefix() = 0;
 
 private:
-    ExcelFile *local;
-    ExcelFile *remote;
+    ExcelFile *currentSession;
+    ExcelFile *currentDay;
 
     void finalPush(ExcelFile *excelFile);
-    void appendToBuffers(QString message);
+    void appendToBuffers(QString message, bool addToCurrentDay = true);
 
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(Excel::HeaderMode)

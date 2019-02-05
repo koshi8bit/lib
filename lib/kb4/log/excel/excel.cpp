@@ -7,17 +7,18 @@ const QString Excel::lineDelimeter = "\r\n";
 Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
     : Log(parent)
 {
+    auto _path = QDir(path);
     auto date = QDateTime::currentDateTime();
-    local = new ExcelFile(date, QString("./log"));
-    remote = new ExcelFile(date, path);
+    currentSession = new ExcelFile(date, "yyyy-MM-dd--hh-mm-ss", _path.filePath(".sessions"), this);
+    currentDay = new ExcelFile(date, "yyyy-MM-dd", _path.absolutePath(), this);
 
     this->headerMode = headerMode;
 }
 
 Excel::~Excel()
 {
-    finalPush(local);
-    finalPush(remote);
+    finalPush(currentSession);
+    finalPush(currentDay);
 }
 
 void Excel::finalPush(ExcelFile *excelFile)
@@ -32,15 +33,17 @@ void Excel::finalPush(ExcelFile *excelFile)
     }
 }
 
-void Excel::appendToBuffers(QString message)
+void Excel::appendToBuffers(QString message, bool addToCurrentDay)
 {
-    local->append(message);
-    remote->append(message);
+    currentSession->append(message);
+    if (addToCurrentDay)
+        currentDay->append(message);
 }
 
-void Excel::finishConfigure()
+void Excel::finishConfigureChild()
 {
     QString line;
+    auto addToCurrentDay = currentDay->isCreated();
 
     if (headerMode.testFlag(Excel::PlotText))
     {
@@ -54,8 +57,8 @@ void Excel::finishConfigure()
             line.append(channel->plotText());
             line.append(elementDelimeter);
         }
-        appendToBuffers(line);
-        appendToBuffers(lineDelimeter);
+        appendToBuffers(line, addToCurrentDay);
+        appendToBuffers(lineDelimeter, addToCurrentDay);
         line.clear();
     }
 
@@ -71,16 +74,18 @@ void Excel::finishConfigure()
             line.append(channel->logName().join("."));
             line.append(elementDelimeter);
         }
-        appendToBuffers(line);
-        appendToBuffers(lineDelimeter);
+        appendToBuffers(line, addToCurrentDay);
+        appendToBuffers(lineDelimeter, addToCurrentDay);
         line.clear();
     }
+
 }
+
 
 void Excel::push()
 {
-    local->push();
-    remote->push();
+    currentSession->push();
+    currentDay->push();
 }
 
 QString Excel::formatDoubleValue(double value)

@@ -2,9 +2,9 @@
 
 //file->close();
 
-ExcelFile::ExcelFile(QDateTime dt, QString folder, QObject *parent) : QObject(parent)
+ExcelFile::ExcelFile(QDateTime dt, QString datePattern, QString folder, QObject *parent) : QObject(parent)
 {
-    auto date = dt.toString("yyyy-MM-dd--hh-mm-ss");
+    auto date = dt.toString(datePattern);
 
     auto d = QDir(folder);
     if (!d.exists())
@@ -45,6 +45,7 @@ void ExcelFile::append(QString message)
 
 bool ExcelFile::openFile()
 {
+    _isCreated = !file->exists();
     if (file->open(QIODevice::WriteOnly | QIODevice::Append))
     {
         stream = new QTextStream(file);
@@ -68,6 +69,11 @@ bool ExcelFile::push()
     file->close();
     openFile();
     return false;
+}
+
+bool ExcelFile::isCreated()
+{
+    return _isCreated;
 }
 
 
