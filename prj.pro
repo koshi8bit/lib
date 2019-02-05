@@ -16,7 +16,6 @@ TEMPLATE = app
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -36,7 +35,7 @@ SOURCES += \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.cpp \
     lib\qcustomplot\qcustomplot.cpp \
     lib/kb4/ui/gradientLineEdit/gradientlineedit.cpp \
-    lib/kb4/ui/gradientlineedit/gradientlineeditwidget.cpp
+    lib/kb4/ui/gradientlineedit/minmaxwidget.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -48,7 +47,7 @@ HEADERS += \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.h \
     lib\qcustomplot\qcustomplot.h \
     lib/kb4/ui/gradientLineEdit/gradientlineedit.h \
-    lib/kb4/ui/gradientlineedit/gradientlineeditwidget.h
+    lib/kb4/ui/gradientlineedit/minmaxwidget.h
 
 FORMS += \
         mainwindow.ui \
