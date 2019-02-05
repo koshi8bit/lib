@@ -15,10 +15,10 @@ GradientLineEditWidget::~GradientLineEditWidget()
 
 void GradientLineEditWidget::on_doubleSpinBoxMin_valueChanged(double arg1)
 {
-    emit rangeChanged(QCPRange(arg1, ui->doubleSpinBoxMax->value()));
+    emit rangeChanged(arg1, ui->doubleSpinBoxMax->value());
 }
 
 void GradientLineEditWidget::on_doubleSpinBoxMax_valueChanged(double arg1)
 {
-    emit rangeChanged(QCPRange(ui->doubleSpinBoxMax->value(), arg1));
+    emit rangeChanged(ui->doubleSpinBoxMax->value(), arg1);
 }

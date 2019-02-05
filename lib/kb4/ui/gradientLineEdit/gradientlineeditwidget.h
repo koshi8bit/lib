@@ -18,7 +18,7 @@ public:
     ~GradientLineEditWidget();
 
 signals:
-    void rangeChanged(QCPRange range);
+    void rangeChanged(double min, double max);
 
 private slots:
     void on_doubleSpinBoxMin_valueChanged(double arg1);
