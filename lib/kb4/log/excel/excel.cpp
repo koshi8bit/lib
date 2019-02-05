@@ -4,19 +4,15 @@ const QString Excel::elementDelimeter = "\t";
 const QString Excel::lineDelimeter = "\r\n";
 
 
-
-
-Excel::Excel(HeaderMode headerMode, QString externalFolder, QObject *parent)
+Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
     : Log(parent)
 {
     auto date = QDateTime::currentDateTime();
     local = new ExcelFile(date, QString("./log"));
-    remote = new ExcelFile(date, externalFolder);
+    remote = new ExcelFile(date, path);
 
     this->headerMode = headerMode;
 }
-
-
 
 Excel::~Excel()
 {
@@ -79,12 +75,7 @@ void Excel::finishConfigure()
         appendToBuffers(lineDelimeter);
         line.clear();
     }
-
-
 }
-
-
-
 
 void Excel::push()
 {
@@ -124,6 +115,9 @@ void Excel::commit()
         if (channel_double)
         {
             value = formatDoubleValue(channel_double->value());
+
+
+            //value = QString("%1").arg(channel_double->value(), 0, 'e', 2, '0');
             line.append(value);
             line.append(elementDelimeter);
             continue;

@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     excelLog->addChannel(a);
     b  = new ChannelDouble("Центр", QStringList() << "b/middle", this);
+    connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 }
 
@@ -246,5 +247,5 @@ void MainWindow::on_pushButtonLogPush_clicked()
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
 {
-
+    excelLog->setAutoLog(arg1 == 2);
 }

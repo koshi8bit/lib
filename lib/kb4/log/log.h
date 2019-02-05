@@ -19,7 +19,7 @@ public:
 
     void addChannel(Channel *channel);
 
-    void setAutoLog(bool newValue);
+
 
     virtual void push() = 0;
     virtual void commit() = 0;
@@ -49,6 +49,7 @@ signals:
     void errorOcurred(QString message);
 
 public slots:
+    void setAutoLog(bool newValue);
 
 protected slots:
     void timeoutCommit();
