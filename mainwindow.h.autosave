@@ -73,6 +73,7 @@ private slots:
     void gradientLineEdit_rangeChanged(double min, double max);
     void on_pushButtonLogCommit_clicked();
     void on_pushButtonLogPush_clicked();
+    void on_checkBox_stateChanged(int arg1);
 };
 
 #endif // MAINWINDOW_H

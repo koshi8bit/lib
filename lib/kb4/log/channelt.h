@@ -15,15 +15,16 @@ public:
         _value = T();
     }
 
+    T value()
+    {
+        return _value;
+    }
+
+public slots:
     void setValue(T newValue)
     {
         _value = newValue;
         emit valueChanged();
-    }
-
-    T value()
-    {
-        return _value;
     }
 
 private:

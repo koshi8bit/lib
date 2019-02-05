@@ -4,12 +4,12 @@ const QString Excel::elementDelimeter = "\t";
 const QString Excel::lineDelimeter = "\r\n";
 
 
-Excel::Excel(HeaderMode headerMode, QString externalFolder, QObject *parent)
+Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
     : Log(parent)
 {
     auto date = QDateTime::currentDateTime();
     local = new ExcelFile(date, QString("./log"));
-    remote = new ExcelFile(date, externalFolder);
+    remote = new ExcelFile(date, path);
 
     this->headerMode = headerMode;
 }

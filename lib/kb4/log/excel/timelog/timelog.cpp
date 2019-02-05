@@ -1,7 +1,7 @@
 #include "timelog.h"
 
-TimeLog::TimeLog(HeaderMode headerMode, QString externalFolder, QObject *parent)
-    : Excel(headerMode, externalFolder, parent)
+TimeLog::TimeLog(QString path, HeaderMode headerMode, QObject *parent)
+    : Excel(path, headerMode, parent)
 
 {
 

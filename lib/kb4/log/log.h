@@ -19,7 +19,7 @@ public:
 
     void addChannel(Channel *channel);
 
-    void startAutoLog();
+    void setAutoLog(bool newValue);
 
     virtual void push() = 0;
     virtual void commit() = 0;
@@ -36,6 +36,8 @@ private:
     QThread *thread;
 
     QString _error;
+
+    bool configureFinished = false;
 
 protected:
     QList<Channel *> channels;
