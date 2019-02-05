@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/gradientlineedit">
+        <file>lib/kb4/ui/gradientlineedit/gears.png</file>
+    </qresource>
+</RCC>

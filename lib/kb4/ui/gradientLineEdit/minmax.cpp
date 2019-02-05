@@ -6,6 +6,7 @@ MinMax::MinMax(QWidget *parent) :
     ui(new Ui::MinMax)
 {
     ui->setupUi(this);
+    setVisibleEdits(false);
 }
 
 MinMax::~MinMax()
@@ -27,4 +28,17 @@ void MinMax::on_doubleSpinBoxMin_valueChanged(double arg1)
 void MinMax::on_doubleSpinBoxMax_valueChanged(double arg1)
 {
     emit rangeChanged(ui->doubleSpinBoxMin->value(), arg1);
+}
+
+void MinMax::setVisibleEdits(bool newValue)
+{
+    ui->labelMin->setVisible(newValue);
+    ui->doubleSpinBoxMin->setVisible(newValue);
+    ui->labelMax->setVisible(newValue);
+    ui->doubleSpinBoxMax->setVisible(newValue);
+}
+
+void MinMax::on_pushButtonConfig_toggled(bool checked)
+{
+    setVisibleEdits(checked);
 }

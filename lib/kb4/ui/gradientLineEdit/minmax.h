@@ -29,8 +29,12 @@ private slots:
     void on_doubleSpinBoxMin_valueChanged(double arg1);
     void on_doubleSpinBoxMax_valueChanged(double arg1);
 
+    void on_pushButtonConfig_toggled(bool checked);
+
 private:
     Ui::MinMax *ui;
+
+    void setVisibleEdits(bool newValue);
 };
 
 #endif // GRADIENTLINEEDITWIDGET_H
