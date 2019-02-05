@@ -9,8 +9,8 @@ Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
 {
     auto _path = QDir(path);
     auto date = QDateTime::currentDateTime();
-    currentSession = new ExcelFile(date, "yyyy-MM-dd--hh-mm-ss", _path.filePath(".sessions"), this);
     currentDay = new ExcelFile(date, "yyyy-MM-dd", _path.absolutePath(), this);
+    currentSession = new ExcelFile(date, "yyyy-MM-dd--hh-mm-ss", _path.filePath(".sessions"), this);
 
     this->headerMode = headerMode;
 }

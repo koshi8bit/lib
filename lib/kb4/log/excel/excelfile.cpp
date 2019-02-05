@@ -6,10 +6,10 @@ ExcelFile::ExcelFile(QDateTime dt, QString datePattern, QString folder, QObject 
 {
     auto date = dt.toString(datePattern);
 
-    auto d = QDir(folder);
-    if (!d.exists())
+    auto dir = QDir();
+    if (!dir.exists(folder))
     {
-        if (!QDir().mkdir(folder))
+        if (!dir.mkpath(folder))
         {
             auto message = QString("Error creating folder <%1>").arg(folder);
             qDebug() << message;
@@ -18,13 +18,15 @@ ExcelFile::ExcelFile(QDateTime dt, QString datePattern, QString folder, QObject 
         }
     }
 
+    while(!dir.exists());
+
     fileName = QString("%1.xls").arg(date);
     fileName = QDir(folder).filePath(fileName);
     file = new QFile(fileName);
 
     if (!openFile())
     {
-        auto message = QString("Error creating folder <%1>").arg(fileName);
+        auto message = QString("Error open file <%1>").arg(fileName);
         qDebug() << message;
         emit errorOcurred(message);
     }
