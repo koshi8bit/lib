@@ -21,12 +21,24 @@ void Log::addChannel(Channel *channel)
 }
 
 
-void Log::startAutoLog()
+void Log::setAutoLog(bool newValue)
 {
-    finishConfigure();
+    if (!configureFinished && newValue)
+    {
+        finishConfigure();
+        configureFinished = true;
+    }
 
-    timerCommit->start();
-    timerPush->start();
+    if (newValue)
+    {
+        timerCommit->start();
+        timerPush->start();
+    }
+    else
+    {
+        timerCommit->stop();
+        timerPush->stop();
+    }
 }
 
 QString Log::error()

@@ -243,3 +243,8 @@ void MainWindow::on_pushButtonLogPush_clicked()
 {
     excelLog->push();
 }
+
+void MainWindow::on_checkBox_stateChanged(int arg1)
+{
+
+}

@@ -6,7 +6,7 @@ const QString Excel::lineDelimeter = "\r\n";
 
 
 
-Excel::Excel(HeaderMode headerMode, QString externalFolder, QObject *parent)
+Excel::Excel(QString path, HeaderMode headerMode, QObject *parent = nullptr)
     : Log(parent)
 {
     auto date = QDateTime::currentDateTime();
