@@ -54,7 +54,7 @@ FORMS += \
     lib\kb4\ui\rtplotwithlegend\axisconfig.ui \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.ui \
     lib\kb4\ui\rtplotwithlegend\graphlegenditem.ui \
-    lib/kb4/ui/gradientlineedit/gradientlineeditwidget.ui
+    lib/kb4/ui/gradientlineedit/minmaxwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

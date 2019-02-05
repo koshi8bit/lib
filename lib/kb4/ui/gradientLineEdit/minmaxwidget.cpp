@@ -1,5 +1,5 @@
 #include "minmaxwidget.h"
-#include "ui_gradientlineeditwidget.h"
+#include "ui_minmaxwidget.h"
 
 MinMaxWidget::MinMaxWidget(QWidget *parent) :
     QWidget(parent),
