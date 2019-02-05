@@ -12,6 +12,7 @@
 #include <lib/kb4/ui/rtplotwithlegend/graph.h>
 #include <lib/kb4/ui/rtplotwithlegend/graphlegenditem.h>
 #include <lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h>
+#include <lib/kb4/log/excel/timelog/timelog.h>
 #include <lib/qcustomplot/qcustomplot.h>
 
 namespace Ui {
@@ -44,6 +45,8 @@ private:
     QCPMarginGroup *mg;
     double now;
     QDateTime time;
+
+    TimeLog *excelLog;
 
     void configurePlots();
     void configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType);

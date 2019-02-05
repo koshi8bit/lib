@@ -22,6 +22,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH += ./
+
 CONFIG += c++11
 
 SOURCES += \
@@ -35,7 +37,14 @@ SOURCES += \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.cpp \
     lib\qcustomplot\qcustomplot.cpp \
     lib/kb4/ui/gradientLineEdit/gradientlineedit.cpp \
-    lib/kb4/ui/gradientlineedit/minmax.cpp
+    lib/kb4/ui/gradientlineedit/minmax.cpp \
+    lib/kb4/log/excel/timelog/timelog.cpp \
+    lib/kb4/log/excel/excel.cpp \
+    lib/kb4/log/excel/excelfile.cpp \
+    lib/kb4/log/sql/sql.cpp \
+    lib/kb4/log/channel.cpp \
+    lib/kb4/log/channeldouble.cpp \
+    lib/kb4/log/log.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -47,7 +56,15 @@ HEADERS += \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.h \
     lib\qcustomplot\qcustomplot.h \
     lib/kb4/ui/gradientLineEdit/gradientlineedit.h \
-    lib/kb4/ui/gradientlineedit/minmax.h
+    lib/kb4/ui/gradientlineedit/minmax.h \
+    lib/kb4/log/excel/timelog/timelog.h \
+    lib/kb4/log/excel/excel.h \
+    lib/kb4/log/excel/excelfile.h \
+    lib/kb4/log/sql/sql.h \
+    lib/kb4/log/channel.h \
+    lib/kb4/log/channeldouble.h \
+    lib/kb4/log/channelt.h \
+    lib/kb4/log/log.h
 
 FORMS += \
         mainwindow.ui \
