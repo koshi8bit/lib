@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->minMax->setRange(ui->gradientLineEdit->min(), ui->gradientLineEdit->max());
     connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
 
-    excelLog = new TimeLog("G:/log-test", Excel::PlotText, this);
+    excelLog = new TimeLog("G:/log-test", Excel::PlotText | Excel::LogName, this);
     a  = new ChannelDouble("Центр", QStringList() << "a/middle", this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
 
