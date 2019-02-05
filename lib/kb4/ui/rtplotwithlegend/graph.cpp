@@ -72,7 +72,7 @@ void Graph::setVisible(bool newValue)
     //TODO autoscale without unsivible graphs
     _graph->setVisible(newValue);
     _tracer->setVisible(newValue);
-    _graphLegendItem->setVisible(newValue);
+    _graphLegendItem->setVisibleValue(newValue);
 }
 
 void Graph::setVisibleByWidget(bool newValue)
