@@ -21,11 +21,8 @@ Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAx
     _tracer->setBrush(color);
     _tracer->setSize(5);
 
-    //_graphLegendItem = new GraphLegendItem(label, color, plot);
     _graphLegendItem = new GraphLegendItem(label, color);
-    connect(this, &Graph::visibleChanged, _graphLegendItem, &GraphLegendItem::setVisibleValue);
-    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::graphVisibleChanged);
-    //connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::graphСolorChanged);
+    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::setVisibleByWidget);
 
 }
 
@@ -72,59 +69,16 @@ void Graph::setGraphKey(double key)
 
 void Graph::setVisible(bool newValue)
 {
-    setVisible(newValue, true);
-}
-
-void Graph::setVisible(bool newValue, bool emitSignal)
-{
     //TODO autoscale without unsivible graphs
     _graph->setVisible(newValue);
     _tracer->setVisible(newValue);
-
-    if (emitSignal)
-    {
-        emit visibleChanged(newValue);
-    }
+    _graphLegendItem->setVisible(newValue);
 }
 
-void Graph::setColor(QColor newColor)
+void Graph::setVisibleByWidget(bool newValue)
 {
-    setColor(newColor, true);
+    _graph->setVisible(newValue);
+    _tracer->setVisible(newValue);
+    emit visibleChanged(newValue);
 }
 
-void Graph::setColor(QColor newColor, bool emitSignal)
-{
-    _graph->setPen(newColor);
-    _tracer->setBrush(newColor);
-
-    if (emitSignal)
-    {
-        //emit colorChanged(newValue);
-    }
-
-    //TODO
-//    _graph->setVisible(newColor);
-//    _tracer->setVisible(newColor);
-
-//    if (emitSignal)
-//    {
-//        emit visibleChanged(newColor);
-//    }
-}
-
-
-
-
-void Graph::graphVisibleChanged(bool newValue)
-{
-    setVisible(newValue, false);
-}
-
-//void Graph::colorChanged(QColor newColor)
-//{
-//    color = newColor;
-//    _graph->setPen(color);
-
-//    _tracer->setBrush(color);
-//    _tracer->setPen(color);
-//}
