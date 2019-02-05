@@ -4,7 +4,7 @@
 
 ExcelFile::ExcelFile(QDateTime dt, QString folder, QObject *parent) : QObject(parent)
 {
-    auto date = dt.toString("yyyy_MM_dd__hh_mm_ss");
+    auto date = dt.toString("yyyy-MM-dd--hh-mm-ss");
 
     auto d = QDir(folder);
     if (!d.exists())
