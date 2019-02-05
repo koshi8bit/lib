@@ -34,8 +34,8 @@ SOURCES += \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.cpp \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.cpp \
     lib\qcustomplot\qcustomplot.cpp \
-    lib/kb4/ui/gradientLineEdit/gradientlineedit.cpp \
-    lib/kb4/ui/gradientlineedit/minmaxwidget.cpp
+    lib/kb4/ui/gradientlineedit/minmaxwidget.cpp \
+    lib/kb4/ui/gradientLineEdit/gradientlineedit.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -46,8 +46,8 @@ HEADERS += \
     lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.h \
     lib\kb4\ui\scientificnotationedit\scientificnotationedit.h \
     lib\qcustomplot\qcustomplot.h \
-    lib/kb4/ui/gradientLineEdit/gradientlineedit.h \
-    lib/kb4/ui/gradientlineedit/minmaxwidget.h
+    lib/kb4/ui/gradientlineedit/minmaxwidget.h \
+    lib/kb4/ui/gradientLineEdit/gradientlineedit.h
 
 FORMS += \
         mainwindow.ui \

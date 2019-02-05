@@ -103,6 +103,7 @@ void Graph::setColor(QColor newColor)
 
 void Graph::setColor(QColor newColor, bool emitSignal)
 {
+    //TODO
 //    _graph->setVisible(newColor);
 //    _tracer->setVisible(newColor);
 
