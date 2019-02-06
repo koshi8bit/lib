@@ -13,13 +13,13 @@ QString TimeLog::headersPrefix(TimePrefixLanguage timePrefixLanguage)
     QString dateFull;
     if (timePrefixLanguage == TimePrefixLanguage::En)
     {
-        date = "Date";
-        dateFull = "Date full";
+        date = "Time";
+        dateFull = "Full date";
     }
 
     if (timePrefixLanguage == TimePrefixLanguage::Ru)
     {
-        date = "Дата";
+        date = "Время";
         dateFull = "Полная дата";
     }
 
@@ -34,8 +34,8 @@ QString TimeLog::commitPrefix()
 {
     auto dt = QDateTime::currentDateTime();
     return QString("%1%2%3%4")
-            .arg(dt.toString("hh:mm:ss"))
+            .arg(dt.toString(KB4_TIME_UI_FORMAT_NO_MS))
             .arg(elementDelimeter)
-            .arg(dt.toString("yyyy-MM-ddThh:mm:ss.zzz"))
+            .arg(dt.toString(KB4_DATETIME_UI_FORMAT))
             .arg(elementDelimeter);
 }
