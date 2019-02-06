@@ -30,7 +30,7 @@ private:
 signals:
 
 public slots:
-    void errorOccurred(QString error);
+    void processError(QString error);
 };
 
 #endif // ERRORHANDLER_H

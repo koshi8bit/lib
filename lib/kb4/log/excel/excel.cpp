@@ -9,8 +9,14 @@ Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
 {
     auto _path = QDir(path);
     auto date = QDateTime::currentDateTime();
-    currentDay = new ExcelFile(date, KB4_FORMAT_DATE_FILE, _path.absolutePath(), this);
-    currentSession = new ExcelFile(date, KB4_FORMAT_DATETIME_FILE, _path.filePath(".sessions"), this);
+
+    currentDay = new ExcelFile(this);
+    connect(currentDay, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
+    currentDay->configure(date, KB4_FORMAT_DATE_FILE, _path.absolutePath());
+
+    currentSession = new ExcelFile(this);
+    connect(currentSession, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
+    currentDay->configure(date, KB4_FORMAT_DATETIME_FILE, _path.filePath(".sessions"));
 
     this->headerMode = headerMode;
 }
@@ -29,7 +35,7 @@ void Excel::finalPush(ExcelFile *excelFile)
     }
     else
     {
-        emit errorOcurred(QString("Final push failed <%1>").arg(excelFile->fileName));
+        //emit errorOcurred(QString("Final push failed <%1>").arg(excelFile->fileName));
     }
 }
 

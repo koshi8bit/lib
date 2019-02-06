@@ -46,25 +46,9 @@ void Log::setAutoLog(bool newValue)
     }
 }
 
-QString Log::error()
-{
-    auto tmp = _error;
-    _error.clear();
-    return  tmp;
-}
-
-void Log::setError(QString message)
-{
-    _error.append(message);
-}
-
 void Log::timeoutCommit()
 {
     commit();
-
-    //FIXME more than 1000 mSec
-//    auto dt = QDateTime::currentDateTime();
-//    qDebug() << QString("COMM %1").arg(dt.toString("yyyy-MM-ddThh:mm:ss.zzz"));
 }
 
 void Log::timeoutPush()

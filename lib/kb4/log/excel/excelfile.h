@@ -7,24 +7,31 @@
 #include <QDir>
 #include <QDateTime>
 
+#include <lib/kb4/macro.h>
+
 class ExcelFile : public QObject
 {
     Q_OBJECT
 public:
-    explicit ExcelFile(QDateTime dt, QString datePattern, QString folder, QObject *parent = nullptr);
+    explicit ExcelFile(QObject *parent = nullptr);
     ~ExcelFile();
 
+    bool configure(QDateTime dt, QString datePattern, QString folder);
     void append(QString message);
-    bool openFile();
+
     bool push();
     bool isCreated();
-    QString fileName;
+    QString fileName();
+
 
 private:
     QFile *file;
     QTextStream *stream;
     QString buffer;
     bool _isCreated;
+
+    bool openFile();
+
 
 signals:
     void errorOcurred(QString message);

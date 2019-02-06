@@ -2,32 +2,9 @@
 
 //file->close();
 
-ExcelFile::ExcelFile(QDateTime dt, QString datePattern, QString folder, QObject *parent) : QObject(parent)
+ExcelFile::ExcelFile(QObject *parent) : QObject(parent)
 {
-    auto date = dt.toString(datePattern);
 
-    auto dir = QDir();
-    if (!dir.exists(folder))
-    {
-        if (!dir.mkpath(folder))
-        {
-            auto message = QString("Error creating folder <%1>").arg(folder);
-            qDebug() << message;
-            emit errorOcurred(message);
-
-        }
-    }
-
-    fileName = QString("%1.xls").arg(date);
-    fileName = QDir(folder).filePath(fileName);
-    file = new QFile(fileName);
-
-    if (!openFile())
-    {
-        auto message = QString("Error open file <%1>").arg(fileName);
-        qDebug() << message;
-        emit errorOcurred(message);
-    }
 }
 
 ExcelFile::~ExcelFile()
@@ -36,6 +13,37 @@ ExcelFile::~ExcelFile()
 
     //stream->close();
     file->close();
+}
+
+bool ExcelFile::configure(QDateTime dt, QString datePattern, QString folder)
+{
+    auto date = dt.toString(datePattern);
+
+    auto dir = QDir();
+    if (!dir.exists(folder))
+    {
+        if (!dir.mkpath(folder))
+        {
+            auto message = KB4_FORMAT_ERR(QString("Error creating folder <%1>").arg(folder));
+            qDebug() << message;
+            emit errorOcurred(message);
+            return false;
+        }
+    }
+
+    auto fileName = QString("%1.xls").arg(date);
+    fileName = QDir(folder).filePath(fileName);
+    file = new QFile(fileName);
+
+    if (!openFile())
+    {
+        auto message = QString("Error open file <%1>").arg(fileName);
+        qDebug() << message;
+        emit errorOcurred(message);
+        return false;
+    }
+
+    return true;
 }
 
 void ExcelFile::append(QString message)
@@ -74,6 +82,11 @@ bool ExcelFile::push()
 bool ExcelFile::isCreated()
 {
     return _isCreated;
+}
+
+QString ExcelFile::fileName()
+{
+    return file->fileName();
 }
 
 

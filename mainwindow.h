@@ -29,6 +29,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    ErrorHandler eh;
+
 
 private:
     Ui::MainWindow *ui;

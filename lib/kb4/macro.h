@@ -23,6 +23,6 @@
 #define KB4_FORMAT_DATETIME_UI KB4_FORMAT_DATE_UI KB4_FORMAT_DATETIME_UI_SEPORATOR KB4_FORMAT_TIME_UI_MS
 
 //errors
-#define KB4_FORMAT_ERR(message) "ACHTUNG! " Q_FUNC_INFO " / " message
+#define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG!" << Q_FUNC_INFO << " / " << message).join(" ")
 
 #endif // MACRO_H

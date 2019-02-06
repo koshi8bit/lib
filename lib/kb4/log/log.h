@@ -23,9 +23,6 @@ public:
     virtual void push() = 0;
     virtual void commit() = 0;
 
-    QString error();
-
-
 private:
     int intervalCommitMSEC = 1000;
     int intervalPushSEC = 5;
@@ -35,15 +32,11 @@ private:
     QTimer *timerPush;
     QThread *thread;
 
-    QString _error;
-
 
 protected:
     QList<Channel *> channels;
 
     virtual void finishConfigureChild() = 0;
-
-    void setError(QString message);
 
 signals:
     void errorOcurred(QString message);

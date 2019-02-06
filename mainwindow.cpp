@@ -254,6 +254,5 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 
 void MainWindow::on_pushButton_clicked()
 {
-    ErrorHandler eh;
-    eh.errorOccurred("i wanna sleep");
+    eh.processError("i wanna sleep");
 }
