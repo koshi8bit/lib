@@ -1,25 +1,19 @@
 #include "qdebuglogger.h"
 
-const QtMessageHandler QDebugLogger::QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(nullptr);
-const QString filename = QString("qDebug-%1.log").arg(QDateTime::currentDateTime().toString(KB4_FORMAT_DATETIME_FILE));;
+static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
 
-QDebugLogger::QDebugLogger(QObject *parent) : QObject(parent)
+QString filename = "./qDebug.txt";
+
+void writeMessage(QString msg)
 {
-
-}
-
-
-
-void QDebugLogger::writeMessage(QString msg)
-{
-    QFile file(QDebugLogger::filename);
+    QFile file(filename);
     if (file.open(QIODevice::ReadWrite | QIODevice::Append)) {
         QTextStream stream(&file);
         stream << msg;
     }
 }
 
-void QDebugLogger::myCustomMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+void myCustomMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     auto time =  QDateTime::currentDateTime().toString(KB4_FORMAT_DATETIME_UI);
     writeMessage(QString("%1: %2\n").arg(time, msg));
@@ -27,10 +21,9 @@ void QDebugLogger::myCustomMessageHandler(QtMsgType type, const QMessageLogConte
     (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
 }
 
-void QDebugLogger::configure()
+void configureQDebug()
 {
-    //filename = "qDebug.log";
     qInstallMessageHandler(myCustomMessageHandler);
     writeMessage("\n");
-    qDebug() << "App started";
+    qDebug() << "qDebug file dump started";
 }

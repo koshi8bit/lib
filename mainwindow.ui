@@ -205,7 +205,7 @@
         <item>
          <widget class="QPushButton" name="pushButtonExit">
           <property name="text">
-           <string>Exit</string>
+           <string>qDebug() &lt;&lt; &quot;lol&quot;</string>
           </property>
          </widget>
         </item>

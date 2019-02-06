@@ -9,10 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     settings = new QSettings("settings.ini", QSettings::IniFormat, this);
-    settings->setValue("qDebug/saveToFile", true);
 
     if(settings->value("qDebug/saveToFile", false).toBool())
-        QDebugLogger::configure();
+        configureQDebug();
 
     configurePlots();
     configureGraphs();
@@ -287,5 +286,5 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButtonExit_clicked()
 {
-    qApp->exit();
+    qDebug() << "lol";
 }
