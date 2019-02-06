@@ -9,6 +9,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     _plot = ui->plot;
     setRealTime(true);
     setMoveLineRealTime(true);
@@ -36,6 +37,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     connect(_plot, &QCustomPlot::beforeReplot, this, &RTPlotWithLegend::beforeReplot);
     connect(_plot, &QCustomPlot::mousePress, this, &RTPlotWithLegend::mousePress);
     connect(_plot, &QCustomPlot::mouseDoubleClick, this, &RTPlotWithLegend::mouseDoubleClick);
+
 }
 
 RTPlotWithLegend::~RTPlotWithLegend()
@@ -178,8 +180,12 @@ void RTPlotWithLegend::configurePlotLine()
 void RTPlotWithLegend::configureLegend()
 {
     legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
-    auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
+    labelTime = new QLabel(this);
+    labelTime->setText("time");
+    legendLayout->addWidget(labelTime);
+
+    auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
     legendLayout->addItem(spacer);
 
 }
@@ -286,6 +292,10 @@ void RTPlotWithLegend::mouseMove(double time)
 
     auto plot = this->_plot;
 
+    //BUG ?is this mouse move or regular move by timer?
+    if (labelTime->isVisible())
+        labelTime->setText(getDateTime(time));
+
     foreach (auto graphElement, graphElements)
     {
         graphElement->setGraphKey(time);
@@ -356,4 +366,15 @@ double RTPlotWithLegend::now()
     auto time = QDateTime::currentDateTime();
     auto now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
     return now;
+}
+
+QString RTPlotWithLegend::getDateTime(double time)
+{
+    //TODO show MSEC
+    return QDateTime::fromTime_t(static_cast<uint>(time)).toString(KB4_FORMAT_TIME_UI_NO_MS);
+}
+
+void RTPlotWithLegend::setLabelTimeVisible(bool newValue)
+{
+    labelTime->setVisible(newValue);
 }

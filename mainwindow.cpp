@@ -77,8 +77,10 @@ void MainWindow::configurePlots()
     connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::lineRealTimeMoved, this, &MainWindow::plotLineRealTimeMoved);
 
     configurePlot(ui->rtPlotTemperaturePower, "Температура (С)", 10, 180, QCPAxis::ScaleType::stLinear, "Мощность (Вт)", 0, 700, QCPAxis::ScaleType::stLinear);
+    ui->rtPlotTemperaturePower->setLabelTimeVisible(false);
 
     configurePlot(ui->rtPlotVacuumRadiation, "Вакуум (Пa)", 1.0e-5, 1, QCPAxis::ScaleType::stLogarithmic, "Радиация (Зв)", 1.0e-5, 1, QCPAxis::ScaleType::stLogarithmic);
+    ui->rtPlotVacuumRadiation->setLabelTimeVisible(false);
 }
 
 
@@ -184,7 +186,6 @@ MainWindow::~MainWindow()
 
     delete ui;
     delete mg;//->deleteLater();
-    qDebug() << "~MainWindow";
 }
 
 

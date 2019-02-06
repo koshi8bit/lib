@@ -3,8 +3,10 @@
 
 #include <QWidget>
 #include <QDateTime>
+#include <QLabel>
 
 #include <lib/qcustomplot/qcustomplot.h>
+#include <lib/kb4/macro.h>
 
 #include "axisconfig.h"
 #include "colorsetter.h"
@@ -41,6 +43,9 @@ public:
     QCustomPlot *plot();
 
     static double now();
+    static QString getDateTime(double time);
+    void setLabelTimeVisible(bool newValue);
+
 
 
 private:
@@ -50,6 +55,7 @@ private:
     QVBoxLayout *legendLayout;
     bool _realTime;
     bool _moveLineRealTime;
+    QLabel *labelTime;
 
     void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);
