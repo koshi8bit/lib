@@ -31,7 +31,7 @@ void myCustomMessageHandler(QtMsgType type, const QMessageLogContext &context, c
 
 void configureQDebug()
 {
-    filename = "qDebug.log";
+    //filename = "qDebug.log";
     filename = QString("qDebug-%1.log").arg(QDateTime::currentDateTime().toString(KB4_FORMAT_DATETIME_FILE));
     qInstallMessageHandler(myCustomMessageHandler);
     writeMessage("\n");

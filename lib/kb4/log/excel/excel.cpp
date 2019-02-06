@@ -27,7 +27,7 @@ void Excel::configure(QString path, HeaderMode headerMode)
 
     currentSession = new ExcelFile(this);
     connect(currentSession, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
-    currentDay->configure(date, KB4_FORMAT_DATETIME_FILE, _path.filePath(".sessions"));
+    currentSession->configure(date, KB4_FORMAT_DATETIME_FILE, _path.filePath(".sessions"));
 
     this->headerMode = headerMode;
 }

@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(&eh, &ErrorHandler::runDestructors, this, &MainWindow::ErrorHandlerRunDestructors);
 
     configurePlots();
     configureGraphs();
@@ -34,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
 
     excelLog = new TimeLog(this);
-    connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
+    //connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
     excelLog->configure("./log", Excel::PlotText);
 
     a  = new ChannelDouble("Центр", QStringList() << "a/middle", this);
@@ -160,6 +161,22 @@ void MainWindow::configureGraphsVacuumRadiation()
 
 MainWindow::~MainWindow()
 {
+    timerAddData1->stop();
+    delete timerAddData1;
+
+    timerAddData2->stop();
+    delete timerAddData2;
+
+    timerReplot->stop();
+    delete timerReplot;
+
+    excelLog->push();
+    delete excelLog;
+
+    delete a;
+    delete b;
+
+
     mg->deleteLater();
     delete ui;
 }
@@ -258,4 +275,9 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 void MainWindow::on_pushButton_clicked()
 {
     eh.processError("i wanna sleep");
+}
+
+void MainWindow::ErrorHandlerRunDestructors()
+{
+    //delete this;
 }
