@@ -45,7 +45,8 @@ SOURCES += \
     lib/kb4/log/channel.cpp \
     lib/kb4/log/channeldouble.cpp \
     lib/kb4/log/log.cpp \
-    lib/kb4/errorhandler/errorhandler.cpp
+    lib/kb4/errorhandler/errorhandler.cpp \
+    lib/kb4/qdebuglogger/qdebuglogger.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -66,8 +67,9 @@ HEADERS += \
     lib/kb4/log/channeldouble.h \
     lib/kb4/log/channelt.h \
     lib/kb4/log/log.h \
-    lob/kb4/macro.h \
-    lib/kb4/errorhandler/errorhandler.h
+    lib/kb4/macro.h \
+    lib/kb4/errorhandler/errorhandler.h \
+    lib/kb4/qdebuglogger/qdebuglogger.h
 
 FORMS += \
         mainwindow.ui \

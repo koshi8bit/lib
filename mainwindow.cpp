@@ -8,6 +8,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    settings = new QSettings("settings.ini", QSettings::IniFormat, this);
+    settings->setValue("qDebug/saveToFile", true);
+
+    if(settings->value("qDebug/saveToFile", false).toBool())
+        QDebugLogger::configure();
+
     configurePlots();
     configureGraphs();
 
