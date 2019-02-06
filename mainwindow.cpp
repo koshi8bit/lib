@@ -251,3 +251,9 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 {
     excelLog->setAutoLog(arg1 == 2);
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    ErrorHandler eh;
+    eh.errorOccurred("i wanna sleep");
+}

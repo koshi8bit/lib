@@ -15,6 +15,7 @@
 #include <lib/kb4/log/channeldouble.h>
 #include <lib/kb4/log/excel/timelog/timelog.h>
 #include <lib/qcustomplot/qcustomplot.h>
+#include <lib/kb4/errorhandler/errorhandler.h>
 
 namespace Ui {
 class MainWindow;
@@ -74,6 +75,7 @@ private slots:
     void on_pushButtonLogCommit_clicked();
     void on_pushButtonLogPush_clicked();
     void on_checkBox_stateChanged(int arg1);
+    void on_pushButton_clicked();
 };
 
 #endif // MAINWINDOW_H
