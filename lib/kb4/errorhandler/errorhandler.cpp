@@ -6,7 +6,18 @@ const QString ErrorHandler::okSend = "Возникла критическая о
 
 ErrorHandler::ErrorHandler(QObject *parent) : QObject(parent)
 {
+    timer = new QTimer();
+    timer->setInterval(1000);
+    connect(timer, &QTimer::timeout, this, &ErrorHandler::timerTimeout);
+}
 
+void ErrorHandler::checkForErrors()
+{
+    checkForErrorsEmited = true;
+    if(triggered)
+    {
+        timer->start();
+    }
 }
 
 void ErrorHandler::showErrorMessage(QString messageToUser, QString error)
@@ -20,6 +31,7 @@ void ErrorHandler::showErrorMessage(QString messageToUser, QString error)
 
 void ErrorHandler::processError(QString error)
 {
+    triggered = true;
     auto date = QDateTime::currentDateTime().toString(KB4_FORMAT_DATETIME_FILE);
     auto fileName = QString("crash-%1.log").arg(date);
     auto file = new QFile(fileName);
@@ -43,7 +55,14 @@ void ErrorHandler::processError(QString error)
     }
 
     showErrorMessage(errorSend, file->fileName());
-    QCoreApplication::exit(-1);
 
+    if (checkForErrorsEmited)
+        QCoreApplication::exit(-1);
+
+}
+
+void ErrorHandler::timerTimeout()
+{
+    QCoreApplication::exit(-1);
 }
 

@@ -9,10 +9,13 @@ ExcelFile::ExcelFile(QObject *parent) : QObject(parent)
 
 ExcelFile::~ExcelFile()
 {
-    push();
+    if (file != nullptr)
+    {
+        push();
 
-    //stream->close();
-    file->close();
+        //stream->close();
+        file->close();
+    }
 }
 
 bool ExcelFile::configure(QDateTime dt, QString datePattern, QString folder)

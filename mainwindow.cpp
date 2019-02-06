@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
 
     excelLog = new TimeLog(this);
-    //connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
+    connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
     excelLog->configure("./log", Excel::PlotText);
 
     a  = new ChannelDouble("Центр", QStringList() << "a/middle", this);
@@ -46,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
     excelLog->addChannel(b);
 
     excelLog->finishConfigure();
+
+    eh.checkForErrors();
 }
 
 
@@ -175,9 +177,11 @@ MainWindow::~MainWindow()
     delete b;
 
 
-    mg->deleteLater();
     delete ui;
+    delete mg;//->deleteLater();
+    qDebug() << "~MainWindow";
 }
+
 
 void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 {
@@ -273,4 +277,9 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 void MainWindow::on_pushButton_clicked()
 {
     eh.processError("i wanna sleep");
+}
+
+void MainWindow::on_pushButtonExit_clicked()
+{
+    qApp->exit();
 }

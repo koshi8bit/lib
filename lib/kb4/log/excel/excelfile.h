@@ -25,7 +25,7 @@ public:
 
 
 private:
-    QFile *file;
+    QFile *file = nullptr;
     QTextStream *stream;
     QString buffer;
     bool _isCreated;

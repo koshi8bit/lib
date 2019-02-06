@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QCoreApplication>
+#include <QTimer>
 
 #include <lib/kb4/macro.h>
 
@@ -16,11 +17,18 @@ class ErrorHandler : public QObject
     Q_OBJECT
 public:
     explicit ErrorHandler(QObject *parent = nullptr);
+    QTimer *timer;
+
+    void checkForErrors();
 
 private:
     static const QString errorSave;
     static const QString errorSend;
     static const QString okSend;
+    bool triggered = false;
+    bool checkForErrorsEmited = false;
+
+
 //    QFile *file;
 //    QTextStream *stream;
 
@@ -31,6 +39,9 @@ signals:
 
 public slots:
     void processError(QString error);
+
+private slots:
+    void timerTimeout();
 };
 
 #endif // ERRORHANDLER_H

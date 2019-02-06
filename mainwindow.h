@@ -29,6 +29,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+
     ErrorHandler eh;
 
 
@@ -78,6 +80,8 @@ private slots:
     void on_pushButtonLogPush_clicked();
     void on_checkBox_stateChanged(int arg1);
     void on_pushButton_clicked();
+    void on_pushButtonExit_clicked();
+
 };
 
 #endif // MAINWINDOW_H

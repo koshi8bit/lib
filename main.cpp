@@ -40,7 +40,7 @@ void configureQDebug()
 
 int main(int argc, char *argv[])
 {
-    configureQDebug();
+    //configureQDebug();
 
     QApplication a(argc, argv);
     MainWindow w;
