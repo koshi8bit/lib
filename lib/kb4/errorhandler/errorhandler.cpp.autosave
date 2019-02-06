@@ -14,6 +14,7 @@ void ErrorHandler::errorOccurred(QString message)
     if (!file->open(QIODevice::WriteOnly | QIODevice::Append))
     {
         qDebug() << message;
+        QMessageBox::critical(this, tr("J"), 
         QMessageBox mb;
         mb.setIcon(QMessageBox::Critical);
     }
