@@ -31,9 +31,10 @@ public:
     };
     Q_ENUM(TimePrefixLanguage)
 
-    Excel(QString path, HeaderMode headerMode, QObject *parent = nullptr);
+    Excel(QObject *parent = nullptr);
     ~Excel();
 
+    void configure(QString path, HeaderMode headerMode);
 
     void push() override;
     void commit() override;

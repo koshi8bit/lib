@@ -4,8 +4,19 @@ const QString Excel::elementDelimeter = "\t";
 const QString Excel::lineDelimeter = "\r\n";
 
 //TODO clean from currentSession
-Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
+Excel::Excel(QObject *parent)
     : Log(parent)
+{
+
+}
+
+Excel::~Excel()
+{
+    finalPush(currentSession);
+    finalPush(currentDay);
+}
+
+void Excel::configure(QString path, HeaderMode headerMode)
 {
     auto _path = QDir(path);
     auto date = QDateTime::currentDateTime();
@@ -19,12 +30,6 @@ Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
     currentDay->configure(date, KB4_FORMAT_DATETIME_FILE, _path.filePath(".sessions"));
 
     this->headerMode = headerMode;
-}
-
-Excel::~Excel()
-{
-    finalPush(currentSession);
-    finalPush(currentDay);
 }
 
 void Excel::finalPush(ExcelFile *excelFile)
