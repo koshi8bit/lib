@@ -18,8 +18,6 @@ ExcelFile::ExcelFile(QDateTime dt, QString datePattern, QString folder, QObject 
         }
     }
 
-    while(!dir.exists());
-
     fileName = QString("%1.xls").arg(date);
     fileName = QDir(folder).filePath(fileName);
     file = new QFile(fileName);

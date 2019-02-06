@@ -10,7 +10,7 @@ Excel::Excel(QString path, HeaderMode headerMode, QObject *parent)
     auto _path = QDir(path);
     auto date = QDateTime::currentDateTime();
     currentDay = new ExcelFile(date, "yyyy-MM-dd", _path.absolutePath(), this);
-    currentSession = new ExcelFile(date, "yyyy-MM-dd--hh-mm-ss", _path.filePath(".sessions"), this);
+    currentSession = new ExcelFile(date, KB4_DATETIME_FILE_FORMAT, _path.filePath(".sessions"), this);
 
     this->headerMode = headerMode;
 }
@@ -90,7 +90,7 @@ void Excel::push()
 
 QString Excel::formatDoubleValue(double value)
 {
-    if (IS_EQUAL_DOUBLE(value, 0))
+    if (KB4_IS_EQUAL_DOUBLE(value, 0))
     {
         return QString("0");
     }
