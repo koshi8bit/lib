@@ -62,20 +62,29 @@ bool ExcelFile::openFile()
     return false;
 }
 
-bool ExcelFile::push()
+long long ExcelFile::tryPush()
 {
     auto sizeBefore = file->size();
     *stream << buffer;
     stream->flush();
     auto sizeAfter = file->size();
+    return sizeAfter - sizeBefore;
+}
 
-    if(sizeAfter - sizeBefore > 0)
+bool ExcelFile::push()
+{
+    if(tryPush() > 0)
     {
         buffer.clear();
         return true;
     }
     file->close();
     openFile();
+    if(tryPush() > 0)
+    {
+        buffer.clear();
+        return true;
+    }
     return false;
 }
 

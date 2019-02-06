@@ -12,8 +12,11 @@ Excel::Excel(QObject *parent)
 
 Excel::~Excel()
 {
-    finalPush(currentSession);
-    finalPush(currentDay);
+    delete currentSession;
+    delete currentDay;
+
+//    finalPush(currentSession);
+//    finalPush(currentDay);
 }
 
 void Excel::configure(QString path, HeaderMode headerMode)
@@ -32,17 +35,17 @@ void Excel::configure(QString path, HeaderMode headerMode)
     this->headerMode = headerMode;
 }
 
-void Excel::finalPush(ExcelFile *excelFile)
-{
-    if (excelFile->push())
-    {
-        delete excelFile;
-    }
-    else
-    {
-        //emit errorOcurred(QString("Final push failed <%1>").arg(excelFile->fileName));
-    }
-}
+//void Excel::finalPush(ExcelFile *excelFile)
+//{
+//    if (excelFile->push())
+//    {
+//        delete excelFile;
+//    }
+//    else
+//    {
+//        emit errorOcurred(KB4_FORMAT_ERR(QString("Final push failed <%1>").arg(excelFile->fileName())));
+//    }
+//}
 
 void Excel::appendToBuffers(QString message, bool addToCurrentDay)
 {

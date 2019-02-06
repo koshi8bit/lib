@@ -33,6 +33,8 @@ private:
     bool openFile();
 
 
+    long long tryPush();
+    
 signals:
     void errorOcurred(QString message);
 

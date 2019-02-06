@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(&eh, &ErrorHandler::runDestructors, this, &MainWindow::ErrorHandlerRunDestructors);
 
     configurePlots();
     configureGraphs();
@@ -170,7 +169,6 @@ MainWindow::~MainWindow()
     timerReplot->stop();
     delete timerReplot;
 
-    excelLog->push();
     delete excelLog;
 
     delete a;
@@ -275,9 +273,4 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
 void MainWindow::on_pushButton_clicked()
 {
     eh.processError("i wanna sleep");
-}
-
-void MainWindow::ErrorHandlerRunDestructors()
-{
-    //delete this;
 }
