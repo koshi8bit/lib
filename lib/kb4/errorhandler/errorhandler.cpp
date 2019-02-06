@@ -18,7 +18,7 @@ void ErrorHandler::showErrorMessage(QString messageToUser, QString error)
     mb.exec();
 }
 
-void ErrorHandler::errorOccurred(QString error)
+void ErrorHandler::processError(QString error)
 {
     auto date = QDateTime::currentDateTime().toString(KB4_FORMAT_DATETIME_FILE);
     auto fileName = QString("crash-%1.log").arg(date);
