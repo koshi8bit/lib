@@ -29,7 +29,15 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    lib/kb4/errorhandler/errorhandler.cpp \
+    lib\kb4\ui\rtplotwithlegend\axisconfig.cpp \
+    lib\kb4\ui\rtplotwithlegend\colorsetter.cpp \
+    lib\kb4\ui\rtplotwithlegend\graph.cpp \
+    lib\kb4\ui\rtplotwithlegend\graphlegenditem.cpp \
+    lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.cpp \
+    lib\kb4\ui\scientificnotationedit\scientificnotationedit.cpp \
+    lib\qcustomplot\qcustomplot.cpp \
+    lib/kb4/ui/gradientLineEdit/gradientlineedit.cpp \
+    lib/kb4/ui/gradientlineedit/minmax.cpp \
     lib/kb4/log/excel/timelog/timelog.cpp \
     lib/kb4/log/excel/excel.cpp \
     lib/kb4/log/excel/excelfile.cpp \
@@ -37,21 +45,20 @@ SOURCES += \
     lib/kb4/log/channel.cpp \
     lib/kb4/log/channeldouble.cpp \
     lib/kb4/log/log.cpp \
-    lib/kb4/qdebuglogger/qdebuglogger.cpp \
-    lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
-    lib/kb4/ui/gradientlineedit/minmax.cpp \
-    lib/kb4/ui/rtplotwithlegend/axisconfig.cpp \
-    lib/kb4/ui/rtplotwithlegend/colorsetter.cpp \
-    lib/kb4/ui/rtplotwithlegend/graph.cpp \
-    lib/kb4/ui/rtplotwithlegend/graphlegendwidget.cpp \
-    lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.cpp \
-    lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
-    lib/qcustomplot/qcustomplot.cpp
-
+    lib/kb4/errorhandler/errorhandler.cpp \
+    lib/kb4/qdebuglogger/qdebuglogger.cpp
 
 HEADERS += \
     mainwindow.h \
-    lib/kb4/errorhandler/errorhandler.h \
+    lib\kb4\ui\rtplotwithlegend\axisconfig.h \
+    lib\kb4\ui\rtplotwithlegend\colorsetter.h \
+    lib\kb4\ui\rtplotwithlegend\graph.h \
+    lib\kb4\ui\rtplotwithlegend\graphlegenditem.h \
+    lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.h \
+    lib\kb4\ui\scientificnotationedit\scientificnotationedit.h \
+    lib\qcustomplot\qcustomplot.h \
+    lib/kb4/ui/gradientLineEdit/gradientlineedit.h \
+    lib/kb4/ui/gradientlineedit/minmax.h \
     lib/kb4/log/excel/timelog/timelog.h \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
@@ -60,25 +67,16 @@ HEADERS += \
     lib/kb4/log/channeldouble.h \
     lib/kb4/log/channelt.h \
     lib/kb4/log/log.h \
-    lib/kb4/qdebuglogger/qdebuglogger.h \
-    lib/kb4/ui/gradientlineedit/gradientlineedit.h \
-    lib/kb4/ui/gradientlineedit/minmax.h \
-    lib/kb4/ui/rtplotwithlegend/axisconfig.h \
-    lib/kb4/ui/rtplotwithlegend/colorsetter.h \
-    lib/kb4/ui/rtplotwithlegend/graph.h \
-    lib/kb4/ui/rtplotwithlegend/graphlegendwidget.h \
-    lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h \
-    lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/macro.h \
-    lib/qcustomplot/qcustomplot.h
-
+    lib/kb4/errorhandler/errorhandler.h \
+    lib/kb4/qdebuglogger/qdebuglogger.h
 
 FORMS += \
         mainwindow.ui \
-    lib/kb4/ui/gradientlineedit/minmax.ui \
-    lib/kb4/ui/rtplotwithlegend/axisconfig.ui \
-    lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.ui
-
+    lib\kb4\ui\rtplotwithlegend\axisconfig.ui \
+    lib\kb4\ui\rtplotwithlegend\rtplotwithlegend.ui \
+    lib\kb4\ui\rtplotwithlegend\graphlegenditem.ui \
+    lib/kb4/ui/gradientlineedit/minmax.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -87,6 +85,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     ui-res.qrc
-
-DISTFILES += \
-    lib/kb4/ui/gradientlineedit/gears.png

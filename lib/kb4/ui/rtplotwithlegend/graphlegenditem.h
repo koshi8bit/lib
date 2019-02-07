@@ -8,19 +8,20 @@ namespace Ui {
 class GraphLegendItem;
 }
 
-class GraphLegendWidget : public QWidget
+class GraphLegendItem : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit GraphLegendWidget(const QString &label, QColor color, QWidget *parent = nullptr);
-    ~GraphLegendWidget();
+    explicit GraphLegendItem(const QString &label, QColor color, QWidget *parent = nullptr);
+    ~GraphLegendItem();
 
     void setValue(double value);
     void setValue(const QString &value);
 
 public slots:
     void setVisibleValue(bool newValue);
+    void setColor(QColor &color);
 
 private slots:
     void on_checkBoxVisible_stateChanged(int arg1);
@@ -35,7 +36,7 @@ private:
     Ui::GraphLegendItem *ui;
     QString label;
     QColor color;
-    void changeColor(QColor &color);
+
 };
 
 #endif // GRAPHLEGENDITEM_H
