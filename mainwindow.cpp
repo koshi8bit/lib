@@ -42,11 +42,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
     excelLog->configure("./log", Excel::PlotText);
 
-    a  = new ChannelDouble("Центр", QStringList() << "a/middle", this);
+    a = new ChannelDouble("Центр", QStringList() << "a/middle", this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
 
     excelLog->addChannel(a);
-    b  = new ChannelDouble("Центр", QStringList() << "b/middle", this);
+    b = new ChannelDouble("Центр", QStringList() << "b/middle", this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
