@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,27 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     configurePlots();
     configureGraphs();
 
-    timerAddData1 = new QTimer(this);
-    timerAddData1->setInterval(addData1MSEC);
-    connect(timerAddData1, SIGNAL(timeout()), this, SLOT(addData1()));
-    timerAddData1->start();
+    configureTimers();
 
-    timerAddData2 = new QTimer(this);
-    timerAddData2->setInterval(addData2MSEC);
-    connect(timerAddData2, SIGNAL(timeout()), this, SLOT(addData2()));
-    timerAddData2->start();
-
-    timerReplot = new QTimer(this);
-    timerReplot->setInterval(plotUpdateIntervalMSEC);
-    connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
-    timerReplot->start();
-
-
-    //connect(ui->gradientLineEdit, &GradientLineEdit::rangeChanged, ui->minMax, &MinMax::setRange);
-    ui->gradientLineEdit->configure();
-    ui->gradientLineEdit->setMinMax(20, 50);
-    ui->minMax->setRange(ui->gradientLineEdit->min(), ui->gradientLineEdit->max());
-    connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
+    configureGradientLineEdit();
 
     excelLog = new TimeLog(this);
     connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
@@ -55,6 +39,33 @@ MainWindow::MainWindow(QWidget *parent) :
     eh.checkForErrors();
 }
 
+void MainWindow::configureTimers()
+{
+    timerAddData1 = new QTimer(this);
+    timerAddData1->setInterval(addData1MSEC);
+    connect(timerAddData1, SIGNAL(timeout()), this, SLOT(addData1()));
+    timerAddData1->start();
+
+    timerAddData2 = new QTimer(this);
+    timerAddData2->setInterval(addData2MSEC);
+    connect(timerAddData2, SIGNAL(timeout()), this, SLOT(addData2()));
+    timerAddData2->start();
+
+    timerReplot = new QTimer(this);
+    timerReplot->setInterval(plotUpdateIntervalMSEC);
+    connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
+    timerReplot->start();
+}
+
+void MainWindow::configureGradientLineEdit()
+{
+    //TODO
+    //connect(ui->gradientLineEdit, &GradientLineEdit::rangeChanged, ui->minMax, &MinMax::setRange);
+    ui->gradientLineEdit->configure();
+    ui->gradientLineEdit->setMinMax(20, 50);
+    ui->minMax->setRange(ui->gradientLineEdit->min(), ui->gradientLineEdit->max());
+    connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
+}
 
 void MainWindow::configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType)
 {

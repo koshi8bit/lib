@@ -17,6 +17,7 @@ void GradientLineEdit::configure(QCPRange *range, QCPColorGradient *gradient)
 {
     setRange(range, false);
     setGradient(gradient, false);
+    display(0);
 }
 
 void GradientLineEdit::configureRange()
@@ -105,7 +106,3 @@ void GradientLineEdit::display(double value)
     setText(text);
     setStyleSheet(css);
 }
-
-
-
-

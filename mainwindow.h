@@ -66,6 +66,10 @@ private:
     void configureGraphsTemperaturePower();
     void configureGraphsVacuumRadiation();
 
+    void configureGradientLineEdit();
+    
+    void configureTimers();
+    
 private slots:
     void addData1();
     void addData2();
