@@ -3,10 +3,10 @@
 
 #include <lib/kb4/log/log.h>
 
-class SQL : public Log
+class Sql : public Log
 {
 public:
-    SQL();
+    Sql();
 };
 
 #endif // SQL_H

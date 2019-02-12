@@ -23,8 +23,8 @@ class RTPlotWithLegend : public QWidget
 public:
     enum Axis
     {
-        yAxis,
-        yAxis2
+        yAxisL,
+        yAxisR
     };
     Q_ENUMS(Axis)
 

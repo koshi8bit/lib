@@ -193,10 +193,10 @@ void RTPlotWithLegend::configureLegend()
 QCPAxis *RTPlotWithLegend::getAxis(RTPlotWithLegend::Axis axis)
 {
     QCPAxis *result = _plot->yAxis;
-    if (axis == Axis::yAxis)
+    if (axis == Axis::yAxisL)
         result = _plot->yAxis;
 
-    if (axis == Axis::yAxis2)
+    if (axis == Axis::yAxisR)
         result = _plot->yAxis2;
 
     return result;

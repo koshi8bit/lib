@@ -1,34 +1,34 @@
 #include "channel.h"
 
-Channel::Channel(QString plotText, QStringList logName, QObject *parent) : QObject(parent)
+Channel::Channel(QString name, QStringList *path, QObject *parent) : QObject(parent)
 {
-    this->_logName = logName;
+    QString seporator = "/";
+    _logName = QString("%1%2%3")
+            .arg(path->join(seporator))
+            .arg(seporator)
+            .arg(name);
 
-    this->_plotText = QString("%1/%2")
-            .arg(logName.join("/"))
-            .arg(plotText);
-    //this->_plotText = plotText;
+    _plotName = _logName;
 
-    this->_uiText = plotText;
+    _widgetName = name;
 }
 
-QString Channel::plotText()
+QString Channel::plotName() const
 {
-    return _plotText;
+    return _plotName;
 }
 
-QStringList Channel::logName()
+QString Channel::widgetName() const
+{
+    return _widgetName;
+}
+
+QString Channel::logName() const
 {
     return _logName;
 }
 
-
-//QString Channel::toExcel(QStringList *list)
-//{
-//    return list->join(".");
-//}
-
-//QString Channel::toSQL(QStringList *list)
-//{
-//    return list->join("_");
-//}
+void Channel::setPlotName(const QString &plotName)
+{
+    _plotName = plotName;
+}

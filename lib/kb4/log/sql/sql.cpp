@@ -1,6 +1,6 @@
 #include "sql.h"
 
-SQL::SQL()
+Sql::Sql()
 {
 
 }

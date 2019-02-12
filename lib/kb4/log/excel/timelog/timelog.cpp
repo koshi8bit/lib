@@ -7,21 +7,13 @@ TimeLog::TimeLog(QObject *parent)
 
 }
 
-QString TimeLog::headersPrefix(TimePrefixLanguage timePrefixLanguage)
+QString TimeLog::headersPrefix()
 {
     QString date;
     QString dateFull;
-    if (timePrefixLanguage == TimePrefixLanguage::En)
-    {
-        date = "Time";
-        dateFull = "Full date";
-    }
 
-    if (timePrefixLanguage == TimePrefixLanguage::Ru)
-    {
-        date = "Время";
-        dateFull = "Полная дата";
-    }
+    date = "Время";
+    dateFull = "Полная дата";
 
     return QString("%1%2%3%4")
             .arg(date)

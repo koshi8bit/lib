@@ -19,17 +19,11 @@ class Excel : public Log
 public:
     enum HeaderModeFlag {
         NoHeader = 0x0000,
-        PlotText = 0x0001,
+        PlotName = 0x0001,
         LogName = 0x0002,
         UiText = 0x0004
     };
     Q_DECLARE_FLAGS(HeaderMode, HeaderModeFlag)
-
-    enum TimePrefixLanguage {
-        Ru,
-        En
-    };
-    Q_ENUM(TimePrefixLanguage)
 
     Excel(QObject *parent = nullptr);
     ~Excel();
@@ -47,7 +41,7 @@ protected:
     HeaderMode headerMode;
     void finishConfigureChild() override;
 
-    virtual QString headersPrefix(TimePrefixLanguage timePrefixLanguage) = 0;
+    virtual QString headersPrefix() = 0;
     virtual QString commitPrefix() = 0;
 
 private:

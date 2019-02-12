@@ -1,7 +1,7 @@
 #include "channeldouble.h"
 
-ChannelDouble::ChannelDouble(QString displayName, QStringList logName, QObject *parent)
-    :ChannelT<double>(displayName, logName, parent)
+ChannelDouble::ChannelDouble(QString name, QStringList *path, QObject *parent)
+    :ChannelT<double>(name, path, parent)
 {
 
 }

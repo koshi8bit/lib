@@ -26,7 +26,7 @@ void Excel::configure(QString path, HeaderMode headerMode)
 
     currentDay = new ExcelFile(this);
     connect(currentDay, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
-    currentDay->configure(date, KB4_FORMAT_DATE_FILE, _path.absolutePath());
+    currentDay->configure(date, KB4_FORMAT_DATE_FILE, _path.filePath(".days"));
 
     currentSession = new ExcelFile(this);
     connect(currentSession, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
@@ -59,16 +59,16 @@ void Excel::finishConfigureChild()
     QString line;
     auto addToCurrentDay = currentDay->isCreated();
 
-    if (headerMode.testFlag(Excel::PlotText))
+    if (headerMode.testFlag(Excel::PlotName))
     {
-        auto prefix = headersPrefix(TimePrefixLanguage::Ru);
+        auto prefix = headersPrefix();
 
         if (!prefix.isEmpty())
             line.append(prefix);
 
         foreach (auto channel, channels)
         {
-            line.append(channel->plotText());
+            line.append(channel->plotName());
             line.append(elementDelimeter);
         }
         appendToBuffers(line, addToCurrentDay);
@@ -78,14 +78,14 @@ void Excel::finishConfigureChild()
 
     if (headerMode.testFlag(Excel::LogName))
     {
-        auto prefix = headersPrefix(TimePrefixLanguage::En);
+        auto prefix = headersPrefix();
 
         if (!prefix.isEmpty())
             line.append(prefix);
 
         foreach (auto channel, channels)
         {
-            line.append(channel->logName().join("."));
+            line.append(channel->logName());
             line.append(elementDelimeter);
         }
         appendToBuffers(line, addToCurrentDay);

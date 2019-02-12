@@ -12,7 +12,7 @@ public:
     TimeLog(QObject *parent = nullptr);
 
 protected:
-    QString headersPrefix(TimePrefixLanguage timePrefixLanguage) override;
+    QString headersPrefix() override;
     QString commitPrefix() override;
 
 };

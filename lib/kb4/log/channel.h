@@ -8,22 +8,20 @@ class Channel : public QObject
 {
     Q_OBJECT
 public:
-    explicit Channel(QString plotText, QStringList logName, QObject *parent = nullptr);
-
-    QString plotText();
-    QString uiText();
-    QStringList logName();
+    explicit Channel(QString name, QStringList *path, QObject *parent = nullptr);
 
     //QColor color;
 
+    QString plotName() const;
+    QString widgetName() const;
+    QString logName() const;
 
-//    static QString toExcel(QStringList *list);
-//    static QString toSQL(QStringList *list);
+    void setPlotName(const QString &plotName);
 
 private:
-    QString _plotText;
-    QString _uiText;
-    QStringList _logName;
+    QString _plotName;
+    QString _widgetName;
+    QString _logName;
 
 
 signals:
