@@ -26,4 +26,3 @@
 #define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
 
 #endif // MACRO_H
-////

@@ -24,13 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     excelLog = new TimeLog(this);
     connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
-    excelLog->configure("./log", Excel::PlotText);
+    excelLog->configure("./log", Excel::PlotName);
 
-    a = new ChannelDouble("Центр", QStringList() << "a/middle", this);
+    a = new ChannelDouble("Центр", &(QStringList() << "a/middle"), this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
 
     excelLog->addChannel(a);
-    b = new ChannelDouble("Центр", QStringList() << "b/middle", this);
+    b = new ChannelDouble("Центр", &(QStringList() << "b/middle"), this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
@@ -69,8 +69,8 @@ void MainWindow::configureGradientLineEdit()
 
 void MainWindow::configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType)
 {
-    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis, yAxisLabel, yAxisMin, yAxisMax, yAxisScaleType);
-    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxis2, yAxis2Label, yAxis2Min, yAxis2Max, yAxis2ScaleType);
+    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxisL, yAxisLabel, yAxisMin, yAxisMax, yAxisScaleType);
+    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxisR, yAxis2Label, yAxis2Min, yAxis2Max, yAxis2ScaleType);
     rtPlot->setMarginGroup(mg);
     connect(rtPlot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
     connect(rtPlot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
@@ -158,21 +158,21 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis, "ЭЛВ (полное напряжение)");
-    graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis, "ЭЛВ (первая секция)");
+    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)");
+    graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setVisible(false);
     graphHighVoltageElvFirstSection->setColor(QColor("#BBBBBB"));
-    graphCurrentBergozHebt = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxis2, "Bergoz (выс. эн. тракт)");
+    graphCurrentBergozHebt = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisR, "Bergoz (выс. эн. тракт)");
 }
 
 void MainWindow::configureGraphsTemperaturePower()
 {
-    graphTemperaturePyrometer = ui->rtPlotTemperaturePower->addGraph(RTPlotWithLegend::Axis::yAxis, "Пирометр");
+    graphTemperaturePyrometer = ui->rtPlotTemperaturePower->addGraph(RTPlotWithLegend::Axis::yAxisL, "Пирометр");
 }
 
 void MainWindow::configureGraphsVacuumRadiation()
 {
-    graphVacuumTandem = ui->rtPlotVacuumRadiation->addGraph(RTPlotWithLegend::Axis::yAxis, "Тандем");
+    graphVacuumTandem = ui->rtPlotVacuumRadiation->addGraph(RTPlotWithLegend::Axis::yAxisL, "Тандем");
 }
 
 
