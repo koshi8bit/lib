@@ -76,6 +76,8 @@ private:
 
     void rescale(QCPAxis *axis);
     
+    void configurePlot();
+    
 signals:
     void realTimeChanged(bool newValue);
     void moveLineRealTimeChanged(bool newValue);

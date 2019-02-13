@@ -9,24 +9,7 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
-    _plot = ui->plot;
-    setRealTime(true);
-    setMoveLineRealTime(true);
-
-    _plot->setInteraction(QCP::iRangeZoom, true);
-    _plot->setInteraction(QCP::iRangeDrag, true);
-
-    configurePlotZoomAndDrag(false);
-    configurePlotBackground();
-
-    configurePlotTimeAxis();
-    configurePlotLine();
-    _plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
-    auto _now = RTPlotWithLegend::now();
-    _plot->xAxis->setRange(_now - 90, _now); //90=1min 30sec
-    _plot->setNoAntialiasingOnDrag(true);
-
+    configurePlot();
     configureLegend();
 
     connect(_plot, &QCustomPlot::axisClick, this, &RTPlotWithLegend::axisClick);
@@ -45,12 +28,36 @@ RTPlotWithLegend::~RTPlotWithLegend()
     _plot->deleteLater();
     line->deleteLater();
 
+    //FIXME
 //    foreach (auto graphElement, graphElements)
 //        graphElement->deleteLater();
 
     delete ui;
 
 }
+
+
+void RTPlotWithLegend::configurePlot()
+{
+    _plot = ui->plot;
+
+    setRealTime(true);
+
+    setMoveLineRealTime(true);
+
+    _plot->setInteraction(QCP::iRangeZoom, true);
+    _plot->setInteraction(QCP::iRangeDrag, true);
+    configurePlotZoomAndDrag(false);
+    configurePlotBackground();
+
+    configurePlotTimeAxis();
+    configurePlotLine();
+    _plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
+    auto _now = RTPlotWithLegend::now();
+    _plot->xAxis->setRange(_now - 90, _now); //90=1min 30sec
+    _plot->setNoAntialiasingOnDrag(true);
+}
+
 
 void RTPlotWithLegend::configurePlotZoomAndDrag(bool zoomAndDragTimeAxis)
 {

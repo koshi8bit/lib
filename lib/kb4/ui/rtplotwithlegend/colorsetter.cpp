@@ -21,7 +21,7 @@ QColor ColorSetter::getColor()
         return colors->dequeue();
     else
     {
-        qDebug() << "Error: out of color";
+        qDebug() << KB4_FORMAT_ERR("Out of color");
         return QColor("#FFFFFF");
     }
 }
