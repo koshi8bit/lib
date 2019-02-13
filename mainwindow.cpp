@@ -35,7 +35,7 @@ void MainWindow::configureExcelLog()
     ///////
     excelLog = new TimeLog();
     connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
-    excelLog->configure("./log", Excel::PlotName);
+    excelLog->configure("./log", Excel::LogName | Excel::WidgetName);
     ///////
 
 

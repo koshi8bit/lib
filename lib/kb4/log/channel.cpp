@@ -9,9 +9,9 @@ Channel::Channel(QString name, QString postfix, QStringList *path, QObject *pare
             .arg(name);
 
     _plotName = _logName;
-    _postfix = postfix;
-
     _widgetName = name;
+
+    _postfix = postfix;
 }
 
 QString Channel::plotName() const
@@ -32,6 +32,11 @@ QString Channel::logName() const
 void Channel::setPlotName(const QString &plotName)
 {
     _plotName = plotName;
+}
+
+void Channel::setWidgetName(const QString &widgetName)
+{
+    _widgetName = widgetName;
 }
 
 QString Channel::postfix() const

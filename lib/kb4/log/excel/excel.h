@@ -21,7 +21,7 @@ public:
         NoHeader = 0x0000,
         PlotName = 0x0001,
         LogName = 0x0002,
-        UiText = 0x0004
+        WidgetName = 0x0004
     };
     Q_DECLARE_FLAGS(HeaderMode, HeaderModeFlag)
 
@@ -51,6 +51,8 @@ private:
     void finalPush(ExcelFile *excelFile);
     void appendToBuffers(QString message, bool addToCurrentDay = true);
 
+    void configureHeader();
+    void generateHeaderLine(HeaderModeFlag flag);
 };
 Q_DECLARE_OPERATORS_FOR_FLAGS(Excel::HeaderMode)
 

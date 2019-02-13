@@ -25,7 +25,7 @@ public:
 
 private:
     int intervalCommitMSEC = 1000;
-    int intervalPushSEC = 60;
+    int intervalPushSEC = 5;
     bool configureFinished = false;
 
     QTimer *timerCommit;

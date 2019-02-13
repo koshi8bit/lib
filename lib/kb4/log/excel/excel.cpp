@@ -55,53 +55,53 @@ void Excel::appendToBuffers(QString message, bool addToCurrentDay)
 }
 
 //FIXME a lot of copy+paste
-void Excel::finishConfigureChild()
+void Excel::generateHeaderLine(Excel::HeaderModeFlag flag)
 {
     QString line;
-    auto addToCurrentDay = currentDay->isCreated();
+    auto prefix = headersPrefix();
+
+    if (!prefix.isEmpty())
+        line.append(prefix);
+
+    foreach (auto channel, channels)
+    {
+
+        if (flag == Excel::HeaderModeFlag::LogName)
+            line.append(channel->logName());
+
+        if (flag == Excel::HeaderModeFlag::PlotName)
+            line.append(channel->plotName());
+
+        if (flag == Excel::HeaderModeFlag::WidgetName)
+            line.append(channel->widgetName());
+
+        if (!channel->postfix().isEmpty())
+        {
+            line.append(" (" + channel->postfix() + ")");
+        }
+        line.append(elementDelimeter);
+    }
+    appendToBuffers(line, currentDay->isCreated());
+    appendToBuffers(lineDelimeter, currentDay->isCreated());
+    line.clear();
+}
+
+void Excel::finishConfigureChild()
+{
+    if (headerMode.testFlag(Excel::LogName))
+    {
+        generateHeaderLine(Excel::LogName);
+    }
 
     if (headerMode.testFlag(Excel::PlotName))
     {
-        auto prefix = headersPrefix();
-
-        if (!prefix.isEmpty())
-            line.append(prefix);
-
-        foreach (auto channel, channels)
-        {
-            line.append(channel->plotName());
-            if (!channel->postfix().isEmpty())
-            {
-                line.append(" (" + channel->postfix() + ")");
-            }
-            line.append(elementDelimeter);
-        }
-        appendToBuffers(line, addToCurrentDay);
-        appendToBuffers(lineDelimeter, addToCurrentDay);
-        line.clear();
+        generateHeaderLine(Excel::PlotName);
     }
 
-    if (headerMode.testFlag(Excel::LogName))
+    if (headerMode.testFlag(Excel::WidgetName))
     {
-        auto prefix = headersPrefix();
-
-        if (!prefix.isEmpty())
-            line.append(prefix);
-
-        foreach (auto channel, channels)
-        {
-            line.append(channel->logName());
-            if (!channel->postfix().isEmpty())
-            {
-                line.append(" (" + channel->postfix() + ")");
-            }
-            line.append(elementDelimeter);
-        }
-        appendToBuffers(line, addToCurrentDay);
-        appendToBuffers(lineDelimeter, addToCurrentDay);
-        line.clear();
+        generateHeaderLine(Excel::WidgetName);
     }
-
 }
 
 

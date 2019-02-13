@@ -18,7 +18,7 @@ public:
     QString postfix() const;
 
     void setPlotName(const QString &plotName);
-
+    void setWidgetName(const QString &widgetName);
 
 private:
     QString _plotName;
