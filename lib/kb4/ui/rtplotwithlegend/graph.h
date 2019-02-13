@@ -12,7 +12,7 @@ class Graph : public QObject
 {
     Q_OBJECT
 public:
-    explicit Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent = nullptr);
+    explicit Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent = nullptr);
     virtual ~Graph();
 
     QCPGraph *graph();
@@ -23,6 +23,7 @@ public:
 
 private:
     QString label;
+    QString _postfix;
     QColor color;
     double _value;
     //ValueScaler valueScaler;

@@ -29,6 +29,7 @@
 #define KB4_POSTFIX_CELSIUS "°C"
 #define KB4_POSTFIX_AMPERE "А"
 #define KB4_POSTFIX_VOLT "В"
+#define KB4_POSTFIX_WATT "Вт"
 
 #define KB4_POSTFIX_KILO "к"
 #define KB4_POSTFIX_MILLI "м"

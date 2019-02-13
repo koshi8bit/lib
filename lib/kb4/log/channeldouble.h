@@ -9,7 +9,7 @@
 class ChannelDouble : public ChannelT<double>
 {
 public:
-    ChannelDouble(QString name, QStringList *path, QObject *parent = nullptr);
+    ChannelDouble(QString name, QStringList *path, QString postfix, QObject *parent = nullptr);
     void setGraph(Graph *graph);
 private:
     Graph *graph;

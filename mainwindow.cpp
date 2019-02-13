@@ -39,11 +39,11 @@ void MainWindow::configureExcelLog()
     ///////
 
 
-    a = new ChannelDouble("Центр", &(QStringList() << "a/middle"), this);
+    a = new ChannelDouble("Центр", &(QStringList() << "a/middle"), KB4_POSTFIX_CELSIUS, this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
 
     excelLog->addChannel(a);
-    b = new ChannelDouble("Центр", &(QStringList() << "b/middle"), this);
+    b = new ChannelDouble("Центр", &(QStringList() << "b/middle"), KB4_POSTFIX_MILLI KB4_POSTFIX_AMPERE, this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
@@ -168,7 +168,7 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)");
+    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", KB4_POSTFIX_KILO KB4_POSTFIX_VOLT);
     graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setVisible(false);
     graphHighVoltageElvFirstSection->setColor(QColor("#BBBBBB"));

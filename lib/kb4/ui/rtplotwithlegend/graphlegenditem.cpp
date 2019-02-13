@@ -2,12 +2,13 @@
 #include "ui_graphlegenditem.h"
 
 //TODO change name to GraphLegendItem
-GraphLegendItem::GraphLegendItem(const QString &label, QColor color, QWidget *parent) :
+GraphLegendItem::GraphLegendItem(const QString &label, const QString &postfix, QColor color, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GraphLegendItem)
 {
     ui->setupUi(this);
     this->label = label;
+    this->postfix = postfix;
 
     setColor(color);
     ui->checkBoxVisible->setChecked(true);
@@ -29,16 +30,21 @@ GraphLegendItem::~GraphLegendItem()
 
 void GraphLegendItem::setValue(double value)
 {
-    ui->label->setText(QString("%1: %2")
-                       .arg(label)
-                       .arg(KB4_FORMAT_DOUBLE(value)));
+    setValue(KB4_FORMAT_DOUBLE(value));
 }
 
 void GraphLegendItem::setValue(const QString &value)
 {
-    ui->label->setText(QString("%1: %2")
+    auto text = QString("%1: %2")
                        .arg(label)
-                       .arg(value));
+                       .arg(value);
+
+    if (!postfix.isEmpty())
+    {
+        text.append(" (" + postfix + ")");
+    }
+
+    ui->label->setText(text);
 }
 
 void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
@@ -49,7 +55,7 @@ void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
 
 void GraphLegendItem::on_pushButtonColor_clicked()
 {
-    auto color = QColorDialog::getColor(this->color, this, tr("Select Color"));
+    auto color = QColorDialog::getColor(this->color, this, tr("Выберите цвет"));
     if (color.isValid())
     {
         setColor(color);

@@ -109,10 +109,11 @@ bool RTPlotWithLegend::moveLineRealTime()
 }
 
 
-Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label)
+Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label, const QString &postfix)
 {
 
     auto graphElement = new Graph(label,
+                            postfix,
                             colorSetter.getColor(),
                             _plot,
                             getAxis(axis),
@@ -122,6 +123,8 @@ Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &la
     legendLayout->insertWidget(legendLayout->count()-1, graphElement->graphLegendItem());
     return graphElement;
 }
+
+
 
 void RTPlotWithLegend::configurePlotBackground()
 {

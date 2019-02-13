@@ -1,11 +1,12 @@
 #include "graph.h"
 
 
-Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent)
+Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent)
     : QObject(parent)
 {
     _plot = plot;
     _yAxis = yAxis;
+
 
     _graph = plot->addGraph(plot->xAxis, yAxis);
     _graph->setName(label);
@@ -21,7 +22,7 @@ Graph::Graph(const QString &label, QColor color, QCustomPlot *plot, QCPAxis *yAx
     _tracer->setBrush(color);
     _tracer->setSize(5);
 
-    _graphLegendItem = new GraphLegendItem(label, color);
+    _graphLegendItem = new GraphLegendItem(label, postfix, color);
     connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::setVisibleByWidget);
     connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::setColorByWidget);
 

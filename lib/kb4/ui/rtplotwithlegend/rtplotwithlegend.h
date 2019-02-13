@@ -39,7 +39,7 @@ public:
     double timeAxisRangeSEC();
 
 
-    Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label);
+    Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label, const QString &postfix = "");
     QCustomPlot *plot();
 
     static double now();
