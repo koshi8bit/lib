@@ -8,7 +8,7 @@ class Channel : public QObject
 {
     Q_OBJECT
 public:
-    explicit Channel(QString name, QStringList *path, QString postfix, QObject *parent = nullptr);
+    explicit Channel(QString name, QString postfix, QStringList *path, QObject *parent = nullptr);
 
     //QColor color;
 

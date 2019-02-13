@@ -9,8 +9,8 @@ template <typename T>
 class ChannelT : public Channel
 {
 public:
-    ChannelT(QString name, QStringList *path, QString postfix, QObject *parent = nullptr)
-        :Channel(name, path, postfix, parent)
+    ChannelT(QString name, QString postfix, QStringList *path, QObject *parent = nullptr)
+        :Channel(name, postfix, path, parent)
     {
         _value = T();
     }
