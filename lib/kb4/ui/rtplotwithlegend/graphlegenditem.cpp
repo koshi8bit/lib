@@ -31,7 +31,7 @@ void GraphLegendItem::setValue(double value)
 {
     ui->label->setText(QString("%1: %2")
                        .arg(label)
-                       .arg(value, 0, 'f', 3, '0'));
+                       .arg(KB4_FORMAT_DOUBLE(value)));
 }
 
 void GraphLegendItem::setValue(const QString &value)

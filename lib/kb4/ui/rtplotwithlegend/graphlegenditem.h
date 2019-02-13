@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QColorDialog>
+#include <lib/kb4/macro.h>
 
 namespace Ui {
 class GraphLegendItem;

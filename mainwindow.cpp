@@ -4,6 +4,8 @@
 
 
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -22,9 +24,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     configureGradientLineEdit();
 
-    excelLog = new TimeLog(this);
+    configureExcelLog();
+
+    eh.checkForErrors();
+}
+
+
+void MainWindow::configureExcelLog()
+{
+    ///////
+    excelLog = new TimeLog();
     connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
     excelLog->configure("./log", Excel::PlotName);
+    ///////
+
 
     a = new ChannelDouble("Центр", &(QStringList() << "a/middle"), this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
@@ -35,10 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     excelLog->addChannel(b);
 
     excelLog->finishConfigure();
-
-    eh.checkForErrors();
 }
-
 void MainWindow::configureTimers()
 {
     timerAddData1 = new QTimer(this);

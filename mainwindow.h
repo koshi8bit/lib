@@ -70,6 +70,8 @@ private:
     
     void configureTimers();
     
+    void configureExcelLog();
+    
 private slots:
     void addData1();
     void addData2();
