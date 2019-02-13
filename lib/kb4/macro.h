@@ -25,4 +25,12 @@
 //errors
 #define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
 
+//postfix
+#define KB4_POSTFIX_CELSIUS "°C"
+#define KB4_POSTFIX_AMPERE "А"
+#define KB4_POSTFIX_VOLT "В"
+
+#define KB4_POSTFIX_KILO "к"
+#define KB4_POSTFIX_MILLI "м"
+
 #endif // MACRO_H
