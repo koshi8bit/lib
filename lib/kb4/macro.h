@@ -34,6 +34,4 @@
 #define KB4_POSTFIX_KILO "к"
 #define KB4_POSTFIX_MILLI "м"
 
-#define KB4_POSTFIX_BRACKETS(str) " (" str ")"
-
 #endif // MACRO_H
