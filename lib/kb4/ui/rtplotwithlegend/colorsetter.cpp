@@ -20,7 +20,10 @@ QColor ColorSetter::getColor()
     if (!colors->isEmpty())
         return colors->dequeue();
     else
+    {
+        qDebug() << "Error: out of color";
         return QColor("#FFFFFF");
+    }
 }
 
 

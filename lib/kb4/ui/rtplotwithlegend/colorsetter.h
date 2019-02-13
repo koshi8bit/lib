@@ -5,6 +5,8 @@
 #include <QStack>
 #include <QQueue>
 #include <QColor>
+#include <QtDebug>
+#include <lib/kb4/macro.h>
 
 class ColorSetter : public QObject
 {
