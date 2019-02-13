@@ -69,6 +69,10 @@ void Excel::finishConfigureChild()
         foreach (auto channel, channels)
         {
             line.append(channel->plotName());
+            if (!channel->postfix().isEmpty())
+            {
+                line.append(" (" + channel->postfix() + ")");
+            }
             line.append(elementDelimeter);
         }
         appendToBuffers(line, addToCurrentDay);
