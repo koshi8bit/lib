@@ -54,6 +54,7 @@ void Excel::appendToBuffers(QString message, bool addToCurrentDay)
         currentDay->append(message);
 }
 
+//FIXME a lot of copy+paste
 void Excel::finishConfigureChild()
 {
     QString line;
@@ -90,6 +91,10 @@ void Excel::finishConfigureChild()
         foreach (auto channel, channels)
         {
             line.append(channel->logName());
+            if (!channel->postfix().isEmpty())
+            {
+                line.append(" (" + channel->postfix() + ")");
+            }
             line.append(elementDelimeter);
         }
         appendToBuffers(line, addToCurrentDay);
