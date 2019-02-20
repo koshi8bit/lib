@@ -9,7 +9,7 @@
 #include <QDebug>
 
 
-#include <lib/kb4/channel/channellog.h>
+#include "channel.h"
 
 class Log : public QObject
 {
@@ -34,7 +34,7 @@ private:
 
 
 protected:
-    QList<ChannelLog *> channels;
+    QList<Channel *> channels;
 
     virtual void finishConfigureChild() = 0;
 

@@ -34,8 +34,8 @@ SOURCES += \
     lib/kb4/log/excel/excel.cpp \
     lib/kb4/log/excel/excelfile.cpp \
     lib/kb4/log/sql/sql.cpp \
-    lib/kb4/channel/channel.cpp \
-    lib/kb4/channel/channellog.cpp \
+    lib/kb4/log/channel.cpp \
+    lib/kb4/log/channeldouble.cpp \
     lib/kb4/log/log.cpp \
     lib/kb4/qdebuglogger/qdebuglogger.cpp \
     lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
@@ -46,8 +46,7 @@ SOURCES += \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.cpp \
     lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
-    lib/qcustomplot/qcustomplot.cpp \
-    lib/kb4/channel/channellogdouble.cpp
+    lib/qcustomplot/qcustomplot.cpp
 
 
 HEADERS += \
@@ -57,9 +56,9 @@ HEADERS += \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
     lib/kb4/log/sql/sql.h \
-    lib/kb4/channel/channel.h \
-    lib/kb4/channel/channelt.h \
-    lib/kb4/channel/channellogt.h \
+    lib/kb4/log/channel.h \
+    lib/kb4/log/channeldouble.h \
+    lib/kb4/log/channelt.h \
     lib/kb4/log/log.h \
     lib/kb4/qdebuglogger/qdebuglogger.h \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \
@@ -71,10 +70,7 @@ HEADERS += \
     lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/macro.h \
-    lib/qcustomplot/qcustomplot.h \
-    lib/kb4/channel/channellog.h \
-    lib/kb4/channel/channellogdouble.h \
-    lib/kb4/channel/channellogt.h
+    lib/qcustomplot/qcustomplot.h
 
 
 FORMS += \
