@@ -39,12 +39,12 @@ void MainWindow::configureExcelLog()
     ///////
 
 
-    a = new ChannelDouble("Центр", KB4_POSTFIX_CELSIUS, &(QStringList() << "a/middle"), this);
-    connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
+    a = new ChannelLogDouble("Центр", KB4_POSTFIX_CELSIUS, &(QStringList() << "a/middle"), this);
+    connect(ui->dialA, &QDial::valueChanged, a, &ChannelLogDouble::setValue);
 
     excelLog->addChannel(a);
-    b = new ChannelDouble("Центр", KB4_POSTFIX_MILLI KB4_POSTFIX_AMPERE, &(QStringList() << "b/middle"), this);
-    connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
+    b = new ChannelLogDouble("Центр", KB4_POSTFIX_MILLI KB4_POSTFIX_AMPERE, &(QStringList() << "b/middle"), this);
+    connect(ui->dialB, &QDial::valueChanged, b, &ChannelLogDouble::setValue);
     excelLog->addChannel(b);
 
     excelLog->finishConfigure();

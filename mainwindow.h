@@ -12,7 +12,7 @@
 #include <lib/kb4/ui/rtplotwithlegend/graph.h>
 #include <lib/kb4/ui/rtplotwithlegend/graphlegenditem.h>
 #include <lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h>
-#include <lib/kb4/channel/channeldouble.h>
+#include <lib/kb4/channel/channellogdouble.h>
 #include <lib/kb4/log/excel/timelog/timelog.h>
 #include <lib/qcustomplot/qcustomplot.h>
 #include <lib/kb4/errorhandler/errorhandler.h>
@@ -54,7 +54,7 @@ private:
     QDateTime time;
 
     TimeLog *excelLog;
-    ChannelDouble *a, *b;
+    ChannelLogDouble *a, *b;
 
     QSettings *settings;
 
