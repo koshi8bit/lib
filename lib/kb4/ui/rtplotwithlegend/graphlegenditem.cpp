@@ -41,7 +41,8 @@ void GraphLegendItem::setValue(const QString &value)
 
     if (!postfix.isEmpty())
     {
-        text.append(" (" + postfix + ")");
+        //text.append(" (" + postfix + ")");
+        text.append(" " + postfix);
     }
 
     ui->label->setText(text);
