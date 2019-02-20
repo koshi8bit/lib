@@ -9,7 +9,7 @@
 #include <QDebug>
 
 
-#include "channel.h"
+#include <lib/kb4/channel/channel.h>
 
 class Log : public QObject
 {

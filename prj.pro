@@ -34,8 +34,8 @@ SOURCES += \
     lib/kb4/log/excel/excel.cpp \
     lib/kb4/log/excel/excelfile.cpp \
     lib/kb4/log/sql/sql.cpp \
-    lib/kb4/log/channel.cpp \
-    lib/kb4/log/channeldouble.cpp \
+    lib/kb4/channel/channel.cpp \
+    lib/kb4/channel/channeldouble.cpp \
     lib/kb4/log/log.cpp \
     lib/kb4/qdebuglogger/qdebuglogger.cpp \
     lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
@@ -56,9 +56,9 @@ HEADERS += \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
     lib/kb4/log/sql/sql.h \
-    lib/kb4/log/channel.h \
-    lib/kb4/log/channeldouble.h \
-    lib/kb4/log/channelt.h \
+    lib/kb4/channel/channel.h \
+    lib/kb4/channel/channeldouble.h \
+    lib/kb4/channel/channelt.h \
     lib/kb4/log/log.h \
     lib/kb4/qdebuglogger/qdebuglogger.h \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \

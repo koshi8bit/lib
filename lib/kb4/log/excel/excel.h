@@ -7,7 +7,7 @@
 #include <QDir>
 
 #include <lib/kb4/log/log.h>
-#include <lib/kb4/log/channelt.h>
+#include <lib/kb4/channel/channelt.h>
 #include <lib/kb4/macro.h>
 
 #include "excelfile.h"
@@ -26,7 +26,7 @@ public:
     Q_DECLARE_FLAGS(HeaderMode, HeaderModeFlag)
 
     Excel(QObject *parent = nullptr);
-    ~Excel();
+    ~Excel() override;
 
     void configure(QString path, HeaderMode headerMode);
 
