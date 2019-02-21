@@ -27,6 +27,12 @@ MainWindow::MainWindow(QWidget *parent) :
     configureExcelLog();
 
     eh.checkForErrors();
+
+    //FIXME tima45
+    auto a = QLocale(QLocale::Russian);
+    qDebug() << a.decimalPoint();
+    qDebug() << QString(a.groupSeparator());
+    qDebug() << QString::number(1300.2, 'f', 2);
 }
 
 
@@ -93,6 +99,8 @@ void MainWindow::configurePlots()
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
     configurePlot(ui->rtPlotHighVoltageCurrent, "Энергия (кВ)", 0, 1250, QCPAxis::ScaleType::stLinear, "Ток (мА)", 0, 10, QCPAxis::ScaleType::stLinear);
+    ui->rtPlotHighVoltageCurrent->setAxisDecimalPlaces(RTPlotWithLegend::Axis::yAxisR, 2);
+
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::lineRealTimeMoved, this, &MainWindow::plotLineRealTimeMoved);

@@ -118,7 +118,7 @@ QString Excel::formatDoubleValue(double value)
         return QString("0");
     }
 
-    if ((0.1 < value) && (value < 2000))
+    if ((0.001 < value) && (value < 2000))
     {
         return  QLocale(QLocale::Russian).toString(value, 'f', 2);
     }

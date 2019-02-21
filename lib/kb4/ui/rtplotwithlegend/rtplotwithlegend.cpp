@@ -99,6 +99,12 @@ double RTPlotWithLegend::timeAxisRangeSEC()
 
 }
 
+void RTPlotWithLegend::setAxisDecimalPlaces(RTPlotWithLegend::Axis axis, int newValue)
+{
+    auto _axis = getAxis(axis);
+    _axis->setNumberPrecision(newValue);
+}
+
 void RTPlotWithLegend::setRealTime(bool newValue)
 {
     _realTime = newValue;
