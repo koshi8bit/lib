@@ -5,7 +5,8 @@
 #define KB4_GET_VARIABLE_NAME(Variable) (#Variable)
 
 //double
-#define KB4_FORMAT_DOUBLE(value) QString::number(value, 'f', 2)
+#define KB4_FORMAT_DOUBLE_FULL(value, format, prec) QString::number(value, format, prec).replace(".", ",")
+#define KB4_FORMAT_DOUBLE(value) KB4_FORMAT_DOUBLE_FULL(value, 'f', 2)
 #define KB4_IS_EQUAL_DOUBLE(A,B) qAbs(A - B) <= std::numeric_limits<double>::epsilon()
 
 //dateTime

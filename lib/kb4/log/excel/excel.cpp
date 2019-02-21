@@ -120,11 +120,11 @@ QString Excel::formatDoubleValue(double value)
 
     if ((0.001 < value) && (value < 2000))
     {
-        return  QLocale(QLocale::Russian).toString(value, 'f', 2);
+        return KB4_FORMAT_DOUBLE(value);
     }
     else
     {
-        return  QLocale(QLocale::Russian).toString(value, 'e', 2);
+        return  KB4_FORMAT_DOUBLE_FULL(value, 'e', 2);
     }
 }
 

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -152,8 +152,11 @@
           </item>
           <item row="0" column="1">
            <widget class="QDial" name="dialB">
+            <property name="maximum">
+             <number>2000</number>
+            </property>
             <property name="wrapping">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="notchesVisible">
              <bool>true</bool>
