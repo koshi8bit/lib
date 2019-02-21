@@ -99,7 +99,7 @@ void MainWindow::configurePlots()
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
     configurePlot(ui->rtPlotHighVoltageCurrent, "Энергия (кВ)", 0, 1250, QCPAxis::ScaleType::stLinear, "Ток (мА)", 0, 10, QCPAxis::ScaleType::stLinear);
-    ui->rtPlotHighVoltageCurrent->setAxisDecimalPlaces(RTPlotWithLegend::Axis::yAxisR, 2);
+    ui->rtPlotHighVoltageCurrent->setNumberPrecision(RTPlotWithLegend::Axis::yAxisR, 2);
 
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
     connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));

@@ -68,6 +68,7 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
         ui->scientificNotationEditMax->setVisible(false);
 
     }
+    ui->spinBoxNumberPrecision->setValue(axis->numberPrecision());
 
 }
 
@@ -99,7 +100,8 @@ void AxisConfig::on_buttonBox_accepted()
         QSharedPointer<QCPAxisTicker> ticker(new QCPAxisTicker);
         axis->setTicker(ticker);
         axis->setNumberFormat("f");
-        axis->setNumberPrecision(1);
+        axis->setNumberPrecision(ui->spinBoxNumberPrecision->value());
+
 
         return;
     }
@@ -114,7 +116,7 @@ void AxisConfig::on_buttonBox_accepted()
         QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
         axis->setTicker(logTicker);
         axis->setNumberFormat("eb");
-        axis->setNumberPrecision(0);
+        axis->setNumberPrecision(ui->spinBoxNumberPrecision->value());
 
         return;
     }
@@ -147,6 +149,7 @@ void AxisConfig::on_checkBoxLog10_stateChanged(int arg1)
         ui->doubleSpinBoxMax->setVisible(false);
         ui->scientificNotationEditMin->setVisible(true);
         ui->scientificNotationEditMax->setVisible(true);
+        ui->spinBoxNumberPrecision->setValue(0);
     }
     else
     {
@@ -155,6 +158,7 @@ void AxisConfig::on_checkBoxLog10_stateChanged(int arg1)
         ui->doubleSpinBoxMax->setVisible(true);
         ui->scientificNotationEditMin->setVisible(false);
         ui->scientificNotationEditMax->setVisible(false);
+        ui->spinBoxNumberPrecision->setValue(1);
     }
 
 }

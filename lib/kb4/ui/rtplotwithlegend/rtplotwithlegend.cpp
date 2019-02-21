@@ -99,7 +99,7 @@ double RTPlotWithLegend::timeAxisRangeSEC()
 
 }
 
-void RTPlotWithLegend::setAxisDecimalPlaces(RTPlotWithLegend::Axis axis, int newValue)
+void RTPlotWithLegend::setNumberPrecision(RTPlotWithLegend::Axis axis, int newValue)
 {
     auto _axis = getAxis(axis);
     _axis->setNumberPrecision(newValue);
