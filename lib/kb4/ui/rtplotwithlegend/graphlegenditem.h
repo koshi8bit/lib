@@ -3,7 +3,11 @@
 
 #include <QWidget>
 #include <QColorDialog>
+
+//FIXME
 #include <lib/kb4/macro.h>
+#include <lib/kb4/easyliving.h>
+
 
 namespace Ui {
 class GraphLegendItem;

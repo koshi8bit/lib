@@ -30,7 +30,7 @@ GraphLegendItem::~GraphLegendItem()
 
 void GraphLegendItem::setValue(double value)
 {
-    setValue(KB4_FORMAT_DOUBLE(value));
+    setValue(EasyLiving::FormatDouble(value));
 }
 
 void GraphLegendItem::setValue(const QString &value)
