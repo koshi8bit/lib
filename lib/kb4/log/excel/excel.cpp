@@ -118,13 +118,14 @@ QString Excel::formatDoubleValue(double value)
         return QString("0");
     }
 
+    //TODO why not kb4 KB4_FORMAT_DOUBLE
     if ((0.1 < value) && (value < 2000))
     {
-        return  QLocale(QLocale::Russian).toString(value, 'f', 2);
+        return  QLocale(QLocale::Russian).toString(value, 'f', 3);
     }
     else
     {
-        return  QLocale(QLocale::Russian).toString(value, 'e', 2);
+        return  QLocale(QLocale::Russian).toString(value, 'e', 3);
     }
 }
 
