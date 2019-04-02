@@ -113,7 +113,7 @@ void Excel::push()
 
 QString Excel::formatDoubleValue(double value)
 {
-    if (KB4_IS_EQUAL_DOUBLE(value, 0))
+    if (EasyLiving::isEqualDouble(value, 0))
     {
         return QString("0");
     }

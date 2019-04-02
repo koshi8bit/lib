@@ -1,11 +1,12 @@
 #ifndef MACRO_H
 #define MACRO_H
  
+//errors
+#define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
+
 //variables
 #define KB4_GET_VARIABLE_NAME(Variable) (#Variable)
 
-//double
-#define KB4_IS_EQUAL_DOUBLE(A,B) qAbs(A - B) <= std::numeric_limits<double>::epsilon()
 
 //dateTime
 #define KB4_FORMAT_DATE "yyyy-MM-dd"
@@ -21,8 +22,6 @@
 #define KB4_FORMAT_DATETIME_UI_SEPORATOR "@"
 #define KB4_FORMAT_DATETIME_UI KB4_FORMAT_DATE_UI KB4_FORMAT_DATETIME_UI_SEPORATOR KB4_FORMAT_TIME_UI_MS
 
-//errors
-#define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
 
 //postfix
 #define KB4_POSTFIX_CELSIUS "°C"

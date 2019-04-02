@@ -1,7 +1,6 @@
 #include "graphlegenditem.h"
 #include "ui_graphlegenditem.h"
 
-//TODO change name to GraphLegendItem
 GraphLegendItem::GraphLegendItem(const QString &label, const QString &postfix, QColor color, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GraphLegendItem)
@@ -30,7 +29,7 @@ GraphLegendItem::~GraphLegendItem()
 
 void GraphLegendItem::setValue(double value)
 {
-    setValue(EasyLiving::FormatDouble(value));
+    setValue(EasyLiving::formatDouble(value));
 }
 
 void GraphLegendItem::setValue(const QString &value)
