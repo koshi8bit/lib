@@ -4,6 +4,7 @@
 #include <QDateTime>
 
 #include <lib/kb4/log/excel/excel.h>
+#include <lib/kb4/easyliving.h>
 
 
 class TimeLog : public Excel

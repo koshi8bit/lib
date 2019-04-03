@@ -5,6 +5,7 @@
 #include <QString>
 #include <QLocale>
 #include <QDebug>
+#include <QDateTime>
 
 #include "macro.h"
 
@@ -36,7 +37,9 @@ public:
     static QString formatDateTimeFile();
 
     static QString formatDateUi();
-    static QString formatTimeUi();
+    static QString formatTimeUi(bool showMS);
+    static QString formatDateTimeUiSeporator();
+    static QString formatDateTimeUi();
 
 
     //errors

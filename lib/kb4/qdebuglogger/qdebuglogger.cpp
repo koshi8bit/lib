@@ -15,7 +15,7 @@ void writeMessage(QString msg)
 
 void myCustomMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    auto time =  QDateTime::currentDateTime().toString(KB4_FORMAT_DATETIME_UI);
+    auto time =  QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeUi());
     writeMessage(QString("%1: %2\n").arg(time, msg));
 
     (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
