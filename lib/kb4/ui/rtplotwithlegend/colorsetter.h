@@ -6,7 +6,8 @@
 #include <QQueue>
 #include <QColor>
 #include <QtDebug>
-#include <lib/kb4/macro.h>
+
+#include "lib/kb4/easyliving.h"
 
 class ColorSetter : public QObject
 {
