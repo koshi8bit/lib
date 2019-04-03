@@ -35,17 +35,24 @@ void MainWindow::configureExcelLog()
     ///////
     excelLog = new TimeLog();
     connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
-    excelLog->configure("./log", Excel::LogName | Excel::WidgetName);
+    excelLog->configure("./Log", Excel::LogName | Excel::WidgetName);
     ///////
 
 
-    a = new ChannelDouble("Центр", EasyLiving::postfixCelsius(), &(QStringList() << "a/middle"), this);
+    a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), &(QStringList() << "a/middle1"), this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
-
     excelLog->addChannel(a);
-    b = new ChannelDouble("Центр", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), &(QStringList() << "b/middle"), this);
+
+    b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), &(QStringList() << "b/middle2"), this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
+
+    c = new ChannelDouble("CCC", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
+    //FIXME tima45
+    //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
+    connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue()));
+    c->setValue(3.009);
+    excelLog->addChannel(c);
 
     excelLog->finishConfigure();
 }

@@ -54,7 +54,7 @@ private:
     QDateTime time;
 
     TimeLog *excelLog;
-    ChannelDouble *a, *b;
+    ChannelDouble *a, *b, *c;
 
     QSettings *settings;
 

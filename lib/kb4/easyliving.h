@@ -28,7 +28,7 @@ public:
     EasyLiving();
 
     //double
-    static QString formatDouble(double value, int precision = 3, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
+    static QString formatDouble(double value, char format = 'f', int precision = 3, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
     static bool isEqualDouble(double a, double b);
 
 

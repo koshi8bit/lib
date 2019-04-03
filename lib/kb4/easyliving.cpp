@@ -6,16 +6,16 @@ EasyLiving::EasyLiving()
 }
 
 //double
-QString EasyLiving::formatDouble(double value, int precision, EasyLiving::DoubleSeporatorSign seporatorSign)
+QString EasyLiving::formatDouble(double value, char format, int precision, EasyLiving::DoubleSeporatorSign seporatorSign)
 {
     if (seporatorSign == DoubleSeporatorSign::Comma)
     {
-        return QLocale(QLocale::Russian).toString(value, 'f', precision);
+        return QLocale(QLocale::Russian).toString(value, format, precision);
     }
 
     if (seporatorSign == DoubleSeporatorSign::Point)
     {
-        return QString::number(value, 'f', precision);
+        return QString::number(value, format, precision);
     }
 
     auto message = KB4_FORMAT_ERR("Invalid seporator sign!");
