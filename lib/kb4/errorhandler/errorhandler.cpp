@@ -32,7 +32,7 @@ void ErrorHandler::showErrorMessage(QString messageToUser, QString error)
 void ErrorHandler::processError(QString error)
 {
     triggered = true;
-    auto date = QDateTime::currentDateTime().toString(KB4_FORMAT_DATETIME_FILE);
+    auto date = QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeFile());
     auto fileName = QString("crash-%1.log").arg(date);
     auto file = new QFile(fileName);
 

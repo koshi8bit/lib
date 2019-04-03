@@ -10,7 +10,7 @@
 #include <QCoreApplication>
 #include <QTimer>
 
-#include <lib/kb4/macro.h>
+#include <lib/kb4/easyliving.h>
 
 class ErrorHandler : public QObject
 {

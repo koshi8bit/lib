@@ -30,7 +30,7 @@ void Excel::configure(QString path, HeaderMode headerMode)
 
     currentSession = new ExcelFile(this);
     connect(currentSession, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
-    currentSession->configure(date, KB4_FORMAT_DATETIME_FILE, _path.filePath(".sessions"));
+    currentSession->configure(date, EasyLiving::formatDateTimeFile(), _path.filePath(".sessions"));
 
     this->headerMode = headerMode;
 }
