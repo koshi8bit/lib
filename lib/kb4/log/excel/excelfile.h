@@ -7,7 +7,7 @@
 #include <QDir>
 #include <QDateTime>
 
-#include "lib/kb4/easyliving.h"
+#include <lib/kb4/easyliving.h>
 
 class ExcelFile : public QObject
 {

@@ -7,7 +7,7 @@
 #include <QColor>
 #include <QtDebug>
 
-#include "lib/kb4/easyliving.h"
+#include <lib/kb4/easyliving.h>
 
 class ColorSetter : public QObject
 {
