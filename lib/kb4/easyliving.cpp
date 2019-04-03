@@ -5,7 +5,6 @@ EasyLiving::EasyLiving()
 
 }
 
-//double
 QString EasyLiving::formatDouble(double value, int precision, EasyLiving::DoubleSeporatorSign seporatorSign)
 {
     if (seporatorSign == DoubleSeporatorSign::Comma)
@@ -28,16 +27,14 @@ bool EasyLiving::isEqualDouble(double a, double b)
     return qAbs(a - b) <= std::numeric_limits<double>::epsilon();
 }
 
-
-//dateTime
-QString EasyLiving::formatDate(QDateTime *dt)
+QString EasyLiving::formatDate()
 {
-    return dt->toString("yyyy-MM-dd");
+    return "yyyy-MM-dd";
 }
 
-QString EasyLiving::formatDateFile(QDateTime *dt)
+QString EasyLiving::formatDateFile()
 {
-    return formatDate(dt);
+    return formatDate();
 }
 
 QString EasyLiving::formatTimeFile()
@@ -50,22 +47,22 @@ QString EasyLiving::formatDateTimeFileSeporator()
     return "--";
 }
 
-QString EasyLiving::formatDateTimeFile(QDateTime *dt)
+QString EasyLiving::formatDateTimeFile()
 {
-    return formatDateFile(dt) + formatDateTimeFileSeporator() + formatTimeFile();
+    return formatDateFile() + formatDateTimeFileSeporator() + formatTimeFile();
 }
 
-QString EasyLiving::formatDateUi(QDateTime *dt)
+QString EasyLiving::formatDateUi()
 {
-    return formatDate(dt);
+    return formatDate();
 }
 
-QString EasyLiving::formatTimeUi(QDateTime *dt, bool showMS)
+QString EasyLiving::formatTimeUi(bool showMS)
 {
-    QString format = "hh:mm:ss";
+    QString base = "hh:mm:ss";
     if (showMS)
-        format += ".zzz";
-    return dt->toString(format);
+        base += ".zzz";
+    return base;
 }
 
 QString EasyLiving::formatDateTimeUiSeporator()
@@ -73,12 +70,7 @@ QString EasyLiving::formatDateTimeUiSeporator()
     return "@";
 }
 
-QString EasyLiving::formatDateTimeUi(QDateTime dt)
+QString EasyLiving::formatDateTimeUi()
 {
-    return formatDateTimeUi(&dt);
-}
-
-QString EasyLiving::formatDateTimeUi(QDateTime *dt)
-{
-    return formatDateUi(dt) + formatDateTimeUiSeporator() + formatTimeUi(dt, true);
+    return formatDateUi() + formatDateTimeUiSeporator() + formatTimeUi(true);
 }
