@@ -70,7 +70,6 @@ HEADERS += \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.h \
     lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
-    lib/kb4/macro.h \
     lib/qcustomplot/qcustomplot.h \
     lib/kb4/easyliving.h
 

@@ -7,7 +7,11 @@
 #include <QDebug>
 #include <QDateTime>
 
-#include "macro.h"
+//errors
+#define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
+
+//variables
+#define KB4_GET_VARIABLE_NAME(Variable) (#Variable)
 
 class EasyLiving : public QObject
 {
