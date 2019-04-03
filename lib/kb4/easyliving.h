@@ -42,7 +42,12 @@ public:
     static QString formatDateTimeUi();
 
 
-    //errors
+    //postfix
+    static QString postfixCelsius();
+    static QString postfixAmpere();
+
+    static QString postfixMilli();
+
 };
 
 #endif // EASYLIVING_H

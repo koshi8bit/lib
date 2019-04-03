@@ -77,3 +77,18 @@ QString EasyLiving::formatDateTimeUi()
 {
     return formatDateUi() + formatDateTimeUiSeporator() + formatTimeUi(true);
 }
+
+QString EasyLiving::postfixCelsius()
+{
+    return "°C";
+}
+
+QString EasyLiving::postfixAmpere()
+{
+    return "А";
+}
+
+QString EasyLiving::postfixMilli()
+{
+    return "м";
+}
