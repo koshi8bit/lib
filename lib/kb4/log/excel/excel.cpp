@@ -26,7 +26,7 @@ void Excel::configure(QString path, HeaderMode headerMode)
 
     currentDay = new ExcelFile(this);
     connect(currentDay, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
-    currentDay->configure(date, KB4_FORMAT_DATE_FILE, _path.filePath(".days"));
+    currentDay->configure(date, EasyLiving::formatDateFile(), _path.filePath(".days"));
 
     currentSession = new ExcelFile(this);
     connect(currentSession, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
