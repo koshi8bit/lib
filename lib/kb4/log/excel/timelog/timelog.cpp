@@ -28,6 +28,6 @@ QString TimeLog::commitPrefix()
     return QString("%1%2%3%4")
             .arg(dt.toString(KB4_FORMAT_TIME_UI_NO_MS))
             .arg(elementDelimeter)
-            .arg(dt.toString(KB4_FORMAT_DATETIME_UI))
+            .arg(EasyLiving::formatDateTimeUi(dt))
             .arg(elementDelimeter);
 }
