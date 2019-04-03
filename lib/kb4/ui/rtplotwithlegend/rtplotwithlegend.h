@@ -6,7 +6,7 @@
 #include <QLabel>
 
 #include <lib/qcustomplot/qcustomplot.h>
-#include <lib/kb4/macro.h>
+#include <lib/kb4/easyliving.h>
 
 #include "axisconfig.h"
 #include "colorsetter.h"

@@ -381,7 +381,7 @@ double RTPlotWithLegend::now()
 QString RTPlotWithLegend::getDateTime(double time)
 {
     //TODO show MSEC
-    return QDateTime::fromTime_t(static_cast<uint>(time)).toString(KB4_FORMAT_TIME_UI_NO_MS);
+    return QDateTime::fromTime_t(static_cast<uint>(time)).toString(EasyLiving::formatTimeUi(false));
 }
 
 void RTPlotWithLegend::setLabelTimeVisible(bool newValue)
