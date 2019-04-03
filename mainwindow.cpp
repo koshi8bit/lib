@@ -168,7 +168,7 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", KB4_POSTFIX_KILO KB4_POSTFIX_VOLT);
+    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKilo() + EasyLiving::postfixVolt());
     graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setVisible(false);
     graphHighVoltageElvFirstSection->setColor(QColor("#BBBBBB"));

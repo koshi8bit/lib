@@ -45,8 +45,11 @@ public:
     //postfix
     static QString postfixCelsius();
     static QString postfixAmpere();
+    static QString postfixVolt();
+    static QString postfixWatt();
 
     static QString postfixMilli();
+    static QString postfixKilo();
 
 };
 

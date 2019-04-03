@@ -88,7 +88,22 @@ QString EasyLiving::postfixAmpere()
     return "А";
 }
 
+QString EasyLiving::postfixVolt()
+{
+    return "В";
+}
+
+QString EasyLiving::postfixWatt()
+{
+    return "Вт";
+}
+
 QString EasyLiving::postfixMilli()
 {
     return "м";
+}
+
+QString EasyLiving::postfixKilo()
+{
+    return "к";
 }
