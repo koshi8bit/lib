@@ -26,8 +26,8 @@ QString TimeLog::commitPrefix()
 {
     auto dt = QDateTime::currentDateTime();
     return QString("%1%2%3%4")
-            .arg(dt.toString(KB4_FORMAT_TIME_UI_NO_MS))
+            .arg(EasyLiving::formatTimeUi(&dt, false))
             .arg(elementDelimeter)
-            .arg(EasyLiving::formatDateTimeUi(dt))
+            .arg(EasyLiving::formatDateTimeUi(&dt))
             .arg(elementDelimeter);
 }

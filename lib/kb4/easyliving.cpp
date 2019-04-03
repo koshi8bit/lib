@@ -75,7 +75,7 @@ QString EasyLiving::formatDateTimeUiSeporator()
 
 QString EasyLiving::formatDateTimeUi(QDateTime dt)
 {
-    formatDateTimeUi(&dt);
+    return formatDateTimeUi(&dt);
 }
 
 QString EasyLiving::formatDateTimeUi(QDateTime *dt)
