@@ -29,6 +29,7 @@ private:
     bool checkForErrorsEmited = false;
 
 
+
 //    QFile *file;
 //    QTextStream *stream;
 

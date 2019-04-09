@@ -37,6 +37,7 @@ public:
     bool realTime();
     bool moveLineRealTime();
     double timeAxisRangeSEC();
+    void setNumberPrecision(RTPlotWithLegend::Axis axis, int newValue);
 
 
     Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label, const QString &postfix = "");
