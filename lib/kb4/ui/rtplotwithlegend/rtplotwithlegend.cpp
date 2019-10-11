@@ -56,6 +56,7 @@ void RTPlotWithLegend::configurePlot()
     auto _now = RTPlotWithLegend::now();
     _plot->xAxis->setRange(_now - 90, _now); //90=1min 30sec
     _plot->setNoAntialiasingOnDrag(true);
+    _plot->setPlottingHint(QCP::phFastPolylines,true); // ?tima45 line from ethernet
 }
 
 

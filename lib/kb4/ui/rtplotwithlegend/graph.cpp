@@ -96,6 +96,7 @@ void Graph::setVisibleByWidget(bool newValue)
 void Graph::setColor(QColor newValue)
 {
     _graph->setPen(newValue);
+
     _tracer->setPen(_graph->pen());
     _tracer->setBrush(newValue);
 
