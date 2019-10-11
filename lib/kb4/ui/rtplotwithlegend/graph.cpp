@@ -62,6 +62,11 @@ double Graph::value()
     return _value;
 }
 
+bool Graph::visible()
+{
+    return _visible;
+}
+
 void Graph::setGraphKey(double key)
 {
     _tracer->setGraphKey(key);
@@ -75,6 +80,7 @@ void Graph::setVisible(bool newValue)
     _graph->setVisible(newValue);
     _tracer->setVisible(newValue);
     _graphLegendItem->setVisibleValue(newValue);
+    _visible = newValue;
 }
 
 
@@ -82,6 +88,7 @@ void Graph::setVisibleByWidget(bool newValue)
 {
     _graph->setVisible(newValue);
     _tracer->setVisible(newValue);
+    _visible = newValue;
     emit visibleChanged(newValue);
 }
 

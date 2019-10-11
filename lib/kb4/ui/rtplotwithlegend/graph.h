@@ -19,6 +19,7 @@ public:
     GraphLegendItem *graphLegendItem();
     void addData(double key, double value);
     double value();
+    bool visible();
     void setGraphKey(double key);
 
 private:
@@ -26,6 +27,7 @@ private:
     QString _postfix;
     QColor color;
     double _value;
+    bool _visible;
     //ValueScaler valueScaler;
     QCustomPlot *_plot;
     QCPAxis *_yAxis;
