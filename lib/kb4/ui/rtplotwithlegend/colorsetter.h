@@ -6,6 +6,7 @@
 #include <QQueue>
 #include <QColor>
 #include <QtDebug>
+#include <QRandomGenerator>
 
 #include <lib/kb4/easyliving.h>
 

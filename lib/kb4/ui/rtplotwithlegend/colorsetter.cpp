@@ -21,8 +21,8 @@ QColor ColorSetter::getColor()
         return colors->dequeue();
     else
     {
-        qDebug() << KB4_FORMAT_ERR("Out of color");
-        return QColor("#FFFFFF");
+        //qDebug() << KB4_FORMAT_ERR("Out of color");
+        return QColor::fromRgb(QRandomGenerator::global()->generate());
     }
 }
 
