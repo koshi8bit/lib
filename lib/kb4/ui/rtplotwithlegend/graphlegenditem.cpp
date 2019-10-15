@@ -49,7 +49,8 @@ void GraphLegendItem::setValue(const QString &value)
 
 void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
 {
-    auto visible = static_cast<bool>(arg1);
+    //auto visible = static_cast<bool>(arg1);
+    auto visible = arg1 == 2 ? true : false;
     emit visibleChanged(visible);
 }
 

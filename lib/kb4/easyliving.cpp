@@ -98,6 +98,16 @@ QString EasyLiving::postfixWatt()
     return "Вт";
 }
 
+QString EasyLiving::postfixSievert()
+{
+    return "Зв";
+}
+
+QString EasyLiving::postfixSievertPerHour()
+{
+    return postfixSievert() + "/Ч";
+}
+
 QString EasyLiving::postfixMilli()
 {
     return "м";
@@ -106,4 +116,9 @@ QString EasyLiving::postfixMilli()
 QString EasyLiving::postfixKilo()
 {
     return "к";
+}
+
+bool EasyLiving::isChecked(int arg1)
+{
+    return arg1 == 2 ? true : false;
 }

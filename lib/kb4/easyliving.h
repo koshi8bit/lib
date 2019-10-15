@@ -51,9 +51,15 @@ public:
     static QString postfixAmpere();
     static QString postfixVolt();
     static QString postfixWatt();
+    static QString postfixSievert();
+    static QString postfixSievertPerHour();
 
     static QString postfixMilli();
     static QString postfixKilo();
+
+
+    //bool
+    static bool isChecked(int arg1);
 
 };
 
