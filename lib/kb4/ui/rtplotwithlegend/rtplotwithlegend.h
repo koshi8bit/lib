@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDateTime>
 #include <QLabel>
+#include <QtMath>
 
 #include <lib/qcustomplot/qcustomplot.h>
 #include <lib/kb4/easyliving.h>

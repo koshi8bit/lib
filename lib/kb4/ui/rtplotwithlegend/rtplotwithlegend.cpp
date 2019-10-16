@@ -301,7 +301,6 @@ void RTPlotWithLegend::mouseMove(QMouseEvent *event)
 
     auto time = plot->xAxis->pixelToCoord(event->x());
     mouseMove(time);
-
 }
 
 
@@ -388,8 +387,21 @@ double RTPlotWithLegend::now()
 
 QString RTPlotWithLegend::getDateTime(double time)
 {
-    //TODO show MSEC
-    return QDateTime::fromTime_t(static_cast<uint>(time)).toString(EasyLiving::formatTimeUi(false));
+    //TODO show MSEC ?formatTimeUi(true)
+    auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
+    auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
+
+    auto deltaTimeMSEC = QDateTime::currentDateTime().msecsTo(mouseTimeQDT);
+    qDebug() << deltaTimeMSEC;
+    if (deltaTimeMSEC > -1000)
+        return mouseTimeStr;
+
+    auto deltaTimeQT = QTime(0,0,0);
+    deltaTimeQT = deltaTimeQT.addMSecs(static_cast<int>(-deltaTimeMSEC));
+    auto deltaTimeStr = deltaTimeQT.toString(EasyLiving::formatTimeUi(false));
+
+
+    return QString("%1 (-%2)").arg(mouseTimeStr).arg(deltaTimeStr);
 }
 
 void RTPlotWithLegend::setLabelTimeVisible(bool newValue)
