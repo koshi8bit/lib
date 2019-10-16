@@ -11,8 +11,6 @@ Log::Log(QObject *parent) : QObject(parent)
     connect(timerPush, &QTimer::timeout, this, &Log::timeoutPush, Qt::ConnectionType::QueuedConnection);
 
     thread = new QThread;
-    qDebug() << "thread" << thread;
-    qDebug() << "Log" << this;
     this->moveToThread(thread);
     thread->start();
 }

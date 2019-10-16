@@ -17,7 +17,7 @@ class GraphLegendItem : public QWidget
     Q_OBJECT
 
 public:
-    explicit GraphLegendItem(const QString &label, const QString &postfix, QColor color, QWidget *parent = nullptr);
+    explicit GraphLegendItem(const QString &label, const QString &postfix, QColor color, bool scientificNotation, QWidget *parent = nullptr);
     ~GraphLegendItem();
 
     void setValue(double value);
@@ -41,6 +41,7 @@ private:
     QString label;
     QString postfix;
     QColor color;
+    bool scientificNotation = false;
 
 };
 

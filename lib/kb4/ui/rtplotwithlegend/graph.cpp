@@ -1,7 +1,7 @@
 #include "graph.h"
 
 
-Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, QObject *parent)
+Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, bool scientificNotation, QObject *parent)
     : QObject(parent)
 {
     _plot = plot;
@@ -22,7 +22,9 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
     _tracer->setBrush(color);
     _tracer->setSize(5);
 
-    _graphLegendItem = new GraphLegendItem(label, postfix, color);
+    _scientificNotation = scientificNotation;
+
+    _graphLegendItem = new GraphLegendItem(label, postfix, color, scientificNotation);
     connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &Graph::setVisibleByWidget);
     connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &Graph::setColorByWidget);
 

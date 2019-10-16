@@ -12,6 +12,16 @@ void ChannelDouble::setGraph(Graph *graph)
     connect(this, &Channel::valueChanged, this, &ChannelDouble::addDataToGraph);
 }
 
+bool ChannelDouble::isScientificNotation()
+{
+    return _scientificNotation;
+}
+
+void ChannelDouble::setScientificNotation(bool newValue)
+{
+    _scientificNotation = newValue;
+}
+
 void ChannelDouble::addDataToGraph()
 {
     graph->addData(RTPlotWithLegend::now(), value());

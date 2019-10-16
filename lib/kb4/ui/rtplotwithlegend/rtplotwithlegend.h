@@ -40,12 +40,14 @@ public:
     void setNumberPrecision(RTPlotWithLegend::Axis axis, int newValue);
 
 
-    Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label, const QString &postfix = "");
+    Graph *addGraph(RTPlotWithLegend::Axis axis, const QString &label, const QString &postfix = "", bool scientificNotation = false);
     QCustomPlot *plot();
 
     static double now();
     static QString getDateTime(double time);
     void setLabelTimeVisible(bool newValue);
+
+    QCPAxis *getAxis(Axis axis);
 
 
 
@@ -69,8 +71,6 @@ private:
     bool isInAxisRect(QPoint pos);
 
     ColorSetter colorSetter;
-
-    QCPAxis *getAxis(Axis axis);
 
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
     QVector<Graph *> graphElements;

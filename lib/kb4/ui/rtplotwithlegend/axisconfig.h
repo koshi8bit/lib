@@ -18,6 +18,7 @@ public:
     explicit AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent = nullptr);
     ~AxisConfig();
 
+
     enum AxisType
     {
         NumericStandardNotation,

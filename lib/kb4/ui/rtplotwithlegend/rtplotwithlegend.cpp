@@ -123,7 +123,7 @@ bool RTPlotWithLegend::moveLineRealTime()
 }
 
 
-Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label, const QString &postfix)
+Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &label, const QString &postfix, bool scientificNotation)
 {
 
     auto graphElement = new Graph(label,
@@ -131,6 +131,7 @@ Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &la
                             colorSetter.getColor(),
                             _plot,
                             getAxis(axis),
+                            scientificNotation,
                             this);
 
     graphElements.append(graphElement);
