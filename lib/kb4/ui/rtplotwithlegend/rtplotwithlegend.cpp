@@ -392,7 +392,7 @@ QString RTPlotWithLegend::getDateTime(double time)
     auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
 
     auto deltaTimeMSEC = QDateTime::currentDateTime().msecsTo(mouseTimeQDT);
-    qDebug() << deltaTimeMSEC;
+    //qDebug() << deltaTimeMSEC;
     if (deltaTimeMSEC > -1000)
         return mouseTimeStr;
 

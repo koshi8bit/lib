@@ -1,5 +1,6 @@
 ::COPY TO lib\
 @echo off
+exit
 ::set source="G:\kent_brockman4\prog\C\Qt\lib\kb4\prj\lib\kb4"
 set source="D:\Users\kb4\Prog\C\Qt\Lib\kb4\prj\lib\kb4"
 set dest=%cd%\kb4\
