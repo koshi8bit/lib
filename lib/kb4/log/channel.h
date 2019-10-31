@@ -29,6 +29,7 @@ private:
 
 signals:
     void valueChanged();
+    void errorOcurred(QString message);
 
 public slots:
 };

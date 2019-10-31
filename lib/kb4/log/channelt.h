@@ -24,6 +24,7 @@ public slots:
     void setValue(T newValue)
     {
         _value = newValue;
+        //emit valueChanged(newValue);
         emit valueChanged();
     }
 
@@ -31,6 +32,9 @@ private:
     T _value;
 
 protected:
+
+//signals:
+//    void valueChanged(T newValue);
 
 };
 

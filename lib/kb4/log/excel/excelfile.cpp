@@ -41,7 +41,7 @@ bool ExcelFile::configure(QDateTime dt, QString datePattern, QString folder)
     if (!openFile())
     {
         auto message = QString("Error open file <%1>").arg(fileName);
-        qDebug() << message;
+        //qDebug() << message;
         emit errorOcurred(message);
         return false;
     }

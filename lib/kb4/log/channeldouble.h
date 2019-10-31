@@ -13,9 +13,15 @@ public:
     void setGraph(Graph *graph);
     bool isScientificNotation();
     void setScientificNotation(bool newValue);
+
+    double raw();
+    void setRawValue(double newValue);
+    void setRawScaleFunc(double(*f)(double));
 private:
     Graph *graph;
     bool _scientificNotation = false;
+    double _raw;
+    double (*rawScaleFunc)(double);
 
 private slots:
     void addDataToGraph();
