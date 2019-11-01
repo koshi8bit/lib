@@ -28,7 +28,7 @@ bool ExcelFile::configure(QDateTime dt, QString datePattern, QString folder)
         if (!dir.mkpath(folder))
         {
             auto message = KB4_FORMAT_ERR(QString("Error creating folder <%1>").arg(folder));
-            qDebug() << message;
+            //qDebug() << message;
             emit errorOcurred(message);
             return false;
         }

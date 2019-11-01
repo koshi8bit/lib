@@ -31,7 +31,7 @@ void ChannelDouble::setRawValue(double newRawValue)
 {
     if (rawScaleFunc == nullptr)
     {
-        emit errorOcurred("rawScaleFunc == nullptr");
+        emit errorOcurred(KB4_FORMAT_ERR(QString("rawScaleFunc == nullptr at channel '%1'").arg(logName())));
         return;
     }
     setValue(rawScaleFunc(newRawValue));

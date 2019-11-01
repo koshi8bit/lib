@@ -6,7 +6,7 @@
 
 QT       += core gui printsupport
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
 
 TARGET = prj
 TEMPLATE = app
@@ -27,6 +27,7 @@ INCLUDEPATH += ./
 CONFIG += c++11
 
 SOURCES += \
+    lib/kb4/shared-variables/shared-variables.cpp \
     main.cpp \
     mainwindow.cpp \
     lib/kb4/errorhandler/errorhandler.cpp \
@@ -51,6 +52,7 @@ SOURCES += \
 
 
 HEADERS += \
+    lib/kb4/shared-variables/shared-variables.h \
     mainwindow.h \
     lib/kb4/errorhandler/errorhandler.h \
     lib/kb4/log/excel/timelog/timelog.h \
