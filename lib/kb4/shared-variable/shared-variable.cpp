@@ -1,19 +1,19 @@
-#include "shared-variables.h"
+#include "shared-variable.h"
 #include <typeinfo>
 
 
 
-QUdpSocket * AbstractSharedVariables::socket = nullptr;
-QUdpSocket * AbstractSharedVariables::writeSocket = nullptr;
+QUdpSocket * AbstractSharedVariable::socket = nullptr;
+QUdpSocket * AbstractSharedVariable::writeSocket = nullptr;
 
-QList<AbstractSharedVariables*> AbstractSharedVariables::variables;
+QList<AbstractSharedVariable*> AbstractSharedVariable::variables;
 
-int AbstractSharedVariables::_port = -1;
+int AbstractSharedVariable::_port = -1;
 
-int AbstractSharedVariables::variablesCounter = 0;
+int AbstractSharedVariable::variablesCounter = 0;
 
 
-AbstractSharedVariables::AbstractSharedVariables(QObject *parent) : QObject(parent)
+AbstractSharedVariable::AbstractSharedVariable(QObject *parent) : QObject(parent)
 {
     if(socket == nullptr){
         socket = new QUdpSocket(0);
@@ -34,7 +34,7 @@ AbstractSharedVariables::AbstractSharedVariables(QObject *parent) : QObject(pare
 
 }
 
-AbstractSharedVariables::~AbstractSharedVariables()
+AbstractSharedVariable::~AbstractSharedVariable()
 {
     variablesCounter--;
     if(variablesCounter == 0){
@@ -43,12 +43,12 @@ AbstractSharedVariables::~AbstractSharedVariables()
     }
 }
 
-void AbstractSharedVariables::setPort(int port)
+void AbstractSharedVariable::setPort(int port)
 {
     _port = port;
 }
 
-void AbstractSharedVariables::handleMessage()
+void AbstractSharedVariable::handleMessage()
 {
     while (socket->hasPendingDatagrams()){
         QByteArray datagram;

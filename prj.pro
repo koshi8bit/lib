@@ -27,7 +27,7 @@ INCLUDEPATH += ./
 CONFIG += c++11
 
 SOURCES += \
-    lib/kb4/shared-variables/shared-variables.cpp \
+    lib/kb4/shared-variable/shared-variable.cpp \
     main.cpp \
     mainwindow.cpp \
     lib/kb4/errorhandler/errorhandler.cpp \
@@ -52,7 +52,7 @@ SOURCES += \
 
 
 HEADERS += \
-    lib/kb4/shared-variables/shared-variables.h \
+    lib/kb4/shared-variable/shared-variable.h \
     mainwindow.h \
     lib/kb4/errorhandler/errorhandler.h \
     lib/kb4/log/excel/timelog/timelog.h \

@@ -5,14 +5,14 @@
 #include <QUdpSocket>
 
 
-class AbstractSharedVariables : public QObject
+class AbstractSharedVariable : public QObject
 {
     Q_OBJECT
 public:
     static void setPort(int port);
 
-    explicit AbstractSharedVariables(QObject *parent = 0);
-    virtual ~AbstractSharedVariables();
+    explicit AbstractSharedVariable(QObject *parent = 0);
+    virtual ~AbstractSharedVariable();
 
 
 signals:
@@ -26,7 +26,7 @@ private slots:
     virtual void decodeValue() = 0;
 
 protected:
-    static QList<AbstractSharedVariables*> variables;
+    static QList<AbstractSharedVariable*> variables;
     static QUdpSocket *socket;
     static QUdpSocket *writeSocket;
     static int _port;
@@ -39,18 +39,18 @@ protected:
 
 
 template<typename T>
-class SharedVariables: public AbstractSharedVariables
+class SharedVariable: public AbstractSharedVariable
 {
 
 public:
 
-    explicit SharedVariables(QString networkName,QObject *parent = 0): AbstractSharedVariables(parent)
+    explicit SharedVariable(QString networkName,QObject *parent = 0): AbstractSharedVariable(parent)
     {
         this->networkName = networkName;
         variables.append(this);
     }
 
-    ~SharedVariables()
+    ~SharedVariable()
     {
         variables.removeOne(this);
     }
