@@ -26,8 +26,8 @@ AbstractSharedVariable::AbstractSharedVariable(QObject *parent) : QObject(parent
                 emit errorOcurred("AbstractNetworkVariable::AbstractNetworkVariable bind failed");
             }
         }else{
-            qDebug() << "AbstractNetworkVariable::AbstractNetworkVariable bad port";
-            emit errorOcurred("AbstractNetworkVariable::AbstractNetworkVariable bad port");
+            qDebug() << "AbstractNetworkVariable::AbstractNetworkVariable bad port. Did You call AbstractSharedVariable::setPort(..)?";
+            emit errorOcurred("AbstractNetworkVariable::AbstractNetworkVariable bad port. Did You call AbstractSharedVariable::setPort(..)?");
         }
     }
     variablesCounter++;

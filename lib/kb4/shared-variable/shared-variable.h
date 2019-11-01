@@ -54,11 +54,6 @@ public:
         variables.removeOne(this);
     }
 
-    void setValue(T value)
-    {
-        this->_value = value;
-    }
-
     T value()
     {
         return _value;
@@ -90,6 +85,13 @@ public:
             writeSocket->writeDatagram(datagram.data(),datagram.size(),QHostAddress(clients.at(i).first),clients.at(i).second);
         }
     }
+
+    void setValue(T newValue)
+    {
+        _value = newValue;
+        emit valueChanged();
+    }
+
 
 private:
     T _value;
