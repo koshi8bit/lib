@@ -16,8 +16,8 @@ public:
 
 
 signals:
-    void valueUpdated();
-    void error(QString);
+    void valueChanged();
+    void errorOcurred(QString message);
 
 public slots:
 
@@ -41,7 +41,6 @@ protected:
 template<typename T>
 class SharedVariable: public AbstractSharedVariable
 {
-
 public:
 
     explicit SharedVariable(QString networkName,QObject *parent = 0): AbstractSharedVariable(parent)
@@ -99,8 +98,10 @@ private:
     void decodeValue()
     {
         _value = *((T*)undecodedValue);
-        emit valueUpdated();
+        emit valueChanged();
     }
+
+
 
 
 

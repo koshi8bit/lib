@@ -23,11 +23,11 @@ AbstractSharedVariable::AbstractSharedVariable(QObject *parent) : QObject(parent
                 connect(socket,&QUdpSocket::readyRead,handleMessage);
             }else{
                 qDebug() << "AbstractNetworkVariable::AbstractNetworkVariable bind failed";
-                emit error("AbstractNetworkVariable::AbstractNetworkVariable bind failed");
+                emit errorOcurred("AbstractNetworkVariable::AbstractNetworkVariable bind failed");
             }
         }else{
             qDebug() << "AbstractNetworkVariable::AbstractNetworkVariable bad port";
-            emit error("AbstractNetworkVariable::AbstractNetworkVariable bad port");
+            emit errorOcurred("AbstractNetworkVariable::AbstractNetworkVariable bad port");
         }
     }
     variablesCounter++;
