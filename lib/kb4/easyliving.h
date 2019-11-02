@@ -6,6 +6,7 @@
 #include <QLocale>
 #include <QDebug>
 #include <QDateTime>
+#include <QDir>
 
 //errors
 #define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
@@ -60,6 +61,9 @@ public:
 
     //bool
     static bool isChecked(int arg1);
+
+    //files
+    static bool createDir(QString path);
 
 };
 

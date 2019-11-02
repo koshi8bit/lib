@@ -122,3 +122,13 @@ bool EasyLiving::isChecked(int arg1)
 {
     return arg1 == 2 ? true : false;
 }
+
+bool EasyLiving::createDir(QString path)
+{
+    QDir dir(path);
+    if (!dir.exists()){
+      dir.mkdir(".");
+    }
+
+    return dir.exists();
+}
