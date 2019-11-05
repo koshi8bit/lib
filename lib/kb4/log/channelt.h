@@ -24,6 +24,7 @@ public slots:
     void setValue(T newValue)
     {
         _value = newValue;
+        valueChangedChild();
         //emit valueChanged(newValue);
         emit valueChanged();
     }
@@ -32,7 +33,10 @@ private:
     T _value;
 
 protected:
+    virtual void valueChangedChild()
+    {
 
+    }
 //signals:
 //    void valueChanged(T newValue);
 

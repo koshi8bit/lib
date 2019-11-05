@@ -3,7 +3,6 @@
 ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList *path, QObject *parent)
     :ChannelT<double>(name, postfix, path, parent)
 {
-
 }
 
 void ChannelDouble::setGraph(Graph *graph)
@@ -22,24 +21,38 @@ void ChannelDouble::setScientificNotation(bool newValue)
     _scientificNotation = newValue;
 }
 
-double ChannelDouble::raw()
-{
-    return _raw;
-}
 
 void ChannelDouble::setRawValue(double newRawValue)
 {
-    if (rawScaleFunc == nullptr)
+    if (fromRawScaleFunc == nullptr)
     {
-        emit errorOcurred(KB4_FORMAT_ERR(QString("rawScaleFunc == nullptr at channel '%1'").arg(logName())));
+        emit errorOcurred(KB4_FORMAT_ERR(QString("fromRawScaleFunc == nullptr at channel '%1'").arg(logName())));
         return;
     }
-    setValue(rawScaleFunc(newRawValue));
+    setValue(fromRawScaleFunc(newRawValue));
 }
 
-void ChannelDouble::setRawScaleFunc(double (*f)(double))
+void ChannelDouble::setFromRawScaleFunc(double (*f)(double))
 {
-    rawScaleFunc = f;
+    fromRawScaleFunc = f;
+}
+
+void ChannelDouble::setToRawScaleFunc(double (*f)(double))
+{
+    toRawScaleFunc = f;
+}
+
+double ChannelDouble::rawValue()
+{
+    return _rawValue;
+}
+
+void ChannelDouble::valueChangedChild()
+{
+    if (toRawScaleFunc == nullptr)
+        return;
+
+    _rawValue = toRawScaleFunc(value());
 }
 
 void ChannelDouble::addDataToGraph()

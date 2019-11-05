@@ -14,15 +14,23 @@ public:
     bool isScientificNotation();
     void setScientificNotation(bool newValue);
 
-    double raw();
     void setRawValue(double newValue);
-    void setRawScaleFunc(double(*f)(double));
+    void setFromRawScaleFunc(double(*f)(double));
+
+    void setToRawScaleFunc(double(*f)(double));
+    double rawValue();
 private:
     Graph *graph;
     bool _scientificNotation = false;
-    double _raw;
-    double (*rawScaleFunc)(double);
+    double (*fromRawScaleFunc)(double) = nullptr;
 
+    double _rawValue;
+    double (*toRawScaleFunc)(double) = nullptr;
+
+
+
+protected:
+    void valueChangedChild() override;
 private slots:
     void addDataToGraph();
 };
