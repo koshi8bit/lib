@@ -9,10 +9,10 @@
 #include <QDir>
 
 //errors
-#define KB4_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
+#define EL_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
 
 //variables
-#define KB4_GET_VARIABLE_NAME(Variable) (#Variable)
+#define EL_GET_VARIABLE_NAME(Variable) (#Variable)
 
 class EasyLiving : public QObject
 {
