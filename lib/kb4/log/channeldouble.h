@@ -4,7 +4,7 @@
 #include "channelt.h"
 
 #include <lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.h>
-#include <lib/kb4/ui/rtplotwithlegend/axis2/graph.h>
+#include <lib/kb4/ui/rtplotwithlegend/graph.h>
 
 class ChannelDouble : public ChannelT<double>
 {

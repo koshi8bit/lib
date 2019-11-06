@@ -9,9 +9,9 @@
 #include <lib/qcustomplot/qcustomplot.h>
 #include <lib/kb4/easyliving.h>
 
-#include "axisconfig.h"
+#include "../axisconfig.h"
 #include "../colorsetter.h"
-#include "graph.h"
+#include "../graph.h"
 
 namespace Ui {
 class RTPlotWithLegend;
