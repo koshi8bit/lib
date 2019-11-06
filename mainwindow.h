@@ -7,11 +7,11 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
-#include <lib/kb4/ui/rtplotwithlegend/axisconfig.h>
+#include <lib/kb4/ui/rtplotwithlegend/axis2/axisconfig.h>
 #include <lib/kb4/ui/rtplotwithlegend/colorsetter.h>
-#include <lib/kb4/ui/rtplotwithlegend/graph.h>
-#include <lib/kb4/ui/rtplotwithlegend/graphlegenditem.h>
-#include <lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h>
+#include <lib/kb4/ui/rtplotwithlegend/axis2/graph.h>
+#include <lib/kb4/ui/rtplotwithlegend/axis2/graphlegenditem.h>
+#include <lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.h>
 #include <lib/kb4/log/channeldouble.h>
 #include <lib/kb4/log/excel/timelog/timelog.h>
 #include <lib/qcustomplot/qcustomplot.h>

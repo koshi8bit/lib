@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -269,7 +269,7 @@
   <customwidget>
    <class>RTPlotWithLegend</class>
    <extends>QWidget</extends>
-   <header>lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h</header>
+   <header>lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

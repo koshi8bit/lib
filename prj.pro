@@ -48,7 +48,7 @@ SOURCES += \
     lib/kb4/ui/rtplotwithlegend/colorsetter.cpp \
     lib/kb4/ui/rtplotwithlegend/graph.cpp \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.cpp \
-    lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.cpp \
+    lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
     lib/qcustomplot/qcustomplot.cpp \
     lib/kb4/easyliving.cpp
@@ -73,7 +73,7 @@ HEADERS += \
     lib/kb4/ui/rtplotwithlegend/colorsetter.h \
     lib/kb4/ui/rtplotwithlegend/graph.h \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.h \
-    lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.h \
+    lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/qcustomplot/qcustomplot.h \
     lib/kb4/easyliving.h
@@ -84,7 +84,7 @@ FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
     lib/kb4/ui/rtplotwithlegend/axisconfig.ui \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.ui \
-    lib/kb4/ui/rtplotwithlegend/rtplotwithlegend.ui
+    lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.ui
 
 
 # Default rules for deployment.

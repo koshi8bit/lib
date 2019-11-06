@@ -10,7 +10,7 @@
 #include <lib/kb4/easyliving.h>
 
 #include "axisconfig.h"
-#include "colorsetter.h"
+#include "../colorsetter.h"
 #include "graph.h"
 
 namespace Ui {
