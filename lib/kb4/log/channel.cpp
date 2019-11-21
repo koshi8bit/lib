@@ -39,6 +39,12 @@ void Channel::setWidgetName(const QString &widgetName)
     _widgetName = widgetName;
 }
 
+void Channel::_errorOcurred(QString message)
+{
+    qWarning() << message;
+    emit errorOccurred(message);
+}
+
 QString Channel::postfix() const
 {
     return _postfix;

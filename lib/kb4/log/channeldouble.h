@@ -15,17 +15,17 @@ public:
     void setScientificNotation(bool newValue);
 
     void setRawValue(double newValue);
-    void setFromRawScaleFunc(double(*f)(double));
+    void setToScaledFunc(double(*f)(double));
 
-    void setToRawScaleFunc(double(*f)(double));
+    void setToRawFunc(double(*f)(double));
     double rawValue();
 private:
     Graph *graph;
     bool _scientificNotation = false;
-    double (*fromRawScaleFunc)(double) = nullptr;
+    double (*toScaledFunc)(double) = nullptr;
 
     double _rawValue;
-    double (*toRawScaleFunc)(double) = nullptr;
+    double (*toRawFunc)(double) = nullptr;
 
 
 

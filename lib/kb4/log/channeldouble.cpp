@@ -24,22 +24,22 @@ void ChannelDouble::setScientificNotation(bool newValue)
 
 void ChannelDouble::setRawValue(double newRawValue)
 {
-    if (fromRawScaleFunc == nullptr)
+    if (toScaledFunc == nullptr)
     {
-        emit errorOcurred(EL_FORMAT_ERR(QString("fromRawScaleFunc == nullptr at channel '%1'").arg(logName())));
+        _errorOccurred(EL_FORMAT_ERR(QString("fromRawScaleFunc == nullptr at channel '%1'").arg(logName())));
         return;
     }
-    setValue(fromRawScaleFunc(newRawValue));
+    setValue(toScaledFunc(newRawValue));
 }
 
-void ChannelDouble::setFromRawScaleFunc(double (*f)(double))
+void ChannelDouble::setToScaledFunc(double (*f)(double))
 {
-    fromRawScaleFunc = f;
+    toScaledFunc = f;
 }
 
-void ChannelDouble::setToRawScaleFunc(double (*f)(double))
+void ChannelDouble::setToRawFunc(double (*f)(double))
 {
-    toRawScaleFunc = f;
+    toRawFunc = f;
 }
 
 double ChannelDouble::rawValue()
@@ -49,10 +49,10 @@ double ChannelDouble::rawValue()
 
 void ChannelDouble::valueChangedChild()
 {
-    if (toRawScaleFunc == nullptr)
+    if (toRawFunc == nullptr)
         return;
 
-    _rawValue = toRawScaleFunc(value());
+    _rawValue = toRawFunc(value());
 }
 
 void ChannelDouble::addDataToGraph()

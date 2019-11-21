@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << a.decimalPoint();
     qDebug() << QString(a.groupSeparator());
     qDebug() << QString::number(1300.2, 'f', 2);
+
 }
 
 
@@ -62,6 +63,7 @@ void MainWindow::configureExcelLog()
 
     excelLog->finishConfigure();
 }
+
 void MainWindow::configureTimers()
 {
     timerAddData1 = new QTimer(this);

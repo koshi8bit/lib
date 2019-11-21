@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QColor>
+#include <QDebug>
 
 class Channel : public QObject
 {
@@ -26,10 +27,13 @@ private:
     QString _logName;
     QString _postfix;
 
+protected:
+    void _errorOccurred(QString message);
+
 
 signals:
     void valueChanged();
-    void errorOcurred(QString message);
+    void errorOccurred(QString message);
 
 public slots:
 };

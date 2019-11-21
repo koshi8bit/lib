@@ -23,6 +23,11 @@ QString EasyLiving::formatDouble(double value, char format, int precision, EasyL
     return message;
 }
 
+bool EasyLiving::isBetween(double value, double min, double max)
+{
+    return (value >= min) && (value <= max);
+}
+
 bool EasyLiving::isEqualDouble(double a, double b)
 {
     return qAbs(a - b) <= std::numeric_limits<double>::epsilon();
