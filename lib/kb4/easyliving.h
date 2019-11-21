@@ -32,6 +32,7 @@ public:
 
     //double
     static QString formatDouble(double value, char format = 'f', int precision = 3, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
+    static bool isBetween(double value, double min, double max);
     static bool isEqualDouble(double a, double b);
 
 

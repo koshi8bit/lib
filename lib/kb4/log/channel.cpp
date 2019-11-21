@@ -39,7 +39,7 @@ void Channel::setWidgetName(const QString &widgetName)
     _widgetName = widgetName;
 }
 
-void Channel::_errorOcurred(QString message)
+void Channel::_errorOccurred(QString message)
 {
     qWarning() << message;
     emit errorOccurred(message);
