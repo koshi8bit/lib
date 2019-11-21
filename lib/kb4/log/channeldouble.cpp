@@ -44,13 +44,22 @@ void ChannelDouble::setToRawFunc(double (*f)(double))
 
 double ChannelDouble::rawValue()
 {
+    if (toRawFunc == nullptr)
+    {
+        _errorOccurred(EL_FORMAT_ERR("toRawFunc == nullptr"));
+        return 0;
+    }
+
     return _rawValue;
 }
 
 void ChannelDouble::valueChangedChild()
 {
     if (toRawFunc == nullptr)
+    {
+        _errorOccurred(EL_FORMAT_ERR("toRawFunc == nullptr"));
         return;
+    }
 
     _rawValue = toRawFunc(value());
 }

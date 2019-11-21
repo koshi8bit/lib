@@ -38,7 +38,7 @@ void ErrorHandler::processError(QString error)
 
     if (!file->open(QIODevice::WriteOnly | QIODevice::Append))
     {
-        qDebug() << error;
+        qWarning() << "Error handled!" << error;
         showErrorMessage(errorSave, error);
         return;
     }
