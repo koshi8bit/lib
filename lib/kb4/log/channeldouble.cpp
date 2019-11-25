@@ -44,9 +44,10 @@ void ChannelDouble::setToRawFunc(double (*f)(double))
 
 double ChannelDouble::rawValue()
 {
+    //FIXME DRY
     if (toRawFunc == nullptr)
     {
-        _errorOccurred(EL_FORMAT_ERR("toRawFunc == nullptr"));
+        _errorOccurred(EL_FORMAT_ERR(QString("toRawFunc == nullptr at channel '%1'").arg(logName())));
         return 0;
     }
 
@@ -55,13 +56,10 @@ double ChannelDouble::rawValue()
 
 void ChannelDouble::valueChangedChild()
 {
-    if (toRawFunc == nullptr)
+    if (toRawFunc != nullptr)
     {
-        _errorOccurred(EL_FORMAT_ERR("toRawFunc == nullptr"));
-        return;
+        _rawValue = toRawFunc(value());
     }
-
-    _rawValue = toRawFunc(value());
 }
 
 void ChannelDouble::addDataToGraph()

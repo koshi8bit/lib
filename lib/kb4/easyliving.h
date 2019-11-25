@@ -61,6 +61,10 @@ public:
     static QString postfixMilli();
     static QString postfixKilo();
 
+    static QString postfixPersent();
+
+    static QString postfixMilliAmpere();
+
 
     //bool
     static bool isChecked(int arg1);

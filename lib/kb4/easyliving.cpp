@@ -123,6 +123,16 @@ QString EasyLiving::postfixKilo()
     return "к";
 }
 
+QString EasyLiving::postfixPersent()
+{
+    return "%";
+}
+
+QString EasyLiving::postfixMilliAmpere()
+{
+    return postfixMilli() + postfixAmpere();
+}
+
 bool EasyLiving::isChecked(int arg1)
 {
     return arg1 == 2 ? true : false;
