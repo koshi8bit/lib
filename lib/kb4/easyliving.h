@@ -28,10 +28,17 @@ public:
     };
     Q_ENUM(DoubleSeporatorSign)
 
+    enum Format
+    {
+        StandardNotation,    // f
+        ScientificNotation   // e
+    };
+    Q_ENUM(Format)
+
     EasyLiving();
 
     //double
-    static QString formatDouble(double value, char format = 'f', int precision = 3, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
+    static QString formatDouble(double value, int precision = 3, Format format = Format::StandardNotation, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
     static bool isBetween(double value, double min, double max);
     static bool isEqualDouble(double a, double b);
 

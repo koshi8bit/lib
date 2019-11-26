@@ -5,17 +5,30 @@ EasyLiving::EasyLiving()
 
 }
 
+
 //double
-QString EasyLiving::formatDouble(double value, char format, int precision, EasyLiving::DoubleSeporatorSign seporatorSign)
+QString EasyLiving::formatDouble(double value, int precision, Format format, EasyLiving::DoubleSeporatorSign seporatorSign)
 {
+    char _format;
+    switch (format)
+    {
+        case Format::StandardNotation:
+            _format='f';
+        break;
+
+        case Format::ScientificNotation:
+            _format='e';
+        break;
+    }
+
     if (seporatorSign == DoubleSeporatorSign::Comma)
     {
-        return QLocale(QLocale::Russian).toString(value, format, precision);
+        return QLocale(QLocale::Russian).toString(value, _format, precision);
     }
 
     if (seporatorSign == DoubleSeporatorSign::Point)
     {
-        return QString::number(value, format, precision);
+        return QString::number(value, _format, precision);
     }
 
     auto message = EL_FORMAT_ERR("Invalid seporator sign!");

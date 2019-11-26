@@ -124,7 +124,7 @@ QString Excel::formatDoubleValue(double value)
     }
     else
     {
-        return  EasyLiving::formatDouble(value, 'e');
+        return  EasyLiving::formatDouble(value, 3, EasyLiving::Format::ScientificNotation);
     }
 }
 
