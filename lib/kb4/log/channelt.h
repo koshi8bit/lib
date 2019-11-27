@@ -46,7 +46,7 @@ public slots:
 
 private:
     T _value;
-    NetVar<double> *sharedVariable;
+    NetVar<double> *sharedVariable = nullptr;
 
     void _setValue(T newValue)
     {
