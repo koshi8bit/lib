@@ -35,6 +35,11 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+DISTFILES += \
+    lib/kb4/shared-variable/tcp/netvars/example/example.7z \
+    lib/kb4/ui/gradientlineedit/gears.png \
+    lib/update-kb4.bat
+
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
     lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.ui \
@@ -49,6 +54,7 @@ HEADERS += \
     lib/kb4/log/channel.h \
     lib/kb4/log/channeldouble.h \
     lib/kb4/log/channelt.h \
+    lib/kb4/log/excel/excel.cpp.orig \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
     lib/kb4/log/excel/timelog/timelog.h \
@@ -104,9 +110,6 @@ SOURCES += \
     lib/qcustomplot/qcustomplot.cpp \
     main.cpp \
     mainwindow.cpp
-
-DISTFILES += \
-    lib/kb4/shared-variable/tcp/netvars/example/example.7z
 
 RESOURCES += \
     ui-res.qrc
