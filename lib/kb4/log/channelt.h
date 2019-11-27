@@ -4,6 +4,7 @@
 #include <QStringList>
 
 #include "channel.h"
+#include <lib/kb4/shared-variable/tcp/netvars.h>
 
 template <typename T>
 class ChannelT : public Channel
@@ -25,20 +26,31 @@ public slots:
     {
         _value = newValue;
         valueChangedChild();
-        //emit valueChanged(newValue);
+
+        if (sharedVariable)
+            sharedVariable->setValue(_value);
+
         emit valueChanged();
+//      emit valueChanged777(_value);
+    }
+
+    void configureSharedVariable()
+    {
+        sharedVariable = new NetVar<T>(logName);
     }
 
 private:
     T _value;
+    NetVar<T> *sharedVariable = nullptr;
 
 protected:
     virtual void valueChangedChild()
     {
 
     }
+
 //signals:
-//    void valueChanged(T newValue);
+//    void valueChanged777(T newValue);
 
 };
 
