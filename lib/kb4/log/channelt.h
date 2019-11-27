@@ -21,27 +21,46 @@ public:
         return _value;
     }
 
+    void configureSharedVariable(bool connectWrite=false)
+    {
+        sharedVariable = new NetVar<double>(logName());
+        if (connectWrite)
+        {
+            connect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);
+        }
+    }
+
 public slots:
     void setValue(T newValue)
     {
-        _value = newValue;
-        valueChangedChild();
+        _setValue(newValue);
 
         if (sharedVariable)
-            sharedVariable->setValue(_value);
+        {
+            sharedVariable->setValue(newValue);
+            sharedVariable->send();
+        }
+    }
+
+
+
+private:
+    T _value;
+    NetVar<double> *sharedVariable;
+
+    void _setValue(T newValue)
+    {
+        _value = newValue;
+        valueChangedChild();
 
         emit valueChanged();
 //      emit valueChanged777(_value);
     }
 
-    void configureSharedVariable()
+    void sharedVariableUpdated()
     {
-        sharedVariable = new NetVar<T>(logName);
+        _setValue(sharedVariable->value());
     }
-
-private:
-    T _value;
-    NetVar<T> *sharedVariable = nullptr;
 
 protected:
     virtual void valueChangedChild()

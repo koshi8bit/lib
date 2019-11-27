@@ -146,6 +146,11 @@ QString EasyLiving::postfixMilliAmpere()
     return postfixMilli() + postfixAmpere();
 }
 
+QString EasyLiving::postfixKiloVolt()
+{
+    return EasyLiving::postfixKilo() + EasyLiving::postfixVolt();
+}
+
 bool EasyLiving::isChecked(int arg1)
 {
     return arg1 == 2 ? true : false;

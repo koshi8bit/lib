@@ -36,7 +36,7 @@ bool NetVarBase::operator==(NetVarBase &other)
 void NetVarBase::updateNewValue(QVariant value)
 {
     this->_value = value;
-    emit newValue();
+    emit valueChanged();
 }
 
 void NetVarBase::ask()

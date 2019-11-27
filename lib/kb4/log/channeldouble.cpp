@@ -1,9 +1,10 @@
 #include "channeldouble.h"
 
-ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList *path, QObject *parent)
-    :ChannelT<double>(name, postfix, path, parent)
+ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent)
+    :ChannelT<double>(name, postfix, prefix, parent)
 {
 }
+
 
 void ChannelDouble::setGraph(Graph *graph)
 {

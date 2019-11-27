@@ -71,6 +71,7 @@ public:
     static QString postfixPersent();
 
     static QString postfixMilliAmpere();
+    static QString postfixKiloVolt();
 
 
     //bool
