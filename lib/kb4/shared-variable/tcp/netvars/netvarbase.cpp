@@ -41,19 +41,16 @@ void NetVarBase::updateNewValue(QVariant value)
 
 void NetVarBase::ask()
 {
-    if(InitNVServer::tcpserver)
-    {
+    if(InitNVServer::tcpserver){
         InitNVServer::askAll(name);
-        return;
-    }
-
-    if(InitNVClient::tcpclient)
-    {
+    }else if(InitNVClient::tcpclient){
         if(InitNVClient::tcpclient->state() == QAbstractSocket::ConnectedState){
             InitNVClient::ask(name);
         }else{
             nvDebug << "Could not ask. Client socket is not connected";
         }
+    }else{
+        //TODO:
     }
 }
 

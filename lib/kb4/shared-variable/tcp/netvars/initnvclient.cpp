@@ -82,35 +82,37 @@ void InitNVClient::connectToServer()
 
 void InitNVClient::readFullMessage()
 {
-    in.startTransaction();
+    while(!in.atEnd()){
+        in.startTransaction();
 
-    QString command;
-    in >> command;
+        QString command;
+        in >> command;
 
-    if(command == "SetValue"){
-        QString varName;
-        in >> varName;
-        QVariant value;
-        in >> value;
-        if (!in.commitTransaction())
-            return;
+        if(command == "SetValue"){
+            QString varName;
+            in >> varName;
+            QVariant value;
+            in >> value;
+            if (!in.commitTransaction())
+                return;
 
-        updateLocalVar(varName,value);
-    }
-    if(command == "AskFor"){
-        int id = -2;
-        in >> id;
-        QString varName;
-        in >> varName;
-        if (!in.commitTransaction())
-            return;
-        if(id == -2){
-            nvDebug << "OH SHEET A RAT!";
-            return;
+            updateLocalVar(varName,value);
         }
-        int i = localVarsIdByName(varName);
-        if(i != -1){
-            setValFor(id,varName,localVars.at(i)->_value);
+        if(command == "AskFor"){
+            int id = -2;
+            in >> id;
+            QString varName;
+            in >> varName;
+            if (!in.commitTransaction())
+                return;
+            if(id == -2){
+                nvDebug << "OH SHEET A RAT!";
+                return;
+            }
+            int i = localVarsIdByName(varName);
+            if(i != -1){
+                setValFor(id,varName,localVars.at(i)->_value);
+            }
         }
     }
 }

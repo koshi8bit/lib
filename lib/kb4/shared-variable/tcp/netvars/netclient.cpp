@@ -72,37 +72,39 @@ void NetClient::askFor(int id, QString varName)
 
 void NetClient::receiveFullMessage()
 {
-    inputStream.startTransaction();
-    QString command;
-    inputStream >> command;
-    if(command == "NewValue"){
-        QString varName;
-        inputStream >> varName;
-        QVariant value;
-        inputStream >> value;
-        if(!inputStream.commitTransaction())
-            return;
-        emit newValue(id,varName,value);
-    }else
-    if(command == "Ask"){
-        QString varName;
-        inputStream >> varName;
-        if(!inputStream.commitTransaction())
-            return;
-        emit ask(varName);
-    }else
-    if(command == "SetValueFor"){
-        int idToSend = -2;
-        inputStream >> idToSend;
-        QString varName;
-        inputStream >> varName;
-        QVariant value;
-        inputStream >> value;
+    while(!inputStream.atEnd()){
+        inputStream.startTransaction();
+        QString command;
+        inputStream >> command;
+        if(command == "NewValue"){
+            QString varName;
+            inputStream >> varName;
+            QVariant value;
+            inputStream >> value;
+            if(!inputStream.commitTransaction())
+                return;
+            emit newValue(id,varName,value);
+        }else
+        if(command == "Ask"){
+            QString varName;
+            inputStream >> varName;
+            if(!inputStream.commitTransaction())
+                return;
+            emit ask(varName);
+        }else
+        if(command == "SetValueFor"){
+            int idToSend = -2;
+            inputStream >> idToSend;
+            QString varName;
+            inputStream >> varName;
+            QVariant value;
+            inputStream >> value;
 
-        if(!inputStream.commitTransaction())
-            return;
+            if(!inputStream.commitTransaction())
+                return;
 
-        emit setValueFor(idToSend,varName,value);
+            emit setValueFor(idToSend,varName,value);
+        }
     }
 }
 
