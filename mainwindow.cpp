@@ -57,7 +57,7 @@ void MainWindow::configureExcelLog()
     c = new ChannelDouble("CCC", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
     //FIXME tima45
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
-    connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue()));
+    connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
     c->setValue(3.009);
     excelLog->addChannel(c);
 

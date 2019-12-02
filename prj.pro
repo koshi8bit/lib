@@ -79,7 +79,7 @@ HEADERS += \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/qcustomplot/qcustomplot.h \
-    mainwindow.h
+    mainwindow.h \
 
 SOURCES += \
     lib/kb4/easyliving.cpp \
