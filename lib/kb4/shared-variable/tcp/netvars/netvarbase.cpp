@@ -36,21 +36,24 @@ bool NetVarBase::operator==(NetVarBase &other)
 void NetVarBase::updateNewValue(QVariant value)
 {
     this->_value = value;
-    emit newValue();
+    emit valueChanged();
 }
 
 void NetVarBase::ask()
 {
-    if(InitNVServer::tcpserver){
+    if(InitNVServer::tcpserver)
+    {
         InitNVServer::askAll(name);
-    }else if(InitNVClient::tcpclient){
+        return;
+    }
+
+    if(InitNVClient::tcpclient)
+    {
         if(InitNVClient::tcpclient->state() == QAbstractSocket::ConnectedState){
             InitNVClient::ask(name);
         }else{
             nvDebug << "Could not ask. Client socket is not connected";
         }
-    }else{
-        //TODO:
     }
 }
 

@@ -26,7 +26,7 @@ public:
         sharedVariable = new NetVar<double>(logName());
         if (connectWrite)
         {
-            connect(sharedVariable, &NetVarBase::newValue, this, &ChannelT::sharedVariableUpdated);
+            connect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);
         }
     }
 

@@ -10,10 +10,10 @@ class NetVar : public NetVarBase
 {
 public:
     NetVar(QString varName) : NetVarBase(varName){
-
+        nvDebug << "variable" << varName << "created";
     }
     TypeName value(){
-        return this->_value.value<TypeName>();
+        return _value.value<TypeName>();
     }
     void setValue(TypeName val){
         this->_value.setValue(val);
