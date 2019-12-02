@@ -134,6 +134,7 @@ void InitNVClient::getError(QAbstractSocket::SocketError socketError)
     }
     nvDebug << tcpclient->errorString();
     emit disConnected();
+    emit connectionChanged(false);
     if(autoReconnectMode)
         t.start();
 }
@@ -148,4 +149,5 @@ void InitNVClient::onConnect()
 {
     nvDebug << "Connected.";
     emit connected();
+    emit connectionChanged(true);
 }

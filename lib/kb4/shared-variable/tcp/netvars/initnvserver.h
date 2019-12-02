@@ -18,7 +18,7 @@ class InitNVServer : public VarsContainer
 
     InitNVServer();
 signals:
-    void newConnection();
+    void newConnection(NetClient *client);
     void clientDisconnected();
 public:
 

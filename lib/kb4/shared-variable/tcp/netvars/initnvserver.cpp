@@ -26,7 +26,6 @@ InitNVServer::InitNVServer(quint16 port) : VarsContainer(nullptr)
         }
 
         connect(tcpserver,SIGNAL(newConnection()),this, SLOT(saveNewClient()));
-        connect(tcpserver,SIGNAL(newConnection()),this,SIGNAL(newConnection()));
     }else{
         nvDebug << "Server is already constructed";
     }
@@ -67,6 +66,7 @@ void InitNVServer::saveNewClient()
     connect(newClient,&NetClient::ask,this,&InitNVServer::clientIsAsking);
     connect(newClient,&NetClient::setValueFor,this,&InitNVServer::clientsSetValueFor);
     clients.append(newClient);
+    emit newConnection(newClient);
 }
 
 void InitNVServer::deleteClient()

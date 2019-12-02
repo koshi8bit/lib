@@ -24,6 +24,7 @@ public:
 
 signals:
     void connected();
+    void connectionChanged(bool state);
     void disConnected();
 public slots:
     void connectToServer();
