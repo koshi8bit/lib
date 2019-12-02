@@ -38,6 +38,7 @@ InitNVServer::~InitNVServer()
         tcpserver->close();
         tcpserver->deleteLater();
     }
+    tcpserver = nullptr;
 }
 
 void InitNVServer::sendToAll(QString varName, QVariant value)

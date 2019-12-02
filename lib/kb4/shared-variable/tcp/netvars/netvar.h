@@ -10,7 +10,6 @@ class NetVar : public NetVarBase
 {
 public:
     NetVar(QString varName) : NetVarBase(varName){
-        nvDebug << "variable" << varName << "created";
 
     }
     TypeName value(){

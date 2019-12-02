@@ -19,7 +19,7 @@ public:
     QString name;
     void updateNewValue(QVariant value);
 signals:
-    void valueChanged();
+    void newValue();
 public slots:
     void ask();
     void send();

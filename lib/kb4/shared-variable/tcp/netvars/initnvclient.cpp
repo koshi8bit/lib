@@ -66,7 +66,11 @@ InitNVClient::InitNVClient(QString serverIp, quint16 serverPort, int autoReconne
 
 InitNVClient::~InitNVClient()
 {
-
+    if(tcpclient){
+        tcpclient->close();
+        tcpclient->deleteLater();
+    }
+    tcpclient = nullptr;
 }
 
 void InitNVClient::connectToServer()
