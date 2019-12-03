@@ -17,6 +17,7 @@
 #include <lib/qcustomplot/qcustomplot.h>
 #include <lib/kb4/errorhandler/errorhandler.h>
 #include <lib/kb4/qdebuglogger/qdebuglogger.h>
+#include <lib/kb4/worker/worker.h>
 
 namespace Ui {
 class MainWindow;
@@ -71,6 +72,10 @@ private:
     void configureTimers();
     
     void configureExcelLog();
+
+    Worker *w;
+    void configureWorker();
+    void heavyWork();
     
 private slots:
     void addData1();

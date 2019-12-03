@@ -26,6 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     configureExcelLog();
 
+    configureWorker();
+
+
+
     eh.checkForErrors();
 
     //FIXME tima45
@@ -62,6 +66,18 @@ void MainWindow::configureExcelLog()
     excelLog->addChannel(c);
 
     excelLog->finishConfigure();
+}
+
+void MainWindow::configureWorker()
+{
+    w = new Worker("test", this);
+    w->heavyWork = [this]() { this->heavyWork();};
+    w->start();
+}
+
+void MainWindow::heavyWork()
+{
+    qDebug() << "LOL";
 }
 
 void MainWindow::configureTimers()

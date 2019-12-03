@@ -78,6 +78,7 @@ HEADERS += \
     lib/kb4/ui/rtplotwithlegend/graph.h \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
+    lib/kb4/worker/worker.h \
     lib/qcustomplot/qcustomplot.h \
     mainwindow.h \
 
@@ -107,6 +108,7 @@ SOURCES += \
     lib/kb4/ui/rtplotwithlegend/graph.cpp \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
+    lib/kb4/worker/worker.cpp \
     lib/qcustomplot/qcustomplot.cpp \
     main.cpp \
     mainwindow.cpp
