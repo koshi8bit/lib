@@ -20,6 +20,7 @@ public:
     void updateNewValue(QVariant value);
 signals:
     void valueChanged();
+    void errorOccurred(QString message);
 public slots:
     void ask();
     void send();

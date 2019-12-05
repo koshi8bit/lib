@@ -2,6 +2,8 @@
 #include "initnvserver.h"
 #include "initnvclient.h"
 
+#include <lib/kb4/easyliving.h>
+
 
 
 
@@ -43,15 +45,19 @@ void NetVarBase::ask()
 {
     if(InitNVServer::tcpserver){
         InitNVServer::askAll(name);
-    }else if(InitNVClient::tcpclient){
+        return;
+    }
+    if(InitNVClient::tcpclient)
+    {
         if(InitNVClient::tcpclient->state() == QAbstractSocket::ConnectedState){
             InitNVClient::ask(name);
         }else{
             nvDebug << "Could not ask. Client socket is not connected";
         }
-    }else{
-        //TODO:
+        return;
     }
+
+    emit errorOccurred(EL_FORMAT_ERR("LOL WHAT"));
 }
 
 void NetVarBase::send()

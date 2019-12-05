@@ -46,6 +46,11 @@ bool EasyLiving::isEqualDouble(double a, double b)
     return qAbs(a - b) <= std::numeric_limits<double>::epsilon();
 }
 
+bool EasyLiving::isBetween(QDateTime value, QDateTime min, QDateTime max)
+{
+    return (value >= min) && (value <= max);
+}
+
 
 //dateTime
 QString EasyLiving::formatDate()

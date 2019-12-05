@@ -3,6 +3,8 @@
 ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent)
     :ChannelT<double>(name, postfix, prefix, parent)
 {
+    //TODO: template fuck. See _valueChanged
+    //connect(this, &Channel::valueChanged, this, &ChannelDouble::_valueChanged);
 }
 
 
@@ -61,6 +63,12 @@ void ChannelDouble::valueChangedChild()
     {
         _rawValue = toRawFunc(value());
     }
+}
+
+void ChannelDouble::_valueChanged()
+{
+    //TODO: template fuck
+    //emit valueChangedDouble(value());
 }
 
 void ChannelDouble::addDataToGraph()

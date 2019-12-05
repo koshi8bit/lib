@@ -27,10 +27,13 @@ private:
     double _rawValue;
     double (*toRawFunc)(double) = nullptr;
 
-
+signals:
+    //TODO: template fuck
+    //void valueChangedDouble(double newValue);
 
 protected:
     void valueChangedChild() override;
+    void _valueChanged();
 private slots:
     void addDataToGraph();
 };

@@ -24,6 +24,7 @@ public:
     void configureSharedVariable(bool connectWrite=false)
     {
         sharedVariable = new NetVar<double>(logName());
+        qDebug() << "sharedVariable" << logName() << "created";
         if (connectWrite)
         {
             connect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);

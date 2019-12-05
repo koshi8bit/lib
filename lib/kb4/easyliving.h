@@ -44,6 +44,7 @@ public:
 
 
     //dateTime
+    static bool isBetween(QDateTime value, QDateTime min, QDateTime max);
     static QString formatDate();
 
     static QString formatDateFile();

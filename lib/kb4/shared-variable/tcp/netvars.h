@@ -5,4 +5,5 @@
 #include "netvars/initnvclient.h"
 #include "netvars/netvar.h"
 
+
 #endif // NETVARS_H
