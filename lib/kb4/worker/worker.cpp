@@ -22,6 +22,7 @@ void Worker::start(int intervalMSEC)
     timer->setInterval(intervalMSEC);
     timer->setSingleShot(true);
     connect(timer, &QTimer::timeout, this, &Worker::timerTimeout);
+    timer->start();
 }
 
 void Worker::timerTimeout()
