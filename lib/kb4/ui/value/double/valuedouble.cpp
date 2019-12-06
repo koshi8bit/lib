@@ -13,23 +13,25 @@ ValueDouble::~ValueDouble()
     delete ui;
 }
 
-void ValueDouble::configure(QString name, QString postfix, bool readOnly, int fontSize)
+void ValueDouble::configure(QString name, QString postfix, bool readOnly, int precision, bool scientificNotation, int fontSize)
 {
     setNameAndPostfix(name, postfix);
     setReadOnly(readOnly);
+    _precision = precision;
+    _scientificNotation = scientificNotation;
     setFontSize(fontSize);
 }
 
 void ValueDouble::setReadOnly(bool newValue)
 {
-    ui->doubleSpinBoxValue->setButtonSymbols(newValue ? QAbstractSpinBox::ButtonSymbols::NoButtons : QAbstractSpinBox::ButtonSymbols::UpDownArrows);
-    ui->doubleSpinBoxValue->setReadOnly(newValue);
+    //ui->doubleSpinBoxValue->setButtonSymbols(newValue ? QAbstractSpinBox::ButtonSymbols::NoButtons : QAbstractSpinBox::ButtonSymbols::UpDownArrows);
+    ui->lineEditValue->setReadOnly(newValue);
 }
 
 void ValueDouble::setFontSize(int newValue)
 {
     _setFontSize(ui->labelNameAndPostfix, newValue);
-    _setFontSize(ui->doubleSpinBoxValue, newValue);
+    _setFontSize(ui->lineEditValue, newValue);
 }
 
 void ValueDouble::setNameAndPostfix(QString name, QString postfix)
@@ -40,7 +42,8 @@ void ValueDouble::setNameAndPostfix(QString name, QString postfix)
 
 void ValueDouble::setValue(double newValue)
 {
-    ui->doubleSpinBoxValue->setValue(newValue);
+    auto str = EasyLiving::formatDouble(newValue, _precision, _scientificNotation);
+    ui->lineEditValue->setText(str);
 }
 
 void ValueDouble::_setFontSize(QWidget *widget, int newValue)

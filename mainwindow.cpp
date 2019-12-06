@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpere());
     ui->valuedoubleTest->setValue(8.7);
 
+    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpere(), true, 1, true);
+    ui->valuedoubleTest_2->setValue(8.7);
+
 
 
     eh.checkForErrors();

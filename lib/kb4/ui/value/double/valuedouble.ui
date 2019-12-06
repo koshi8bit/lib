@@ -28,18 +28,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QDoubleSpinBox" name="doubleSpinBoxValue">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>1</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+    <widget class="QLineEdit" name="lineEditValue">
      <property name="alignment">
       <set>Qt::AlignCenter</set>
-     </property>
-     <property name="decimals">
-      <number>3</number>
      </property>
     </widget>
    </item>

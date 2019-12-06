@@ -6,19 +6,18 @@ EasyLiving::EasyLiving()
 }
 
 
+
 //double
-QString EasyLiving::formatDouble(double value, int precision, Format format, EasyLiving::DoubleSeporatorSign seporatorSign)
+QString EasyLiving::formatDouble(double value, int precision, bool scientificNotation, EasyLiving::DoubleSeporatorSign seporatorSign)
 {
     char _format;
-    switch (format)
+    if (scientificNotation)
     {
-        case Format::StandardNotation:
-            _format='f';
-        break;
-
-        case Format::ScientificNotation:
-            _format='e';
-        break;
+        _format='e';
+    }
+    else
+    {
+        _format='f';
     }
 
     if (seporatorSign == DoubleSeporatorSign::Comma)

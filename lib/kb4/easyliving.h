@@ -38,7 +38,7 @@ public:
     EasyLiving();
 
     //double
-    static QString formatDouble(double value, int precision = 3, Format format = Format::StandardNotation, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
+    static QString formatDouble(double value, int precision = 3, bool scientificNotation = false, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
     static bool isBetween(double value, double min, double max);
     static bool isEqualDouble(double a, double b);
 
