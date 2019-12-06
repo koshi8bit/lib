@@ -32,7 +32,7 @@ void GraphLegendItem::setValue(double value)
 {
     if (scientificNotation)
     {
-        setValue(EasyLiving::formatDouble(value, 3, EasyLiving::Format::ScientificNotation));
+        setValue(EasyLiving::formatDouble(value, 3, true));
     }
     else
     {

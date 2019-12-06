@@ -28,13 +28,6 @@ public:
     };
     Q_ENUM(DoubleSeporatorSign)
 
-    enum Format
-    {
-        StandardNotation,    // f
-        ScientificNotation   // e
-    };
-    Q_ENUM(Format)
-
     EasyLiving();
 
     //double
@@ -65,6 +58,7 @@ public:
     static QString postfixWatt();
     static QString postfixSievert();
     static QString postfixSievertPerHour();
+    static QString postfixFluence();
 
     static QString postfixMilli();
     static QString postfixKilo();

@@ -23,7 +23,7 @@ public:
 
     void configureSharedVariable(bool connectWrite=false)
     {
-        sharedVariable = new NetVar<double>(logName());
+        sharedVariable = new NetVar<T>(logName());
         qDebug() << "sharedVariable" << logName() << "created";
         if (connectWrite)
         {
@@ -47,7 +47,7 @@ public slots:
 
 private:
     T _value;
-    NetVar<double> *sharedVariable = nullptr;
+    NetVar<T> *sharedVariable = nullptr;
 
     void _setValue(T newValue)
     {

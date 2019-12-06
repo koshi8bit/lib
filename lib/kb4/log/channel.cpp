@@ -3,10 +3,17 @@
 Channel::Channel(QString name, QString postfix, QStringList *path, QObject *parent) : QObject(parent)
 {
     QString seporator = "/";
-    _logName = QString("%1%2%3")
-            .arg(path->join(seporator))
-            .arg(seporator)
-            .arg(name);
+    if (path)
+    {
+        _logName = QString("%1%2%3")
+                .arg(path->join(seporator))
+                .arg(seporator)
+                .arg(name);
+    }
+    else
+    {
+        _logName = name;
+    }
 
     _plotName = _logName;
     _widgetName = name;

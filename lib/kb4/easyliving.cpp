@@ -130,6 +130,11 @@ QString EasyLiving::postfixSievertPerHour()
     return postfixSievert() + "/Ч";
 }
 
+QString EasyLiving::postfixFluence()
+{
+    return "Кл";
+}
+
 QString EasyLiving::postfixMilli()
 {
     return "м";

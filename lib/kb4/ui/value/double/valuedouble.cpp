@@ -13,13 +13,14 @@ ValueDouble::~ValueDouble()
     delete ui;
 }
 
-void ValueDouble::configure(QString name, QString postfix, bool readOnly, int precision, bool scientificNotation, int fontSize)
+void ValueDouble::configure(QString name, QString postfix, int precision, bool readOnly, bool scientificNotation, int fontSize)
 {
     setNameAndPostfix(name, postfix);
     setReadOnly(readOnly);
     _precision = precision;
     _scientificNotation = scientificNotation;
     setFontSize(fontSize);
+    setValue(0);
 }
 
 void ValueDouble::setReadOnly(bool newValue)
@@ -36,7 +37,7 @@ void ValueDouble::setFontSize(int newValue)
 
 void ValueDouble::setNameAndPostfix(QString name, QString postfix)
 {
-    auto s = QString("%1 (%2)").arg(name, postfix);
+    auto s = QString("%1 (%2):").arg(name, postfix);
     ui->labelNameAndPostfix->setText(s);
 }
 

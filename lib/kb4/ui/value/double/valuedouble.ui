@@ -22,6 +22,11 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <family>Consolas</family>
+      </font>
+     </property>
      <property name="text">
       <string>name</string>
      </property>
@@ -29,6 +34,17 @@
    </item>
    <item>
     <widget class="QLineEdit" name="lineEditValue">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>1</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Consolas</family>
+      </font>
+     </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
