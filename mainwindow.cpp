@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     configureWorker();
 
+    ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpere());
+    ui->valuedoubleTest->setValue(8.7);
+
 
 
     eh.checkForErrors();
@@ -66,6 +69,11 @@ void MainWindow::configureExcelLog()
     excelLog->addChannel(c);
 
     excelLog->finishConfigure();
+
+
+
+
+
 }
 
 void MainWindow::configureWorker()

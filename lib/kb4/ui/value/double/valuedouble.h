@@ -18,8 +18,7 @@ public:
     void configure(QString name, QString postfix, bool readOnly = true, int fontSize = 14);
     void setValue(double newValue);
 
-    void setName(QString newValue);
-    void setPostfix(QString newValue);
+    void setNameAndPostfix(QString name, QString postfix);
     void setFontSize(int newValue);
     void setReadOnly(bool newValue);
 

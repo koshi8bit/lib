@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -240,6 +240,21 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>valuedouble</string>
+       </attribute>
+       <widget class="ValueDouble" name="valuedoubleTest" native="true">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>60</y>
+          <width>171</width>
+          <height>71</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -282,6 +297,12 @@
    <class>MinMax</class>
    <extends>QWidget</extends>
    <header>lib/kb4/ui/gradientlineedit/minmax.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ValueDouble</class>
+   <extends>QWidget</extends>
+   <header>lib/kb4/ui/value/double/valuedouble.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

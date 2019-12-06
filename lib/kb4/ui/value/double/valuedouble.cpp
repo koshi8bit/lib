@@ -15,8 +15,7 @@ ValueDouble::~ValueDouble()
 
 void ValueDouble::configure(QString name, QString postfix, bool readOnly, int fontSize)
 {
-    setName(name);
-    setPostfix(postfix);
+    setNameAndPostfix(name, postfix);
     setReadOnly(readOnly);
     setFontSize(fontSize);
 }
@@ -29,19 +28,14 @@ void ValueDouble::setReadOnly(bool newValue)
 
 void ValueDouble::setFontSize(int newValue)
 {
-    _setFontSize(ui->labelName, newValue);
-    _setFontSize(ui->labelPostfix, newValue);
+    _setFontSize(ui->labelNameAndPostfix, newValue);
     _setFontSize(ui->doubleSpinBoxValue, newValue);
 }
 
-void ValueDouble::setName(QString newValue)
+void ValueDouble::setNameAndPostfix(QString name, QString postfix)
 {
-    ui->labelName->setText(newValue);
-}
-
-void ValueDouble::setPostfix(QString newValue)
-{
-    ui->labelPostfix->setText(newValue);
+    auto s = QString("%1 (%2)").arg(name, postfix);
+    ui->labelNameAndPostfix->setText(s);
 }
 
 void ValueDouble::setValue(double newValue)
