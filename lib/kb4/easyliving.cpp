@@ -95,9 +95,9 @@ QString EasyLiving::formatDateTimeUiSeporator()
     return "@";
 }
 
-QString EasyLiving::formatDateTimeUi()
+QString EasyLiving::formatDateTimeUi(bool showMS)
 {
-    return formatDateUi() + formatDateTimeUiSeporator() + formatTimeUi(true);
+    return formatDateUi() + formatDateTimeUiSeporator() + formatTimeUi(showMS);
 }
 
 QString EasyLiving::postfixCelsius()
