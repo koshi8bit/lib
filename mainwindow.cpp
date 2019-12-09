@@ -60,7 +60,7 @@ void MainWindow::configureExcelLog()
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
     excelLog->addChannel(a);
 
-    b = new ChannelDouble("BBB", EasyLiving::postfixMilliRu() + EasyLiving::postfixAmpere(), &(QStringList() << "b/middle2"), this);
+    b = new ChannelDouble("BBB", EasyLiving::postfixMilliRu() + EasyLiving::postfixAmpereRu(), &(QStringList() << "b/middle2"), this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
