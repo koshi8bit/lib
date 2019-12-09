@@ -2,6 +2,8 @@
 #define VALUEDOUBLE_H
 
 #include <QWidget>
+#include <QLineEdit>
+
 #include <lib/kb4/easyliving.h>
 
 namespace Ui {
@@ -22,12 +24,21 @@ public:
     void setNameAndPostfix(QString name, QString postfix);
     void setFontSize(int newValue);
     void setReadOnly(bool newValue);
+    void setTrusted(bool newValue);
+
+    QLineEdit *valueWidget();
+
+    const static QString trustedColor;
+    const static QString notTrustedColor;
 
 private:
     bool _scientificNotation;
     int _precision;
     Ui::ValueDouble *ui;
     void _setFontSize(QWidget *widget, int newValue);
+
+    void setColor(QWidget *widget, QString newColor);
+
 
 public slots:
     void setValue(double newValue);
