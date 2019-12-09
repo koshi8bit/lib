@@ -47,26 +47,27 @@ public:
 
     static QString formatDateUi();
     static QString formatTimeUi(bool showMS);
-    static QString formatDateTimeUiSeporator();
-    static QString formatDateTimeUi();
+    static QString formatDateTimeUiSeporator(QString seporator = "@");
+    static QString formatDateTimeUi(bool showMS);
 
 
     //postfix
     static QString postfixCelsius();
     static QString postfixAmpere();
-    static QString postfixVolt();
-    static QString postfixWatt();
-    static QString postfixSievert();
-    static QString postfixSievertPerHour();
-    static QString postfixFluence();
+    static QString postfixVoltRu();
+    static QString postfixVoltEn();
+    static QString postfixWattRu();
+    static QString postfixSievertRu();
+    static QString postfixSievertPerHourRu();
+    static QString postfixFluenceRu();
 
-    static QString postfixMilli();
-    static QString postfixKilo();
+    static QString postfixMilliRu();
+    static QString postfixKiloRu();
 
     static QString postfixPersent();
 
-    static QString postfixMilliAmpere();
-    static QString postfixKiloVolt();
+    static QString postfixMilliAmpereRu();
+    static QString postfixKiloVoltRu();
 
 
     //bool

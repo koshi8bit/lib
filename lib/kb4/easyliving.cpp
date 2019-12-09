@@ -90,9 +90,9 @@ QString EasyLiving::formatTimeUi(bool showMS)
     return format;
 }
 
-QString EasyLiving::formatDateTimeUiSeporator()
+QString EasyLiving::formatDateTimeUiSeporator(QString seporator)
 {
-    return "@";
+    return seporator;
 }
 
 QString EasyLiving::formatDateTimeUi(bool showMS)
@@ -110,37 +110,37 @@ QString EasyLiving::postfixAmpere()
     return "А";
 }
 
-QString EasyLiving::postfixVolt()
+QString EasyLiving::postfixVoltRu()
 {
     return "В";
 }
 
-QString EasyLiving::postfixWatt()
+QString EasyLiving::postfixWattRu()
 {
     return "Вт";
 }
 
-QString EasyLiving::postfixSievert()
+QString EasyLiving::postfixSievertRu()
 {
     return "Зв";
 }
 
-QString EasyLiving::postfixSievertPerHour()
+QString EasyLiving::postfixSievertPerHourRu()
 {
-    return postfixSievert() + "/Ч";
+    return postfixSievertRu() + "/Ч";
 }
 
-QString EasyLiving::postfixFluence()
+QString EasyLiving::postfixFluenceRu()
 {
     return "Кл";
 }
 
-QString EasyLiving::postfixMilli()
+QString EasyLiving::postfixMilliRu()
 {
     return "м";
 }
 
-QString EasyLiving::postfixKilo()
+QString EasyLiving::postfixKiloRu()
 {
     return "к";
 }
@@ -150,14 +150,14 @@ QString EasyLiving::postfixPersent()
     return "%";
 }
 
-QString EasyLiving::postfixMilliAmpere()
+QString EasyLiving::postfixMilliAmpereRu()
 {
-    return postfixMilli() + postfixAmpere();
+    return postfixMilliRu() + postfixAmpere();
 }
 
-QString EasyLiving::postfixKiloVolt()
+QString EasyLiving::postfixKiloVoltRu()
 {
-    return EasyLiving::postfixKilo() + EasyLiving::postfixVolt();
+    return EasyLiving::postfixKiloRu() + EasyLiving::postfixVoltRu();
 }
 
 bool EasyLiving::isChecked(int arg1)

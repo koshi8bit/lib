@@ -28,10 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     configureWorker();
 
-    ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpere());
+    ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpereRu());
     ui->valuedoubleTest->setValue(8.7);
 
-    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpere(), 1, true, true);
+    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpereRu(), 1, true, true);
     ui->valuedoubleTest_2->setValue(8.7);
 
 
@@ -60,11 +60,11 @@ void MainWindow::configureExcelLog()
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
     excelLog->addChannel(a);
 
-    b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), &(QStringList() << "b/middle2"), this);
+    b = new ChannelDouble("BBB", EasyLiving::postfixMilliRu() + EasyLiving::postfixAmpere(), &(QStringList() << "b/middle2"), this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
-    c = new ChannelDouble("CCC", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
+    c = new ChannelDouble("CCC", EasyLiving::postfixKiloRu() + EasyLiving::postfixVoltRu(), &(QStringList() << "c/middle3"), this);
     //FIXME tima45
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
@@ -212,7 +212,7 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKilo() + EasyLiving::postfixVolt());
+    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKiloRu() + EasyLiving::postfixVoltRu());
     graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setVisible(false);
     graphHighVoltageElvFirstSection->setColor(QColor("#BBBBBB"));
