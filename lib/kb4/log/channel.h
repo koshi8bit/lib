@@ -14,12 +14,12 @@ public:
     //QColor color;
 
     QString plotName() const;
+    void setPlotName(const QString plotName);
     QString widgetName() const;
+    void setWidgetName(const QString widgetName);
     QString logName() const;
+    void setLogName(const QString logName);
     QString postfix() const;
-
-    void setPlotName(const QString &plotName);
-    void setWidgetName(const QString &widgetName);
 
 private:
     QString _plotName;

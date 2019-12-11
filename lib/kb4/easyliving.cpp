@@ -30,7 +30,7 @@ QString EasyLiving::formatDouble(double value, int precision, bool scientificNot
         return QString::number(value, _format, precision);
     }
 
-    auto message = EL_FORMAT_ERR("Invalid seporator sign!");
+    auto message = EL_FORMAT_ERR(tr("Invalid seporator sign!"));
     qDebug() << message;
     return message;
 }

@@ -62,6 +62,11 @@ void ValueDouble::setFontSize(int newValue)
     {
         this->setMinimumHeight(71);
     }
+
+    if (newValue == 25)
+    {
+        this->setMinimumHeight(62);
+    }
 }
 
 void ValueDouble::setNameAndPostfix(QString name, QString postfix)

@@ -26,9 +26,19 @@ QString Channel::plotName() const
     return _plotName;
 }
 
+void Channel::setPlotName(const QString plotName)
+{
+    _plotName = plotName;
+}
+
 QString Channel::widgetName() const
 {
     return _widgetName;
+}
+
+void Channel::setWidgetName(const QString widgetName)
+{
+    _widgetName = widgetName;
 }
 
 QString Channel::logName() const
@@ -36,14 +46,9 @@ QString Channel::logName() const
     return _logName;
 }
 
-void Channel::setPlotName(const QString &plotName)
+void Channel::setLogName(const QString logName)
 {
-    _plotName = plotName;
-}
-
-void Channel::setWidgetName(const QString &widgetName)
-{
-    _widgetName = widgetName;
+    _logName = logName;
 }
 
 void Channel::_errorOccurred(QString message)

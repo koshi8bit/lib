@@ -15,6 +15,7 @@ public:
     void setScientificNotation(bool newValue);
 
     void setRawValue(double newValue);
+    //std::function<void()> heavyWork;
     void setToScaledFunc(double(*f)(double));
 
     void setToRawFunc(double(*f)(double));
