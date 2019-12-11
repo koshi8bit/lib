@@ -15,18 +15,20 @@ public:
     void setScientificNotation(bool newValue);
 
     void setRawValue(double newValue);
-    //std::function<void()> heavyWork;
-    void setToScaledFunc(double(*f)(double));
+    void setToScaledFunc(std::function<double(double)> f);
 
-    void setToRawFunc(double(*f)(double));
+    void setToRawFunc(std::function<double(double)> f);
     double rawValue();
 private:
     Graph *graph;
     bool _scientificNotation = false;
-    double (*toScaledFunc)(double) = nullptr;
+
+    //double (*toScaledFunc)(double) = nullptr;
+    std::function<double(double)> toScaledFunc = nullptr;
 
     double _rawValue;
-    double (*toRawFunc)(double) = nullptr;
+    //double (*toRawFunc)(double) = nullptr;
+    std::function<double(double)> toRawFunc = nullptr;
 
 signals:
     //TODO: template fuck

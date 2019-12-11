@@ -35,12 +35,12 @@ void ChannelDouble::setRawValue(double newRawValue)
     setValue(toScaledFunc(newRawValue));
 }
 
-void ChannelDouble::setToScaledFunc(double (*f)(double))
+void ChannelDouble::setToScaledFunc(std::function<double(double)> f)
 {
     toScaledFunc = f;
 }
 
-void ChannelDouble::setToRawFunc(double (*f)(double))
+void ChannelDouble::setToRawFunc(std::function<double(double)> f)
 {
     toRawFunc = f;
 }
