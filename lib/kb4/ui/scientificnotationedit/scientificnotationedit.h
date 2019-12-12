@@ -6,6 +6,7 @@
 #include <QDoubleValidator>
 #include <QLocale>
 #include <QDebug>
+#include <QRegExp>
 
 class ScientificNotationEdit : public QLineEdit
 {
@@ -14,6 +15,9 @@ public:
 
     void setValue(double value);
     double value();
+
+private:
+    QRegExpValidator  *validator;
 
 };
 

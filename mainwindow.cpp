@@ -31,8 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpereRu());
     ui->valuedoubleTest->setValue(8.7);
 
-    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpereRu(), 1, true, true);
+    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpereRu(), 1, false, true);
     ui->valuedoubleTest_2->setValue(8.7);
+
+    connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
+    connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [this](double a) { qDebug() << a; });
 
 
 

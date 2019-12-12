@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>110</width>
+    <width>159</width>
     <height>38</height>
    </rect>
   </property>
@@ -33,7 +33,19 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEditValue">
+    <widget class="QDoubleSpinBox" name="doubleSpinBoxValueSet">
+     <property name="font">
+      <font>
+       <family>Consolas</family>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="lineEditValueGet">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>1</horstretch>

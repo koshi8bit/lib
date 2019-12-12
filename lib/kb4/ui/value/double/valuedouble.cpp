@@ -9,6 +9,9 @@ ValueDouble::ValueDouble(QWidget *parent) :
     ui(new Ui::ValueDouble)
 {
     ui->setupUi(this);
+    ui->lineEditValueGet->setReadOnly(true);
+    connect(ui->doubleSpinBoxValueSet, SIGNAL(valueChanged(double)), this, SIGNAL(valueChanged(double)));
+
 }
 
 ValueDouble::~ValueDouble()
@@ -16,20 +19,18 @@ ValueDouble::~ValueDouble()
     delete ui;
 }
 
-void ValueDouble::configure(QString name, QString postfix, int precision, bool readOnly, bool scientificNotation, int fontSize)
+void ValueDouble::configure(QString name, QString postfix, int precision, bool hideSetWidget, bool scientificNotation, int fontSize)
 {
     setNameAndPostfix(name, postfix);
-    setReadOnly(readOnly);
     _precision = precision;
+
+    ui->doubleSpinBoxValueSet->setVisible(!hideSetWidget);
+    ui->doubleSpinBoxValueSet->setDecimals(_precision);
+
+
     _scientificNotation = scientificNotation;
     setFontSize(fontSize);
     setValue(0);
-}
-
-void ValueDouble::setReadOnly(bool newValue)
-{
-    //ui->doubleSpinBoxValue->setButtonSymbols(newValue ? QAbstractSpinBox::ButtonSymbols::NoButtons : QAbstractSpinBox::ButtonSymbols::UpDownArrows);
-    ui->lineEditValue->setReadOnly(newValue);
 }
 
 void ValueDouble::setTrusted(bool newValue)
@@ -45,18 +46,19 @@ void ValueDouble::setTrusted(bool newValue)
     }
 
     setColor(ui->labelNameAndPostfix, color);
-    setColor(ui->lineEditValue, color);
+    setColor(ui->lineEditValueGet, color);
 }
 
 QLineEdit *ValueDouble::valueWidget()
 {
-    return ui->lineEditValue;
+    return ui->lineEditValueGet;
 }
 
 void ValueDouble::setFontSize(int newValue)
 {
     _setFontSize(ui->labelNameAndPostfix, newValue);
-    _setFontSize(ui->lineEditValue, newValue);
+    _setFontSize(ui->lineEditValueGet, newValue);
+    _setFontSize(ui->doubleSpinBoxValueSet, newValue);
 
     if (newValue == 30)
     {
@@ -78,7 +80,7 @@ void ValueDouble::setNameAndPostfix(QString name, QString postfix)
 void ValueDouble::setValue(double newValue)
 {
     auto str = EasyLiving::formatDouble(newValue, _precision, _scientificNotation);
-    ui->lineEditValue->setText(str);
+    ui->lineEditValueGet->setText(str);
 }
 
 void ValueDouble::_setFontSize(QWidget *widget, int newValue)

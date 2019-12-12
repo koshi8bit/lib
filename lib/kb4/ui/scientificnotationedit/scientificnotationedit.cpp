@@ -4,8 +4,9 @@ ScientificNotationEdit::ScientificNotationEdit(QWidget *parent)
     : QLineEdit (parent)
 {
     //FIXME 0,99 не работает, не вводится, когда пустое поле
-    auto validator = new QDoubleValidator(-9999999999.0, 999999999.0, 2, parent);
-    validator->setNotation(QDoubleValidator::Notation::ScientificNotation);
+//    auto validator = new QDoubleValidator(-9999999999.0, 999999999.0, 2, parent);
+//    validator->setNotation(QDoubleValidator::Notation::ScientificNotation);
+    validator = new QRegExpValidator(QRegExp(R"([+\-]?(?:0|[1-9]\d*)(?:\.\d*|\,\d*)?(?:[eE][+\-]?\d+)?)"));
     this->setValidator(validator);
 }
 

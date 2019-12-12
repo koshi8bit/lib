@@ -18,12 +18,11 @@ public:
     explicit ValueDouble(QWidget *parent = nullptr);
     ~ValueDouble();
 
-    void configure(QString name, QString postfix, int precision = 3, bool readOnly = true, bool scientificNotation = false, int fontSize = 8);
+    void configure(QString name, QString postfix, int precision = 3, bool hideSetWidget = true, bool scientificNotation = false, int fontSize = 8);
 
 
     void setNameAndPostfix(QString name, QString postfix);
     void setFontSize(int newValue);
-    void setReadOnly(bool newValue);
     void setTrusted(bool newValue);
 
     QLineEdit *valueWidget();
@@ -38,6 +37,9 @@ private:
     void _setFontSize(QWidget *widget, int newValue);
 
     void setColor(QWidget *widget, QString newColor);
+
+signals:
+    void valueChanged(double newValue);
 
 
 public slots:
