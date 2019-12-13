@@ -18,7 +18,8 @@ public:
     explicit ValueDouble(QWidget *parent = nullptr);
     ~ValueDouble();
 
-    void configure(QString name, QString postfix, int precision = 3, bool hideSetWidget = true, bool scientificNotation = false, int fontSize = 8);
+    void configure(QString name, QString postfix, int precision = 3, bool hideSetWidget = true, bool scientificNotation = false, int fontSize = 10);
+    void setRangeSetter(double min, double max);
 
 
     void setNameAndPostfix(QString name, QString postfix);
@@ -44,6 +45,8 @@ signals:
 
 public slots:
     void setValue(double newValue);
+private slots:
+    void on_pushButtonSet_clicked();
 };
 
 #endif // VALUEDOUBLE_H

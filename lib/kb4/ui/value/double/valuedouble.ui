@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>159</width>
-    <height>38</height>
+    <width>234</width>
+    <height>41</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,6 +41,19 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButtonSet">
+     <property name="maximumSize">
+      <size>
+       <width>35</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Set</string>
      </property>
     </widget>
    </item>

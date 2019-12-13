@@ -54,6 +54,7 @@ private:
         _value = newValue;
         valueChangedChild();
 
+        //qDebug() << "valueChanged" << logName() << newValue;
         emit valueChanged();
 //      emit valueChanged777(_value);
     }

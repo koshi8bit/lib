@@ -10,7 +10,8 @@ ValueDouble::ValueDouble(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEditValueGet->setReadOnly(true);
-    connect(ui->doubleSpinBoxValueSet, SIGNAL(valueChanged(double)), this, SIGNAL(valueChanged(double)));
+    //connect(ui->doubleSpinBoxValueSet, SIGNAL(valueChanged(double)), this, SIGNAL(valueChanged(double)));
+
 
 }
 
@@ -25,12 +26,18 @@ void ValueDouble::configure(QString name, QString postfix, int precision, bool h
     _precision = precision;
 
     ui->doubleSpinBoxValueSet->setVisible(!hideSetWidget);
+    ui->pushButtonSet->setVisible(!hideSetWidget);
     ui->doubleSpinBoxValueSet->setDecimals(_precision);
 
 
     _scientificNotation = scientificNotation;
     setFontSize(fontSize);
     setValue(0);
+}
+
+void ValueDouble::setRangeSetter(double min, double max)
+{
+    ui->doubleSpinBoxValueSet->setRange(min, max);
 }
 
 void ValueDouble::setTrusted(bool newValue)
@@ -59,6 +66,7 @@ void ValueDouble::setFontSize(int newValue)
     _setFontSize(ui->labelNameAndPostfix, newValue);
     _setFontSize(ui->lineEditValueGet, newValue);
     _setFontSize(ui->doubleSpinBoxValueSet, newValue);
+    _setFontSize(ui->pushButtonSet, newValue);
 
     if (newValue == 30)
     {
@@ -68,6 +76,11 @@ void ValueDouble::setFontSize(int newValue)
     if (newValue == 25)
     {
         this->setMinimumHeight(62);
+    }
+
+    if (newValue == 8)
+    {
+        this->setMinimumHeight(38);
     }
 }
 
@@ -93,4 +106,9 @@ void ValueDouble::_setFontSize(QWidget *widget, int newValue)
 void ValueDouble::setColor(QWidget *widget, QString newColor)
 {
     widget->setStyleSheet(QString("color: %1").arg(newColor));
+}
+
+void ValueDouble::on_pushButtonSet_clicked()
+{
+    emit valueChanged(ui->doubleSpinBoxValueSet->value());
 }
