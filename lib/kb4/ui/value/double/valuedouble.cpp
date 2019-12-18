@@ -112,3 +112,8 @@ void ValueDouble::on_pushButtonSet_clicked()
 {
     emit valueChanged(ui->doubleSpinBoxValueSet->value());
 }
+
+void ValueDouble::on_doubleSpinBoxValueSet_editingFinished()
+{
+    emit valueChanged(ui->doubleSpinBoxValueSet->value());
+}

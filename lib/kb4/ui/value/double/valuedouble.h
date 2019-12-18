@@ -47,6 +47,7 @@ public slots:
     void setValue(double newValue);
 private slots:
     void on_pushButtonSet_clicked();
+    void on_doubleSpinBoxValueSet_editingFinished();
 };
 
 #endif // VALUEDOUBLE_H
