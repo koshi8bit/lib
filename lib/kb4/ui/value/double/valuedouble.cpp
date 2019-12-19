@@ -20,6 +20,7 @@ ValueDouble::~ValueDouble()
     delete ui;
 }
 
+
 void ValueDouble::configure(QString name, QString postfix, int precision, bool hideSetWidget, bool scientificNotation, int fontSize)
 {
     setNameAndPostfix(name, postfix);
@@ -33,6 +34,17 @@ void ValueDouble::configure(QString name, QString postfix, int precision, bool h
     _scientificNotation = scientificNotation;
     setFontSize(fontSize);
     setValue(0);
+
+    setMaxWidth();
+
+}
+
+void ValueDouble::setMaxWidth()
+{
+    QFontMetrics fm(ui->lineEditValueGet->font());
+    auto str = EasyLiving::formatDouble(123, _precision, _scientificNotation);
+    auto maxWidth = fm.horizontalAdvance(str);
+    ui->lineEditValueGet->setMaximumWidth(static_cast<int>(maxWidth*1.2)+10);
 }
 
 void ValueDouble::setRangeSetter(double min, double max)

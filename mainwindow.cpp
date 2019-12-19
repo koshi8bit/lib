@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpereRu(), 1, false, true);
     ui->valuedoubleTest_2->setValue(8.7);
 
+
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [this](double a) { qDebug() << a; });
 
@@ -43,8 +44,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //FIXME tima45
     auto a = QLocale(QLocale::Russian);
-    qDebug() << a.decimalPoint();
-    qDebug() << QString(a.groupSeparator());
+    qDebug() << "Разделитель тчк/зпт" << a.decimalPoint();
+    qDebug() << "Разделитель группы" << QString(a.groupSeparator());
     qDebug() << QString::number(1300.2, 'f', 2);
 
 }
@@ -91,7 +92,7 @@ void MainWindow::configureWorker()
 
 void MainWindow::heavyWork()
 {
-    qDebug() << "LOL";
+    qDebug() << "heavyWork";
 }
 
 void MainWindow::configureTimers()

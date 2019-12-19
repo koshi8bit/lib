@@ -39,6 +39,8 @@ private:
 
     void setColor(QWidget *widget, QString newColor);
 
+    void setMaxWidth();
+    
 signals:
     void valueChanged(double newValue);
 

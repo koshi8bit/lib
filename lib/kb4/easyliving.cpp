@@ -10,24 +10,15 @@ EasyLiving::EasyLiving()
 //double
 QString EasyLiving::formatDouble(double value, int precision, bool scientificNotation, EasyLiving::DoubleSeporatorSign seporatorSign)
 {
-    char _format;
-    if (scientificNotation)
-    {
-        _format='e';
-    }
-    else
-    {
-        _format='f';
-    }
+    char _format= scientificNotation ? 'e' : 'f';
 
-    if (seporatorSign == DoubleSeporatorSign::Comma)
+    switch (seporatorSign)
     {
-        return QLocale(QLocale::Russian).toString(value, _format, precision);
-    }
+        case DoubleSeporatorSign::Comma:
+            return QLocale(QLocale::Russian).toString(value, _format, precision);
 
-    if (seporatorSign == DoubleSeporatorSign::Point)
-    {
-        return QString::number(value, _format, precision);
+        case DoubleSeporatorSign::Point:
+            return QString::number(value, _format, precision);
     }
 
     auto message = EL_FORMAT_ERR(tr("Invalid seporator sign!"));

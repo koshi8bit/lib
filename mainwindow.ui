@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
+    <width>1163</width>
     <height>651</height>
    </rect>
   </property>
@@ -244,26 +244,31 @@
        <attribute name="title">
         <string>valuedouble</string>
        </attribute>
-       <widget class="ValueDouble" name="valuedoubleTest" native="true">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>60</y>
-          <width>291</width>
-          <height>71</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="ValueDouble" name="valuedoubleTest_2" native="true">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>170</y>
-          <width>291</width>
-          <height>71</height>
-         </rect>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="ValueDouble" name="valuedoubleTest_2" native="true"/>
+          </item>
+          <item>
+           <widget class="ValueDouble" name="valuedoubleTest" native="true"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -289,7 +294,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>798</width>
+     <width>1163</width>
      <height>21</height>
     </rect>
    </property>
