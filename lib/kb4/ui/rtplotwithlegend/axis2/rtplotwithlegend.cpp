@@ -21,6 +21,8 @@ RTPlotWithLegend::RTPlotWithLegend(QWidget *parent) :
     connect(_plot, &QCustomPlot::mousePress, this, &RTPlotWithLegend::mousePress);
     connect(_plot, &QCustomPlot::mouseDoubleClick, this, &RTPlotWithLegend::mouseDoubleClick);
 
+    connect(_plot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisRangeChanged(QCPRange)));
+
 }
 
 RTPlotWithLegend::~RTPlotWithLegend()
@@ -54,7 +56,9 @@ void RTPlotWithLegend::configurePlot()
     configurePlotLine();
     _plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     auto _now = RTPlotWithLegend::now();
-    _plot->xAxis->setRange(_now - 90, _now); //90=1min 30sec
+    _plot->xAxis->setRangeUpper(_now);
+    setTimeAxisRange(90); //90=1min 30sec
+    //_plot->xAxis->setRange(_now - 90, _now); //90=1min 30sec
     //_plot->setNoAntialiasingOnDrag(true);
     //_plot->setPlottingHint(QCP::phFastPolylines,true); // ?tima45 line from ethernet
 }
@@ -98,6 +102,19 @@ double RTPlotWithLegend::timeAxisRangeSEC()
     auto range = _plot->xAxis->range();
     return range.upper - range.lower;
 
+}
+
+void RTPlotWithLegend::updateTimeAxisRangePostfix()
+{
+    auto delta = _plot->xAxis->range().upper - _plot->xAxis->range().lower;
+    auto t = QTime(0, 0, 0).addSecs(static_cast<int>(delta));
+    _plot->xAxis->setLabel(QString("Время [%1]").arg(t.toString(EasyLiving::formatTimeUi(false))));
+}
+
+void RTPlotWithLegend::setTimeAxisRange(int newRangeSEC)
+{
+    _plot->xAxis->setRangeLower(_plot->xAxis->range().upper - newRangeSEC);
+    updateTimeAxisRangePostfix();
 }
 
 void RTPlotWithLegend::setNumberPrecision(RTPlotWithLegend::Axis axis, int newValue)
@@ -294,6 +311,15 @@ void RTPlotWithLegend::beforeReplot()
     }
 }
 
+void RTPlotWithLegend::xAxisRangeChanged(const QCPRange &newRange)
+{
+    auto delta = newRange.upper - newRange.lower;
+    if (!EasyLiving::isEqualDouble(xAxisOldRange, delta))
+    {
+        xAxisOldRange = delta;
+        updateTimeAxisRangePostfix();
+    }
+}
 
 void RTPlotWithLegend::mouseMove(QMouseEvent *event)
 {

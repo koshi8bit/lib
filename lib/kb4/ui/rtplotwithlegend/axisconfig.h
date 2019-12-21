@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <lib/qcustomplot/qcustomplot.h>
 
+#include <lib/kb4/easyliving.h>
+
 namespace Ui {
 class AxisConfig;
 }

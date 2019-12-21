@@ -38,6 +38,7 @@ public:
     bool realTime();
     bool moveLineRealTime();
     double timeAxisRangeSEC();
+    void setTimeAxisRange(int newRangeSEC);
     void setNumberPrecision(RTPlotWithLegend::Axis axis, int newValue);
 
 
@@ -60,6 +61,7 @@ private:
     bool _realTime;
     bool _moveLineRealTime;
     QLabel *labelTime;
+    double xAxisOldRange;
 
     void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);
@@ -80,6 +82,8 @@ private:
     
     void configurePlot();
     
+    void updateTimeAxisRangePostfix();
+
 signals:
     void realTimeChanged(bool newValue);
     void moveLineRealTimeChanged(bool newValue);
@@ -97,6 +101,7 @@ private slots:
     void mouseDoubleClick(QMouseEvent *event);
     void mouseMove(QMouseEvent *event);
     void beforeReplot();
+    void xAxisRangeChanged(const QCPRange &newRange);
 
 
     

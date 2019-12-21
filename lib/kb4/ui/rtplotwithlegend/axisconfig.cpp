@@ -23,13 +23,15 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
         axisType = AxisType::DateTime;
 
         ui->groupBoxNumeric->setVisible(false);
+        ui->labelLabel->setVisible(false);
+        ui->lineEditLabel->setVisible(false);
 
-        ui->spinBoxFullSec->setValue(ceil(axis->range().upper - axis->range().lower));
+        ui->spinBoxFullSec->setValue(static_cast<int>(axis->range().upper - axis->range().lower));
         connect(ui->spinBoxHours, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
         connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
         connect(ui->spinBoxSeconds, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
 
-        resize(450, 145);
+        resize(450, 110);
 
         return;
 
@@ -125,6 +127,7 @@ void AxisConfig::on_buttonBox_accepted()
     {
 
         axis->setRangeLower(axis->range().upper - ui->spinBoxFullSec->value());
+
         return;
     }
 }
@@ -178,8 +181,6 @@ void AxisConfig::spinBoxHoursMinutesSecondsValueChanged(int arg1)
     QTime t = QTime(ui->spinBoxHours->value(),
                     ui->spinBoxMinutes->value(),
                     ui->spinBoxSeconds->value());
-
-    qDebug() << t << -t.secsTo(QTime(0, 0, 0));
 
     ui->spinBoxFullSec->setValue(-t.secsTo(QTime(0, 0, 0)));
 }
