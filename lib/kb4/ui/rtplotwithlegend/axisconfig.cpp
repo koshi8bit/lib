@@ -24,18 +24,13 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
 
         ui->groupBoxNumeric->setVisible(false);
 
-//        ui->radioButtonAuto->setVisible(false);
-//        ui->radioButtonManual->setVisible(false);
-//        ui->labelMin->setVisible(false);
-//        ui->labelMax->setVisible(false);
-//        ui->checkBoxLog10->setVisible(false);
-//        ui->doubleSpinBoxMin->setVisible(false);
-//        ui->doubleSpinBoxMax->setVisible(false);
-//        ui->scientificNotationEditMin->setVisible(false);
-//        ui->scientificNotationEditMax->setVisible(false);
+        ui->spinBoxFullSec->setValue(ceil(axis->range().upper - axis->range().lower));
+        connect(ui->spinBoxHours, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
+        connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
+        connect(ui->spinBoxSeconds, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
 
+        resize(450, 145);
 
-        ui->spinBoxSec->setValue(ceil(axis->range().upper - axis->range().lower));
         return;
 
     }
@@ -70,6 +65,7 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
 
     }
     ui->spinBoxNumberPrecision->setValue(axis->numberPrecision());
+    resize(300, 200);
 
 }
 
@@ -80,6 +76,8 @@ AxisConfig::~AxisConfig()
 
 void AxisConfig::on_buttonBox_accepted()
 {
+    qDebug() << size();
+
     axis->setLabel(ui->lineEditLabel->text());
 
     if (ui->radioButtonAuto->isChecked())
@@ -126,7 +124,7 @@ void AxisConfig::on_buttonBox_accepted()
     if (axisType == AxisType::DateTime)
     {
 
-        axis->setRangeLower(axis->range().upper - ui->spinBoxSec->value());
+        axis->setRangeLower(axis->range().upper - ui->spinBoxFullSec->value());
         return;
     }
 }
@@ -136,6 +134,9 @@ void AxisConfig::on_radioButtonAuto_toggled(bool checked)
 {
     ui->doubleSpinBoxMin->setEnabled(!checked);
     ui->doubleSpinBoxMax->setEnabled(!checked);
+
+    ui->scientificNotationEditMin->setEnabled(!checked);
+    ui->scientificNotationEditMax->setEnabled(!checked);
 }
 
 void AxisConfig::on_checkBoxLog10_stateChanged(int arg1)
@@ -163,3 +164,22 @@ void AxisConfig::on_checkBoxLog10_stateChanged(int arg1)
 
 }
 
+
+void AxisConfig::on_spinBoxFullSec_valueChanged(int arg1)
+{
+    QTime t = QTime(0, 0, 0).addSecs(arg1);
+    ui->spinBoxHours->setValue(t.hour());
+    ui->spinBoxMinutes->setValue(t.minute());
+    ui->spinBoxSeconds->setValue(t.second());
+}
+
+void AxisConfig::spinBoxHoursMinutesSecondsValueChanged(int arg1)
+{
+    QTime t = QTime(ui->spinBoxHours->value(),
+                    ui->spinBoxMinutes->value(),
+                    ui->spinBoxSeconds->value());
+
+    qDebug() << t << -t.secsTo(QTime(0, 0, 0));
+
+    ui->spinBoxFullSec->setValue(-t.secsTo(QTime(0, 0, 0)));
+}

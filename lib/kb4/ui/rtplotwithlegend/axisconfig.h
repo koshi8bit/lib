@@ -37,6 +37,9 @@ private slots:
 
 
 
+    void on_spinBoxFullSec_valueChanged(int arg1);
+    void spinBoxHoursMinutesSecondsValueChanged(int arg1);
+
 private:
 
 
