@@ -48,6 +48,14 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << "Разделитель группы" << QString(a.groupSeparator());
     qDebug() << QString::number(1300.2, 'f', 2);
 
+    QTime t1(15, 23, 16);
+    QTime t2(12, 11, 02);
+
+    qDebug() << t2.secsTo(t1);
+    QTime t3 = QTime(0, 0, 0).addSecs(t2.secsTo(t1));
+
+    qDebug() << t3;
+
 }
 
 
