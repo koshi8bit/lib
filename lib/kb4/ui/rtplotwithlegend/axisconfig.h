@@ -35,6 +35,8 @@ private slots:
 
     void on_checkBoxLog10_stateChanged(int arg1);
 
+
+
 private:
 
 

@@ -22,15 +22,17 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
     {
         axisType = AxisType::DateTime;
 
-        ui->radioButtonAuto->setVisible(false);
-        ui->radioButtonManual->setVisible(false);
-        ui->labelMin->setVisible(false);
-        ui->labelMax->setVisible(false);
-        ui->checkBoxLog10->setVisible(false);
-        ui->doubleSpinBoxMin->setVisible(false);
-        ui->doubleSpinBoxMax->setVisible(false);
-        ui->scientificNotationEditMin->setVisible(false);
-        ui->scientificNotationEditMax->setVisible(false);
+        ui->groupBoxNumeric->setVisible(false);
+
+//        ui->radioButtonAuto->setVisible(false);
+//        ui->radioButtonManual->setVisible(false);
+//        ui->labelMin->setVisible(false);
+//        ui->labelMax->setVisible(false);
+//        ui->checkBoxLog10->setVisible(false);
+//        ui->doubleSpinBoxMin->setVisible(false);
+//        ui->doubleSpinBoxMax->setVisible(false);
+//        ui->scientificNotationEditMin->setVisible(false);
+//        ui->scientificNotationEditMax->setVisible(false);
 
 
         ui->spinBoxSec->setValue(ceil(axis->range().upper - axis->range().lower));
@@ -38,8 +40,7 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
 
     }
 
-    ui->labelSecOnScreen->setVisible(false);
-    ui->spinBoxSec->setVisible(false);
+    ui->groupBoxTime->setVisible(false);
 
     ui->scientificNotationEditMin->setValue(axis->range().lower);
     ui->scientificNotationEditMax->setValue(axis->range().upper);
@@ -133,7 +134,6 @@ void AxisConfig::on_buttonBox_accepted()
 
 void AxisConfig::on_radioButtonAuto_toggled(bool checked)
 {
-    qDebug() << checked;
     ui->doubleSpinBoxMin->setEnabled(!checked);
     ui->doubleSpinBoxMax->setEnabled(!checked);
 }
@@ -162,3 +162,4 @@ void AxisConfig::on_checkBoxLog10_stateChanged(int arg1)
     }
 
 }
+
