@@ -78,7 +78,7 @@ AxisConfig::~AxisConfig()
 
 void AxisConfig::on_buttonBox_accepted()
 {
-    qDebug() << size();
+    //qDebug() << size();
 
     axis->setLabel(ui->lineEditLabel->text());
 

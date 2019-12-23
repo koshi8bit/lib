@@ -15,7 +15,7 @@
 #define EL_GET_VARIABLE_NAME(Variable) (#Variable)
 
 //raw string
-//?HOW to do
+//R"(raw\string)"
 class EasyLiving : public QObject
 {
     Q_OBJECT
