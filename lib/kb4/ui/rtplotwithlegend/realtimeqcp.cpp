@@ -26,6 +26,7 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
 
 RealTimeQCP::~RealTimeQCP()
 {
+    //FIXME FTH: (8440): *** Fault tolerant heap
     delete ui;
 }
 

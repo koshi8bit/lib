@@ -24,26 +24,26 @@
        <attribute name="title">
         <string>RealTimeQCP</string>
        </attribute>
-       <widget class="RealTimeQCP" name="realTimeQCPU" native="true">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>140</y>
-          <width>501</width>
-          <height>291</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="RealTimeQCP" name="realTimeQCPI" native="true">
-        <property name="geometry">
-         <rect>
-          <x>610</x>
-          <y>140</y>
-          <width>501</width>
-          <height>291</height>
-         </rect>
-        </property>
-       </widget>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPU" native="true"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPT" native="true"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="RealTimeQCP" name="realTimeQCPI" native="true"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="RealTimeQCP" name="realTimeQCPIPersent" native="true"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPTRadiation" native="true"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="RealTimeQCP" name="realTimeQCPTVacuum" native="true"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
