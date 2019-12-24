@@ -77,6 +77,16 @@ QCustomPlot *RealTimeQCP::plot() const
     return ui->plot;
 }
 
+void RealTimeQCP::moveTimeAxisRealTime()
+{
+//    auto range = plot()->xAxis->range();
+//    auto delta = range.upper - range.lower;
+
+    auto cdt = currentDateTime();
+
+    plot()->xAxis->setRange(cdt - timeAxisOldRange, cdt);
+}
+
 void RealTimeQCP::setTimeAxisRange(int newRangeSEC)
 {
     plot()->xAxis->setRangeLower(plot()->xAxis->range().upper - newRangeSEC);
@@ -89,6 +99,39 @@ double RealTimeQCP::currentDateTime()
     auto now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
     return now;
 }
+
+void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType)
+{
+    axis->setVisible(true);
+    axis->setLabel(label);
+    axis->setRange(min, max);
+    //axis->setLabelPadding(20);
+
+    setAxisType(axis, scaleType);
+}
+
+
+void RealTimeQCP::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
+{
+    if (scaleType == QCPAxis::ScaleType::stLinear)
+    {
+        axis->setScaleType(QCPAxis::stLinear);
+        QSharedPointer<QCPAxisTicker> ticker(new QCPAxisTicker);
+        axis->setTicker(ticker);
+        axis->setNumberFormat("f");
+        axis->setNumberPrecision(1);
+    }
+
+    if (scaleType == QCPAxis::ScaleType::stLogarithmic)
+    {
+        axis->setScaleType(QCPAxis::stLogarithmic);
+        QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
+        axis->setTicker(logTicker);
+        axis->setNumberFormat("eb");
+        axis->setNumberPrecision(0);
+    }
+}
+
 
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)
 {

@@ -22,14 +22,18 @@ public:
     explicit RealTimeQCP(QWidget *parent = nullptr);
     ~RealTimeQCP();
 
-    bool realTime() const;
+    static double currentDateTime();
 
-    bool moveLineRealTime() const;
+    void configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+
     QCustomPlot* plot() const;
-
+    void moveTimeAxisRealTime();
     void setTimeAxisRange(int newRangeSEC);
 
-    static double currentDateTime();
+    void setMarginGroup(QCPMarginGroup *mg);
+
+    bool realTime() const;
+    bool moveLineRealTime() const;
 
 signals:
     void lineRealTimeMoved();
@@ -62,7 +66,7 @@ private:
     void configurePlotTimeAxis();
     void configurePlotLine();
 
-    void updateTimeAxisRangePostfix();
+    void updateTimeAxisLabel();
 
     void configureLegend();
     QVBoxLayout *_legendLayout;
@@ -77,6 +81,8 @@ private:
     bool isInAxisRect(QPoint pos);
 
     double timeAxisOldRange;
+
+    void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
