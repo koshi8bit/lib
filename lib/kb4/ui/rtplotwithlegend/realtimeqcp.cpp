@@ -9,6 +9,7 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
 
     configurePlot();
     configureLegend();
+    //configureSplitter();
 
     connect(plot(), &QCustomPlot::axisClick, this, &RealTimeQCP::axisClick);
     connect(plot(), &QCustomPlot::axisDoubleClick, this, &RealTimeQCP::axisDoubleClick);
@@ -244,6 +245,12 @@ void RealTimeQCP::configureLegend()
 
     auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
     legendLayout->addItem(spacer);
+}
+
+void RealTimeQCP::configureSplitter()
+{
+    splitter = new QSplitter(Qt::Vertical, this);
+    ui->horizontalLayout->insertWidget(1, splitter);
 }
 
 void RealTimeQCP::autoScaleAxis(QCPAxis *axis)

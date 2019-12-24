@@ -7,10 +7,12 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
+
 #include <lib/kb4/ui/rtplotwithlegend/axisconfig.h>
 #include <lib/kb4/ui/rtplotwithlegend/colorsetter.h>
 #include <lib/kb4/ui/rtplotwithlegend/graph.h>
 #include <lib/kb4/ui/rtplotwithlegend/graphlegenditem.h>
+#include <lib/kb4/ui/rtplotwithlegend/realtimeqcp.h>
 #include <lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.h>
 #include <lib/kb4/log/channeldouble.h>
 #include <lib/kb4/log/excel/timelog/timelog.h>
@@ -61,6 +63,7 @@ private:
 
 
     void configureRealTimeQCP();
+    void configureRealTimeQCPPlot(RealTimeQCP * plot);
 
     void configureRTPlotWithLegend();
     void configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType);

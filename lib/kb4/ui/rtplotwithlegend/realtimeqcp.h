@@ -75,6 +75,9 @@ private:
     QVBoxLayout *legendLayout;
     QLabel *labelTime;
 
+    void configureSplitter();
+    QSplitter *splitter;
+
     void autoScaleAxis(QCPAxis *axis);
 
     //WARNING rename to _graphs?

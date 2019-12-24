@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
         configureQDebug();
 
     configureRealTimeQCP();
+
     configureRTPlotWithLegend();
     configureGraphs();
 
@@ -37,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
-    connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [this](double a) { qDebug() << a; });
+    connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [](double a) { qDebug() << a; });
 
 
 
@@ -72,11 +73,11 @@ void MainWindow::configureExcelLog()
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
     excelLog->addChannel(a);
 
-    b = new ChannelDouble("BBB", EasyLiving::postfixMilliRu() + EasyLiving::postfixAmpereRu(), &(QStringList() << "b/middle2"), this);
+    b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), &(QStringList() << "b/middle2"), this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
-    c = new ChannelDouble("CCC", EasyLiving::postfixKiloRu() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
+    c = new ChannelDouble("CCC", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
     //FIXME tima45
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
@@ -224,7 +225,7 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKiloRu() + EasyLiving::postfixVolt());
+    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKilo() + EasyLiving::postfixVolt());
     graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setVisible(false);
     graphHighVoltageElvFirstSection->setColor(QColor("#BBBBBB"));
@@ -268,13 +269,21 @@ MainWindow::~MainWindow()
 void MainWindow::configureRealTimeQCP()
 {
     RealTimeQCP * plot;
+    mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
     plot = ui->realTimeQCPU;
     plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
-
+    configureRealTimeQCPPlot(plot);
 
     plot = ui->realTimeQCPI;
     plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10);
+    configureRealTimeQCPPlot(plot);
+}
+
+void MainWindow::configureRealTimeQCPPlot(RealTimeQCP *plot)
+{
+    plot->setMarginGroup(mg);
+
 }
 
 

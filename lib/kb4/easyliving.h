@@ -53,32 +53,32 @@ public:
 
     //postfix
     static QString postfixCelsius();
-    static QString postfixAmpereRu();
+    static QString postfixAmpere();
     static QString postfixAmpereEn();
-    static QString postfixVoltRu();
+    static QString postfixVolt();
     static QString postfixVoltEn();
-    static QString postfixEnergyRu();
+    static QString postfixEnergy();
     static QString postfixEnergyEn();
-    static QString postfixWattRu();
-    static QString postfixSievertRu();
+    static QString postfixWatt();
+    static QString postfixSievert();
     static QString postfixSievertEn();
-    static QString postfixSievertPerHourRu();
+    static QString postfixSievertPerHour();
     static QString postfixSievertPerHourEn();
-    static QString postfixFluenceRu();
+    static QString postfixFluence();
     static QString postfixFluenceEn();
 
-    static QString postfixMilliRu();
+    static QString postfixMilli();
     static QString postfixMilliEn();
-    static QString postfixKiloRu();
+    static QString postfixKilo();
     static QString postfixKiloEn();
-    static QString postfixMegaRu();
+    static QString postfixMega();
     static QString postfixMegaEn();
 
     static QString postfixPersent();
 
-    static QString postfixMilliAmpereRu();
+    static QString postfixMilliAmpere();
     static QString postfixMilliAmpereEn();
-    static QString postfixKiloVoltRu();
+    static QString postfixKiloVolt();
 
 
     //bool
