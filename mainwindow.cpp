@@ -274,6 +274,8 @@ void MainWindow::configureRealTimeQCP()
     plot = ui->realTimeQCPU;
     plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
     configureRealTimeQCPPlot(plot);
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPI->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPTemperature->plot(), SLOT(replot()));
 
     plot = ui->realTimeQCPI;
     plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10);
@@ -411,9 +413,14 @@ void MainWindow::realTimeQCPChangeRange(QCPRange range)
 
     realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPU, axis, range);
     realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPI, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPU, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPTemperature, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPPower, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPPersent, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPBool, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPVacuum, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPRadiation, axis, range);
 
-    ui->rtPlotHighVoltageCurrent->plot()->replot();
+    ui->realTimeQCPU->plot()->replot();
 }
 
 void MainWindow::realTimeQCPMouseMove(QMouseEvent *event)
