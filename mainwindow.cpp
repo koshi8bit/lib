@@ -291,6 +291,15 @@ void MainWindow::configureRealTimeQCP()
     plot->configureAxis(plot->plot()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
     configureRealTimeQCPPlot(plot);
 
+    plot = ui->realTimeQCPBool;
+    plot->configureAxis(plot->plot()->yAxis, tr("True/False"), "", -0.2, 1.2);
+    QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
+    textTicker->addTick(0, "False");
+    textTicker->addTick(1, "True");
+    plot->plot()->yAxis->setTicker(textTicker);
+    //plot->plot()->yAxis->setSubTicks(false);
+    configureRealTimeQCPPlot(plot);
+
     plot = ui->realTimeQCPVacuum;
     plot->configureAxis(plot->plot()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, QCPAxis::stLogarithmic);
     configureRealTimeQCPPlot(plot);
@@ -321,18 +330,30 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 }
 
 
+
 ////////////////////////////////
+
+
+void MainWindow::realTimeQCPChangeRangeCheckAxis(QCPAxis *axis, RTPlotWithLegend *plot, QCPRange range)
+{
+    if (axis != plot->plot()->xAxis)
+        plot->plot()->xAxis->setRange(range);
+}
 
 void MainWindow::plotChangeRange(QCPRange range)
 {
     QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
 
-    if (axis != ui->rtPlotHighVoltageCurrent->plot()->xAxis)
-        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(range);
-    if (axis != ui->rtPlotTemperaturePower->plot()->xAxis)
-        ui->rtPlotTemperaturePower->plot()->xAxis->setRange(range);
-    if (axis != ui->rtPlotVacuumRadiation->plot()->xAxis)
-        ui->rtPlotVacuumRadiation->plot()->xAxis->setRange(range);
+    realTimeQCPChangeRangeCheckAxis(axis, ui->rtPlotHighVoltageCurrent, range);
+    realTimeQCPChangeRangeCheckAxis(axis, ui->rtPlotTemperaturePower, range);
+    realTimeQCPChangeRangeCheckAxis(axis, ui->rtPlotVacuumRadiation, range);
+
+//    if (axis != ui->rtPlotHighVoltageCurrent->plot()->xAxis)
+//        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(range);
+//    if (axis != ui->rtPlotTemperaturePower->plot()->xAxis)
+//        ui->rtPlotTemperaturePower->plot()->xAxis->setRange(range);
+//    if (axis != ui->rtPlotVacuumRadiation->plot()->xAxis)
+//        ui->rtPlotVacuumRadiation->plot()->xAxis->setRange(range);
 
     ui->rtPlotHighVoltageCurrent->plot()->replot();
 }
@@ -375,6 +396,39 @@ void MainWindow::plotMoveLineRealTimeChanged(bool newValue)
         ui->rtPlotTemperaturePower->setMoveLineRealTime(newValue);
     if (plot != ui->rtPlotVacuumRadiation)
         ui->rtPlotVacuumRadiation->setMoveLineRealTime(newValue);
+}
+
+
+void MainWindow::realTimeQCPChangeRangeCheckAxis(RealTimeQCP *plot, QCPAxis *axis, QCPRange range)
+{
+    if (axis != plot->plot()->xAxis)
+        plot->plot()->xAxis->setRange(range);
+}
+
+void MainWindow::realTimeQCPChangeRange(QCPRange range)
+{
+    QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
+
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPU, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPI, axis, range);
+    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPU, axis, range);
+
+    ui->rtPlotHighVoltageCurrent->plot()->replot();
+}
+
+void MainWindow::realTimeQCPMouseMove(QMouseEvent *event)
+{
+
+}
+
+void MainWindow::realTimeQCPRealTimeChanged(bool newValue)
+{
+
+}
+
+void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
+{
+
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)
