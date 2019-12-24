@@ -9,6 +9,7 @@
 
 #include "axisconfig.h"
 #include "graph.h"
+#include "colorsetter.h"
 
 namespace Ui {
 class RealTimeQCP;
@@ -25,6 +26,7 @@ public:
     static double currentDateTime();
 
     void configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear, int precision = 3);
+    Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", bool scientificNotation = false);
 
     QCustomPlot* plot() const;
     void moveTimeAxisRealTime();
@@ -69,13 +71,13 @@ private:
     void updateTimeAxisLabel();
 
     void configureLegend();
-    QVBoxLayout *_legendLayout;
-    QLabel *_labelTime;
+    QVBoxLayout *legendLayout;
+    QLabel *labelTime;
 
     void autoScaleAxis(QCPAxis *axis);
 
     //WARNING rename to _graphs?
-    QVector<Graph *> _graphElements;
+    QVector<Graph *> graphs;
     static QString formatLabelTime(double time);
 
     bool isInAxisRect(QPoint pos);
@@ -83,6 +85,7 @@ private:
     double timeAxisOldRange;
 
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
+    ColorSetter colorSetter;
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);

@@ -148,8 +148,7 @@ Graph *RTPlotWithLegend::addGraph(RTPlotWithLegend::Axis axis, const QString &la
                             colorSetter.getColor(),
                             _plot,
                             getAxis(axis),
-                            scientificNotation,
-                            this);
+                            scientificNotation);
 
     graphElements.append(graphElement);
     legendLayout->insertWidget(legendLayout->count()-1, graphElement->graphLegendItem());

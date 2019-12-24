@@ -12,11 +12,15 @@ class Graph : public QObject
 {
     Q_OBJECT
 public:
-    explicit Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, bool scientificNotation, QObject *parent = nullptr);
+    explicit Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, bool scientificNotation);
     virtual ~Graph();
 
     QCPGraph *graph();
+
+    GraphLegendItem *legendItem();
+    //WARNING delete method graphLegendItem
     GraphLegendItem *graphLegendItem();
+
     void addData(double key, double value);
     double value();
     bool visible();

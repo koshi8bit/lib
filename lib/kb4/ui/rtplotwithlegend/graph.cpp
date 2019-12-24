@@ -1,8 +1,8 @@
 #include "graph.h"
 
 
-Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, bool scientificNotation, QObject *parent)
-    : QObject(parent)
+Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, bool scientificNotation)
+    : QObject(plot)
 {
     _plot = plot;
     _yAxis = yAxis;
@@ -47,6 +47,11 @@ QCPItemTracer *Graph::tracer()
 QCPGraph *Graph::graph()
 {
     return _graph;
+}
+
+GraphLegendItem *Graph::legendItem()
+{
+    return graphLegendItem();
 }
 
 GraphLegendItem *Graph::graphLegendItem()

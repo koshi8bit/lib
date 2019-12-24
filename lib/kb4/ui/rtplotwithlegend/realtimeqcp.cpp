@@ -111,6 +111,20 @@ void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, double min,
 
 }
 
+Graph *RealTimeQCP::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, bool scientificNotation)
+{
+    auto graph = new Graph( label,
+                            postfix,
+                            colorSetter.getColor(),
+                            plot(),
+                            axis,
+                            scientificNotation);
+
+    graphs.append(graph);
+    legendLayout->insertWidget(legendLayout->count()-1, graph->graphLegendItem());
+    return graph;
+}
+
 
 void RealTimeQCP::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
 {
@@ -217,14 +231,14 @@ void RealTimeQCP::updateTimeAxisLabel()
 
 void RealTimeQCP::configureLegend()
 {
-    _legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
+    legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
 
     _labelTime = new QLabel(this);
     _labelTime->setText(timeLabel);
-    _legendLayout->addWidget(_labelTime);
+    legendLayout->addWidget(_labelTime);
 
     auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    _legendLayout->addItem(spacer);
+    legendLayout->addItem(spacer);
 }
 
 void RealTimeQCP::autoScaleAxis(QCPAxis *axis)
@@ -319,7 +333,7 @@ void RealTimeQCP::mouseMove(double time)
     if (_labelTime->isVisible())
         _labelTime->setText(formatLabelTime(time));
 
-    foreach (auto graphElement, _graphElements)
+    foreach (auto graphElement, graphs)
     {
         graphElement->setGraphKey(time);
     }
