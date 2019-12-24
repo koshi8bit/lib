@@ -388,7 +388,7 @@ QString RealTimeQCP::formatLabelTime(double time)
 {
     //TODO show MSEC ?formatTimeUi(true)
     auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
-    auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(true));
+    auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
 
     auto deltaTimeMSEC = QDateTime::currentDateTime().msecsTo(mouseTimeQDT);
     //qDebug() << deltaTimeMSEC;
@@ -397,7 +397,7 @@ QString RealTimeQCP::formatLabelTime(double time)
 
     auto deltaTimeQT = QTime(0,0,0);
     deltaTimeQT = deltaTimeQT.addMSecs(static_cast<int>(-deltaTimeMSEC));
-    auto deltaTimeStr = deltaTimeQT.toString(EasyLiving::formatTimeUi(true));
+    auto deltaTimeStr = deltaTimeQT.toString(EasyLiving::formatTimeUi(false));
 
 
     return QString("%1 (-%2)").arg(mouseTimeStr).arg(deltaTimeStr);

@@ -166,8 +166,8 @@ void MainWindow::configureRTPlotWithLegend()
 
 void MainWindow::addData1()
 {
-    graphHighVoltageElvFull->addData(now, sin(5.0f/2*cos(now)));
-    graphTemperaturePyrometer->addData(now, sin(9.0f/2*cos(now)));
+    graphHighVoltageElvFull->addData(now, sin(5.0/2*cos(now)));
+    graphTemperaturePyrometer->addData(now, sin(9.0/2*cos(now)));
 
 
 }
@@ -276,6 +276,11 @@ void MainWindow::configureRealTimeQCP()
     configureRealTimeQCPPlot(plot);
     connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPI->plot(), SLOT(replot()));
     connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPTemperature->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPPower->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPPersent->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPBool->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPVacuum->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPRadiation->plot(), SLOT(replot()));
 
     plot = ui->realTimeQCPI;
     plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10);
@@ -296,8 +301,8 @@ void MainWindow::configureRealTimeQCP()
     plot = ui->realTimeQCPBool;
     plot->configureAxis(plot->plot()->yAxis, tr("True/False"), "", -0.2, 1.2);
     QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
-    textTicker->addTick(0, "False");
-    textTicker->addTick(1, "True");
+    textTicker->addTick(0, "False\nOff");
+    textTicker->addTick(1, "True\nOn");
     plot->plot()->yAxis->setTicker(textTicker);
     //plot->plot()->yAxis->setSubTicks(false);
     configureRealTimeQCPPlot(plot);
