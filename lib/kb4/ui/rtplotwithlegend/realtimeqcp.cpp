@@ -8,6 +8,19 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
     ui->setupUi(this);
 
     configurePlot();
+    configureLegend();
+
+    connect(plot(), &QCustomPlot::axisClick, this, &RealTimeQCP::axisClick);
+    connect(plot(), &QCustomPlot::axisDoubleClick, this, &RealTimeQCP::axisDoubleClick);
+
+    connect(plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
+    //connect(plot(), &QCustomPlot::mouseMove, this, &RTPlotWithLegend::mouseMove);
+    connect(plot(), &QCustomPlot::mousePress, this, &RealTimeQCP::mousePress);
+    connect(plot(), &QCustomPlot::mouseDoubleClick, this, &RealTimeQCP::mouseDoubleClick);
+
+    connect(plot(), &QCustomPlot::beforeReplot, this, &RealTimeQCP::beforeReplot);
+    connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisRangeChanged(QCPRange)));
+
 }
 
 RealTimeQCP::~RealTimeQCP()
@@ -39,10 +52,12 @@ void RealTimeQCP::configurePlot()
     configurePlotLine();
     plot()->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     plot()->xAxis->setRangeUpper(RealTimeQCP::currentDateTime());
-    setTimeAxisRange(90); //90=1min 30sec
-    //plot()->xAxis->setRange(_now - 90, _now); //90=1min 30sec
+    setTimeAxisRange(90);
+
+    // { Tests
     //plot()->setNoAntialiasingOnDrag(true);
     //plot()->setPlottingHint(QCP::phFastPolylines,true); // ?tima45 line from ethernet
+    // } Tests
 }
 
 
@@ -154,4 +169,46 @@ void RealTimeQCP::updateTimeAxisRangePostfix()
     auto delta = plot()->xAxis->range().upper - plot()->xAxis->range().lower;
     auto t = QTime(0, 0, 0).addSecs(static_cast<int>(delta));
     plot()->xAxis->setLabel(QString("%1 [%2]").arg(timeLabel).arg(t.toString(EasyLiving::formatTimeUi(false))));
+}
+
+void RealTimeQCP::configureLegend()
+{
+    _legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
+
+    _labelTime = new QLabel(this);
+    _labelTime->setText(timeLabel);
+    _legendLayout->addWidget(_labelTime);
+
+    auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    _legendLayout->addItem(spacer);
+}
+
+void RealTimeQCP::autoScaleAxis(QCPAxis *axis)
+{
+    axis->rescale(true);
+    auto delta = (axis->range().upper - axis->range().lower)*0.05; // 5%
+    axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
+}
+
+void RealTimeQCP::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    Q_UNUSED(axis)
+    Q_UNUSED(part)
+    if (event->button() == Qt::MouseButton::RightButton)
+    {
+        autoScaleAxis(axis);
+    }
+}
+
+void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    Q_UNUSED(part)
+    Q_UNUSED(event)
+    if (event->button() == Qt::MouseButton::LeftButton)
+    {
+        auto plot = static_cast<QCustomPlot *>(sender());
+        AxisConfig ac(axis, plot->xAxis == axis, this);
+        ac.setModal(true);
+        ac.exec();
+    }
 }

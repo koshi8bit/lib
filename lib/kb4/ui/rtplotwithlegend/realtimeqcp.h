@@ -7,6 +7,8 @@
 
 #include <lib/kb4/easyliving.h>
 
+#include "axisconfig.h"
+
 namespace Ui {
 class RealTimeQCP;
 }
@@ -51,6 +53,24 @@ private:
     void configurePlotLine();
 
     void updateTimeAxisRangePostfix();
+
+    void configureLegend();
+    QVBoxLayout *_legendLayout;
+    QLabel *_labelTime;
+
+    void autoScaleAxis(QCPAxis *axis);
+
+private slots:
+    void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+    void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+
+    void mouseMove(QMouseEvent *event);
+    void mousePress(QMouseEvent *event);
+    void mouseDoubleClick(QMouseEvent *event);
+
+    void beforeReplot();
+    void xAxisRangeChanged(const QCPRange &newRange);
+
 };
 
 #endif // REALTIMEQCP_H
