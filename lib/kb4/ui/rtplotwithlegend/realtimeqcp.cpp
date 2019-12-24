@@ -105,9 +105,9 @@ double RealTimeQCP::currentDateTime()
     return now;
 }
 
-void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType, int precision)
+void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, QCPAxis::ScaleType scaleType, int precision)
 {
-    axis->setLabel(label);
+    axis->setLabel(QString("%1 (%2)").arg(label).arg(postfix));
     axis->setVisible(true);
     axis->setRange(min, max);
     setAxisType(axis, scaleType);

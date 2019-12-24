@@ -29,10 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     configureWorker();
 
-    ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpereRu());
+    ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpere());
     ui->valuedoubleTest->setValue(8.7);
 
-    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpereRu(), 1, false, true);
+    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpere(), 1, false, true);
     ui->valuedoubleTest_2->setValue(8.7);
 
 
@@ -76,7 +76,7 @@ void MainWindow::configureExcelLog()
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
-    c = new ChannelDouble("CCC", EasyLiving::postfixKiloRu() + EasyLiving::postfixVoltRu(), &(QStringList() << "c/middle3"), this);
+    c = new ChannelDouble("CCC", EasyLiving::postfixKiloRu() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
     //FIXME tima45
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
@@ -224,7 +224,7 @@ void MainWindow::configureGraphs()
 
 void MainWindow::configureGraphsEnergyCurrent()
 {
-    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKiloRu() + EasyLiving::postfixVoltRu());
+    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKiloRu() + EasyLiving::postfixVolt());
     graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (первая секция)");
     graphHighVoltageElvFirstSection->setVisible(false);
     graphHighVoltageElvFirstSection->setColor(QColor("#BBBBBB"));
@@ -270,11 +270,11 @@ void MainWindow::configureRealTimeQCP()
     RealTimeQCP * plot;
 
     plot = ui->realTimeQCPU;
-    plot->configureAxis(plot->plot()->yAxis, tr("Напруга") + EasyLiving::postfixVoltEn(), 0, 2300);
+    plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
 
 
     plot = ui->realTimeQCPI;
-    plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), 0, 10);
+    plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10);
 }
 
 
