@@ -19,7 +19,7 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
     connect(plot(), &QCustomPlot::mouseDoubleClick, this, &RealTimeQCP::mouseDoubleClick);
 
     connect(plot(), &QCustomPlot::beforeReplot, this, &RealTimeQCP::beforeReplot);
-    connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(xAxisRangeChanged(QCPRange)));
+    connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(timeAxisRangeChanged(QCPRange)));
 
 }
 
@@ -80,7 +80,7 @@ QCustomPlot *RealTimeQCP::plot() const
 void RealTimeQCP::setTimeAxisRange(int newRangeSEC)
 {
     plot()->xAxis->setRangeLower(plot()->xAxis->range().upper - newRangeSEC);
-    updateTimeAxisRangePostfix();
+    updateTimeAxisLabel();
 }
 
 double RealTimeQCP::currentDateTime()
@@ -164,7 +164,7 @@ void RealTimeQCP::configurePlotLine()
     _line->end->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().lower);
 }
 
-void RealTimeQCP::updateTimeAxisRangePostfix()
+void RealTimeQCP::updateTimeAxisLabel()
 {
     auto delta = plot()->xAxis->range().upper - plot()->xAxis->range().lower;
     auto t = QTime(0, 0, 0).addSecs(static_cast<int>(delta));
@@ -220,6 +220,54 @@ void RealTimeQCP::mouseMove(QMouseEvent *event)
     mouseMove(time);
 }
 
+void RealTimeQCP::mousePress(QMouseEvent *event)
+{
+    if (isInAxisRect(event->pos()))
+    {
+        if (event->button() == Qt::MouseButton::RightButton)
+        {
+            auto newValue = !moveLineRealTime();
+            setMoveLineRealTime(newValue);
+            emit moveLineRealTimeChanged(newValue);
+        }
+    }
+}
+
+void RealTimeQCP::mouseDoubleClick(QMouseEvent *event)
+{
+    if (isInAxisRect(event->pos()))
+    {
+        if (event->button() == Qt::MouseButton::LeftButton)
+        {
+            auto newValue = !realTime();
+            setRealTime(newValue);
+            emit realTimeChanged(newValue);
+            setMoveLineRealTime(newValue);
+            emit moveLineRealTimeChanged(newValue);
+        }
+    }
+}
+
+void RealTimeQCP::beforeReplot()
+{
+    //WARNING update values without dependence of _line position
+//    if (moveLineRealTime())
+//    {
+//        //BUG set to 1970 and don't move
+//        mouseMove(RealTimeQCP::currentDateTime());
+    //    }
+}
+
+void RealTimeQCP::timeAxisRangeChanged(const QCPRange &newRange)
+{
+    auto delta = newRange.upper - newRange.lower;
+    if (!EasyLiving::isEqualDouble(timeAxisOldRange, delta))
+    {
+        timeAxisOldRange = delta;
+        updateTimeAxisLabel();
+    }
+}
+
 
 void RealTimeQCP::mouseMove(double time)
 {
@@ -270,4 +318,9 @@ QString RealTimeQCP::formatLabelTime(double time)
 
 
     return QString("%1 (-%2)").arg(mouseTimeStr).arg(deltaTimeStr);
+}
+
+bool RealTimeQCP::isInAxisRect(QPoint pos)
+{
+    return plot()->axisRect()->rect().contains(pos);
 }

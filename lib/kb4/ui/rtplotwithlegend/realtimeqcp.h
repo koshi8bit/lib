@@ -33,7 +33,8 @@ public:
 
 signals:
     void lineRealTimeMoved();
-
+    void moveLineRealTimeChanged(bool newValue);
+    void realTimeChanged(bool newValue);
 
 public slots:
     void setRealTime(bool newValue);
@@ -73,6 +74,10 @@ private:
     QVector<Graph *> _graphElements;
     static QString formatLabelTime(double time);
 
+    bool isInAxisRect(QPoint pos);
+
+    double timeAxisOldRange;
+
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
@@ -82,7 +87,7 @@ private slots:
     void mouseDoubleClick(QMouseEvent *event);
 
     void beforeReplot();
-    void xAxisRangeChanged(const QCPRange &newRange);
+    void timeAxisRangeChanged(const QCPRange &newRange);
 
 };
 
