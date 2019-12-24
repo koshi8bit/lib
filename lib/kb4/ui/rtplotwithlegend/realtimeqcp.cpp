@@ -37,7 +37,6 @@ bool RealTimeQCP::realTime() const
 
 void RealTimeQCP::configurePlot()
 {
-    setRealTime(true);
 
     setMoveLineRealTime(true);
 
@@ -45,8 +44,10 @@ void RealTimeQCP::configurePlot()
     ui->plot->setInteraction(QCP::iRangeZoom, true);
     ui->plot->setInteraction(QCP::iRangeDrag, true);
 
+    setRealTime(true);
+
     //WARNING dublicate exec in setRealTime
-    configureAxesZoomAndDrag(false);
+    //configureAxesZoomAndDrag(false);
 
     configurePlotBackground();
 
