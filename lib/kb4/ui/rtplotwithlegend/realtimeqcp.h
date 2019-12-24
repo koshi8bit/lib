@@ -25,7 +25,7 @@ public:
 
     static double currentDateTime();
 
-    void configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear, int precision = 3);
+    void configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear, int precision = 0);
     Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", bool scientificNotation = false);
 
     QCustomPlot* plot() const;

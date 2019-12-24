@@ -17,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     if(settings->value("qDebug/saveToFile", false).toBool())
         configureQDebug();
 
-    configurePlots();
+    configureRealTimeQCP();
+    configureRTPlotWithLegend();
     configureGraphs();
 
     configureTimers();
@@ -141,7 +142,7 @@ void MainWindow::configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, dou
     connect(rtPlot, &RTPlotWithLegend::moveLineRealTimeChanged, this, &MainWindow::plotMoveLineRealTimeChanged);
 }
 
-void MainWindow::configurePlots()
+void MainWindow::configureRTPlotWithLegend()
 {
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
@@ -262,6 +263,14 @@ MainWindow::~MainWindow()
 
     delete ui;
     delete mg;//->deleteLater();
+}
+
+void MainWindow::configureRealTimeQCP()
+{
+    auto plot = ui->realTimeQCPU;
+    //plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), 0, 2300, QCPAxis::stLinear, 0);
+    plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), 0, 2300);
+    plot->configureAxis(plot->plot()->yAxis2, tr("Напруга2"), 0, 500);
 }
 
 

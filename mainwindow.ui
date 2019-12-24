@@ -20,6 +20,21 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
+      <widget class="QWidget" name="tab_7">
+       <attribute name="title">
+        <string>RealTimeQCP</string>
+       </attribute>
+       <widget class="RealTimeQCP" name="realTimeQCPU" native="true">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>140</y>
+          <width>891</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>RTPlotWithLegend</string>
@@ -333,6 +348,12 @@
    <class>ValueDouble</class>
    <extends>QWidget</extends>
    <header>lib/kb4/ui/value/double/valuedouble.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RealTimeQCP</class>
+   <extends>QWidget</extends>
+   <header>lib/kb4/ui/rtplotwithlegend/realtimeqcp.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

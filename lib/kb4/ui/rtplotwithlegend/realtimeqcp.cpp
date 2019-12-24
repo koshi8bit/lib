@@ -108,7 +108,7 @@ double RealTimeQCP::currentDateTime()
 void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType, int precision)
 {
     axis->setLabel(label);
-    //axis->setVisible(true);
+    axis->setVisible(true);
     axis->setRange(min, max);
     setAxisType(axis, scaleType);
     axis->setNumberPrecision(precision);
