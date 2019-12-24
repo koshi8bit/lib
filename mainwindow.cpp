@@ -450,14 +450,55 @@ void MainWindow::realTimeQCPMouseMove(QMouseEvent *event)
 
 }
 
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPU,
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPI,
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPTemperature,
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPower,
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPersent,
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPBool,
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPVacuum,
+//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPRadiation,
+
+void MainWindow::realTimeQCPRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue)
+{
+    if (sender != widget)
+        widget->setRealTime(newValue);
+}
+
 void MainWindow::realTimeQCPRealTimeChanged(bool newValue)
 {
+    auto _sender = static_cast<RealTimeQCP *>(sender());
 
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPU, _sender, newValue);
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPI, _sender, newValue);
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPTemperature, _sender, newValue);
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPPower, _sender, newValue);
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPPersent, _sender, newValue);
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPBool, _sender, newValue);
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPVacuum, _sender, newValue);
+    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPRadiation, _sender, newValue);
+
+
+}
+
+void MainWindow::realTimeQCPMoveLineRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue)
+{
+    if (sender != widget)
+        widget->setMoveLineRealTime(newValue);
 }
 
 void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
 {
+    auto _sender = static_cast<RealTimeQCP *>(sender());
 
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPU, _sender, newValue);
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPI, _sender, newValue);
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPTemperature, _sender, newValue);
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPPower, _sender, newValue);
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPPersent, _sender, newValue);
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPBool, _sender, newValue);
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPVacuum, _sender, newValue);
+    realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPRadiation, _sender, newValue);
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)

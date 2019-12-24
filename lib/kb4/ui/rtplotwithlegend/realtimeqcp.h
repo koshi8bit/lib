@@ -57,9 +57,9 @@ private:
     bool _moveLineRealTime;
     const QString timeLabel = tr("Время");
 
-    //TODO rename to _lineA
-    //TODO make 2 lines same as oscillograph
+    //TODO make 2 lines same as oscillograph switching by Mouse wheel button
     QCPItemLine *_line;
+    QCPItemLine *_lineA;
     QCPItemLine *_lineB;
 
     void configurePlot();
