@@ -190,6 +190,7 @@ void RealTimeQCP::autoScaleAxis(QCPAxis *axis)
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
+
 void RealTimeQCP::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(axis)
@@ -211,4 +212,62 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
         ac.setModal(true);
         ac.exec();
     }
+}
+
+void RealTimeQCP::mouseMove(QMouseEvent *event)
+{
+    auto time = plot()->xAxis->pixelToCoord(event->x());
+    mouseMove(time);
+}
+
+
+void RealTimeQCP::mouseMove(double time)
+{
+    //BUG ?is this mouse move or regular move by timer?
+    if (_labelTime->isVisible())
+        _labelTime->setText(formatLabelTime(time));
+
+    foreach (auto graphElement, _graphElements)
+    {
+        graphElement->setGraphKey(time);
+    }
+
+    auto lower = qMin(
+                plot()->yAxis->range().lower,
+                plot()->yAxis2->range().lower);
+
+    auto upper = qMax(
+                plot()->yAxis->range().upper,
+                plot()->yAxis2->range().upper);
+
+    _line->start->setCoords(time, lower);
+    _line->end->setCoords(time, upper);
+
+    emit lineRealTimeMoved();
+
+    //NOTE check cpu usage too big
+//    if(!realTime())
+//    {
+//        plot()->replot();
+//    }
+}
+
+
+QString RealTimeQCP::formatLabelTime(double time)
+{
+    //TODO show MSEC ?formatTimeUi(true)
+    auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
+    auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(true));
+
+    auto deltaTimeMSEC = QDateTime::currentDateTime().msecsTo(mouseTimeQDT);
+    //qDebug() << deltaTimeMSEC;
+    if (deltaTimeMSEC > -1000)
+        return mouseTimeStr;
+
+    auto deltaTimeQT = QTime(0,0,0);
+    deltaTimeQT = deltaTimeQT.addMSecs(static_cast<int>(-deltaTimeMSEC));
+    auto deltaTimeStr = deltaTimeQT.toString(EasyLiving::formatTimeUi(true));
+
+
+    return QString("%1 (-%2)").arg(mouseTimeStr).arg(deltaTimeStr);
 }

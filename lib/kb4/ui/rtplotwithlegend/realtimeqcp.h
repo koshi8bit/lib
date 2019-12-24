@@ -8,6 +8,7 @@
 #include <lib/kb4/easyliving.h>
 
 #include "axisconfig.h"
+#include "graph.h"
 
 namespace Ui {
 class RealTimeQCP;
@@ -30,11 +31,16 @@ public:
 
     static double currentDateTime();
 
+signals:
+    void lineRealTimeMoved();
+
+
 public slots:
     void setRealTime(bool newValue);
 
     //? what is this? rename?
     void setMoveLineRealTime(bool moveLineRealTime);
+    void mouseMove(double time);
 
 private:
     Ui::RealTimeQCP *ui;
@@ -43,7 +49,10 @@ private:
     bool _moveLineRealTime;
     const QString timeLabel = tr("Время");
 
+    //TODO rename to _lineA
+    //TODO make 2 lines same as oscillograph
     QCPItemLine *_line;
+    QCPItemLine *_lineB;
 
     void configurePlot();
     void configureAxesZoomAndDrag(bool configureTimeAxis);
@@ -59,6 +68,10 @@ private:
     QLabel *_labelTime;
 
     void autoScaleAxis(QCPAxis *axis);
+
+    //WARNING rename to _graphs?
+    QVector<Graph *> _graphElements;
+    static QString formatLabelTime(double time);
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
