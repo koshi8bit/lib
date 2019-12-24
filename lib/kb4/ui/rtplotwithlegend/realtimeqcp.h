@@ -31,6 +31,7 @@ public:
     QCustomPlot* plot() const;
     void moveTimeAxisRealTime();
     void setTimeAxisRange(int newRangeSEC);
+    void setTimeLabelVisible(bool newValue);
 
     void setMarginGroup(QCPMarginGroup *mg);
 

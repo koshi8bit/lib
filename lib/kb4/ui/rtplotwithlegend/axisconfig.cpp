@@ -178,6 +178,7 @@ void AxisConfig::on_spinBoxFullSec_valueChanged(int arg1)
 
 void AxisConfig::spinBoxHoursMinutesSecondsValueChanged(int arg1)
 {
+    Q_UNUSED(arg1)
     QTime t = QTime(ui->spinBoxHours->value(),
                     ui->spinBoxMinutes->value(),
                     ui->spinBoxSeconds->value());

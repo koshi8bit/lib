@@ -93,6 +93,11 @@ void RealTimeQCP::setTimeAxisRange(int newRangeSEC)
     updateTimeAxisLabel();
 }
 
+void RealTimeQCP::setTimeLabelVisible(bool newValue)
+{
+    labelTime->setVisible(newValue);
+}
+
 double RealTimeQCP::currentDateTime()
 {
     auto time = QDateTime::currentDateTime();
@@ -233,9 +238,9 @@ void RealTimeQCP::configureLegend()
 {
     legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
 
-    _labelTime = new QLabel(this);
-    _labelTime->setText(timeLabel);
-    legendLayout->addWidget(_labelTime);
+    labelTime = new QLabel(this);
+    labelTime->setText(timeLabel);
+    legendLayout->addWidget(labelTime);
 
     auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
     legendLayout->addItem(spacer);
@@ -330,8 +335,8 @@ void RealTimeQCP::timeAxisRangeChanged(const QCPRange &newRange)
 void RealTimeQCP::mouseMove(double time)
 {
     //BUG ?is this mouse move or regular move by timer?
-    if (_labelTime->isVisible())
-        _labelTime->setText(formatLabelTime(time));
+    if (labelTime->isVisible())
+        labelTime->setText(formatLabelTime(time));
 
     foreach (auto graphElement, graphs)
     {

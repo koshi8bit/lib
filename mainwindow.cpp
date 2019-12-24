@@ -42,7 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     eh.checkForErrors();
 
-//    //FIXME tima45
 //    auto a = QLocale(QLocale::Russian);
 //    qDebug() << "Разделитель тчк/зпт" << a.decimalPoint();
 //    qDebug() << "Разделитель группы" << QString(a.groupSeparator());
