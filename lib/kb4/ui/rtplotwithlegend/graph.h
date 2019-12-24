@@ -30,7 +30,7 @@ public:
 private:
     QString label;
     QString _postfix;
-    QColor color;
+    QColor _color;
     double _value;
     bool _visible;
     bool _scientificNotation;

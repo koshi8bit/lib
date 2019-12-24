@@ -573,3 +573,8 @@ void MainWindow::on_pushButtonExit_clicked()
 {
     qDebug() << "lol";
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    graphRealTimeQcpUa->setVisible(!graphRealTimeQcpUa->visible());
+}

@@ -44,6 +44,8 @@ private:
     bool scientificNotation = false;
     int precision;
 
+    const QString noValueText = "---";
+
 };
 
 #endif // GRAPHLEGENDITEM_H

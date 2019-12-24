@@ -7,6 +7,8 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
     _plot = plot;
     _yAxis = yAxis;
 
+    _visible = true;
+
 
     _graph = plot->addGraph(plot->xAxis, yAxis);
     _graph->setName(label);
@@ -77,9 +79,12 @@ bool Graph::visible()
 
 void Graph::setGraphKey(double key)
 {
-    _tracer->setGraphKey(key);
-    _value = _tracer->position->value();
-    _graphLegendItem->setValue(_value);
+    if (visible())
+    {
+        _tracer->setGraphKey(key);
+        _value = _tracer->position->value();
+        _graphLegendItem->setValue(_value);
+    }
 }
 
 void Graph::setVisible(bool newValue)
@@ -103,6 +108,7 @@ void Graph::setVisibleByWidget(bool newValue)
 
 void Graph::setColor(QColor newValue)
 {
+    _color = newValue;
     _graph->setPen(newValue);
 
     _tracer->setPen(_graph->pen());

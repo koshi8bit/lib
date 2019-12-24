@@ -25,20 +25,8 @@
         <string>RealTimeQCP</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPU" native="true"/>
-        </item>
         <item row="2" column="0">
          <widget class="RealTimeQCP" name="realTimeQCPPersent" native="true"/>
-        </item>
-        <item row="1" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPPower" native="true"/>
-        </item>
-        <item row="0" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPI" native="true"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPTemperature" native="true"/>
         </item>
         <item row="3" column="0">
          <widget class="RealTimeQCP" name="realTimeQCPVacuum" native="true"/>
@@ -46,8 +34,27 @@
         <item row="3" column="1">
          <widget class="RealTimeQCP" name="realTimeQCPRadiation" native="true"/>
         </item>
+        <item row="0" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPU" native="true"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="RealTimeQCP" name="realTimeQCPPower" native="true"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPTemperature" native="true"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="RealTimeQCP" name="realTimeQCPI" native="true"/>
+        </item>
         <item row="2" column="1">
          <widget class="RealTimeQCP" name="realTimeQCPBool" native="true"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -326,7 +333,7 @@
      <x>0</x>
      <y>0</y>
      <width>1163</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

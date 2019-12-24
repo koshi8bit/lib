@@ -58,8 +58,11 @@ void GraphLegendItem::setValue(const QString &value)
 
 void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
 {
-    //auto visible = static_cast<bool>(arg1);
-    auto visible = arg1 == 2 ? true : false;
+    auto visible = EasyLiving::isChecked(arg1);
+    if (!visible)
+    {
+        setValue(noValueText);
+    }
     emit visibleChanged(visible);
 }
 
@@ -78,4 +81,8 @@ void GraphLegendItem::on_pushButtonColor_clicked()
 void GraphLegendItem::setVisibleValue(bool newValue)
 {
     ui->checkBoxVisible->setChecked(newValue);
+    if (!newValue)
+    {
+        setValue(noValueText);
+    }
 }
