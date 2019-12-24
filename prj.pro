@@ -45,6 +45,7 @@ FORMS += \
     lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.ui \
     lib/kb4/ui/rtplotwithlegend/axisconfig.ui \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.ui \
+    lib/kb4/ui/rtplotwithlegend/realtimeqcp.ui \
     lib/kb4/ui/value/double/valuedouble.ui \
     mainwindow.ui \
     progressbar.ui
@@ -78,6 +79,7 @@ HEADERS += \
     lib/kb4/ui/rtplotwithlegend/colorsetter.h \
     lib/kb4/ui/rtplotwithlegend/graph.h \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.h \
+    lib/kb4/ui/rtplotwithlegend/realtimeqcp.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/ui/value/double/valuedouble.h \
     lib/kb4/worker/worker.h \
@@ -109,6 +111,7 @@ SOURCES += \
     lib/kb4/ui/rtplotwithlegend/colorsetter.cpp \
     lib/kb4/ui/rtplotwithlegend/graph.cpp \
     lib/kb4/ui/rtplotwithlegend/graphlegenditem.cpp \
+    lib/kb4/ui/rtplotwithlegend/realtimeqcp.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
     lib/kb4/ui/value/double/valuedouble.cpp \
     lib/kb4/worker/worker.cpp \
