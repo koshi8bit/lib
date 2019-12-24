@@ -25,8 +25,9 @@ public:
 
     static double currentDateTime();
 
-    void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear, int precision = 0);
-    Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", bool scientificNotation = false);
+    void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+    Graph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
+    Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
 
     QCustomPlot* plot() const;
 
@@ -48,7 +49,7 @@ public slots:
 
     //? what is this? rename?
     void setMoveLineRealTime(bool moveLineRealTime);
-    void mouseMove(double time);
+    void moveCursor(double time);
     void moveTimeAxisRealTime();
 
 private:
@@ -59,9 +60,9 @@ private:
     const QString timeLabel = tr("Время");
 
     //TODO make 2 lines same as oscillograph switching by Mouse wheel button
-    QCPItemLine *_line;
-    QCPItemLine *_lineA;
-    QCPItemLine *_lineB;
+    QCPItemLine *_cursor;
+    QCPItemLine *_cursorA;
+    QCPItemLine *_cursorB;
 
     void configurePlot();
     void configureAxesZoomAndDrag(bool configureTimeAxis);

@@ -17,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     if(settings->value("qDebug/saveToFile", false).toBool())
         configureQDebug();
 
-    configureRealTimeQCP();
+    configureRealTimeQcpPlot();
+    configureRealTimeQcpGraphs();
 
     configureRTPlotWithLegend();
     configureGraphs();
@@ -172,18 +173,31 @@ void MainWindow::configureRTPlotWithLegend()
 
 void MainWindow::addData1()
 {
+    auto now = RealTimeQCP::currentDateTime();
+
     graphHighVoltageElvFull->addData(now, sin(5.0/2*cos(now)));
+    graphRealTimeQcpUa->addData(now, sin(5.0/2*cos(now)));
+
     graphTemperaturePyrometer->addData(now, sin(9.0/2*cos(now)));
+    graphRealTimeQcpIa->addData(now, sin(9.0/2*cos(now)));
+
+
+
 
 
 }
 
 void MainWindow::addData2()
 {
+    auto now = RealTimeQCP::currentDateTime();
+
     graphCurrentBergozHebt->addData(now, QRandomGenerator::global()->bounded(1.0));
     graphHighVoltageElvFirstSection->addData(now, sin(now));
     graphVacuumTandem->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
 
+    graphRealTimeQcpUb->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
+
+    graphRealTimeQcpBoola->addData(now, qrand() % 2);
 }
 
 //FIXME tima45 diff?
@@ -204,7 +218,7 @@ void MainWindow::addData2()
 
 void MainWindow::plotReplotTimeout()
 {
-    now = RTPlotWithLegend::now();
+    auto now = RTPlotWithLegend::now();
 
     if (ui->rtPlotHighVoltageCurrent->realTime())
     {
@@ -272,7 +286,7 @@ MainWindow::~MainWindow()
     delete mg;//->deleteLater();
 }
 
-void MainWindow::configureRealTimeQCP()
+void MainWindow::configureRealTimeQcpPlot()
 {
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
 
@@ -280,7 +294,7 @@ void MainWindow::configureRealTimeQCP()
 
     plot = ui->realTimeQCPU;
     plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
-    configureRealTimeQCPPlot(plot);
+    configureRealTimeQcpPlot(plot);
     connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPI->plot(), SLOT(replot()));
     connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPTemperature->plot(), SLOT(replot()));
     connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPPower->plot(), SLOT(replot()));
@@ -290,20 +304,20 @@ void MainWindow::configureRealTimeQCP()
     connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPRadiation->plot(), SLOT(replot()));
 
     plot = ui->realTimeQCPI;
-    plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10);
-    configureRealTimeQCPPlot(plot);
+    plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10, 2);
+    configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQCPTemperature;
     plot->configureAxis(plot->plot()->yAxis, tr("Температурим"), EasyLiving::postfixCelsius(), 0, 200);
-    configureRealTimeQCPPlot(plot);
+    configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQCPPower;
     plot->configureAxis(plot->plot()->yAxis, tr("МОООЩА!"), EasyLiving::postfixWatt(), 0, 700);
-    configureRealTimeQCPPlot(plot);
+    configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQCPPersent;
     plot->configureAxis(plot->plot()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
-    configureRealTimeQCPPlot(plot);
+    configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQCPBool;
     plot->configureAxis(plot->plot()->yAxis, tr("True/False"), "", -0.2, 1.2);
@@ -312,18 +326,18 @@ void MainWindow::configureRealTimeQCP()
     textTicker->addTick(1, "True\nOn");
     plot->plot()->yAxis->setTicker(textTicker);
     //plot->plot()->yAxis->setSubTicks(false);
-    configureRealTimeQCPPlot(plot);
+    configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQCPVacuum;
-    plot->configureAxis(plot->plot()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, QCPAxis::stLogarithmic);
-    configureRealTimeQCPPlot(plot);
+    plot->configureAxis(plot->plot()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, 0, QCPAxis::stLogarithmic);
+    configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQCPRadiation;
-    plot->configureAxis(plot->plot()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, QCPAxis::stLogarithmic);
-    configureRealTimeQCPPlot(plot);
+    plot->configureAxis(plot->plot()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, 0, QCPAxis::stLogarithmic);
+    configureRealTimeQcpPlot(plot);
 }
 
-void MainWindow::configureRealTimeQCPPlot(RealTimeQCP *plot)
+void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
 {
     plot->setMarginGroup(mg);
 
@@ -331,6 +345,16 @@ void MainWindow::configureRealTimeQCPPlot(RealTimeQCP *plot)
     connect(plot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(realTimeQCPMouseMove(QMouseEvent*)));
     connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPRealTimeChanged);
     connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
+}
+
+void MainWindow::configureRealTimeQcpGraphs()
+{
+    graphRealTimeQcpUa = ui->realTimeQCPU->addGraph("ELV/E", EasyLiving::postfixVolt());
+    graphRealTimeQcpUb = ui->realTimeQCPU->addGraph("Ultravolt/-300", EasyLiving::postfixVolt());
+
+    graphRealTimeQcpIa = ui->realTimeQCPI->addGraph("Bergoz/Hebl", EasyLiving::postfixMilliAmpere());
+
+    graphRealTimeQcpBoola = ui->realTimeQCPBool->addGraph("ЭЛВ/Напуск аргона", "", 0);
 }
 
 
@@ -438,7 +462,7 @@ void MainWindow::realTimeQCPChangeRange(QCPRange range)
 void MainWindow::realTimeQCPMouseMoveCheckPlot(RealTimeQCP *widget, QCustomPlot *plot, double time)
 {
     if (plot != widget->plot())
-        widget->mouseMove(time);
+        widget->moveCursor(time);
 }
 
 void MainWindow::realTimeQCPMouseMove(QMouseEvent *event)

@@ -6,13 +6,14 @@
 #include <lib/qcustomplot/qcustomplot.h>
 
 #include "graphlegenditem.h"
+//#include "realtimeqcp.h"
 
 
 class Graph : public QObject
 {
     Q_OBJECT
 public:
-    explicit Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, bool scientificNotation = false);
+    explicit Graph(const QString &label, const QString &postfix, QColor color, QCustomPlot *plot, QCPAxis *yAxis, int precision = 3, bool scientificNotation = false);
     virtual ~Graph();
 
     QCPGraph *graph();
@@ -33,6 +34,7 @@ private:
     double _value;
     bool _visible;
     bool _scientificNotation;
+    int _precision;
     //ValueScaler valueScaler;
     QCustomPlot *_plot;
     QCPAxis *_yAxis;

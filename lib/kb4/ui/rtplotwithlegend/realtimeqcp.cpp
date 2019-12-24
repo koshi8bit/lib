@@ -116,7 +116,7 @@ double RealTimeQCP::currentDateTime()
     return now;
 }
 
-void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, QCPAxis::ScaleType scaleType, int precision)
+void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
 {
     if (postfix.isEmpty())
     {
@@ -134,13 +134,19 @@ void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, const QStri
 
 }
 
-Graph *RealTimeQCP::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, bool scientificNotation)
+Graph *RealTimeQCP::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
+{
+    return addGraph(plot()->yAxis, label, postfix, precision, scientificNotation);
+}
+
+Graph *RealTimeQCP::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, int precision, bool scientificNotation)
 {
     auto graph = new Graph( label,
                             postfix,
                             colorSetter.getColor(),
                             plot(),
                             axis,
+                            precision,
                             scientificNotation);
 
     graphs.append(graph);
@@ -235,14 +241,14 @@ void RealTimeQCP::configurePlotTimeAxis()
 
 void RealTimeQCP::configurePlotLine()
 {
-    _line = new QCPItemLine(plot());
+    _cursor = new QCPItemLine(plot());
     auto pen = QPen();
     pen.setColor("#C0C0C0");
     pen.setStyle(Qt::PenStyle::DashLine);
-    _line->setPen(pen);
+    _cursor->setPen(pen);
 
-    _line->start->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().upper);
-    _line->end->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().lower);
+    _cursor->start->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().upper);
+    _cursor->end->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().lower);
 }
 
 void RealTimeQCP::updateTimeAxisLabel()
@@ -306,7 +312,7 @@ void RealTimeQCP::mouseMove(QMouseEvent *event)
     //auto plot = static_cast<QCustomPlot*>(sender());
 
     auto time = plot()->xAxis->pixelToCoord(event->x());
-    mouseMove(time);
+    moveCursor(time);
 }
 
 void RealTimeQCP::mousePress(QMouseEvent *event)
@@ -340,12 +346,12 @@ void RealTimeQCP::mouseDoubleClick(QMouseEvent *event)
 void RealTimeQCP::beforeReplot()
 {
     //WARNING update values without dependence of _line position
-    next fix here
-//    if (moveLineRealTime())
-//    {
-//        //BUG set to 1970 and don't move
-//        mouseMove(RealTimeQCP::currentDateTime());
-//    }
+    //next fix here
+    if (moveLineRealTime())
+    {
+        //TODO set to 1970 and don't move
+        moveCursor(currentDateTime());
+    }
 }
 
 void RealTimeQCP::timeAxisRangeChanged(const QCPRange &newRange)
@@ -359,7 +365,7 @@ void RealTimeQCP::timeAxisRangeChanged(const QCPRange &newRange)
 }
 
 
-void RealTimeQCP::mouseMove(double time)
+void RealTimeQCP::moveCursor(double time)
 {
     //BUG ?is this mouse move or regular move by timer?
     if (labelTime->isVisible())
@@ -378,8 +384,8 @@ void RealTimeQCP::mouseMove(double time)
                 plot()->yAxis->range().upper,
                 plot()->yAxis2->range().upper);
 
-    _line->start->setCoords(time, lower);
-    _line->end->setCoords(time, upper);
+    _cursor->start->setCoords(time, lower);
+    _cursor->end->setCoords(time, upper);
 
     emit lineRealTimeMoved();
 

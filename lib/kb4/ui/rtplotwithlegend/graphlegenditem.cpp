@@ -1,15 +1,15 @@
 #include "graphlegenditem.h"
 #include "ui_graphlegenditem.h"
 
-GraphLegendItem::GraphLegendItem(const QString &label, const QString &postfix, QColor color, bool scientificNotation, QWidget *parent) :
+GraphLegendItem::GraphLegendItem(const QString &label, const QString &postfix, QColor color, int precision, bool scientificNotation, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GraphLegendItem)
 {
     ui->setupUi(this);
     this->label = label;
     this->postfix = postfix;
-
     setColor(color);
+    this->precision = precision;
     ui->checkBoxVisible->setChecked(true);
     setValue(0);
     this->scientificNotation = scientificNotation;
@@ -32,11 +32,11 @@ void GraphLegendItem::setValue(double value)
 {
     if (scientificNotation)
     {
-        setValue(EasyLiving::formatDouble(value, 3, true));
+        setValue(EasyLiving::formatDouble(value, precision, true));
     }
     else
     {
-        setValue(EasyLiving::formatDouble(value));
+        setValue(EasyLiving::formatDouble(value, precision));
     }
 
 }

@@ -52,8 +52,10 @@ private:
     Graph *graphTemperaturePyrometer;
     Graph *graphVacuumTandem;
 
+    Graph *graphRealTimeQcpUa, *graphRealTimeQcpUb, *graphRealTimeQcpIa, *graphRealTimeQcpBoola;
+
     QCPMarginGroup *mg;
-    double now;
+    //double now;
     QDateTime time;
 
     TimeLog *excelLog;
@@ -62,8 +64,10 @@ private:
     QSettings *settings;
 
 
-    void configureRealTimeQCP();
-    void configureRealTimeQCPPlot(RealTimeQCP * plot);
+    void configureRealTimeQcpPlot();
+    void configureRealTimeQcpPlot(RealTimeQCP * plot);
+
+    void configureRealTimeQcpGraphs();
 
     void configureRTPlotWithLegend();
     void configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType);
