@@ -267,10 +267,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::configureRealTimeQCP()
 {
-    auto plot = ui->realTimeQCPU;
-    //plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), 0, 2300, QCPAxis::stLinear, 0);
-    plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), 0, 2300);
-    plot->configureAxis(plot->plot()->yAxis2, tr("Напруга2"), 0, 500);
+    RealTimeQCP * plot;
+
+    plot = ui->realTimeQCPU;
+    plot->configureAxis(plot->plot()->yAxis, tr("Напруга") + EasyLiving::postfixVoltEn(), 0, 2300);
+
+
+    plot = ui->realTimeQCPI;
+    plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), 0, 10);
 }
 
 

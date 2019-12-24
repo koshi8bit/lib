@@ -29,8 +29,18 @@
          <rect>
           <x>100</x>
           <y>140</y>
-          <width>891</width>
-          <height>301</height>
+          <width>501</width>
+          <height>291</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="RealTimeQCP" name="realTimeQCPI" native="true">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>140</y>
+          <width>501</width>
+          <height>291</height>
          </rect>
         </property>
        </widget>
