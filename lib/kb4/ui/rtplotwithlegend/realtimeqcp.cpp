@@ -99,6 +99,11 @@ void RealTimeQCP::setTimeLabelVisible(bool newValue)
     labelTime->setVisible(newValue);
 }
 
+void RealTimeQCP::setMarginGroup(QCPMarginGroup *mg)
+{
+    plot()->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
+}
+
 double RealTimeQCP::currentDateTime()
 {
     auto time = QDateTime::currentDateTime();
