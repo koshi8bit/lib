@@ -46,7 +46,7 @@ private:
     int addData2MSEC = 1000;
 
 
-    QTimer *timerAddData1, *timerAddData2, *timerReplot;
+    QTimer *timerAddData1, *timerAddData2, *timerReplot, *timerRealTimeQCPReplot;
 
     Graph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt;
     Graph *graphTemperaturePyrometer;
@@ -102,6 +102,7 @@ private slots:
     void realTimeQCPRealTimeChanged(bool newValue);
     void realTimeQCPMoveLineRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue);
     void realTimeQCPMoveLineRealTimeChanged(bool newValue);
+    void timerRealTimeQCPReplotTimeout();
 
     void plotReplotTimeout();
     void plotLineRealTimeMoved();

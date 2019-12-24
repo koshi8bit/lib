@@ -29,7 +29,7 @@ public:
     Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", bool scientificNotation = false);
 
     QCustomPlot* plot() const;
-    void moveTimeAxisRealTime();
+
     void setTimeAxisRange(int newRangeSEC);
     void setTimeLabelVisible(bool newValue);
 
@@ -49,6 +49,7 @@ public slots:
     //? what is this? rename?
     void setMoveLineRealTime(bool moveLineRealTime);
     void mouseMove(double time);
+    void moveTimeAxisRealTime();
 
 private:
     Ui::RealTimeQCP *ui;

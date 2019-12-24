@@ -78,7 +78,7 @@ void MainWindow::configureExcelLog()
     excelLog->addChannel(b);
 
     c = new ChannelDouble("CCC", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
-    //FIXME tima45
+    //FIXME !tima45!
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
     c->setValue(3.009);
@@ -120,6 +120,12 @@ void MainWindow::configureTimers()
     timerReplot->setInterval(plotUpdateIntervalMSEC);
     connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
     timerReplot->start();
+
+    timerRealTimeQCPReplot = new QTimer(this);
+    timerRealTimeQCPReplot->setInterval(plotUpdateIntervalMSEC);
+    //connect(timerRealTimeQCPReplot, SIGNAL(timeout()), this, SLOT(timerRealTimeQCPReplotTimeout()));
+    connect(timerRealTimeQCPReplot, &QTimer::timeout, ui->realTimeQCPU, &RealTimeQCP::moveTimeAxisRealTime);
+    timerRealTimeQCPReplot->start();
 }
 
 void MainWindow::configureGradientLineEdit()
@@ -268,8 +274,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::configureRealTimeQCP()
 {
-    RealTimeQCP * plot;
     mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
+
+    RealTimeQCP * plot;
 
     plot = ui->realTimeQCPU;
     plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
@@ -499,6 +506,11 @@ void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
     realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPBool, _sender, newValue);
     realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPVacuum, _sender, newValue);
     realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPRadiation, _sender, newValue);
+}
+
+void MainWindow::timerRealTimeQCPReplotTimeout()
+{
+    ui->realTimeQCPU->moveTimeAxisRealTime();
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)

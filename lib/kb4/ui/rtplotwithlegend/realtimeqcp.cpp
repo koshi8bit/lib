@@ -7,10 +7,6 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    configurePlot();
-    configureLegend();
-    //configureSplitter();
-
     connect(plot(), &QCustomPlot::axisClick, this, &RealTimeQCP::axisClick);
     connect(plot(), &QCustomPlot::axisDoubleClick, this, &RealTimeQCP::axisDoubleClick);
 
@@ -21,6 +17,10 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
 
     connect(plot(), &QCustomPlot::beforeReplot, this, &RealTimeQCP::beforeReplot);
     connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(timeAxisRangeChanged(QCPRange)));
+
+    configurePlot();
+    configureLegend();
+    //configureSplitter();
 
 }
 
@@ -46,7 +46,7 @@ void RealTimeQCP::configurePlot()
     ui->plot->setInteraction(QCP::iRangeDrag, true);
 
     //WARNING dublicate exec in setRealTime
-    //configurePlotZoomAndDrag(false);
+    configureAxesZoomAndDrag(false);
 
     configurePlotBackground();
 
@@ -84,9 +84,13 @@ void RealTimeQCP::moveTimeAxisRealTime()
 //    auto range = plot()->xAxis->range();
 //    auto delta = range.upper - range.lower;
 
-    auto cdt = currentDateTime();
+    if (realTime())
+    {
+        auto cdt = currentDateTime();
 
-    plot()->xAxis->setRange(cdt - timeAxisOldRange, cdt);
+        plot()->xAxis->setRange(cdt - timeAxisOldRange, cdt);
+    }
+    plot()->replot();
 }
 
 void RealTimeQCP::setTimeAxisRange(int newRangeSEC)
@@ -299,6 +303,8 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
 
 void RealTimeQCP::mouseMove(QMouseEvent *event)
 {
+    //auto plot = static_cast<QCustomPlot*>(sender());
+
     auto time = plot()->xAxis->pixelToCoord(event->x());
     mouseMove(time);
 }
@@ -334,11 +340,12 @@ void RealTimeQCP::mouseDoubleClick(QMouseEvent *event)
 void RealTimeQCP::beforeReplot()
 {
     //WARNING update values without dependence of _line position
+    next fix here
 //    if (moveLineRealTime())
 //    {
 //        //BUG set to 1970 and don't move
 //        mouseMove(RealTimeQCP::currentDateTime());
-    //    }
+//    }
 }
 
 void RealTimeQCP::timeAxisRangeChanged(const QCPRange &newRange)
