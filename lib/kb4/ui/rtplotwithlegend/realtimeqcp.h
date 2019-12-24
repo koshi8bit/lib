@@ -24,7 +24,7 @@ public:
 
     static double currentDateTime();
 
-    void configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+    void configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType = QCPAxis::stLinear, int precision = 3);
 
     QCustomPlot* plot() const;
     void moveTimeAxisRealTime();

@@ -100,14 +100,15 @@ double RealTimeQCP::currentDateTime()
     return now;
 }
 
-void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType)
+void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, double min, double max, QCPAxis::ScaleType scaleType, int precision)
 {
-    axis->setVisible(true);
     axis->setLabel(label);
+    //axis->setVisible(true);
     axis->setRange(min, max);
+    setAxisType(axis, scaleType);
+    axis->setNumberPrecision(precision);
     //axis->setLabelPadding(20);
 
-    setAxisType(axis, scaleType);
 }
 
 
