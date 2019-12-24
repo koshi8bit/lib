@@ -341,7 +341,7 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 ////////////////////////////////
 
 
-void MainWindow::realTimeQCPChangeRangeCheckAxis(QCPAxis *axis, RTPlotWithLegend *plot, QCPRange range)
+void MainWindow::realTimeQCPChangeRangeCheckPlotAxis(QCPAxis *axis, RTPlotWithLegend *plot, QCPRange range)
 {
     if (axis != plot->plot()->xAxis)
         plot->plot()->xAxis->setRange(range);
@@ -351,9 +351,9 @@ void MainWindow::plotChangeRange(QCPRange range)
 {
     QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
 
-    realTimeQCPChangeRangeCheckAxis(axis, ui->rtPlotHighVoltageCurrent, range);
-    realTimeQCPChangeRangeCheckAxis(axis, ui->rtPlotTemperaturePower, range);
-    realTimeQCPChangeRangeCheckAxis(axis, ui->rtPlotVacuumRadiation, range);
+    realTimeQCPChangeRangeCheckPlotAxis(axis, ui->rtPlotHighVoltageCurrent, range);
+    realTimeQCPChangeRangeCheckPlotAxis(axis, ui->rtPlotTemperaturePower, range);
+    realTimeQCPChangeRangeCheckPlotAxis(axis, ui->rtPlotVacuumRadiation, range);
 
 //    if (axis != ui->rtPlotHighVoltageCurrent->plot()->xAxis)
 //        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(range);
@@ -406,30 +406,47 @@ void MainWindow::plotMoveLineRealTimeChanged(bool newValue)
 }
 
 
-void MainWindow::realTimeQCPChangeRangeCheckAxis(RealTimeQCP *plot, QCPAxis *axis, QCPRange range)
+void MainWindow::realTimeQCPChangeRangeCheckPlotAxis(RealTimeQCP *widget, QCPAxis *axis, QCPRange range)
 {
-    if (axis != plot->plot()->xAxis)
-        plot->plot()->xAxis->setRange(range);
+    if (axis != widget->plot()->xAxis)
+        widget->plot()->xAxis->setRange(range);
 }
 
 void MainWindow::realTimeQCPChangeRange(QCPRange range)
 {
     QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
 
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPU, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPI, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPTemperature, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPPower, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPPersent, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPBool, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPVacuum, axis, range);
-    realTimeQCPChangeRangeCheckAxis(ui->realTimeQCPRadiation, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPU, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPI, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPTemperature, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPPower, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPPersent, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPBool, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPVacuum, axis, range);
+    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPRadiation, axis, range);
 
     ui->realTimeQCPU->plot()->replot();
 }
 
+void MainWindow::realTimeQCPMouseMoveCheckPlot(RealTimeQCP *widget, QCustomPlot *plot, double time)
+{
+    if (plot != widget->plot())
+        widget->mouseMove(time);
+}
+
 void MainWindow::realTimeQCPMouseMove(QMouseEvent *event)
 {
+    auto plot = static_cast<QCustomPlot*>(sender());
+    auto time = plot->xAxis->pixelToCoord(event->x());
+
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPU, plot, time);
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPI, plot, time);
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPTemperature, plot, time);
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPower, plot, time);
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPersent, plot, time);
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPBool, plot, time);
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPVacuum, plot, time);
+    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPRadiation, plot, time);
 
 }
 
