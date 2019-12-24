@@ -28,20 +28,23 @@
         <item row="0" column="0">
          <widget class="RealTimeQCP" name="realTimeQCPU" native="true"/>
         </item>
-        <item row="1" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPT" native="true"/>
+        <item row="2" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPPersent" native="true"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="RealTimeQCP" name="realTimeQCPPower" native="true"/>
         </item>
         <item row="0" column="1">
          <widget class="RealTimeQCP" name="realTimeQCPI" native="true"/>
         </item>
-        <item row="1" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPIPersent" native="true"/>
+        <item row="1" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPTemperature" native="true"/>
         </item>
-        <item row="2" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPTRadiation" native="true"/>
+        <item row="3" column="0">
+         <widget class="RealTimeQCP" name="realTimeQCPVacuum" native="true"/>
         </item>
-        <item row="2" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPTVacuum" native="true"/>
+        <item row="3" column="1">
+         <widget class="RealTimeQCP" name="realTimeQCPRadiation" native="true"/>
         </item>
        </layout>
       </widget>

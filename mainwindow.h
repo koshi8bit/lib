@@ -92,6 +92,12 @@ private slots:
     void plotMouseMove(QMouseEvent *event);
     void plotRealTimeChanged(bool newValue);
     void plotMoveLineRealTimeChanged(bool newValue);
+
+    void realTimeQCPChangeRange(QCPRange range);
+    void realTimeQCPMouseMove(QMouseEvent *event);
+    void realTimeQCPRealTimeChanged(bool newValue);
+    void realTimeQCPMoveLineRealTimeChanged(bool newValue);
+
     void plotReplotTimeout();
     void plotLineRealTimeMoved();
     void on_horizontalSlider_valueChanged(int value);

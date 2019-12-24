@@ -278,16 +278,36 @@ void MainWindow::configureRealTimeQCP()
     plot = ui->realTimeQCPI;
     plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10);
     configureRealTimeQCPPlot(plot);
+
+    plot = ui->realTimeQCPTemperature;
+    plot->configureAxis(plot->plot()->yAxis, tr("Температурим"), EasyLiving::postfixCelsius(), 0, 200);
+    configureRealTimeQCPPlot(plot);
+
+    plot = ui->realTimeQCPPower;
+    plot->configureAxis(plot->plot()->yAxis, tr("МОООЩА!"), EasyLiving::postfixWatt(), 0, 700);
+    configureRealTimeQCPPlot(plot);
+
+    plot = ui->realTimeQCPPersent;
+    plot->configureAxis(plot->plot()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
+    configureRealTimeQCPPlot(plot);
+
+    plot = ui->realTimeQCPVacuum;
+    plot->configureAxis(plot->plot()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, QCPAxis::stLogarithmic);
+    configureRealTimeQCPPlot(plot);
+
+    plot = ui->realTimeQCPRadiation;
+    plot->configureAxis(plot->plot()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, QCPAxis::stLogarithmic);
+    configureRealTimeQCPPlot(plot);
 }
 
 void MainWindow::configureRealTimeQCPPlot(RealTimeQCP *plot)
 {
     plot->setMarginGroup(mg);
 
-//    connect(rtPlot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-//    connect(rtPlot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
-//    connect(rtPlot, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
-//    connect(rtPlot, &RTPlotWithLegend::moveLineRealTimeChanged, this, &MainWindow::plotMoveLineRealTimeChanged);
+    connect(plot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(realTimeQCPChangeRange(QCPRange)));
+    connect(plot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(realTimeQCPMouseMove(QMouseEvent*)));
+    connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPRealTimeChanged);
+    connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
 }
 
 
