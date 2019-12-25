@@ -29,7 +29,7 @@ public:
         _value = T();
 
         //configure and get postfix
-        //postfix=
+        //postfix=???
 
         configureSharedVariable(true);
     }

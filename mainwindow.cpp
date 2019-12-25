@@ -75,7 +75,7 @@ void MainWindow::configureExcelLog()
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
-    c = new ChannelDouble("ЭЛВ/EnergyU get", false, this);
+    c = new ChannelDouble("ЭЛВ/EnergyU get", this);
     //FIXME !tima45!
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
