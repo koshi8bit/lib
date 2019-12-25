@@ -63,11 +63,11 @@ void MainWindow::configureExcelLog()
     ///////
     excelLog = new TimeLog();
     connect(excelLog, &TimeLog::errorOcurred, &eh, &ErrorHandler::processError);
-    excelLog->configure("./Log", Excel::LogName | Excel::WidgetName);
+    excelLog->configure("./log", Excel::LogName | Excel::WidgetName);
     ///////
 
 
-    a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), QStringList() << "a/middle1", this);
+    a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
     excelLog->addChannel(a);
 
@@ -75,7 +75,7 @@ void MainWindow::configureExcelLog()
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
-    c = new ChannelDouble("ЭЛВ/EnergyU get", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), false, this);
+    c = new ChannelDouble("ЭЛВ/EnergyU get", false, this);
     //FIXME !tima45!
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
