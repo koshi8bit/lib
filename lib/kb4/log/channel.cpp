@@ -1,28 +1,30 @@
 #include "channel.h"
 
-Channel::Channel(QString name, QString postfix, QObject *parent)
+
+Channel::Channel(QString plotName, QString widgetName, QString postfix, QObject *parent)
     : QObject(parent)
 {
-    _logName = name;
-    _plotName = name;
-    _widgetName = name;
-
+    _plotName = plotName;
+    _widgetName = widgetName;
     _postfix = postfix;
 }
 
-Channel::Channel(QString name, QString postfix, QStringList &path, QObject *parent) : QObject(parent)
+Channel::Channel(QString name, QString postfix, QObject *parent)
+    : Channel(name, name, postfix, parent)
 {
-    path << name;
-    _logName = path.join(seporator);
-//    _logName = QString("%1%2%3")
-//            .arg(path->join(seporator))
-//            .arg(seporator)
-//            .arg(name);
+    _logName = name;
+}
 
-    _plotName = name;
-    _widgetName = name;
+Channel::Channel(QString name, QString postfix, QStringList &path, QObject *parent)
+  : Channel(name, name, postfix, parent)
+{
+    //path << name;
+    //_logName = path.join(seporator);
 
-    _postfix = postfix;
+    _logName = QString("%1%2%3")
+            .arg(path.join(seporator))
+            .arg(seporator)
+            .arg(name);
 }
 
 
@@ -66,3 +68,4 @@ QString Channel::postfix() const
 {
     return _postfix;
 }
+

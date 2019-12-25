@@ -10,7 +10,7 @@ class Channel : public QObject
     Q_OBJECT
 public:
     explicit Channel(QString name, QString postfix, QObject *parent = nullptr);
-    explicit Channel(QString name, QString postfix, QStringList *path, QObject *parent = nullptr);
+    explicit Channel(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
 
     //QColor color;
 
@@ -19,18 +19,21 @@ public:
     QString widgetName() const;
     void setWidgetName(const QString widgetName);
     QString logName() const;
-    void setLogName(const QString logName);
     QString postfix() const;
 
     const QString seporator = "/";
 
 private:
+    explicit Channel(QString plotName, QString widgetName, QString postfix, QObject *parent = nullptr);
+
     QString _plotName;
     QString _widgetName;
     QString _logName;
     QString _postfix;
 
 protected:
+    void setLogName(const QString logName);
+
     void _errorOccurred(QString message);
 
 

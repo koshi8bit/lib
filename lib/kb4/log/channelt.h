@@ -10,16 +10,34 @@ template <typename T>
 class ChannelT : public Channel
 {
 public:
-    ChannelT(QString name, QString postfix, QStringList *path, QObject *parent = nullptr)
+    ChannelT(QString name, QString postfix, QObject *parent = nullptr)
+        :Channel(name, postfix, parent)
+    {
+        _value = T();
+    }
+
+    ChannelT(QString name, QString postfix, QStringList &path, QObject *parent = nullptr)
         :Channel(name, postfix, path, parent)
     {
         _value = T();
     }
 
-    ChannelT(QString sharedVariableName, QString postfix, bool connectWrite=false, QObject *parent = nullptr)
-        :Channel(getName(sharedVariableName), postfix, getPath(sharedVariableName), parent)
+    ChannelT(QString sharedVariableName, bool connectWrite=false, QObject *parent = nullptr)
+        :Channel(getName(sharedVariableName), "", parent)
     {
         _value = T();
+
+        //configure and get postfix
+        configureSharedVariable(connectWrite);
+    }
+
+    //this will be deleted soon. Use constructor higher
+    ChannelT(QString sharedVariableName, QString postfix, bool connectWrite=false, QObject *parent = nullptr)
+        :Channel(getName(sharedVariableName), postfix, parent)
+    {
+        _value = T();
+
+        //configure and get postfix
         configureSharedVariable(connectWrite);
     }
 
