@@ -35,6 +35,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+RESOURCES += \
+    ui-res.qrc
+
 DISTFILES += \
     lib/kb4/shared-variable/tcp/netvars/example/example.7z \
     lib/kb4/ui/gradientlineedit/gears.png \
@@ -42,10 +45,9 @@ DISTFILES += \
 
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
-    lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.ui \
-    lib/kb4/ui/rtplotwithlegend/axisconfig.ui \
-    lib/kb4/ui/rtplotwithlegend/graphlegenditem.ui \
-    lib/kb4/ui/rtplotwithlegend/realtimeqcp.ui \
+    lib/kb4/ui/realtimeqcp/axisconfig.ui \
+    lib/kb4/ui/realtimeqcp/graphlegenditem.ui \
+    lib/kb4/ui/realtimeqcp/realtimeqcp.ui \
     lib/kb4/ui/value/double/valuedouble.ui \
     mainwindow.ui \
     progressbar.ui
@@ -74,17 +76,16 @@ HEADERS += \
     lib/kb4/shared-variable/udp/shared-variable.h \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \
     lib/kb4/ui/gradientlineedit/minmax.h \
-    lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.h \
-    lib/kb4/ui/rtplotwithlegend/axisconfig.h \
-    lib/kb4/ui/rtplotwithlegend/colorsetter.h \
-    lib/kb4/ui/rtplotwithlegend/graph.h \
-    lib/kb4/ui/rtplotwithlegend/graphlegenditem.h \
-    lib/kb4/ui/rtplotwithlegend/realtimeqcp.h \
+    lib/kb4/ui/realtimeqcp/axisconfig.h \
+    lib/kb4/ui/realtimeqcp/colorsetter.h \
+    lib/kb4/ui/realtimeqcp/graph.h \
+    lib/kb4/ui/realtimeqcp/graphlegenditem.h \
+    lib/kb4/ui/realtimeqcp/realtimeqcp.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/ui/value/double/valuedouble.h \
     lib/kb4/worker/worker.h \
     lib/qcustomplot/qcustomplot.h \
-    mainwindow.h \
+    mainwindow.h
 
 SOURCES += \
     lib/kb4/easyliving.cpp \
@@ -106,19 +107,15 @@ SOURCES += \
     lib/kb4/shared-variable/udp/shared-variable.cpp \
     lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
     lib/kb4/ui/gradientlineedit/minmax.cpp \
-    lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.cpp \
-    lib/kb4/ui/rtplotwithlegend/axisconfig.cpp \
-    lib/kb4/ui/rtplotwithlegend/colorsetter.cpp \
-    lib/kb4/ui/rtplotwithlegend/graph.cpp \
-    lib/kb4/ui/rtplotwithlegend/graphlegenditem.cpp \
-    lib/kb4/ui/rtplotwithlegend/realtimeqcp.cpp \
+    lib/kb4/ui/realtimeqcp/axisconfig.cpp \
+    lib/kb4/ui/realtimeqcp/colorsetter.cpp \
+    lib/kb4/ui/realtimeqcp/graph.cpp \
+    lib/kb4/ui/realtimeqcp/graphlegenditem.cpp \
+    lib/kb4/ui/realtimeqcp/realtimeqcp.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
     lib/kb4/ui/value/double/valuedouble.cpp \
     lib/kb4/worker/worker.cpp \
     lib/qcustomplot/qcustomplot.cpp \
     main.cpp \
     mainwindow.cpp
-
-RESOURCES += \
-    ui-res.qrc
 

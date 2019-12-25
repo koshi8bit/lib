@@ -73,5 +73,5 @@ void ChannelDouble::_valueChanged()
 
 void ChannelDouble::addDataToGraph()
 {
-    graph->addData(RTPlotWithLegend::now(), value());
+    graph->addData(RealTimeQCP::currentDateTime(), value());
 }

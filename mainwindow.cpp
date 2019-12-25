@@ -139,37 +139,6 @@ void MainWindow::configureGradientLineEdit()
     connect(ui->minMax, &MinMax::rangeChanged, this, &MainWindow::gradientLineEdit_rangeChanged);
 }
 
-void MainWindow::configurePlot(RTPlotWithLegend *rtPlot, QString yAxisLabel, double yAxisMin, double yAxisMax, QCPAxis::ScaleType yAxisScaleType, QString yAxis2Label, double yAxis2Min, double yAxis2Max, QCPAxis::ScaleType yAxis2ScaleType)
-{
-    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxisL, yAxisLabel, yAxisMin, yAxisMax, yAxisScaleType);
-    rtPlot->configureAxis(RTPlotWithLegend::Axis::yAxisR, yAxis2Label, yAxis2Min, yAxis2Max, yAxis2ScaleType);
-    rtPlot->setMarginGroup(mg);
-    connect(rtPlot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(plotChangeRange(QCPRange)));
-    connect(rtPlot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(plotMouseMove(QMouseEvent*)));
-    connect(rtPlot, &RTPlotWithLegend::realTimeChanged, this, &MainWindow::plotRealTimeChanged);
-    connect(rtPlot, &RTPlotWithLegend::moveLineRealTimeChanged, this, &MainWindow::plotMoveLineRealTimeChanged);
-}
-
-void MainWindow::configureRTPlotWithLegend()
-{
-    mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
-
-    configurePlot(ui->rtPlotHighVoltageCurrent, "Энергия (кВ)", 0, 1250, QCPAxis::ScaleType::stLinear, "Ток (мА)", 0, 10, QCPAxis::ScaleType::stLinear);
-    ui->rtPlotHighVoltageCurrent->setNumberPrecision(RTPlotWithLegend::Axis::yAxisR, 2);
-
-    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotTemperaturePower->plot(), SLOT(replot()));
-    connect(ui->rtPlotHighVoltageCurrent->plot(), SIGNAL(afterReplot()), ui->rtPlotVacuumRadiation->plot(), SLOT(replot()));
-    connect(ui->rtPlotHighVoltageCurrent, &RTPlotWithLegend::lineRealTimeMoved, this, &MainWindow::plotLineRealTimeMoved);
-
-    configurePlot(ui->rtPlotTemperaturePower, "Температура (С)", 10, 180, QCPAxis::ScaleType::stLinear, "Мощность (Вт)", 0, 700, QCPAxis::ScaleType::stLinear);
-    ui->rtPlotTemperaturePower->setLabelTimeVisible(false);
-
-    configurePlot(ui->rtPlotVacuumRadiation, "Вакуум (Пa)", 1.0e-5, 1, QCPAxis::ScaleType::stLogarithmic, "Радиация (Зв)", 1.0e-5, 1, QCPAxis::ScaleType::stLogarithmic);
-    ui->rtPlotVacuumRadiation->setLabelTimeVisible(false);
-}
-
-
-
 
 void MainWindow::addData1()
 {
@@ -216,17 +185,6 @@ void MainWindow::addData2()
 //    rtPlot->plot()->replot();
 //}
 
-void MainWindow::plotReplotTimeout()
-{
-    auto now = RTPlotWithLegend::now();
-
-    if (ui->rtPlotHighVoltageCurrent->realTime())
-    {
-        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(now - ui->rtPlotHighVoltageCurrent->timeAxisRangeSEC(), now);
-    }
-
-    ui->rtPlotHighVoltageCurrent->plot()->replot();
-}
 
 void MainWindow::plotLineRealTimeMoved()
 {

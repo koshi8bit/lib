@@ -3,8 +3,8 @@
 
 #include "channelt.h"
 
-#include <lib/kb4/ui/rtplotwithlegend/axis2/rtplotwithlegend.h>
-#include <lib/kb4/ui/rtplotwithlegend/graph.h>
+#include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
+#include <lib/kb4/ui/realtimeqcp/graph.h>
 
 class ChannelDouble : public ChannelT<double>
 {
