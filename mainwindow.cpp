@@ -20,9 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     configureRealTimeQcpPlot();
     configureRealTimeQcpGraphs();
 
-    configureRTPlotWithLegend();
-    configureGraphs();
-
     configureTimers();
 
     configureGradientLineEdit();
@@ -144,28 +141,15 @@ void MainWindow::addData1()
 {
     auto now = RealTimeQCP::currentDateTime();
 
-    graphHighVoltageElvFull->addData(now, sin(5.0/2*cos(now)));
     graphRealTimeQcpUa->addData(now, sin(5.0/2*cos(now)));
-
-    graphTemperaturePyrometer->addData(now, sin(9.0/2*cos(now)));
     graphRealTimeQcpIa->addData(now, sin(9.0/2*cos(now)));
-
-
-
-
-
 }
 
 void MainWindow::addData2()
 {
     auto now = RealTimeQCP::currentDateTime();
 
-    graphCurrentBergozHebt->addData(now, QRandomGenerator::global()->bounded(1.0));
-    graphHighVoltageElvFirstSection->addData(now, sin(now));
-    graphVacuumTandem->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
-
     graphRealTimeQcpUb->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
-
     graphRealTimeQcpBoola->addData(now, qrand() % 2);
 }
 
@@ -193,36 +177,6 @@ void MainWindow::plotLineRealTimeMoved()
 }
 
 
-
-void MainWindow::configureGraphs()
-{
-    configureGraphsEnergyCurrent();
-    configureGraphsTemperaturePower();
-    configureGraphsVacuumRadiation();
-}
-
-void MainWindow::configureGraphsEnergyCurrent()
-{
-    graphHighVoltageElvFull = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (полное напряжение)", EasyLiving::postfixKilo() + EasyLiving::postfixVolt());
-    graphHighVoltageElvFirstSection = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisL, "ЭЛВ (первая секция)");
-    graphHighVoltageElvFirstSection->setVisible(false);
-    graphHighVoltageElvFirstSection->setColor(QColor("#BBBBBB"));
-    graphCurrentBergozHebt = ui->rtPlotHighVoltageCurrent->addGraph(RTPlotWithLegend::Axis::yAxisR, "Bergoz (выс. эн. тракт)");
-}
-
-void MainWindow::configureGraphsTemperaturePower()
-{
-    graphTemperaturePyrometer = ui->rtPlotTemperaturePower->addGraph(RTPlotWithLegend::Axis::yAxisL, "Пирометр");
-}
-
-void MainWindow::configureGraphsVacuumRadiation()
-{
-    graphVacuumTandem = ui->rtPlotVacuumRadiation->addGraph(RTPlotWithLegend::Axis::yAxisL, "Тандем");
-}
-
-
-
-
 MainWindow::~MainWindow()
 {
     timerAddData1->stop();
@@ -246,7 +200,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::configureRealTimeQcpPlot()
 {
-    mg = new QCPMarginGroup(ui->rtPlotHighVoltageCurrent->plot());
+    mg = new QCPMarginGroup(ui->realTimeQCPU->plot());
 
     RealTimeQCP * plot;
 
@@ -321,81 +275,11 @@ void MainWindow::configureRealTimeQcpGraphs()
 void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 {
     plotUpdateRealTIme = static_cast<bool>(arg1);
-
-    ui->rtPlotHighVoltageCurrent->setRealTime(plotUpdateRealTIme);
-    ui->rtPlotTemperaturePower->setRealTime(plotUpdateRealTIme);
-    ui->rtPlotVacuumRadiation->setRealTime(plotUpdateRealTIme);
 }
 
 
 
 ////////////////////////////////
-
-
-void MainWindow::realTimeQCPChangeRangeCheckPlotAxis(QCPAxis *axis, RTPlotWithLegend *plot, QCPRange range)
-{
-    if (axis != plot->plot()->xAxis)
-        plot->plot()->xAxis->setRange(range);
-}
-
-void MainWindow::plotChangeRange(QCPRange range)
-{
-    QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
-
-    realTimeQCPChangeRangeCheckPlotAxis(axis, ui->rtPlotHighVoltageCurrent, range);
-    realTimeQCPChangeRangeCheckPlotAxis(axis, ui->rtPlotTemperaturePower, range);
-    realTimeQCPChangeRangeCheckPlotAxis(axis, ui->rtPlotVacuumRadiation, range);
-
-//    if (axis != ui->rtPlotHighVoltageCurrent->plot()->xAxis)
-//        ui->rtPlotHighVoltageCurrent->plot()->xAxis->setRange(range);
-//    if (axis != ui->rtPlotTemperaturePower->plot()->xAxis)
-//        ui->rtPlotTemperaturePower->plot()->xAxis->setRange(range);
-//    if (axis != ui->rtPlotVacuumRadiation->plot()->xAxis)
-//        ui->rtPlotVacuumRadiation->plot()->xAxis->setRange(range);
-
-    ui->rtPlotHighVoltageCurrent->plot()->replot();
-}
-
-void MainWindow::plotMouseMove(QMouseEvent *event)
-{
-    auto plot = static_cast<QCustomPlot*>(sender());
-    auto time = plot->xAxis->pixelToCoord(event->x());
-
-    if (plot != ui->rtPlotHighVoltageCurrent->plot())
-        ui->rtPlotHighVoltageCurrent->mouseMove(time);
-    if (plot != ui->rtPlotTemperaturePower->plot())
-        ui->rtPlotTemperaturePower->mouseMove(time);
-    if (plot != ui->rtPlotVacuumRadiation->plot())
-        ui->rtPlotVacuumRadiation->mouseMove(time);
-
-    ui->rtPlotHighVoltageCurrent->plot()->replot();
-}
-
-void MainWindow::plotRealTimeChanged(bool newValue)
-{
-    ui->checkBoxRealTime->setChecked(newValue);
-    auto plot = static_cast<RTPlotWithLegend *>(sender());
-
-    if (plot != ui->rtPlotHighVoltageCurrent)
-        ui->rtPlotHighVoltageCurrent->setRealTime(newValue);
-    if (plot != ui->rtPlotTemperaturePower)
-        ui->rtPlotTemperaturePower->setRealTime(newValue);
-    if (plot != ui->rtPlotVacuumRadiation)
-        ui->rtPlotVacuumRadiation->setRealTime(newValue);
-}
-
-void MainWindow::plotMoveLineRealTimeChanged(bool newValue)
-{
-    auto plot = static_cast<RTPlotWithLegend *>(sender());
-
-    if (plot != ui->rtPlotHighVoltageCurrent)
-        ui->rtPlotHighVoltageCurrent->setMoveLineRealTime(newValue);
-    if (plot != ui->rtPlotTemperaturePower)
-        ui->rtPlotTemperaturePower->setMoveLineRealTime(newValue);
-    if (plot != ui->rtPlotVacuumRadiation)
-        ui->rtPlotVacuumRadiation->setMoveLineRealTime(newValue);
-}
-
 
 void MainWindow::realTimeQCPChangeRangeCheckPlotAxis(RealTimeQCP *widget, QCPAxis *axis, QCPRange range)
 {

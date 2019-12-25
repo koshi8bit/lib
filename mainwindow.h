@@ -68,11 +68,6 @@ private:
 
     void configureRealTimeQcpGraphs();
 
-    void configureGraphs();
-    void configureGraphsEnergyCurrent();
-    void configureGraphsTemperaturePower();
-    void configureGraphsVacuumRadiation();
-
     void configureGradientLineEdit();
     
     void configureTimers();
@@ -88,12 +83,6 @@ private slots:
     void addData2();
     void on_checkBoxRealTime_stateChanged(int arg1);
 
-    void realTimeQCPChangeRangeCheckPlotAxis(QCPAxis* axis, RTPlotWithLegend *plot, QCPRange range);
-    void plotChangeRange(QCPRange range);
-    void plotMouseMove(QMouseEvent *event);
-    void plotRealTimeChanged(bool newValue);
-    void plotMoveLineRealTimeChanged(bool newValue);
-
     void realTimeQCPChangeRangeCheckPlotAxis(RealTimeQCP *widget, QCPAxis* axis, QCPRange range);
     void realTimeQCPChangeRange(QCPRange range);
     void realTimeQCPMouseMoveCheckPlot(RealTimeQCP *widget, QCustomPlot* plot, double time);
@@ -104,7 +93,6 @@ private slots:
     void realTimeQCPMoveLineRealTimeChanged(bool newValue);
     void timerRealTimeQCPReplotTimeout();
 
-    void plotReplotTimeout();
     void plotLineRealTimeMoved();
     void on_horizontalSlider_valueChanged(int value);
     void gradientLineEdit_rangeChanged(double min, double max);
