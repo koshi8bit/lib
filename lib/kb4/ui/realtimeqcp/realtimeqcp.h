@@ -11,6 +11,8 @@
 #include "graph.h"
 #include "colorsetter.h"
 
+//f8f1856 - old widget
+
 namespace Ui {
 class RealTimeQCP;
 }

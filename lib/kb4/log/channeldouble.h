@@ -9,6 +9,9 @@
 class ChannelDouble : public ChannelT<double>
 {
 public:
+    ChannelDouble(QString sharedVariableName, QString postfix, bool connectWrite=false, QObject *parent = nullptr);
+
+    ChannelDouble(QString name, QString postfix, QStringList &prefix, QObject *parent = nullptr);
     ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
     void setGraph(Graph *graph);
     bool isScientificNotation();

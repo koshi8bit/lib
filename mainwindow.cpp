@@ -67,15 +67,15 @@ void MainWindow::configureExcelLog()
     ///////
 
 
-    a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), &(QStringList() << "a/middle1"), this);
+    a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), QStringList() << "a/middle1", this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
     excelLog->addChannel(a);
 
-    b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), &(QStringList() << "b/middle2"), this);
+    b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), QStringList() << "b/middle2", this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
 
-    c = new ChannelDouble("CCC", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), &(QStringList() << "c/middle3"), this);
+    c = new ChannelDouble("ЭЛВ/EnergyU get", EasyLiving::postfixKilo() + EasyLiving::postfixVolt(), false, this);
     //FIXME !tima45!
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));

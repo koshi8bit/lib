@@ -16,6 +16,13 @@ public:
         _value = T();
     }
 
+    ChannelT(QString sharedVariableName, QString postfix, bool connectWrite=false, QObject *parent = nullptr)
+        :Channel(getName(sharedVariableName), postfix, getPath(sharedVariableName), parent)
+    {
+        _value = T();
+        configureSharedVariable(connectWrite);
+    }
+
     T value()
     {
         return _value;
@@ -48,6 +55,19 @@ public slots:
 
 
 private:
+    static QString getName(QString sharedVariableName)
+    {
+        return sharedVariableName.split("/").last();
+    }
+
+    static QStringList* getPath(QString sharedVariableName)
+    {
+        QStringList* result = new QStringList(sharedVariableName.split("/"));
+        result->removeLast();
+        qDebug() << result;
+        return result;
+    }
+
     T _value;
     NetVar<T> *sharedVariable = nullptr;
 

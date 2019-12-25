@@ -1,9 +1,21 @@
 #include "channeldouble.h"
 
+ChannelDouble::ChannelDouble(QString sharedVariableName, QString postfix, bool connectWrite, QObject *parent)
+    :ChannelT<double>(sharedVariableName, postfix, connectWrite, parent)
+{
+
+}
+
+ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList &prefix, QObject *parent)
+    :ChannelT<double>(name, postfix, &prefix, parent)
+{
+
+}
+
 ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent)
     :ChannelT<double>(name, postfix, prefix, parent)
 {
-    //TODO: template fuck. See _valueChanged
+    //TODO: template imperfection. See _valueChanged
     //connect(this, &Channel::valueChanged, this, &ChannelDouble::_valueChanged);
 }
 
