@@ -22,23 +22,16 @@ public:
         _value = T();
     }
 
-    ChannelT(QString sharedVariableName, bool connectWrite=false, QObject *parent = nullptr)
+    ChannelT(QString sharedVariableName, QObject *parent = nullptr)
         :Channel(getName(sharedVariableName), "", parent)
     {
+        setLogName(getName(sharedVariableName));
         _value = T();
 
         //configure and get postfix
-        configureSharedVariable(connectWrite);
-    }
+        //postfix=
 
-    //this will be deleted soon. Use constructor higher
-    ChannelT(QString sharedVariableName, QString postfix, bool connectWrite=false, QObject *parent = nullptr)
-        :Channel(getName(sharedVariableName), postfix, parent)
-    {
-        _value = T();
-
-        //configure and get postfix
-        configureSharedVariable(connectWrite);
+        configureSharedVariable(true);
     }
 
     T value()
@@ -46,16 +39,26 @@ public:
         return _value;
     }
 
-    void configureSharedVariable(bool connectWrite=false)
+    void setSharedVariableEnableWriteFromNet(bool enable)
+    {
+        if (enable)
+        {
+            connect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);
+        }
+        else
+        {
+            disconnect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);
+        }
+
+    }
+
+    void configureSharedVariable(bool enableWriteFromNet = false)
     {
         sharedVariable = new NetVar<T>(logName());
 #ifdef SV_SHOW_DEBUG
         qDebug() << "sharedVariable" << logName() << "created";
 #endif
-        if (connectWrite)
-        {
-            connect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);
-        }
+        setSharedVariableEnableWriteFromNet(enableWriteFromNet);
     }
 
 public slots:
@@ -80,7 +83,7 @@ private:
 
     static QStringList* getPath(QString sharedVariableName)
     {
-        QStringList* result = new QStringList(sharedVariableName.split("/"));
+        QStringList* result = new QStringList(sharedVariableName.split(Channel::seporator));
         result->removeLast();
         qDebug() << result;
         return result;

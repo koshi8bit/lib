@@ -1,13 +1,8 @@
 #include "channel.h"
 
+const QString Channel::seporator = "/";
 
-Channel::Channel(QString plotName, QString widgetName, QString postfix, QObject *parent)
-    : QObject(parent)
-{
-    _plotName = plotName;
-    _widgetName = widgetName;
-    _postfix = postfix;
-}
+
 
 Channel::Channel(QString name, QString postfix, QObject *parent)
     : Channel(name, name, postfix, parent)
@@ -25,6 +20,29 @@ Channel::Channel(QString name, QString postfix, QStringList &path, QObject *pare
             .arg(path.join(seporator))
             .arg(seporator)
             .arg(name);
+}
+
+Channel::Channel(QString plotName, QString widgetName, QString postfix, QObject *parent)
+    : QObject(parent)
+{
+    _plotName = plotName;
+    _widgetName = widgetName;
+    _postfix = postfix;
+}
+
+void Channel::setPostfix(const QString &postfix)
+{
+    _postfix = postfix;
+}
+
+QColor Channel::color() const
+{
+    return _color;
+}
+
+void Channel::setColor(const QColor &color)
+{
+    _color = color;
 }
 
 

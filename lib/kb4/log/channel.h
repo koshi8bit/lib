@@ -9,19 +9,26 @@ class Channel : public QObject
 {
     Q_OBJECT
 public:
+
+    //TODO move to dir ./channel
     explicit Channel(QString name, QString postfix, QObject *parent = nullptr);
     explicit Channel(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
 
-    //QColor color;
 
     QString plotName() const;
     void setPlotName(const QString plotName);
     QString widgetName() const;
     void setWidgetName(const QString widgetName);
-    QString logName() const;
+    QColor color() const;
+    void setColor(const QColor &color);
     QString postfix() const;
+    void setPostfix(const QString &postfix);
 
-    const QString seporator = "/";
+    QString logName() const;
+
+    const static QString seporator;
+
+
 
 private:
     explicit Channel(QString plotName, QString widgetName, QString postfix, QObject *parent = nullptr);
@@ -30,6 +37,7 @@ private:
     QString _widgetName;
     QString _logName;
     QString _postfix;
+    QColor _color;
 
 protected:
     void setLogName(const QString logName);

@@ -11,9 +11,7 @@ class ChannelDouble : public ChannelT<double>
 public:
     ChannelDouble(QString name, QString postfix, QObject *parent = nullptr);
     ChannelDouble(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
-    ChannelDouble(QString sharedVariableName, bool connectWrite=false, QObject *parent = nullptr);
-    //this will be deleted soon. Use constructor higher
-    ChannelDouble(QString sharedVariableName, QString postfix, bool connectWrite=false, QObject *parent = nullptr);
+    ChannelDouble(QString sharedVariableName, QObject *parent = nullptr);
 
 
 

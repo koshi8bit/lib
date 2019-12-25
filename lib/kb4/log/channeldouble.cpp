@@ -34,14 +34,8 @@ ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList &path, Q
 
 }
 
-ChannelDouble::ChannelDouble(QString sharedVariableName, bool connectWrite, QObject *parent)
-    :ChannelT<double>(sharedVariableName, connectWrite, parent)
-{
-
-}
-
-ChannelDouble::ChannelDouble(QString sharedVariableName, QString postfix, bool connectWrite, QObject *parent)
-    :ChannelT<double>(sharedVariableName, postfix, connectWrite, parent)
+ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
+    :ChannelT<double>(sharedVariableName, parent)
 {
 
 }
