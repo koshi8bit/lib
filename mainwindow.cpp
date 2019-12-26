@@ -69,7 +69,7 @@ void MainWindow::configureExcelLog()
 
     a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
-    a->addGraphToWidget(ui->realTimeQCPPower);
+    a->addGraphToPlot(ui->realTimeQCPPower);
     excelLog->addChannel(a);
 
     b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), QStringList() << "b/middle2", this);

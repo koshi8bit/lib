@@ -18,7 +18,7 @@ ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
     configure();
 }
 
-void ChannelDouble::addGraphToWidget(RealTimeQCP *plot)
+void ChannelDouble::addGraphToPlot(RealTimeQCP *plot)
 {
     this->graph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
     connect(this, &Channel::valueChanged, this, &ChannelDouble::addDataToGraph);
