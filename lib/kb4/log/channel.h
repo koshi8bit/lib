@@ -28,8 +28,6 @@ public:
 
     const static QString seporator;
 
-
-
 private:
     explicit Channel(QString plotName, QString widgetName, QString postfix, QObject *parent = nullptr);
 

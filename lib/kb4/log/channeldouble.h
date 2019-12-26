@@ -21,16 +21,22 @@ public:
 //    ChannelDouble(QString name, QString postfix, QStringList &prefix, QObject *parent = nullptr);
 //    ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
     void setGraph(Graph *graph);
-    bool isScientificNotation();
+
+    bool scientificNotation();
     void setScientificNotation(bool newValue);
 
-    void setRawValue(double newValue);
+    int precision() const;
+    void setPrecision(int precision);
+
     void setToScaledFunc(std::function<double(double)> f);
+    void setRawValue(double newValue);
 
     void setToRawFunc(std::function<double(double)> f);
     double rawValue();
+
 private:
     Graph *graph;
+    int _precision;
     bool _scientificNotation = false;
 
     //double (*toScaledFunc)(double) = nullptr;

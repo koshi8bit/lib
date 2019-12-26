@@ -24,7 +24,7 @@ void ChannelDouble::setGraph(Graph *graph)
     connect(this, &Channel::valueChanged, this, &ChannelDouble::addDataToGraph);
 }
 
-bool ChannelDouble::isScientificNotation()
+bool ChannelDouble::scientificNotation()
 {
     return _scientificNotation;
 }
@@ -67,9 +67,21 @@ double ChannelDouble::rawValue()
     return _rawValue;
 }
 
+int ChannelDouble::precision() const
+{
+    return _precision;
+}
+
+void ChannelDouble::setPrecision(int precision)
+{
+    _precision = precision;
+}
+
 void ChannelDouble::configure()
 {
     connect(this, &Channel::valueChanged, [this]() { emit valueChangedDouble(value()); } );
+    setScientificNotation(false);
+    setPrecision(3);
 }
 
 void ChannelDouble::valueChangedChild()
