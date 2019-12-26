@@ -25,11 +25,16 @@ public:
     ChannelT(QString sharedVariableName, QObject *parent = nullptr)
         :Channel(getName(sharedVariableName), "", parent)
     {
-        setLogName(getName(sharedVariableName));
+        setLogName(sharedVariableName);
         _value = T();
 
         //configure and get postfix
-        //postfix=???
+        //setPostfix=???
+
+        //child
+        //setPrecision(??);
+        //setScientificNotation(??);
+
 
         configureSharedVariable(true);
     }
@@ -79,14 +84,6 @@ private:
     static QString getName(QString sharedVariableName)
     {
         return sharedVariableName.split("/").last();
-    }
-
-    static QStringList* getPath(QString sharedVariableName)
-    {
-        QStringList* result = new QStringList(sharedVariableName.split(Channel::seporator));
-        result->removeLast();
-        qDebug() << result;
-        return result;
     }
 
     T _value;
