@@ -169,7 +169,7 @@ void MainWindow::addData2()
 
 void MainWindow::plotLineRealTimeMoved()
 {
-    auto message = QString("%1").arg(graphHighVoltageElvFull->value());
+    auto message = QString("%1").arg(graphHighVoltageElvFull->valueCursor());
     this->setWindowTitle(message);
 }
 

@@ -67,7 +67,7 @@ void Graph::addData(double key, double value)
     _graph->addData(key, value);
 }
 
-double Graph::value()
+double Graph::valueCursor()
 {
     return _value;
 }
@@ -90,38 +90,43 @@ void Graph::setGraphKey(double key)
 void Graph::setVisible(bool newValue)
 {
     //TODO autoscale without unsivible graphs
-    _graph->setVisible(newValue);
-    _tracer->setVisible(newValue);
+    _setVisible(newValue);
     _graphLegendItem->setVisibleValue(newValue);
-    _visible = newValue;
 }
 
 
-void Graph::setVisibleByWidget(bool newValue)
+void Graph::_setVisible(bool newValue)
 {
     _graph->setVisible(newValue);
     _tracer->setVisible(newValue);
     _visible = newValue;
+}
+
+void Graph::_setColor(QColor newValue)
+{
+    _color = newValue;
+    _graph->setPen(newValue);
+    _tracer->setPen(_graph->pen());
+    _tracer->setBrush(newValue);
+}
+
+void Graph::setVisibleByWidget(bool newValue)
+{
+    _setVisible(newValue);
     emit visibleChanged(newValue);
 }
 
 
 void Graph::setColor(QColor newValue)
 {
-    _color = newValue;
-    _graph->setPen(newValue);
-
-    _tracer->setPen(_graph->pen());
-    _tracer->setBrush(newValue);
+    _setColor(newValue);
 
     _graphLegendItem->setColor(newValue);
 }
 
 void Graph::setColorByWidget(QColor newValue)
 {
-    _graph->setPen(newValue);
-    _tracer->setPen(_graph->pen());
-    _tracer->setBrush(newValue);
+    _setColor(newValue);
     emit colorChanged(newValue);
 }
 

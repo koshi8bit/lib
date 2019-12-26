@@ -22,8 +22,9 @@ public:
     //WARNING delete method graphLegendItem
     GraphLegendItem *graphLegendItem();
 
-    void addData(double key, double value);
-    double value();
+    void addData(double key, double valueCursor);
+    double valueCursor();
+    double valueLast();
     bool visible();
     void setGraphKey(double key);
 
@@ -44,6 +45,9 @@ private:
     GraphLegendItem *_graphLegendItem;
 
     QCPItemTracer *tracer();
+
+    void _setVisible(bool newValue);
+    void _setColor(QColor newValue);
 
 signals:
     void visibleChanged(bool newValue);
