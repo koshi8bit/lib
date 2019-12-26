@@ -6,7 +6,6 @@
 #include <lib/qcustomplot/qcustomplot.h>
 
 #include "graphlegenditem.h"
-//#include "realtimeqcp.h"
 
 
 class Graph : public QObject
@@ -22,9 +21,12 @@ public:
     //WARNING delete method graphLegendItem
     GraphLegendItem *graphLegendItem();
 
+    //void addData(double valueCursor);
     void addData(double key, double valueCursor);
+
     double valueCursor();
     double valueLast();
+
     bool visible();
     void setGraphKey(double key);
 

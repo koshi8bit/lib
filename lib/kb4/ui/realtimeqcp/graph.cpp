@@ -62,6 +62,11 @@ GraphLegendItem *Graph::graphLegendItem()
     return _graphLegendItem;
 }
 
+//void Graph::addData(double valueCursor)
+//{
+//    addData(RealTimeQCP:)
+//}
+
 void Graph::addData(double key, double value)
 {
     _graph->addData(key, value);
@@ -70,6 +75,14 @@ void Graph::addData(double key, double value)
 double Graph::valueCursor()
 {
     return _value;
+}
+
+double Graph::valueLast()
+{
+    //TODO tima45
+    qWarning() << EL_FORMAT_ERR("Method is not completed");
+    return 0;
+    //return _graph->data()->last());
 }
 
 bool Graph::visible()

@@ -190,6 +190,7 @@ void RealTimeQCP::configureAxesZoomAndDrag(bool configureTimeAxis)
             << plot()->yAxis
             << plot()->yAxis2;
 
+    Q_UNUSED(configureTimeAxis)
     //if (configureTimeAxis)
         axes << plot()->xAxis;
 
