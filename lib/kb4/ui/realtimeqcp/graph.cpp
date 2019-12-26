@@ -83,21 +83,26 @@ bool Graph::visible()
     return _visible;
 }
 
+void Graph::updateValue()
+{
+    if (_tracer2->visible())
+    {
+        auto deltaValue = _tracer->position->value() - _tracer2->position->value();
+        _graphLegendItem->setValue(deltaValue, true);
+    }
+    else
+    {
+        _graphLegendItem->setValue(_valueCursor);
+    }
+    _valueCursor = _tracer->position->value();
+}
+
 void Graph::moveCursor(double key)
 {
     if (visible())
     {
         _tracer->setGraphKey(key);
-        if (_tracer2->visible())
-        {
-            auto deltaValue = _tracer->position->value() - _tracer2->position->value();
-            _graphLegendItem->setValue(deltaValue, true);
-        }
-        else
-        {
-            _graphLegendItem->setValue(_valueCursor);
-        }
-        _valueCursor = _tracer->position->value();
+        updateValue();
     }
 }
 

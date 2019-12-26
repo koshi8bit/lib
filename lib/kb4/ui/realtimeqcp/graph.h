@@ -28,6 +28,7 @@ public:
     double valueLast();
 
     bool visible();
+    void updateValue();
     void moveCursor(double key);
     void moveCursor2(double key);
     void setTracer2Visible(bool newValue);

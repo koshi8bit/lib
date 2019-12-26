@@ -51,7 +51,7 @@ signals:
 public slots:
     void setRealTime(bool newValue);
 
-    //? what is this? rename?
+    bool cursor2Visible();
     void setCursor2Visible(bool newValue);
     void setMoveLineRealTime(bool moveLineRealTime);
     void moveCursor(double time);

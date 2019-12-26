@@ -178,6 +178,11 @@ void RealTimeQCP::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
     }
 }
 
+bool RealTimeQCP::cursor2Visible()
+{
+    return _cursor2->visible();
+}
+
 
 void RealTimeQCP::setCursor2Visible(bool newValue)
 {
@@ -190,12 +195,8 @@ void RealTimeQCP::setCursor2Visible(bool newValue)
 
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)
 {
-    qDebug() << "setMoveLineRealTime" << moveLineRealTime;
     _moveLineRealTime = moveLineRealTime;
-    if (!moveLineRealTime)
-    {
-        setCursor2Visible(false);
-    }
+    //setCursor2Visible(false);
 
 }
 
@@ -348,17 +349,29 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
             emit moveLineRealTimeChanged(newValue);
         }
 
-        if (event->button() == Qt::MouseButton::LeftButton)
+        if (event->button() == Qt::MouseButton::MiddleButton)
         {
-            foreach (auto graphElement, graphs)
+            if (!cursor2Visible())
             {
-                graphElement->moveCursor2(_cursor->start->key());
+                foreach (auto graphElement, graphs)
+                {
+                    graphElement->moveCursor2(_cursor->start->key());
+                }
+
+                _cursor2->start->setCoords(_cursor->start->coords());
+                _cursor2->end->setCoords(_cursor->end->coords());
+                setCursor2Visible(true);
+                plot()->replot();
+            }
+            else
+            {
+                setCursor2Visible(false);
             }
 
-            _cursor2->start->setCoords(_cursor->start->coords());
-            _cursor2->end->setCoords(_cursor->end->coords());
-            setCursor2Visible(true);
-            plot()->replot();
+            foreach (auto graphElement, graphs)
+            {
+                graphElement->updateValue();
+            }
         }
     }
 }
