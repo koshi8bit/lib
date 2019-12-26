@@ -7,7 +7,7 @@ const QString Channel::seporator = "/";
 Channel::Channel(QString name, QString postfix, QObject *parent)
     : Channel(name, name, postfix, parent)
 {
-    _logName = name;
+    setLogName(name);
 }
 
 Channel::Channel(QString name, QString postfix, QStringList &path, QObject *parent)
@@ -16,10 +16,12 @@ Channel::Channel(QString name, QString postfix, QStringList &path, QObject *pare
     //path << name;
     //_logName = path.join(seporator);
 
-    _logName = QString("%1%2%3")
+    auto logName = QString("%1%2%3")
             .arg(path.join(seporator))
             .arg(seporator)
             .arg(name);
+
+    setLogName(logName);
 }
 
 Channel::Channel(QString plotName, QString widgetName, QString postfix, QObject *parent)
@@ -74,6 +76,7 @@ QString Channel::logName() const
 void Channel::setLogName(const QString logName)
 {
     _logName = logName;
+    setPlotName(logName);
 }
 
 void Channel::_errorOccurred(QString message)
