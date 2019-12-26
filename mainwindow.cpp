@@ -115,10 +115,10 @@ void MainWindow::configureTimers()
     connect(timerAddData2, SIGNAL(timeout()), this, SLOT(addData2()));
     timerAddData2->start();
 
-    timerReplot = new QTimer(this);
-    timerReplot->setInterval(plotUpdateIntervalMSEC);
-    connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
-    timerReplot->start();
+//    timerReplot = new QTimer(this);
+//    timerReplot->setInterval(plotUpdateIntervalMSEC);
+//    connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
+//    timerReplot->start();
 
     timerRealTimeQCPReplot = new QTimer(this);
     timerRealTimeQCPReplot->setInterval(plotUpdateIntervalMSEC);
