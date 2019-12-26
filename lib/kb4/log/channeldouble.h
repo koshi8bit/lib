@@ -20,7 +20,7 @@ public:
 
 //    ChannelDouble(QString name, QString postfix, QStringList &prefix, QObject *parent = nullptr);
 //    ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
-    void setGraph(Graph *graph);
+    void addGraphToWidget(RealTimeQCP *plot);
 
     bool scientificNotation();
     void setScientificNotation(bool newValue);

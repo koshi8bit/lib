@@ -18,10 +18,15 @@ ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
     configure();
 }
 
-void ChannelDouble::setGraph(Graph *graph)
+void ChannelDouble::addGraphToWidget(RealTimeQCP *plot)
 {
-    this->graph = graph;
+    this->graph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
     connect(this, &Channel::valueChanged, this, &ChannelDouble::addDataToGraph);
+}
+
+void ChannelDouble::addDataToGraph()
+{
+    graph->addData(RealTimeQCP::currentDateTime(), value());
 }
 
 bool ChannelDouble::scientificNotation()
@@ -98,7 +103,3 @@ void ChannelDouble::_valueChanged()
     //emit valueChangedDouble(value());
 }
 
-void ChannelDouble::addDataToGraph()
-{
-    graph->addData(RealTimeQCP::currentDateTime(), value());
-}

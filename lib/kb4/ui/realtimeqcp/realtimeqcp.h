@@ -6,6 +6,7 @@
 #include <lib/qcustomplot/qcustomplot.h>
 
 #include <lib/kb4/easyliving.h>
+//#include <lib/kb4/log/channeldouble.h>
 
 #include "axisconfig.h"
 #include "graph.h"
@@ -30,6 +31,7 @@ public:
     void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
     Graph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
+    //Graph* addGraph(ChannelDouble *channel, bool visible = true);
 
     QCustomPlot* plot() const;
 
