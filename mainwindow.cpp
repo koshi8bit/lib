@@ -186,9 +186,6 @@ MainWindow::~MainWindow()
     timerAddData2->stop();
     delete timerAddData2;
 
-    timerReplot->stop();
-    delete timerReplot;
-
     delete excelLog;
 
     delete a;
@@ -300,8 +297,6 @@ void MainWindow::realTimeQCPChangeRange(QCPRange range)
     realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPBool, axis, range);
     realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPVacuum, axis, range);
     realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPRadiation, axis, range);
-
-    ui->realTimeQCPU->plot()->replot();
 }
 
 void MainWindow::realTimeQCPMouseMoveCheckPlot(RealTimeQCP *widget, QCustomPlot *plot, double time)

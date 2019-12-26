@@ -45,7 +45,7 @@ private:
     int addData2MSEC = 1000;
 
 
-    QTimer *timerAddData1, *timerAddData2, *timerReplot, *timerRealTimeQCPReplot;
+    QTimer *timerAddData1, *timerAddData2, *timerRealTimeQCPReplot;
 
     Graph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt;
     Graph *graphTemperaturePyrometer;

@@ -393,7 +393,7 @@ void RealTimeQCP::moveCursor(double time)
     //NOTE check cpu usage too big
 //    if(!realTime())
 //    {
-//        plot()->replot();
+        plot()->replot();
 //    }
 }
 
