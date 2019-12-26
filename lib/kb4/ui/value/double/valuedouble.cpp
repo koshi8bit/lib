@@ -24,14 +24,14 @@ ValueDouble::~ValueDouble()
 void ValueDouble::configure(QString name, QString postfix, int precision, bool hideSetWidget, bool scientificNotation, int fontSize)
 {
     setNameAndPostfix(name, postfix);
-    _precision = precision;
+    setPrecision(precision);
 
     ui->doubleSpinBoxValueSet->setVisible(!hideSetWidget);
     ui->pushButtonSet->setVisible(!hideSetWidget);
-    ui->doubleSpinBoxValueSet->setDecimals(_precision);
 
+    ui->doubleSpinBoxValueSet->setDecimals(this->precision());
 
-    _scientificNotation = scientificNotation;
+    setScientificNotation(scientificNotation);
     setFontSize(fontSize);
     setValue(0);
 
@@ -76,6 +76,26 @@ void ValueDouble::setTrusted(bool newValue)
 QLineEdit *ValueDouble::valueWidget()
 {
     return ui->lineEditValueGet;
+}
+
+bool ValueDouble::scientificNotation() const
+{
+    return _scientificNotation;
+}
+
+void ValueDouble::setScientificNotation(bool scientificNotation)
+{
+    _scientificNotation = scientificNotation;
+}
+
+int ValueDouble::precision() const
+{
+    return _precision;
+}
+
+void ValueDouble::setPrecision(int precision)
+{
+    _precision = precision;
 }
 
 void ValueDouble::setFontSize(int newValue)

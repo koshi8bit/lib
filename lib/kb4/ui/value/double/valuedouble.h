@@ -23,6 +23,11 @@ public:
     void configure(ChannelDouble *channel, bool hideSetWidget = true, int fontSize = 10);
     void setRangeSetter(double min, double max);
 
+    int precision() const;
+    void setPrecision(int precision);
+
+    bool scientificNotation() const;
+    void setScientificNotation(bool scientificNotation);
 
     void setNameAndPostfix(QString name, QString postfix);
     void setFontSize(int newValue);
@@ -33,9 +38,11 @@ public:
     const static QString trustedColor;
     const static QString notTrustedColor;
 
+
+
 private:
-    bool _scientificNotation;
     int _precision;
+    bool _scientificNotation;
     Ui::ValueDouble *ui;
     void _setFontSize(QWidget *widget, int newValue);
 
