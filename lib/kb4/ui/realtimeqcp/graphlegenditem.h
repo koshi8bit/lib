@@ -20,8 +20,8 @@ public:
     explicit GraphLegendItem(const QString &label, const QString &postfix, QColor color, int precision = 3, bool scientificNotation = false, QWidget *parent = nullptr);
     ~GraphLegendItem();
 
-    void setValue(double value);
-    void setValue(const QString &value);
+    void setValue(double value, bool showDelta = false);
+    void setValue(const QString &value, bool showDelta = false);
 
 public slots:
     void setVisibleValue(bool newValue);

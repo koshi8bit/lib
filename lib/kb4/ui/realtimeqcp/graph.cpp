@@ -9,6 +9,8 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
 
     _visible = true;
 
+    _color = color;
+
 
     _graph = plot->addGraph(plot->xAxis, yAxis);
     _graph->setName(label);
@@ -16,13 +18,8 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
     _graph->setLineStyle(QCPGraph::LineStyle::lsStepLeft);
 
 
-    _tracer = new QCPItemTracer(plot);
-    _tracer->setGraph(_graph);
-    _tracer->setInterpolating(true);
-    _tracer->setStyle(QCPItemTracer::tsCircle);
-    _tracer->setPen(_graph->pen());
-    _tracer->setBrush(color);
-    _tracer->setSize(5);
+    configureTracer(&_tracer);
+    configureTracer(&_tracer2);
 
     _precision = precision;
     _scientificNotation = scientificNotation;
@@ -42,10 +39,6 @@ Graph::~Graph()
     //_graphLegendItem->deleteLater();
 }
 
-QCPItemTracer *Graph::tracer()
-{
-    return _tracer;
-}
 
 QCPGraph *Graph::graph()
 {
@@ -74,7 +67,7 @@ void Graph::addData(double key, double value)
 
 double Graph::valueCursor()
 {
-    return _value;
+    return _valueCursor;
 }
 
 double Graph::valueLast()
@@ -90,14 +83,47 @@ bool Graph::visible()
     return _visible;
 }
 
-void Graph::setGraphKey(double key)
+void Graph::moveCursor(double key)
 {
     if (visible())
     {
         _tracer->setGraphKey(key);
-        _value = _tracer->position->value();
-        _graphLegendItem->setValue(_value);
+        if (_tracer2->visible())
+        {
+            auto deltaValue = _tracer->position->value() - _tracer2->position->value();
+            _graphLegendItem->setValue(deltaValue, true);
+        }
+        else
+        {
+            _graphLegendItem->setValue(_valueCursor);
+        }
+        _valueCursor = _tracer->position->value();
     }
+}
+
+void Graph::moveCursor2(double key)
+{
+    if (visible())
+    {
+        _tracer2->setGraphKey(key);
+    }
+}
+
+void Graph::configureTracer(QCPItemTracer **tracer)
+{
+    (*tracer) = new QCPItemTracer(_plot);
+    (*tracer)->setGraph(_graph);
+    (*tracer)->setInterpolating(true);
+    (*tracer)->setStyle(QCPItemTracer::tsCircle);
+    (*tracer)->setPen(_graph->pen());
+    (*tracer)->setBrush(_color);
+    (*tracer)->setSize(5);
+}
+
+void Graph::setTracer2Visible(bool newValue)
+{
+    _tracer2->setVisible(newValue);
+    qDebug() << _tracer2->visible();
 }
 
 void Graph::setVisible(bool newValue)

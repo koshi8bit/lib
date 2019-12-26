@@ -28,22 +28,23 @@ GraphLegendItem::~GraphLegendItem()
     delete ui;
 }
 
-void GraphLegendItem::setValue(double value)
+void GraphLegendItem::setValue(double value, bool showDelta)
 {
     if (scientificNotation)
     {
-        setValue(EasyLiving::formatDouble(value, precision, true));
+        setValue(EasyLiving::formatDouble(value, precision, true), showDelta);
     }
     else
     {
-        setValue(EasyLiving::formatDouble(value, precision));
+        setValue(EasyLiving::formatDouble(value, precision), showDelta);
     }
-
 }
 
-void GraphLegendItem::setValue(const QString &value)
+void GraphLegendItem::setValue(const QString &value, bool showDelta)
 {
-    auto text = QString("%1: %2")
+    QString _template = showDelta ? "%1: Δ%2" : "%1: %2";
+
+    auto text = QString(_template)
                        .arg(label)
                        .arg(value);
 

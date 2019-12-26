@@ -20,6 +20,7 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
 
     configurePlot();
     configureLegend();
+    setCursor2Visible(false);
     //configureSplitter();
 
 }
@@ -38,7 +39,6 @@ bool RealTimeQCP::realTime() const
 void RealTimeQCP::configurePlot()
 {
 
-    setMoveLineRealTime(true);
 
     //WARNING dublicate configureAxesZoomAndDrag??
     ui->plot->setInteraction(QCP::iRangeZoom, true);
@@ -53,6 +53,7 @@ void RealTimeQCP::configurePlot()
 
     configurePlotTimeAxis();
     configurePlotLine();
+    setMoveLineRealTime(true);
     plot()->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     plot()->xAxis->setRangeUpper(RealTimeQCP::currentDateTime());
     setTimeAxisRange(90);
@@ -178,9 +179,24 @@ void RealTimeQCP::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
 }
 
 
+void RealTimeQCP::setCursor2Visible(bool newValue)
+{
+    _cursor2->setVisible(newValue);
+    foreach (auto graphElement, graphs)
+    {
+        graphElement->setTracer2Visible(newValue);
+    }
+}
+
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)
 {
+    qDebug() << "setMoveLineRealTime" << moveLineRealTime;
     _moveLineRealTime = moveLineRealTime;
+    if (!moveLineRealTime)
+    {
+        setCursor2Visible(false);
+    }
+
 }
 
 
@@ -243,14 +259,20 @@ void RealTimeQCP::configurePlotTimeAxis()
 
 void RealTimeQCP::configurePlotLine()
 {
-    _cursor = new QCPItemLine(plot());
+    configurePlotLine(&_cursor);
+    configurePlotLine(&_cursor2);
+}
+
+void RealTimeQCP::configurePlotLine(QCPItemLine **line)
+{
+    (*line) = new QCPItemLine(plot());
     auto pen = QPen();
     pen.setColor("#C0C0C0");
     pen.setStyle(Qt::PenStyle::DashLine);
-    _cursor->setPen(pen);
+    (*line)->setPen(pen);
 
-    _cursor->start->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().upper);
-    _cursor->end->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().lower);
+    (*line)->start->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().upper);
+    (*line)->end->setCoords(plot()->xAxis->range().upper, plot()->yAxis->range().lower);
 }
 
 void RealTimeQCP::updateTimeAxisLabel()
@@ -311,8 +333,6 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
 
 void RealTimeQCP::mouseMove(QMouseEvent *event)
 {
-    //auto plot = static_cast<QCustomPlot*>(sender());
-
     auto time = plot()->xAxis->pixelToCoord(event->x());
     moveCursor(time);
 }
@@ -326,6 +346,19 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
             auto newValue = !moveLineRealTime();
             setMoveLineRealTime(newValue);
             emit moveLineRealTimeChanged(newValue);
+        }
+
+        if (event->button() == Qt::MouseButton::LeftButton)
+        {
+            foreach (auto graphElement, graphs)
+            {
+                graphElement->moveCursor2(_cursor->start->key());
+            }
+
+            _cursor2->start->setCoords(_cursor->start->coords());
+            _cursor2->end->setCoords(_cursor->end->coords());
+            setCursor2Visible(true);
+            plot()->replot();
         }
     }
 }
@@ -375,7 +408,7 @@ void RealTimeQCP::moveCursor(double time)
 
     foreach (auto graphElement, graphs)
     {
-        graphElement->setGraphKey(time);
+        graphElement->moveCursor(time);
     }
 
     auto lower = qMin(
@@ -392,10 +425,10 @@ void RealTimeQCP::moveCursor(double time)
     emit lineRealTimeMoved();
 
     //NOTE check cpu usage too big
-//    if(!realTime())
-//    {
+    if(!realTime())
+    {
         plot()->replot();
-//    }
+    }
 }
 
 

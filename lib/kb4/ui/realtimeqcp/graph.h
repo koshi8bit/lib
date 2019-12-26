@@ -28,13 +28,16 @@ public:
     double valueLast();
 
     bool visible();
-    void setGraphKey(double key);
+    void moveCursor(double key);
+    void moveCursor2(double key);
+    void setTracer2Visible(bool newValue);
+
 
 private:
     QString label;
     QString _postfix;
     QColor _color;
-    double _value;
+    double _valueCursor;
     bool _visible;
     bool _scientificNotation;
     int _precision;
@@ -43,10 +46,11 @@ private:
     QCPAxis *_yAxis;
 
     QCPGraph *_graph;
-    QCPItemTracer *_tracer;
+    void configureTracer(QCPItemTracer **tracer);
+    //TODO rename to _cursor. also getter and setter
+    QCPItemTracer *_tracer, *_tracer2;
     GraphLegendItem *_graphLegendItem;
 
-    QCPItemTracer *tracer();
 
     void _setVisible(bool newValue);
     void _setColor(QColor newValue);

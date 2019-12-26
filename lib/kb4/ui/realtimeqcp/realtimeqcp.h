@@ -52,6 +52,7 @@ public slots:
     void setRealTime(bool newValue);
 
     //? what is this? rename?
+    void setCursor2Visible(bool newValue);
     void setMoveLineRealTime(bool moveLineRealTime);
     void moveCursor(double time);
     void moveTimeAxisRealTime();
@@ -65,8 +66,8 @@ private:
 
     //TODO make 2 lines same as oscillograph switching by Mouse wheel button
     QCPItemLine *_cursor;
-    QCPItemLine *_cursorA;
-    QCPItemLine *_cursorB;
+    QCPItemLine *_cursor2;
+    //bool _cursor2CanMove = false;
 
     void configurePlot();
     void configureAxesZoomAndDrag(bool configureTimeAxis);
@@ -74,6 +75,7 @@ private:
     void configurePlotBackgroundAxis(QCPAxis *axis);
     void configurePlotTimeAxis();
     void configurePlotLine();
+    void configurePlotLine(QCPItemLine **line);
 
     void updateTimeAxisLabel();
 
