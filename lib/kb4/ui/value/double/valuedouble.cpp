@@ -39,9 +39,9 @@ void ValueDouble::configure(QString name, QString postfix, int precision, bool h
 
 }
 
-void ValueDouble::configure(ChannelDouble *channel, int precision, bool hideSetWidget, bool scientificNotation, int fontSize)
+void ValueDouble::configure(ChannelDouble *channel, bool hideSetWidget, int fontSize)
 {
-    configure(channel->widgetName(), channel->postfix(), precision, hideSetWidget, scientificNotation, fontSize);
+    configure(channel->widgetName(), channel->postfix(), channel->precision(), hideSetWidget, channel->scientificNotation(), fontSize);
 }
 
 void ValueDouble::setMaxWidth()

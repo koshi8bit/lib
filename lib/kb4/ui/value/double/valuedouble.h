@@ -20,7 +20,7 @@ public:
     ~ValueDouble();
 
     void configure(QString name, QString postfix, int precision = 3, bool hideSetWidget = true, bool scientificNotation = false, int fontSize = 10);
-    void configure(ChannelDouble *channel, int precision = 3, bool hideSetWidget = true, bool scientificNotation = false, int fontSize = 10);
+    void configure(ChannelDouble *channel, bool hideSetWidget = true, int fontSize = 10);
     void setRangeSetter(double min, double max);
 
 
