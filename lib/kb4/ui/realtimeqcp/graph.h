@@ -31,7 +31,7 @@ public:
     void updateValue();
     void moveCursor(double key);
     void moveCursor2(double key);
-    void setTracer2Visible(bool newValue);
+    void setCursor2Visible(bool newValue);
 
 
 private:
@@ -47,9 +47,9 @@ private:
     QCPAxis *_yAxis;
 
     QCPGraph *_graph;
-    void configureTracer(QCPItemTracer **tracer);
-    //TODO rename to _cursor. also getter and setter
-    QCPItemTracer *_tracer, *_tracer2;
+
+    void configureCursor(QCPItemTracer **cursor);
+    QCPItemTracer *_cursor, *_cursor2;
     GraphLegendItem *_graphLegendItem;
 
 

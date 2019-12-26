@@ -90,7 +90,7 @@ private:
 
     //WARNING rename to _graphs?
     QVector<Graph *> graphs;
-    static QString formatLabelTime(double time);
+    QString formatLabelTime(double time);
 
     bool isInAxisRect(QPoint pos);
 

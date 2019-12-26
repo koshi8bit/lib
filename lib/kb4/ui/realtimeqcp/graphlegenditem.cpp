@@ -42,7 +42,7 @@ void GraphLegendItem::setValue(double value, bool showDelta)
 
 void GraphLegendItem::setValue(const QString &value, bool showDelta)
 {
-    QString _template = showDelta ? "%1: Δ%2" : "%1: %2";
+    auto _template = QString("%1: ") + (showDelta ? "Δ" : "") + "%2";
 
     auto text = QString(_template)
                        .arg(label)

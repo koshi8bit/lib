@@ -18,8 +18,9 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
     _graph->setLineStyle(QCPGraph::LineStyle::lsStepLeft);
 
 
-    configureTracer(&_tracer);
-    configureTracer(&_tracer2);
+    configureCursor(&_cursor);
+    configureCursor(&_cursor2);
+    _cursor2->setVisible(false);
 
     _precision = precision;
     _scientificNotation = scientificNotation;
@@ -85,23 +86,23 @@ bool Graph::visible()
 
 void Graph::updateValue()
 {
-    if (_tracer2->visible())
+    if (_cursor2->visible())
     {
-        auto deltaValue = _tracer->position->value() - _tracer2->position->value();
+        auto deltaValue = _cursor->position->value() - _cursor2->position->value();
         _graphLegendItem->setValue(deltaValue, true);
     }
     else
     {
         _graphLegendItem->setValue(_valueCursor);
     }
-    _valueCursor = _tracer->position->value();
+    _valueCursor = _cursor->position->value();
 }
 
 void Graph::moveCursor(double key)
 {
     if (visible())
     {
-        _tracer->setGraphKey(key);
+        _cursor->setGraphKey(key);
         updateValue();
     }
 }
@@ -110,25 +111,25 @@ void Graph::moveCursor2(double key)
 {
     if (visible())
     {
-        _tracer2->setGraphKey(key);
+        _cursor2->setGraphKey(key);
     }
 }
 
-void Graph::configureTracer(QCPItemTracer **tracer)
+void Graph::configureCursor(QCPItemTracer **cursor)
 {
-    (*tracer) = new QCPItemTracer(_plot);
-    (*tracer)->setGraph(_graph);
-    (*tracer)->setInterpolating(true);
-    (*tracer)->setStyle(QCPItemTracer::tsCircle);
-    (*tracer)->setPen(_graph->pen());
-    (*tracer)->setBrush(_color);
-    (*tracer)->setSize(5);
+    (*cursor) = new QCPItemTracer(_plot);
+    (*cursor)->setGraph(_graph);
+    (*cursor)->setInterpolating(true);
+    (*cursor)->setStyle(QCPItemTracer::tsCircle);
+    (*cursor)->setPen(_graph->pen());
+    (*cursor)->setBrush(_color);
+    (*cursor)->setSize(5);
 }
 
-void Graph::setTracer2Visible(bool newValue)
+void Graph::setCursor2Visible(bool newValue)
 {
-    _tracer2->setVisible(newValue);
-    qDebug() << _tracer2->visible();
+    _cursor2->setVisible(newValue);
+    qDebug() << _cursor2->visible();
 }
 
 void Graph::setVisible(bool newValue)
@@ -142,7 +143,7 @@ void Graph::setVisible(bool newValue)
 void Graph::_setVisible(bool newValue)
 {
     _graph->setVisible(newValue);
-    _tracer->setVisible(newValue);
+    _cursor->setVisible(newValue);
     _visible = newValue;
 }
 
@@ -150,8 +151,8 @@ void Graph::_setColor(QColor newValue)
 {
     _color = newValue;
     _graph->setPen(newValue);
-    _tracer->setPen(_graph->pen());
-    _tracer->setBrush(newValue);
+    _cursor->setPen(_graph->pen());
+    _cursor->setBrush(newValue);
 }
 
 void Graph::setVisibleByWidget(bool newValue)

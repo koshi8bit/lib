@@ -189,15 +189,13 @@ void RealTimeQCP::setCursor2Visible(bool newValue)
     _cursor2->setVisible(newValue);
     foreach (auto graphElement, graphs)
     {
-        graphElement->setTracer2Visible(newValue);
+        graphElement->setCursor2Visible(newValue);
     }
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)
 {
     _moveLineRealTime = moveLineRealTime;
-    //setCursor2Visible(false);
-
 }
 
 
@@ -451,17 +449,31 @@ QString RealTimeQCP::formatLabelTime(double time)
     auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
     auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
 
-    auto deltaTimeMSEC = QDateTime::currentDateTime().msecsTo(mouseTimeQDT);
-    //qDebug() << deltaTimeMSEC;
-    if (deltaTimeMSEC > -1000)
-        return mouseTimeStr;
+    if (cursor2Visible())
+    {
+        auto deltaTimeMSEC = _cursor->start->key() - _cursor2->start->key();
+        bool negative = deltaTimeMSEC < 0;
+        if (negative) deltaTimeMSEC *= -1;
+        auto deltaTimeQT = QTime(0,0,0).addMSecs(deltaTimeMSEC*1000);
+        auto result = QString("%1 (%2%3 to cursor2)").arg(mouseTimeStr).arg(negative ? "-" : "").arg(deltaTimeQT.toString(EasyLiving::formatTimeUi(false)));
+        return result;
+    }
+    else
+    {
+        auto deltaTimeMSEC = QDateTime::currentDateTime().msecsTo(mouseTimeQDT);
+        //qDebug() << deltaTimeMSEC;
+        if (deltaTimeMSEC > -1000)
+            return mouseTimeStr;
 
-    auto deltaTimeQT = QTime(0,0,0);
-    deltaTimeQT = deltaTimeQT.addMSecs(static_cast<int>(-deltaTimeMSEC));
-    auto deltaTimeStr = deltaTimeQT.toString(EasyLiving::formatTimeUi(false));
+        auto deltaTimeQT = QTime(0,0,0);
+        deltaTimeQT = deltaTimeQT.addMSecs(static_cast<int>(-deltaTimeMSEC));
+        auto deltaTimeStr = deltaTimeQT.toString(EasyLiving::formatTimeUi(false));
 
 
-    return QString("%1 (-%2)").arg(mouseTimeStr).arg(deltaTimeStr);
+        return QString("%1 (-%2 to current time)").arg(mouseTimeStr).arg(deltaTimeStr);
+    }
+
+
 }
 
 bool RealTimeQCP::isInAxisRect(QPoint pos)
