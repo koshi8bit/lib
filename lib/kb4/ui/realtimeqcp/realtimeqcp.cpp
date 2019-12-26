@@ -366,10 +366,14 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
                 setCursor2Visible(false);
             }
 
+
             foreach (auto graphElement, graphs)
             {
                 graphElement->updateValue();
             }
+
+            if (labelTime->isVisible())
+                labelTime->setText(formatLabelTime(_cursor->start->key()));
         }
     }
 }
@@ -445,7 +449,9 @@ void RealTimeQCP::moveCursor(double time)
 
 QString RealTimeQCP::formatLabelTime(double time)
 {
-    //TODO show MSEC ?formatTimeUi(true)
+    //TODO show MSEC ?formatTimeUi(true) and +07:00
+    //auto mouseTimeQDT = QDateTime().fromString("1970-01-01T00:00:00", Qt::ISODate).addMSecs(static_cast<qint64>(time*1000));
+
     auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
     auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
 
@@ -454,8 +460,8 @@ QString RealTimeQCP::formatLabelTime(double time)
         auto deltaTimeMSEC = _cursor->start->key() - _cursor2->start->key();
         bool negative = deltaTimeMSEC < 0;
         if (negative) deltaTimeMSEC *= -1;
-        auto deltaTimeQT = QTime(0,0,0).addMSecs(deltaTimeMSEC*1000);
-        auto result = QString("%1 (%2%3 to cursor2)").arg(mouseTimeStr).arg(negative ? "-" : "").arg(deltaTimeQT.toString(EasyLiving::formatTimeUi(false)));
+        auto deltaTimeQT = QTime(0,0,0).addMSecs(static_cast<int>(deltaTimeMSEC*1000));
+        auto result = QString("%1 [%2%3]").arg(mouseTimeStr).arg(negative ? "-" : "").arg(deltaTimeQT.toString(EasyLiving::formatTimeUi(false)));
         return result;
     }
     else
@@ -470,7 +476,7 @@ QString RealTimeQCP::formatLabelTime(double time)
         auto deltaTimeStr = deltaTimeQT.toString(EasyLiving::formatTimeUi(false));
 
 
-        return QString("%1 (-%2 to current time)").arg(mouseTimeStr).arg(deltaTimeStr);
+        return QString("%1 (-%2)").arg(mouseTimeStr).arg(deltaTimeStr);
     }
 
 
