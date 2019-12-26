@@ -40,6 +40,7 @@ private:
     //double (*toRawFunc)(double) = nullptr;
     std::function<double(double)> toRawFunc = nullptr;
 
+    void configure();
 signals:
     //TODO: template fuck
     //void valueChangedDouble(double newValue);

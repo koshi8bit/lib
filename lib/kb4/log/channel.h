@@ -47,6 +47,7 @@ protected:
 
 signals:
     void valueChanged();
+    void valueChangedDouble(double newValue);
     void errorOccurred(QString message);
 
 public slots:
