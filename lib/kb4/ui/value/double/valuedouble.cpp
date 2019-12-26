@@ -39,6 +39,11 @@ void ValueDouble::configure(QString name, QString postfix, int precision, bool h
 
 }
 
+void ValueDouble::configure(ChannelDouble *channel, int precision, bool hideSetWidget, bool scientificNotation, int fontSize)
+{
+    configure(channel->widgetName(), channel->postfix(), precision, hideSetWidget, scientificNotation, fontSize);
+}
+
 void ValueDouble::setMaxWidth()
 {
     QFontMetrics fm(ui->lineEditValueGet->font());
