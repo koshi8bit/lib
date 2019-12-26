@@ -87,6 +87,9 @@ public:
     //files
     static bool createDir(QString path);
 
+    //ui
+    static QString formatWindowTitle(QString text);
+
 };
 
 #endif // EASYLIVING_H
