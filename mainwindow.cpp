@@ -373,7 +373,14 @@ void MainWindow::realTimeQCPcursor2VisibleValueChanged(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
+    ui->realTimeQCPU->setCursor2Visible(newValue, _sender);
     ui->realTimeQCPI->setCursor2Visible(newValue, _sender);
+    ui->realTimeQCPTemperature->setCursor2Visible(newValue, _sender);
+    ui->realTimeQCPPower->setCursor2Visible(newValue, _sender);
+    ui->realTimeQCPPersent->setCursor2Visible(newValue, _sender);
+    ui->realTimeQCPBool->setCursor2Visible(newValue, _sender);
+    ui->realTimeQCPVacuum->setCursor2Visible(newValue, _sender);
+    ui->realTimeQCPRadiation->setCursor2Visible(newValue, _sender);
 }
 
 void MainWindow::timerRealTimeQCPReplotTimeout()

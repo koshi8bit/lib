@@ -20,7 +20,7 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
 
     configurePlot();
     configureLegend();
-    setCursor2Visible(false);
+    _setCursor2Visible(false);
     //configureSplitter();
 
 }
@@ -69,6 +69,12 @@ void RealTimeQCP::setRealTime(bool newValue)
 {
     _realTime = newValue;
     configureAxesZoomAndDrag(!newValue);
+}
+
+void RealTimeQCP::setCursor2Visible(bool newValue)
+{
+    _setCursor2Visible(newValue);
+    emit cursor2VisibleValueChanged(newValue);
 }
 
 bool RealTimeQCP::moveLineRealTime() const
@@ -178,6 +184,15 @@ void RealTimeQCP::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
     }
 }
 
+void RealTimeQCP::_setCursor2Visible(bool newValue)
+{
+    _cursor2->setVisible(newValue);
+    foreach (auto graphElement, graphs)
+    {
+        graphElement->setCursor2Visible(newValue);
+    }
+}
+
 bool RealTimeQCP::cursor2Visible()
 {
     return _cursor2->visible();
@@ -191,15 +206,9 @@ void RealTimeQCP::setCursor2Visible(bool newValue, RealTimeQCP *senderWidget)
     if (senderWidget == this)
     {
         qDebug() << "return";
-        return; good refactor?
+        return;
     }
-    _cursor2->setVisible(newValue);
-    foreach (auto graphElement, graphs)
-    {
-        graphElement->setCursor2Visible(newValue);
-    }
-
-    emit cursor2VisibleValueChanged(newValue);
+    _setCursor2Visible(newValue);
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)

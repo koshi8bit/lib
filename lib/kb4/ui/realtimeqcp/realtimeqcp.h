@@ -42,6 +42,8 @@ public:
 
     bool realTime() const;
     bool moveLineRealTime() const;
+    void setCursor2Visible(bool newValue, RealTimeQCP *senderWidget);
+
 
 signals:
     void lineRealTimeMoved();
@@ -51,9 +53,8 @@ signals:
 
 public slots:
     void setRealTime(bool newValue);
-
+    void setCursor2Visible(bool newValue);
     bool cursor2Visible();
-    void setCursor2Visible(bool newValue, RealTimeQCP *senderWidget = nullptr);
     void setMoveLineRealTime(bool moveLineRealTime);
     void moveCursor(double time);
     void moveTimeAxisRealTime();
@@ -99,6 +100,9 @@ private:
 
     void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
     ColorSetter colorSetter;
+
+    void _setCursor2Visible(bool newValue);
+
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
