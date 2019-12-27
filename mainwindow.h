@@ -91,6 +91,7 @@ private slots:
     void realTimeQCPRealTimeChanged(bool newValue);
     void realTimeQCPMoveLineRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue);
     void realTimeQCPMoveLineRealTimeChanged(bool newValue);
+    void realTimeQCPcursor2VisibleValueChanged(bool newValue);
     void timerRealTimeQCPReplotTimeout();
 
     void plotLineRealTimeMoved();

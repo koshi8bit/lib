@@ -45,6 +45,7 @@ public:
 
 signals:
     void lineRealTimeMoved();
+    void cursor2VisibleValueChanged(bool newValue);
     void moveLineRealTimeChanged(bool newValue);
     void realTimeChanged(bool newValue);
 
@@ -52,7 +53,7 @@ public slots:
     void setRealTime(bool newValue);
 
     bool cursor2Visible();
-    void setCursor2Visible(bool newValue);
+    void setCursor2Visible(bool newValue, RealTimeQCP *senderWidget = nullptr);
     void setMoveLineRealTime(bool moveLineRealTime);
     void moveCursor(double time);
     void moveTimeAxisRealTime();

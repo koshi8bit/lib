@@ -184,13 +184,22 @@ bool RealTimeQCP::cursor2Visible()
 }
 
 
-void RealTimeQCP::setCursor2Visible(bool newValue)
+void RealTimeQCP::setCursor2Visible(bool newValue, RealTimeQCP *senderWidget)
 {
+    //auto plot = dynamic_cast<RealTimeQCP *>(sender());
+    qDebug() << senderWidget << this;
+    if (senderWidget == this)
+    {
+        qDebug() << "return";
+        return; good refactor?
+    }
     _cursor2->setVisible(newValue);
     foreach (auto graphElement, graphs)
     {
         graphElement->setCursor2Visible(newValue);
     }
+
+    emit cursor2VisibleValueChanged(newValue);
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)

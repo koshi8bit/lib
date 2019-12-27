@@ -129,7 +129,6 @@ void Graph::configureCursor(QCPItemTracer **cursor)
 void Graph::setCursor2Visible(bool newValue)
 {
     _cursor2->setVisible(newValue);
-    qDebug() << _cursor2->visible();
 }
 
 void Graph::setVisible(bool newValue)

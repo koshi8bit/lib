@@ -251,8 +251,9 @@ void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
     connect(plot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(realTimeQCPMouseMove(QMouseEvent*)));
     connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPRealTimeChanged);
     connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
+    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
 
-
+    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPcursor2VisibleValueChanged);
 }
 
 void MainWindow::configureRealTimeQcpGraphs()
@@ -366,6 +367,13 @@ void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
     realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPBool, _sender, newValue);
     realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPVacuum, _sender, newValue);
     realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPRadiation, _sender, newValue);
+}
+
+void MainWindow::realTimeQCPcursor2VisibleValueChanged(bool newValue)
+{
+    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+
+    ui->realTimeQCPI->setCursor2Visible(newValue, _sender);
 }
 
 void MainWindow::timerRealTimeQCPReplotTimeout()
