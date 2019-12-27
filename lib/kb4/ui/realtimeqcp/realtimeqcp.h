@@ -43,7 +43,7 @@ public:
     bool realTime() const;
     bool moveLineRealTime() const;
     void setCursor2Visible(bool newValue, RealTimeQCP *senderWidget);
-    void setCursor2Key(QPointF &start, QPointF &end, RealTimeQCP *senderWidget);
+    void setCursor2Key(double key, RealTimeQCP *senderWidget);
 
 
 
@@ -52,7 +52,7 @@ signals:
     void cursor2VisibleValueChanged(bool newValue);
     void moveLineRealTimeChanged(bool newValue);
     void realTimeChanged(bool newValue);
-    void cursor2KeyChanged(QPointF &start, QPointF &end);
+    void cursor2KeyChanged(double key);
 
 public slots:
     void setRealTime(bool newValue);
@@ -61,7 +61,7 @@ public slots:
     void moveCursor(double time);
     void moveTimeAxisRealTime();
     void setCursor2Visible(bool newValue);
-    void setCursor2Key(QPointF start, QPointF end);
+    void setCursor2Key(double key);
 
 private:
     Ui::RealTimeQCP *ui;
@@ -106,7 +106,10 @@ private:
     ColorSetter colorSetter;
 
     void _setCursor2Visible(bool newValue);
-    void _setCursor2Key(QPointF &start, QPointF &end);
+    void _setCursor2Key(double key);
+
+    double getYAxisUpper();
+    double getYAxisLower();
 
 
 private slots:

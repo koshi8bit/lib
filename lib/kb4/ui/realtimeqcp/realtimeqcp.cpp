@@ -77,10 +77,10 @@ void RealTimeQCP::setCursor2Visible(bool newValue)
     emit cursor2VisibleValueChanged(newValue);
 }
 
-void RealTimeQCP::setCursor2Key(QPointF start, QPointF end)
+void RealTimeQCP::setCursor2Key(double key)
 {
-    _setCursor2Key(start, end);
-    emit cursor2KeyChanged(start, end);
+    _setCursor2Key(key);
+    emit cursor2KeyChanged(key);
 }
 
 bool RealTimeQCP::moveLineRealTime() const
@@ -197,19 +197,35 @@ void RealTimeQCP::_setCursor2Visible(bool newValue)
     {
         graphElement->setCursor2Visible(newValue);
     }
+
+    if (labelTime->isVisible())
+        labelTime->setText(formatLabelTime(_cursor->start->key()));
 }
 
-void RealTimeQCP::_setCursor2Key(QPointF &start, QPointF &end)
+void RealTimeQCP::_setCursor2Key(double key)
 {
     foreach (auto graphElement, graphs)
     {
         graphElement->moveCursor2(_cursor->start->key());
     }
 
-    _cursor2->start->setCoords(start);
-    _cursor2->end->setCoords(end);
+    _cursor2->start->setCoords(key, _cursor->start->coords().y());
+    _cursor2->end->setCoords(key, _cursor->end->coords().y());
     _setCursor2Visible(true);
     plot()->replot();
+}
+
+double RealTimeQCP::getYAxisUpper()
+{
+    return qMax(plot()->yAxis->range().upper,
+                plot()->yAxis2->range().upper);
+}
+
+double RealTimeQCP::getYAxisLower()
+{
+    return qMin(plot()->yAxis->range().lower,
+                plot()->yAxis2->range().lower);
+
 }
 
 bool RealTimeQCP::cursor2Visible()
@@ -229,7 +245,7 @@ void RealTimeQCP::setCursor2Visible(bool newValue, RealTimeQCP *senderWidget)
     _setCursor2Visible(newValue);
 }
 
-void RealTimeQCP::setCursor2Key(QPointF &start, QPointF &end, RealTimeQCP *senderWidget)
+void RealTimeQCP::setCursor2Key(double key, RealTimeQCP *senderWidget)
 {
     qDebug() << "cursor2Move" << senderWidget << this;
     if (senderWidget == this)
@@ -237,7 +253,7 @@ void RealTimeQCP::setCursor2Key(QPointF &start, QPointF &end, RealTimeQCP *sende
         qDebug() << "return setCursor2Visible";
         return;
     }
-    _setCursor2Key(start, end);
+    _setCursor2Key(key);
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)
@@ -398,7 +414,7 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
         {
             if (!cursor2Visible())
             {
-                setCursor2Key(_cursor->start->coords(), _cursor->end->coords());
+                setCursor2Key(_cursor->start->key());
             }
             else
             {
@@ -411,8 +427,7 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
                 graphElement->updateValue();
             }
 
-            if (labelTime->isVisible())
-                labelTime->setText(formatLabelTime(_cursor->start->key()));
+
         }
     }
 }
@@ -465,16 +480,16 @@ void RealTimeQCP::moveCursor(double time)
         graphElement->moveCursor(time);
     }
 
-    auto lower = qMin(
-                plot()->yAxis->range().lower,
-                plot()->yAxis2->range().lower);
 
-    auto upper = qMax(
-                plot()->yAxis->range().upper,
-                plot()->yAxis2->range().upper);
+    //    auto lower = getYAxisLower();
+    //    auto upper = getYAxisUpper();
+    auto lower = -999999;
+    auto upper = +999999;
+
 
     _cursor->start->setCoords(time, lower);
     _cursor->end->setCoords(time, upper);
+
 
     emit lineRealTimeMoved();
 

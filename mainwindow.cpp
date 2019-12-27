@@ -383,18 +383,18 @@ void MainWindow::realTimeQCPCursor2VisibleValueChanged(bool newValue)
     ui->realTimeQCPRadiation->setCursor2Visible(newValue, _sender);
 }
 
-void MainWindow::realTimeQCPCursor2Moved(QPointF &start, QPointF &end)
+void MainWindow::realTimeQCPCursor2Moved(double key)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    ui->realTimeQCPU->setCursor2Key(start, end, _sender);
-    ui->realTimeQCPI->setCursor2Key(start, end, _sender);
-    ui->realTimeQCPTemperature->setCursor2Key(start, end, _sender);
-    ui->realTimeQCPPower->setCursor2Key(start, end, _sender);
-    ui->realTimeQCPPersent->setCursor2Key(start, end, _sender);
-    ui->realTimeQCPBool->setCursor2Key(start, end, _sender);
-    ui->realTimeQCPVacuum->setCursor2Key(start, end, _sender);
-    ui->realTimeQCPRadiation->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPU->setCursor2Key(key, _sender);
+    ui->realTimeQCPI->setCursor2Key(key, _sender);
+    ui->realTimeQCPTemperature->setCursor2Key(key, _sender);
+    ui->realTimeQCPPower->setCursor2Key(key, _sender);
+    ui->realTimeQCPPersent->setCursor2Key(key, _sender);
+    ui->realTimeQCPBool->setCursor2Key(key, _sender);
+    ui->realTimeQCPVacuum->setCursor2Key(key, _sender);
+    ui->realTimeQCPRadiation->setCursor2Key(key, _sender);
 }
 
 void MainWindow::timerRealTimeQCPReplotTimeout()

@@ -92,7 +92,7 @@ private slots:
     void realTimeQCPMoveLineRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue);
     void realTimeQCPMoveLineRealTimeChanged(bool newValue);
     void realTimeQCPCursor2VisibleValueChanged(bool newValue);
-    void realTimeQCPCursor2Moved(QPointF &start, QPointF &end);
+    void realTimeQCPCursor2Moved(double key);
     void timerRealTimeQCPReplotTimeout();
 
     void plotLineRealTimeMoved();
