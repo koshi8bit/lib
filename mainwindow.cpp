@@ -251,9 +251,9 @@ void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
     connect(plot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(realTimeQCPMouseMove(QMouseEvent*)));
     connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPRealTimeChanged);
     connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
-    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
 
-    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPcursor2VisibleValueChanged);
+    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPCursor2VisibleValueChanged);
+    connect(plot, &RealTimeQCP::cursor2KeyChanged, this, &MainWindow::realTimeQCPCursor2Moved);
 }
 
 void MainWindow::configureRealTimeQcpGraphs()
@@ -369,7 +369,7 @@ void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
     realTimeQCPMoveLineRealTimeChangedCheckWidget(ui->realTimeQCPRadiation, _sender, newValue);
 }
 
-void MainWindow::realTimeQCPcursor2VisibleValueChanged(bool newValue)
+void MainWindow::realTimeQCPCursor2VisibleValueChanged(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
@@ -381,6 +381,20 @@ void MainWindow::realTimeQCPcursor2VisibleValueChanged(bool newValue)
     ui->realTimeQCPBool->setCursor2Visible(newValue, _sender);
     ui->realTimeQCPVacuum->setCursor2Visible(newValue, _sender);
     ui->realTimeQCPRadiation->setCursor2Visible(newValue, _sender);
+}
+
+void MainWindow::realTimeQCPCursor2Moved(QPointF &start, QPointF &end)
+{
+    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+
+    ui->realTimeQCPU->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPI->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPTemperature->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPPower->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPPersent->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPBool->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPVacuum->setCursor2Key(start, end, _sender);
+    ui->realTimeQCPRadiation->setCursor2Key(start, end, _sender);
 }
 
 void MainWindow::timerRealTimeQCPReplotTimeout()

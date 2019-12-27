@@ -77,6 +77,12 @@ void RealTimeQCP::setCursor2Visible(bool newValue)
     emit cursor2VisibleValueChanged(newValue);
 }
 
+void RealTimeQCP::setCursor2Key(QPointF start, QPointF end)
+{
+    _setCursor2Key(start, end);
+    emit cursor2KeyChanged(start, end);
+}
+
 bool RealTimeQCP::moveLineRealTime() const
 {
     return _moveLineRealTime;
@@ -193,6 +199,19 @@ void RealTimeQCP::_setCursor2Visible(bool newValue)
     }
 }
 
+void RealTimeQCP::_setCursor2Key(QPointF &start, QPointF &end)
+{
+    foreach (auto graphElement, graphs)
+    {
+        graphElement->moveCursor2(_cursor->start->key());
+    }
+
+    _cursor2->start->setCoords(start);
+    _cursor2->end->setCoords(end);
+    _setCursor2Visible(true);
+    plot()->replot();
+}
+
 bool RealTimeQCP::cursor2Visible()
 {
     return _cursor2->visible();
@@ -201,14 +220,24 @@ bool RealTimeQCP::cursor2Visible()
 
 void RealTimeQCP::setCursor2Visible(bool newValue, RealTimeQCP *senderWidget)
 {
-    //auto plot = dynamic_cast<RealTimeQCP *>(sender());
-    qDebug() << senderWidget << this;
+    qDebug() << "setCursor2Visible" << senderWidget << this;
     if (senderWidget == this)
     {
-        qDebug() << "return";
+        qDebug() << "return setCursor2Visible";
         return;
     }
     _setCursor2Visible(newValue);
+}
+
+void RealTimeQCP::setCursor2Key(QPointF &start, QPointF &end, RealTimeQCP *senderWidget)
+{
+    qDebug() << "cursor2Move" << senderWidget << this;
+    if (senderWidget == this)
+    {
+        qDebug() << "return setCursor2Visible";
+        return;
+    }
+    _setCursor2Key(start, end);
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)
@@ -369,15 +398,7 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
         {
             if (!cursor2Visible())
             {
-                foreach (auto graphElement, graphs)
-                {
-                    graphElement->moveCursor2(_cursor->start->key());
-                }
-
-                _cursor2->start->setCoords(_cursor->start->coords());
-                _cursor2->end->setCoords(_cursor->end->coords());
-                setCursor2Visible(true);
-                plot()->replot();
+                setCursor2Key(_cursor->start->coords(), _cursor->end->coords());
             }
             else
             {
