@@ -59,7 +59,7 @@ This widget allow to display and set double values. This widget have *set value*
 
 ### Channel \<Templated\>
 
-This class allow to make  cahnnels with this basic fields:
+This class allow to make any type of cahnnels (double, bool, int and ect.) with this basic fields:
 * plotName
 * widgetName
 * color
@@ -86,6 +86,10 @@ Allow to automatically log values to \*.xlsx file every N seconds
 
 Not implemented yet
 
+## Shared variables
+
+Allow to **easely** send values via network with **TCP or UDP** protocols
+
 ## EasyLeaving
 
 * formatDouble
@@ -103,6 +107,7 @@ Custom error handler. Not shure this is common for C++
 ## Author
 
  **Alexey K** koshi8bit@mail.ru
+ All discussions are welcome! If you have some advices - please let me know :D
  
 ## Acknowledgments
 
