@@ -13,30 +13,22 @@ INCLUDEPATH += ./
 ```
 * Fin. You are perfect!
 
-## Running the tests
-Now tests are not avaliable, but soon they will be implemented
-
 # Most common classes and methods:
-
-## EasyLeaving
-
-* formatDouble
-* formatDateTime
-* default physical postfixes
-* isBetween (double)
-* isEqualDouble
 
 ## UI
 
 ### RealTimeQCP
 
-Realtime plot with
+Realtime plot with:
 * Full axis config (time and value). for Y axis it is possible to set **Scientific notation and precision**
 * Powerful **legend and mouse iterations**
 * It is possible to add **cursor** (like in a oscilloscope) and see delta time and values in legend. 
 * Legend allow to change graph **color and visibility**.
 * It is possible to use **2 seporated Y axies**
+
 This plot is based on QCustomPlot
+
+Now avaiable in Russian, but can easyly translated by Qt tr() macro.
 
 ![RealTimeQCP](readme-pic/realtimeqcp01.png)
 ![RealTimeQCP](readme-pic/realtimeqcp02--.png)
@@ -47,13 +39,65 @@ This plot is based on QCustomPlot
 
 This is QLineEdit with color representation of double value. *(May be better to inherit from QDoubleSpinBox)*
 
+![RealTimeQCP](readme-pic/gradientlineedit01.png)
+
 ### Worker
 
 Background worker, that works in sepoporated thread. Good for heavy tasks.
 
+### ScientificNotationEdit
+
+This widget allow to display and set values in **scientific notation**. See example picture from *RealTimeQCP*
+
+### ValueDouble
+
+This widget allow to display and set double values. This widget have *set value* field, *Set* button (Enter also works), *get value*. In picture first is with setter fields, and in second picture are only display fields
+
+![RealTimeQCP](readme-pic/valuedouble01.PNG)
+
+## Channels
+
+### Channel \<Templated\>
+
+This class allow to make  cahnnels with this basic fields:
+* plotName
+* widgetName
+* color
+* postfix (physical value)
+* logName
+* value
+
+### ChannelDouble 
+* addGraphToPlot (easely works with *RealTimeQCP*)
+* scientificNotation
+* precision
+* setRawValue (example: raw value from ADC. setToScaledFunc need to be executed)
+* rawValue (example: raw value to DAC. setToRawFunc need to be executed)
+
+## Logs
+
+This code allow basic functionality of logging
+
+### Excel
+
+Allow to automatically log values to \*.xlsx file every N seconds
+
+### SQL
+
+Not implemented yet
+
+## EasyLeaving
+
+* formatDouble
+* formatDateTime
+* default physical postfixes
+* isBetween (double)
+* isEqualDouble
+
 ### ErrorHandler
 
 Custom error handler. Not shure this is common for C++
+
 
 
 ## Author

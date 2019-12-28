@@ -1,6 +1,8 @@
 #ifndef REALTIMEQCP_H
 #define REALTIMEQCP_H
 
+//https://github.com/koshi8bit/lib
+
 #include <QWidget>
 
 #include <lib/qcustomplot/qcustomplot.h>

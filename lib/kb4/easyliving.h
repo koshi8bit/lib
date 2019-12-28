@@ -1,6 +1,8 @@
 #ifndef EASYLIVING_H
 #define EASYLIVING_H
 
+//https://github.com/koshi8bit/lib
+
 #include <QObject>
 #include <QString>
 #include <QLocale>
