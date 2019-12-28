@@ -1,5 +1,5 @@
 # lib
-Library with most common classes, that are developed during BNCT project
+Library with most common classes, that are developed during automation BNCT experimental facility
 
 *This readme is still under construction. Some errors may be present*
 
