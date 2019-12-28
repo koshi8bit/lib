@@ -30,7 +30,18 @@ Now tests are not avaliable, but soon they will be implemented
 
 ### RealTimeQCP
 
-Realtime plot wit axis config, powerful legend and mouse iterations. It is possible to add cursor like in a oscilloscope and see delta time and values in legend. Legend allow to change graph color and visibility.
+Realtime plot with
+* Full axis config (time and value). for Y axis it is possible to set **Scientific notation and precision**
+* Powerful **legend and mouse iterations**
+* It is possible to add **cursor** (like in a oscilloscope) and see delta time and values in legend. 
+* Legend allow to change graph **color and visibility**.
+* It is possible to use **2 seporated Y axies**
+This plot is based on QCustomPlot
+
+![RealTimeQCP](readme-pic/realtimeqcp01.png)
+![RealTimeQCP](readme-pic/realtimeqcp02.png)
+![RealTimeQCP](readme-pic/realtimeqcp03.png)
+![RealTimeQCP](readme-pic/realtimeqcp04.png)
 
 ### GradientLineEdit
 
