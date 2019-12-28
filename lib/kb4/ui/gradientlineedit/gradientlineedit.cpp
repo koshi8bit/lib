@@ -41,7 +41,7 @@ void GradientLineEdit::setMinMax(double min, double max)
 {
     if (!_range)
     {
-        qDebug() << "ACHTUNG!" << Q_FUNC_INFO << "Range is not configured";
+        qWarning() << EL_FORMAT_ERR("Range is not configured");
         return;
     }
 
@@ -74,7 +74,7 @@ double GradientLineEdit::min()
 {
     if (!_range)
     {
-        qDebug() << "ACHTUNG!" << Q_FUNC_INFO << "Range is not configured";
+        qWarning() << EL_FORMAT_ERR("Range is not configured");
         return 0;
     }
 
@@ -85,7 +85,7 @@ double GradientLineEdit::max()
 {
     if (!_range)
     {
-        qDebug() << "ACHTUNG!" << Q_FUNC_INFO << "Range is not configured";
+        qWarning() << EL_FORMAT_ERR("Range is not configured");
         return 0;
     }
 
@@ -97,7 +97,7 @@ void GradientLineEdit::display(double value)
     previousValue = value;
     if (!_gradient || !_range)
     {
-        qDebug() << "ACHTUNG!" << Q_FUNC_INFO << "Gradient or range is not configured";
+        qWarning() << EL_FORMAT_ERR("Gradient or range is not configured");
         return;
     }
 

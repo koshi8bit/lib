@@ -1,8 +1,8 @@
 #include "errorhandler.h"
 
-const QString ErrorHandler::errorSave = "Возникла критическая ошибка!\nНевозможно сохранить файл.\nПокажи это окно Лехе (или сфотай и отправь через WatsUp)";
-const QString ErrorHandler::errorSend = "Возникла критическая ошибка!\nОтправка логов не удалась, но логи сохранены в файл.\nСообщи Лехе!";
-const QString ErrorHandler::okSend = "Возникла критическая ошибка!\nЛоги отправлены Лехе!";
+const QString ErrorHandler::errorSave = tr("Возникла критическая ошибка!\nНевозможно сохранить файл.\nПокажи это окно Лехе (или сфотай и отправь через WatsUp)");
+const QString ErrorHandler::errorSend = tr("Возникла критическая ошибка!\nОтправка логов не удалась, но логи сохранены в файл.\nСообщи Лехе!");
+const QString ErrorHandler::okSend = tr("Возникла критическая ошибка!\nЛоги отправлены Лехе!");
 
 ErrorHandler::ErrorHandler(QObject *parent) : QObject(parent)
 {

@@ -6,6 +6,8 @@
 
 #include <lib/qcustomplot/qcustomplot.h>
 
+#include <lib/kb4/easyliving.h>
+
 class GradientLineEdit : public QLineEdit
 {
 public:
