@@ -268,6 +268,14 @@ void RealTimeQCP::setRealTime(bool newValue, RealTimeQCP *senderWidget)
     _setRealTime(newValue);
 }
 
+void RealTimeQCP::setCursorKey(double key, RealTimeQCP *senderWidget)
+{
+    if (senderWidget->plot() == this->plot()) { return; }
+
+    _setCursorKey(key);
+}
+
+
 void RealTimeQCP::_setMoveLineRealTime(bool newValue)
 {
     _moveLineRealTime = newValue;
@@ -414,7 +422,7 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
 void RealTimeQCP::mouseMove(QMouseEvent *event)
 {
     auto time = plot()->xAxis->pixelToCoord(event->x());
-    moveCursor(time);
+    setCursorKey(time);
 }
 
 void RealTimeQCP::mousePress(QMouseEvent *event)
@@ -470,7 +478,7 @@ void RealTimeQCP::beforeReplot()
     if (moveLineRealTime())
     {
         //TODO set to 1970 and don't move
-        moveCursor(currentDateTime());
+        setCursorKey(currentDateTime());
     }
 }
 
@@ -485,7 +493,7 @@ void RealTimeQCP::timeAxisRangeChanged(const QCPRange &newRange)
 }
 
 
-void RealTimeQCP::moveCursor(double time)
+void RealTimeQCP::_setCursorKey(double time)
 {
     //BUG ?is this mouse move or regular move by timer?
     if (labelTime->isVisible())
@@ -496,7 +504,6 @@ void RealTimeQCP::moveCursor(double time)
         graphElement->moveCursor(time);
     }
 
-
     //    auto lower = getYAxisLower();
     //    auto upper = getYAxisUpper();
     auto lower = -999999;
@@ -506,14 +513,18 @@ void RealTimeQCP::moveCursor(double time)
     _cursor->start->setCoords(time, lower);
     _cursor->end->setCoords(time, upper);
 
-
-    emit lineRealTimeMoved();
-
     //NOTE check cpu usage too big
     if(!realTime())
     {
         plot()->replot();
     }
+}
+
+void RealTimeQCP::setCursorKey(double time)
+{
+    _setCursorKey(time);
+    emit cursorKeyChanged(time);
+
 }
 
 

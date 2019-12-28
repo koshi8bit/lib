@@ -248,7 +248,7 @@ void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
     plot->setMarginGroup(mg);
 
     connect(plot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(realTimeQCPChangeRange(QCPRange)));
-    connect(plot->plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(realTimeQCPMouseMove(QMouseEvent*)));
+    connect(plot, &RealTimeQCP::cursorKeyChanged, this, &MainWindow::realTimeQCPSetCursorKey);
     connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPRealTimeChanged);
     connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
 
@@ -296,25 +296,20 @@ void MainWindow::realTimeQCPChangeRange(QCPRange range)
     realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPRadiation, axis, range);
 }
 
-void MainWindow::realTimeQCPMouseMoveCheckPlot(RealTimeQCP *widget, QCustomPlot *plot, double time)
+void MainWindow::realTimeQCPSetCursorKey(double key)
 {
-    if (plot != widget->plot())
-        widget->moveCursor(time);
-}
+    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-void MainWindow::realTimeQCPMouseMove(QMouseEvent *event)
-{
-    auto plot = static_cast<QCustomPlot*>(sender());
-    auto time = plot->xAxis->pixelToCoord(event->x());
+    qDebug() << _sender << _sender->plot();
 
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPU, plot, time);
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPI, plot, time);
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPTemperature, plot, time);
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPower, plot, time);
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPersent, plot, time);
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPBool, plot, time);
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPVacuum, plot, time);
-    realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPRadiation, plot, time);
+    ui->realTimeQCPU->setCursorKey(key, _sender);
+    ui->realTimeQCPI->setCursorKey(key, _sender);
+    ui->realTimeQCPTemperature->setCursorKey(key, _sender);
+    ui->realTimeQCPPower->setCursorKey(key, _sender);
+    ui->realTimeQCPPersent->setCursorKey(key, _sender);
+    ui->realTimeQCPBool->setCursorKey(key, _sender);
+    ui->realTimeQCPVacuum->setCursorKey(key, _sender);
+    ui->realTimeQCPRadiation->setCursorKey(key, _sender);
 
 }
 

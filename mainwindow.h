@@ -85,8 +85,7 @@ private slots:
 
     void realTimeQCPChangeRangeCheckPlotAxis(RealTimeQCP *widget, QCPAxis* axis, QCPRange range);
     void realTimeQCPChangeRange(QCPRange range);
-    void realTimeQCPMouseMoveCheckPlot(RealTimeQCP *widget, QCustomPlot* plot, double time);
-    void realTimeQCPMouseMove(QMouseEvent *event);
+    void realTimeQCPSetCursorKey(double key);
     void realTimeQCPRealTimeChanged(bool newValue);
     void realTimeQCPMoveLineRealTimeChanged(bool newValue);
     void realTimeQCPCursor2VisibleValueChanged(bool newValue);
