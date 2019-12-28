@@ -249,11 +249,11 @@ void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
 
     connect(plot, &RealTimeQCP::timeAxisRangeChanged, this, &MainWindow::realTimeQCPSetTimeAxisRange);
     connect(plot, &RealTimeQCP::cursorKeyChanged, this, &MainWindow::realTimeQCPSetCursorKey);
-    connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPRealTimeChanged);
-    connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
+    connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPSetRealTime);
+    connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPSetMoveLineRealTime);
 
-    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPCursor2VisibleValueChanged);
-    connect(plot, &RealTimeQCP::cursor2KeyChanged, this, &MainWindow::realTimeQCPCursor2Moved);
+    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPSetCursor2Visible);
+    connect(plot, &RealTimeQCP::cursor2KeyChanged, this, &MainWindow::realTimeQCPSetCursor2Key);
 }
 
 void MainWindow::configureRealTimeQcpGraphs()
@@ -307,16 +307,7 @@ void MainWindow::realTimeQCPSetCursorKey(double key)
 
 }
 
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPU,
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPI,
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPTemperature,
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPower,
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPPersent,
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPBool,
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPVacuum,
-//realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPRadiation,
-
-void MainWindow::realTimeQCPRealTimeChanged(bool newValue)
+void MainWindow::realTimeQCPSetRealTime(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
@@ -332,7 +323,7 @@ void MainWindow::realTimeQCPRealTimeChanged(bool newValue)
 
 }
 
-void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
+void MainWindow::realTimeQCPSetMoveLineRealTime(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
@@ -348,7 +339,7 @@ void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
 
 }
 
-void MainWindow::realTimeQCPCursor2VisibleValueChanged(bool newValue)
+void MainWindow::realTimeQCPSetCursor2Visible(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
@@ -363,7 +354,7 @@ void MainWindow::realTimeQCPCursor2VisibleValueChanged(bool newValue)
     ui->realTimeQCPRadiation->setCursor2Visible(newValue, _sender);
 }
 
-void MainWindow::realTimeQCPCursor2Moved(double key)
+void MainWindow::realTimeQCPSetCursor2Key(double key)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
@@ -376,9 +367,6 @@ void MainWindow::realTimeQCPCursor2Moved(double key)
     ui->realTimeQCPBool->setCursor2Key(key, _sender);
     ui->realTimeQCPVacuum->setCursor2Key(key, _sender);
     ui->realTimeQCPRadiation->setCursor2Key(key, _sender);
-
-    qDebug() << "";
-
 }
 
 void MainWindow::timerRealTimeQCPReplotTimeout()
