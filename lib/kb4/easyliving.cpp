@@ -223,5 +223,5 @@ bool EasyLiving::createDir(QString path)
 
 QString EasyLiving::formatWindowTitle(QString text)
 {
-    return QString("%1 /// Alexey Koshkarev AKA koshi8bit AKA kent_brockman4").arg(text);
+    return QString("%1 /// Alexey K. AKA koshi8bit AKA kent_brockman4").arg(text);
 }

@@ -6,7 +6,6 @@ Library with most common classes, that are developed during automation BNCT expe
 ## Getting Started
 This lib is tested in Qt 5.14.0 and Qt Creator 4.11.0
 
-*Not tested yet*
 
 * Check examples in *main.c* and *mainwindow.cpp* files to see, how to use lib
 * Add *lib* folder to your project
@@ -16,6 +15,8 @@ QT += core gui printsupport network
 INCLUDEPATH += ./
 ```
 * Fin. You are perfect!
+
+*This steps not tested yet*
 
 # Most common classes and methods:
 
@@ -97,11 +98,11 @@ Allow to **easely** send values via network with **TCP or UDP** protocols
 
 ## EasyLeaving
 
-* formatDouble
+* formatDouble (precision, scientificNotation, seporatorSign)
 * formatDateTime
 * default physical postfixes
-* isBetween (double)
-* isEqualDouble
+* isBetween (double and QDateTime)
+* isEqualDouble (sheck with std::numeric_limits)
 
 ### ErrorHandler
 
@@ -126,5 +127,3 @@ If use - please provide link to this repository
 ```
 https://github.com/koshi8bit/lib
 ```
-
-
