@@ -42,6 +42,7 @@ This plot is based on QCustomPlot
 ![RealTimeQCP](readme-pic/realtimeqcp02.png)
 ![RealTimeQCP](readme-pic/realtimeqcp03.png)
 ![RealTimeQCP](readme-pic/realtimeqcp04.png)
+![RealTimeQCP](readme-pic/realtimeqcp05.png)
 
 ### GradientLineEdit
 
