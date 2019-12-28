@@ -30,7 +30,7 @@ Realtime plot with:
 
 This plot is based on QCustomPlot
 
-Now avaiable in Russian, but can easyly translated by Qt tr() macro.
+Now avaiable in Russian, but can easyly translated by Qt *tr()* macro.
 
 ![RealTimeQCP](readme-pic/realtimeqcp01.png)
 ![RealTimeQCP](readme-pic/realtimeqcp02--.png)
