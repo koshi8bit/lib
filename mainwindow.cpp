@@ -327,26 +327,18 @@ void MainWindow::realTimeQCPMouseMove(QMouseEvent *event)
 //realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPVacuum,
 //realTimeQCPMouseMoveCheckPlot(ui->realTimeQCPRadiation,
 
-void MainWindow::realTimeQCPRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue)
-{
-    if (sender != widget)
-        widget->setRealTime(newValue);
-}
-
 void MainWindow::realTimeQCPRealTimeChanged(bool newValue)
 {
-    auto _sender = static_cast<RealTimeQCP *>(sender());
+    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPU, _sender, newValue);
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPI, _sender, newValue);
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPTemperature, _sender, newValue);
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPPower, _sender, newValue);
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPPersent, _sender, newValue);
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPBool, _sender, newValue);
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPVacuum, _sender, newValue);
-    realTimeQCPRealTimeChangedCheckWidget(ui->realTimeQCPRadiation, _sender, newValue);
-
-
+    ui->realTimeQCPU->setRealTime(newValue, _sender);
+    ui->realTimeQCPI->setRealTime(newValue, _sender);
+    ui->realTimeQCPTemperature->setRealTime(newValue, _sender);
+    ui->realTimeQCPPower->setRealTime(newValue, _sender);
+    ui->realTimeQCPPersent->setRealTime(newValue, _sender);
+    ui->realTimeQCPBool->setRealTime(newValue, _sender);
+    ui->realTimeQCPVacuum->setRealTime(newValue, _sender);
+    ui->realTimeQCPRadiation->setRealTime(newValue, _sender);
 }
 
 void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)

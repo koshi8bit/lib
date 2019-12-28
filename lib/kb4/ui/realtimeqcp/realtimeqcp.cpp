@@ -65,10 +65,16 @@ void RealTimeQCP::configurePlot()
 }
 
 
-void RealTimeQCP::setRealTime(bool newValue)
+void RealTimeQCP::_setRealTime(bool newValue)
 {
     _realTime = newValue;
     configureAxesZoomAndDrag(!newValue);
+}
+
+void RealTimeQCP::setRealTime(bool newValue)
+{
+    _setRealTime(newValue);
+    emit realTimeChanged(newValue);
 }
 
 void RealTimeQCP::setCursor2Visible(bool newValue)
@@ -253,6 +259,13 @@ void RealTimeQCP::setMoveLineRealTime(bool newValue, RealTimeQCP *senderWidget)
     if (senderWidget == this) { return; }
 
     _setMoveLineRealTime(newValue);
+}
+
+void RealTimeQCP::setRealTime(bool newValue, RealTimeQCP *senderWidget)
+{
+    if (senderWidget == this) { return; }
+
+    _setRealTime(newValue);
 }
 
 void RealTimeQCP::_setMoveLineRealTime(bool newValue)
@@ -443,7 +456,7 @@ void RealTimeQCP::mouseDoubleClick(QMouseEvent *event)
         {
             auto newValue = !realTime();
             setRealTime(newValue);
-            emit realTimeChanged(newValue);
+
             setMoveLineRealTime(newValue);
 
         }

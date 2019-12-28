@@ -45,6 +45,7 @@ public:
     void setCursor2Visible(bool newValue, RealTimeQCP *senderWidget);
     void setCursor2Key(double key, RealTimeQCP *senderWidget);
     void setMoveLineRealTime(bool newValue, RealTimeQCP *senderWidget);
+    void setRealTime(bool newValue, RealTimeQCP *senderWidget);
 
 
 
@@ -114,6 +115,7 @@ private:
     double getYAxisLower();
 
 
+    void _setRealTime(bool newValue);
     void _setMoveLineRealTime(bool newValue);
 
 private slots:
