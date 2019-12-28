@@ -39,7 +39,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    bool plotUpdateRealTIme;
     int plotUpdateIntervalMSEC = 10;
     int addData1MSEC = 50;
     int addData2MSEC = 1000;
@@ -81,7 +80,6 @@ private:
 private slots:
     void addData1();
     void addData2();
-    void on_checkBoxRealTime_stateChanged(int arg1);
 
     void realTimeQCPSetTimeAxisRange(QCPRange range);
     void realTimeQCPSetCursorKey(double key);

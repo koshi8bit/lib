@@ -267,12 +267,6 @@ void MainWindow::configureRealTimeQcpGraphs()
 }
 
 
-void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
-{
-    plotUpdateRealTIme = static_cast<bool>(arg1);
-}
-
-
 
 ////////////////////////////////
 

@@ -35,7 +35,7 @@ public:
     double rawValue();
 
 private:
-    Graph *graph;
+    Graph *graph = nullptr;
     int _precision;
     bool _scientificNotation = false;
 
@@ -55,7 +55,6 @@ protected:
     void valueChangedChild() override;
     void _valueChanged();
 private slots:
-    void addDataToGraph();
 };
 
 #endif // CHANNELDOUBLE_H

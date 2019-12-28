@@ -16,6 +16,7 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
     _graph->setName(label);
     _graph->setPen(color);
     _graph->setLineStyle(QCPGraph::LineStyle::lsStepLeft);
+    _graph->setAdaptiveSampling(true);
 
 
     configureCursor(&_cursor);
@@ -119,8 +120,8 @@ void Graph::configureCursor(QCPItemTracer **cursor)
 {
     (*cursor) = new QCPItemTracer(_plot);
     (*cursor)->setGraph(_graph);
-    (*cursor)->setInterpolating(true);
-    (*cursor)->setStyle(QCPItemTracer::tsCircle);
+    //(*cursor)->setInterpolating(true);
+    (*cursor)->setStyle(QCPItemTracer::tsCircle); // tsCircle
     (*cursor)->setPen(_graph->pen());
     (*cursor)->setBrush(_color);
     (*cursor)->setSize(5);

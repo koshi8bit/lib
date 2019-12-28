@@ -41,8 +41,8 @@ void RealTimeQCP::configurePlot()
 
 
     //WARNING dublicate configureAxesZoomAndDrag??
-    ui->plot->setInteraction(QCP::iRangeZoom, true);
-    ui->plot->setInteraction(QCP::iRangeDrag, true);
+    plot()->setInteraction(QCP::iRangeZoom, true);
+    plot()->setInteraction(QCP::iRangeDrag, true);
 
     setRealTime(true);
 

@@ -12,7 +12,7 @@
 #include "graph.h"
 #include "colorsetter.h"
 
-//f8f1856 - old widget
+//f8f1856 - old widget rtPlotWithLegend
 
 namespace Ui {
 class RealTimeQCP;

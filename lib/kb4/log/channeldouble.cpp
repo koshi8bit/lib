@@ -21,12 +21,6 @@ ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
 void ChannelDouble::addGraphToPlot(RealTimeQCP *plot)
 {
     this->graph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
-    connect(this, &Channel::valueChanged, this, &ChannelDouble::addDataToGraph);
-}
-
-void ChannelDouble::addDataToGraph()
-{
-    graph->addData(RealTimeQCP::currentDateTime(), value());
 }
 
 bool ChannelDouble::scientificNotation()
@@ -91,10 +85,9 @@ void ChannelDouble::configure()
 
 void ChannelDouble::valueChangedChild()
 {
-    if (toRawFunc != nullptr)
-    {
-        _rawValue = toRawFunc(value());
-    }
+    if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
+
+    if (graph != nullptr) { graph->addData(RealTimeQCP::currentDateTime(), value()); }
 }
 
 void ChannelDouble::_valueChanged()
