@@ -4,6 +4,8 @@ Library with most common classes, that are developed during BNCT project
 ## Getting Started
 This lib is tested in Qt 5.14.0 and Qt Creator 4.11.0
 
+*Not tested yet*
+
 * Check examples in *main.c* and *mainwindow.cpp* files to see, how to use lib
 * Add *lib* folder to your project
 * Add in .pro file this lines
