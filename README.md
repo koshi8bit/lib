@@ -23,6 +23,8 @@ INCLUDEPATH += ./
 
 ### RealTimeQCP
 
+![RealTimeQCP](readme-pic/realtimeqcp01.png)
+
 Realtime plot with:
 * Full axis config (time and value). for Y axis it is possible to set **Scientific notation and precision**
 * Powerful **legend and mouse iterations**
@@ -34,7 +36,6 @@ This plot is based on QCustomPlot
 
 Now avaiable in Russian, but can easyly translated by Qt *tr()* macro.
 
-![RealTimeQCP](readme-pic/realtimeqcp01.png)
 ![RealTimeQCP](readme-pic/realtimeqcp02--.png)
 ![RealTimeQCP](readme-pic/realtimeqcp03-.png)
 ![RealTimeQCP](readme-pic/realtimeqcp04.png)
