@@ -48,16 +48,18 @@ Custom error handler. Not shure this is common for C++
 ## Author
 
  **Alexey K** koshi8bit@mail.ru
- *Budker Institute of Nuclear Physics*
-
+ 
 ## Acknowledgments
 
 * [Qt developers](https://www.qt.io/)
 * [QCustomPlot](https://www.qcustomplot.com/) library developers 
-* Work colleagues
+* Work colleagues and Budker Institute of Nuclear Physics
 * My wife and dog
 
 ## License
 If use - please provide link to this repository
+```
+https://github.com/koshi8bit/lib
+```
 
 
