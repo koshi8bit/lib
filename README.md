@@ -1,6 +1,8 @@
 # lib
 Library with most common classes, that are developed during BNCT project
 
+*This readme is still under construction. Some errors may be present*
+
 ## Getting Started
 This lib is tested in Qt 5.14.0 and Qt Creator 4.11.0
 
