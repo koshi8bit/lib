@@ -89,7 +89,6 @@ private slots:
     void realTimeQCPMouseMove(QMouseEvent *event);
     void realTimeQCPRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue);
     void realTimeQCPRealTimeChanged(bool newValue);
-    void realTimeQCPMoveLineRealTimeChangedCheckWidget(RealTimeQCP *widget, RealTimeQCP *sender, bool newValue);
     void realTimeQCPMoveLineRealTimeChanged(bool newValue);
     void realTimeQCPCursor2VisibleValueChanged(bool newValue);
     void realTimeQCPCursor2Moved(double key);

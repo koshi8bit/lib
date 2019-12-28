@@ -236,29 +236,34 @@ bool RealTimeQCP::cursor2Visible()
 
 void RealTimeQCP::setCursor2Visible(bool newValue, RealTimeQCP *senderWidget)
 {
-    qDebug() << "setCursor2Visible" << senderWidget << this;
-    if (senderWidget == this)
-    {
-        qDebug() << "return setCursor2Visible";
-        return;
-    }
+    if (senderWidget == this) { return; }
+
     _setCursor2Visible(newValue);
 }
 
 void RealTimeQCP::setCursor2Key(double key, RealTimeQCP *senderWidget)
 {
-    qDebug() << "cursor2Move" << senderWidget << this;
-    if (senderWidget == this)
-    {
-        qDebug() << "return setCursor2Visible";
-        return;
-    }
+    if (senderWidget == this) { return; }
+
     _setCursor2Key(key);
 }
 
-void RealTimeQCP::setMoveLineRealTime(bool moveLineRealTime)
+void RealTimeQCP::setMoveLineRealTime(bool newValue, RealTimeQCP *senderWidget)
 {
-    _moveLineRealTime = moveLineRealTime;
+    if (senderWidget == this) { return; }
+
+    _setMoveLineRealTime(newValue);
+}
+
+void RealTimeQCP::_setMoveLineRealTime(bool newValue)
+{
+    _moveLineRealTime = newValue;
+}
+
+void RealTimeQCP::setMoveLineRealTime(bool newValue)
+{
+    _setMoveLineRealTime(newValue);
+    emit moveLineRealTimeChanged(newValue);
 }
 
 
@@ -405,9 +410,7 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
     {
         if (event->button() == Qt::MouseButton::RightButton)
         {
-            auto newValue = !moveLineRealTime();
-            setMoveLineRealTime(newValue);
-            emit moveLineRealTimeChanged(newValue);
+            setMoveLineRealTime(!moveLineRealTime());
         }
 
         if (event->button() == Qt::MouseButton::MiddleButton)
@@ -442,7 +445,7 @@ void RealTimeQCP::mouseDoubleClick(QMouseEvent *event)
             setRealTime(newValue);
             emit realTimeChanged(newValue);
             setMoveLineRealTime(newValue);
-            emit moveLineRealTimeChanged(newValue);
+
         }
     }
 }

@@ -44,6 +44,8 @@ public:
     bool moveLineRealTime() const;
     void setCursor2Visible(bool newValue, RealTimeQCP *senderWidget);
     void setCursor2Key(double key, RealTimeQCP *senderWidget);
+    void setMoveLineRealTime(bool newValue, RealTimeQCP *senderWidget);
+
 
 
 
@@ -57,7 +59,7 @@ signals:
 public slots:
     void setRealTime(bool newValue);
     bool cursor2Visible();
-    void setMoveLineRealTime(bool moveLineRealTime);
+    void setMoveLineRealTime(bool newValue);
     void moveCursor(double time);
     void moveTimeAxisRealTime();
     void setCursor2Visible(bool newValue);
@@ -111,6 +113,8 @@ private:
     double getYAxisUpper();
     double getYAxisLower();
 
+
+    void _setMoveLineRealTime(bool newValue);
 
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
