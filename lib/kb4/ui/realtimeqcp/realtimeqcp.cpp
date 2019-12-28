@@ -10,13 +10,13 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
     connect(plot(), &QCustomPlot::axisClick, this, &RealTimeQCP::axisClick);
     connect(plot(), &QCustomPlot::axisDoubleClick, this, &RealTimeQCP::axisDoubleClick);
 
-    connect(plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     //connect(plot(), &QCustomPlot::mouseMove, this, &RTPlotWithLegend::mouseMove);
+    connect(plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     connect(plot(), &QCustomPlot::mousePress, this, &RealTimeQCP::mousePress);
     connect(plot(), &QCustomPlot::mouseDoubleClick, this, &RealTimeQCP::mouseDoubleClick);
 
     connect(plot(), &QCustomPlot::beforeReplot, this, &RealTimeQCP::beforeReplot);
-    connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(timeAxisRangeChanged(QCPRange)));
+    connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(setTimeAxisRange(QCPRange)));
 
     configurePlot();
     configureLegend();
@@ -27,7 +27,7 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
 
 RealTimeQCP::~RealTimeQCP()
 {
-    //FIXME FTH: (8440): *** Fault tolerant heap
+    //FIXME "FTH: (8440): *** Fault tolerant heap.."
     delete ui;
 }
 
@@ -87,6 +87,12 @@ void RealTimeQCP::setCursor2Key(double key)
 {
     _setCursor2Key(key);
     emit cursor2KeyChanged(key);
+}
+
+void RealTimeQCP::setTimeAxisRange(const QCPRange &newValue)
+{
+    _setTimeAxisRange(newValue);
+    emit timeAxisRangeChanged(newValue);
 }
 
 bool RealTimeQCP::moveLineRealTime() const
@@ -270,9 +276,16 @@ void RealTimeQCP::setRealTime(bool newValue, RealTimeQCP *senderWidget)
 
 void RealTimeQCP::setCursorKey(double key, RealTimeQCP *senderWidget)
 {
-    if (senderWidget->plot() == this->plot()) { return; }
+    if (senderWidget == this) { return; }
 
     _setCursorKey(key);
+}
+
+void RealTimeQCP::setTimeAxisRange(const QCPRange &newRange, RealTimeQCP *senderWidget)
+{
+    if (senderWidget == this) { return; }
+
+    _setTimeAxisRange(newRange);
 }
 
 
@@ -482,8 +495,9 @@ void RealTimeQCP::beforeReplot()
     }
 }
 
-void RealTimeQCP::timeAxisRangeChanged(const QCPRange &newRange)
+void RealTimeQCP::_setTimeAxisRange(const QCPRange &newRange)
 {
+    plot()->xAxis->setRange(newRange);
     auto delta = newRange.upper - newRange.lower;
     if (!EasyLiving::isEqualDouble(timeAxisOldRange, delta))
     {

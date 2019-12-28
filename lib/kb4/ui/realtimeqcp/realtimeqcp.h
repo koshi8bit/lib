@@ -47,6 +47,7 @@ public:
     void setMoveLineRealTime(bool newValue, RealTimeQCP *senderWidget);
     void setRealTime(bool newValue, RealTimeQCP *senderWidget);
     void setCursorKey(double key, RealTimeQCP *senderWidget);
+    void setTimeAxisRange(const QCPRange &newRange, RealTimeQCP *senderWidget);
     //void moveCursor(double time, RealTimeQCP *senderWidget);
 
 
@@ -58,6 +59,7 @@ signals:
     void realTimeChanged(bool newValue);
     void cursorKeyChanged(double key);
     void cursor2KeyChanged(double key);
+    void timeAxisRangeChanged(const QCPRange &newRange);
 
 public slots:
     void setRealTime(bool newValue);
@@ -67,6 +69,7 @@ public slots:
     void moveTimeAxisRealTime();
     void setCursor2Visible(bool newValue);
     void setCursor2Key(double key);
+    void setTimeAxisRange(const QCPRange &newValue);
 
 private:
     Ui::RealTimeQCP *ui;
@@ -131,7 +134,7 @@ private slots:
     void mouseDoubleClick(QMouseEvent *event);
 
     void beforeReplot();
-    void timeAxisRangeChanged(const QCPRange &newRange);
+    void _setTimeAxisRange(const QCPRange &newRange);
 
 };
 

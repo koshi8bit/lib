@@ -83,8 +83,7 @@ private slots:
     void addData2();
     void on_checkBoxRealTime_stateChanged(int arg1);
 
-    void realTimeQCPChangeRangeCheckPlotAxis(RealTimeQCP *widget, QCPAxis* axis, QCPRange range);
-    void realTimeQCPChangeRange(QCPRange range);
+    void realTimeQCPSetTimeAxisRange(QCPRange range);
     void realTimeQCPSetCursorKey(double key);
     void realTimeQCPRealTimeChanged(bool newValue);
     void realTimeQCPMoveLineRealTimeChanged(bool newValue);

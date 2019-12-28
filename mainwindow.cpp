@@ -247,7 +247,7 @@ void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
 {
     plot->setMarginGroup(mg);
 
-    connect(plot->plot()->xAxis,SIGNAL(rangeChanged(QCPRange)),this,SLOT(realTimeQCPChangeRange(QCPRange)));
+    connect(plot, &RealTimeQCP::timeAxisRangeChanged, this, &MainWindow::realTimeQCPSetTimeAxisRange);
     connect(plot, &RealTimeQCP::cursorKeyChanged, this, &MainWindow::realTimeQCPSetCursorKey);
     connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPRealTimeChanged);
     connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPMoveLineRealTimeChanged);
@@ -276,31 +276,25 @@ void MainWindow::on_checkBoxRealTime_stateChanged(int arg1)
 
 ////////////////////////////////
 
-void MainWindow::realTimeQCPChangeRangeCheckPlotAxis(RealTimeQCP *widget, QCPAxis *axis, QCPRange range)
+void MainWindow::realTimeQCPSetTimeAxisRange(QCPRange range)
 {
-    if (axis != widget->plot()->xAxis)
-        widget->plot()->xAxis->setRange(range);
-}
 
-void MainWindow::realTimeQCPChangeRange(QCPRange range)
-{
-    QCPAxis* axis = static_cast<QCPAxis *>(QObject::sender());
+    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPU, axis, range);
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPI, axis, range);
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPTemperature, axis, range);
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPPower, axis, range);
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPPersent, axis, range);
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPBool, axis, range);
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPVacuum, axis, range);
-    realTimeQCPChangeRangeCheckPlotAxis(ui->realTimeQCPRadiation, axis, range);
+    ui->realTimeQCPU->setTimeAxisRange(range, _sender);
+    ui->realTimeQCPI->setTimeAxisRange(range, _sender);
+    ui->realTimeQCPTemperature->setTimeAxisRange(range, _sender);
+    ui->realTimeQCPPower->setTimeAxisRange(range, _sender);
+    ui->realTimeQCPPersent->setTimeAxisRange(range, _sender);
+    ui->realTimeQCPBool->setTimeAxisRange(range, _sender);
+    ui->realTimeQCPVacuum->setTimeAxisRange(range, _sender);
+    ui->realTimeQCPRadiation->setTimeAxisRange(range, _sender);
+
 }
 
 void MainWindow::realTimeQCPSetCursorKey(double key)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
-
-    qDebug() << _sender << _sender->plot();
 
     ui->realTimeQCPU->setCursorKey(key, _sender);
     ui->realTimeQCPI->setCursorKey(key, _sender);
