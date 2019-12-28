@@ -255,25 +255,21 @@ void RealTimeQCP::setCursor2Visible(bool newValue, RealTimeQCP *senderWidget)
 
 void RealTimeQCP::setCursor2Key(double key, RealTimeQCP *senderWidget)
 {
-    if (senderWidget == this) { qDebug() << this << "skip";  return; }
-    qDebug() << this;
+    if (senderWidget == this) { return; }
 
     _setCursor2Key(key);
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool newValue, RealTimeQCP *senderWidget)
 {
-    if (senderWidget == this) { qDebug() << this << "skip";  return; }
-    qDebug() << this;
-
+    if (senderWidget == this) { return; }
 
     _setMoveLineRealTime(newValue);
 }
 
 void RealTimeQCP::setRealTime(bool newValue, RealTimeQCP *senderWidget)
 {
-    if (senderWidget == this) { qDebug() << this << "skip";  return; }
-    qDebug() << this;
+    if (senderWidget == this) { return; }
 
     _setRealTime(newValue);
 }

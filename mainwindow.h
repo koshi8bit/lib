@@ -85,10 +85,10 @@ private slots:
 
     void realTimeQCPSetTimeAxisRange(QCPRange range);
     void realTimeQCPSetCursorKey(double key);
-    void realTimeQCPRealTimeChanged(bool newValue);
-    void realTimeQCPMoveLineRealTimeChanged(bool newValue);
-    void realTimeQCPCursor2VisibleValueChanged(bool newValue);
-    void realTimeQCPCursor2Moved(double key);
+    void realTimeQCPSetRealTime(bool newValue);
+    void realTimeQCPSetMoveLineRealTime(bool newValue);
+    void realTimeQCPSetCursor2Visible(bool newValue);
+    void realTimeQCPSetCursor2Key(double key);
     void timerRealTimeQCPReplotTimeout();
 
     void plotLineRealTimeMoved();

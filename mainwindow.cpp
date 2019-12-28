@@ -311,7 +311,6 @@ void MainWindow::realTimeQCPSetRealTime(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setRealTime(newValue, _sender);
     ui->realTimeQCPI->setRealTime(newValue, _sender);
     ui->realTimeQCPTemperature->setRealTime(newValue, _sender);
@@ -327,7 +326,6 @@ void MainWindow::realTimeQCPSetMoveLineRealTime(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setMoveLineRealTime(newValue, _sender);
     ui->realTimeQCPI->setMoveLineRealTime(newValue, _sender);
     ui->realTimeQCPTemperature->setMoveLineRealTime(newValue, _sender);
@@ -343,7 +341,6 @@ void MainWindow::realTimeQCPSetCursor2Visible(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setCursor2Visible(newValue, _sender);
     ui->realTimeQCPI->setCursor2Visible(newValue, _sender);
     ui->realTimeQCPTemperature->setCursor2Visible(newValue, _sender);
@@ -358,7 +355,6 @@ void MainWindow::realTimeQCPSetCursor2Key(double key)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setCursor2Key(key, _sender);
     ui->realTimeQCPI->setCursor2Key(key, _sender);
     ui->realTimeQCPTemperature->setCursor2Key(key, _sender);
