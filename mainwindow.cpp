@@ -138,15 +138,15 @@ void MainWindow::addData1()
 {
     auto now = RealTimeQCP::currentDateTime();
 
-    graphRealTimeQcpUa->addData(now, sin(5.0/2*cos(now)));
-    graphRealTimeQcpIa->addData(now, sin(9.0/2*cos(now)));
+    graphRealTimeQcpUa->addData(now, 1000+1000*sin(5.0/2*cos(now)));
+    graphRealTimeQcpIa->addData(now, 5+5*sin(9.0/2*cos(now)));
 }
 
 void MainWindow::addData2()
 {
     auto now = RealTimeQCP::currentDateTime();
 
-    graphRealTimeQcpUb->addData(now, qPow(qSin(now), 2) - 2*qSin(now) - 2);
+    graphRealTimeQcpUb->addData(now, 1000+1000*qPow(qSin(now), 2) - 2*qSin(now) - 2);
     graphRealTimeQcpBoola->addData(now, qrand() % 2);
 }
 
@@ -320,6 +320,7 @@ void MainWindow::realTimeQCPRealTimeChanged(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
+    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setRealTime(newValue, _sender);
     ui->realTimeQCPI->setRealTime(newValue, _sender);
     ui->realTimeQCPTemperature->setRealTime(newValue, _sender);
@@ -328,12 +329,14 @@ void MainWindow::realTimeQCPRealTimeChanged(bool newValue)
     ui->realTimeQCPBool->setRealTime(newValue, _sender);
     ui->realTimeQCPVacuum->setRealTime(newValue, _sender);
     ui->realTimeQCPRadiation->setRealTime(newValue, _sender);
+
 }
 
 void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
+    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setMoveLineRealTime(newValue, _sender);
     ui->realTimeQCPI->setMoveLineRealTime(newValue, _sender);
     ui->realTimeQCPTemperature->setMoveLineRealTime(newValue, _sender);
@@ -342,12 +345,14 @@ void MainWindow::realTimeQCPMoveLineRealTimeChanged(bool newValue)
     ui->realTimeQCPBool->setMoveLineRealTime(newValue, _sender);
     ui->realTimeQCPVacuum->setMoveLineRealTime(newValue, _sender);
     ui->realTimeQCPRadiation->setMoveLineRealTime(newValue, _sender);
+
 }
 
 void MainWindow::realTimeQCPCursor2VisibleValueChanged(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
+    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setCursor2Visible(newValue, _sender);
     ui->realTimeQCPI->setCursor2Visible(newValue, _sender);
     ui->realTimeQCPTemperature->setCursor2Visible(newValue, _sender);
@@ -362,6 +367,7 @@ void MainWindow::realTimeQCPCursor2Moved(double key)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
+    qDebug() << Q_FUNC_INFO;
     ui->realTimeQCPU->setCursor2Key(key, _sender);
     ui->realTimeQCPI->setCursor2Key(key, _sender);
     ui->realTimeQCPTemperature->setCursor2Key(key, _sender);
@@ -370,6 +376,9 @@ void MainWindow::realTimeQCPCursor2Moved(double key)
     ui->realTimeQCPBool->setCursor2Key(key, _sender);
     ui->realTimeQCPVacuum->setCursor2Key(key, _sender);
     ui->realTimeQCPRadiation->setCursor2Key(key, _sender);
+
+    qDebug() << "";
+
 }
 
 void MainWindow::timerRealTimeQCPReplotTimeout()

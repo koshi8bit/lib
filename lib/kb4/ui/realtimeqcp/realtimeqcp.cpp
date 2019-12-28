@@ -56,7 +56,7 @@ void RealTimeQCP::configurePlot()
     setMoveLineRealTime(true);
     plot()->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     plot()->xAxis->setRangeUpper(RealTimeQCP::currentDateTime());
-    setTimeAxisRange(90);
+    setTimeAxisRange(30);
 
     // { Tests
     //plot()->setNoAntialiasingOnDrag(true);
@@ -255,21 +255,25 @@ void RealTimeQCP::setCursor2Visible(bool newValue, RealTimeQCP *senderWidget)
 
 void RealTimeQCP::setCursor2Key(double key, RealTimeQCP *senderWidget)
 {
-    if (senderWidget == this) { return; }
+    if (senderWidget == this) { qDebug() << this << "skip";  return; }
+    qDebug() << this;
 
     _setCursor2Key(key);
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool newValue, RealTimeQCP *senderWidget)
 {
-    if (senderWidget == this) { return; }
+    if (senderWidget == this) { qDebug() << this << "skip";  return; }
+    qDebug() << this;
+
 
     _setMoveLineRealTime(newValue);
 }
 
 void RealTimeQCP::setRealTime(bool newValue, RealTimeQCP *senderWidget)
 {
-    if (senderWidget == this) { return; }
+    if (senderWidget == this) { qDebug() << this << "skip";  return; }
+    qDebug() << this;
 
     _setRealTime(newValue);
 }
@@ -528,10 +532,11 @@ void RealTimeQCP::_setCursorKey(double time)
     _cursor->end->setCoords(time, upper);
 
     //NOTE check cpu usage too big
-    if(!realTime())
-    {
-        plot()->replot();
-    }
+    //NOTE inf loop
+//    if(!realTime())
+//    {
+//        plot()->replot();
+//    }
 }
 
 void RealTimeQCP::setCursorKey(double time)
