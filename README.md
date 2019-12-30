@@ -14,6 +14,7 @@ This lib is tested in Qt 5.14.0 and Qt Creator 4.11.0
 QT += core gui printsupport network
 INCLUDEPATH += ./
 ```
+* In project area click on *projectName* -> *Add existing directory* and select *lib* folder
 * Fin. You are perfect!
 
 *This steps not tested yet*
@@ -112,7 +113,7 @@ Custom error handler. Not shure this is common for C++
 
 ## Author
 
- **Alexey K** koshi8bit@mail.ru
+ **Alexey K.** koshi8bit@mail.ru
  All discussions are welcome! If you have some advices - please let me know :D
  
 ## Acknowledgments
