@@ -8,7 +8,7 @@
 
 class ChannelDouble : public ChannelT<double>
 {
-    Q_OBJECT
+    //Q_OBJECT
 public:
     ChannelDouble(QString name, QString postfix, QObject *parent = nullptr);
     ChannelDouble(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);

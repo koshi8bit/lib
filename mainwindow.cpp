@@ -267,7 +267,7 @@ void MainWindow::configureRealTimeQcpGraphs()
 
 
 
-////////////////////////////////
+/// { RealTimeQCP copy SIGNALS and SLOTS
 
 void MainWindow::realTimeQcpSetTimeAxisRange(QCPRange range)
 {
@@ -358,6 +358,7 @@ void MainWindow::realTimeQcpSetCursor2Key(double key)
     ui->realTimeQcpRadiation->setCursor2Key(key, _sender);
 }
 
+/// } RealTimeQCP copy SIGNALS and SLOTS
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
