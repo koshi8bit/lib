@@ -26,28 +26,28 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="2" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPPersent" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpPersent" native="true"/>
         </item>
         <item row="3" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPVacuum" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpVacuum" native="true"/>
         </item>
         <item row="3" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPRadiation" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpRadiation" native="true"/>
         </item>
         <item row="0" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPU" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpU" native="true"/>
         </item>
         <item row="1" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPPower" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpPower" native="true"/>
         </item>
         <item row="1" column="0">
-         <widget class="RealTimeQCP" name="realTimeQCPTemperature" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpTemperature" native="true"/>
         </item>
         <item row="0" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPI" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpI" native="true"/>
         </item>
         <item row="2" column="1">
-         <widget class="RealTimeQCP" name="realTimeQCPBool" native="true"/>
+         <widget class="RealTimeQCP" name="realTimeQcpBool" native="true"/>
         </item>
         <item row="4" column="0">
          <widget class="QPushButton" name="pushButton_2">

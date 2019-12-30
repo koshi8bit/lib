@@ -65,7 +65,7 @@ void MainWindow::configureExcelLog()
 
     a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), this);
     connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
-    a->addGraphToPlot(ui->realTimeQCPPower);
+    a->addGraphToPlot(ui->realTimeQcpPower);
     excelLog->addChannel(a);
 
     b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), QStringList() << "b/middle2", this);
@@ -116,11 +116,11 @@ void MainWindow::configureTimers()
 //    connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
 //    timerReplot->start();
 
-    timerRealTimeQCPReplot = new QTimer(this);
-    timerRealTimeQCPReplot->setInterval(plotUpdateIntervalMSEC);
-    //connect(timerRealTimeQCPReplot, SIGNAL(timeout()), this, SLOT(timerRealTimeQCPReplotTimeout()));
-    connect(timerRealTimeQCPReplot, &QTimer::timeout, ui->realTimeQCPU, &RealTimeQCP::moveTimeAxisRealTime);
-    timerRealTimeQCPReplot->start();
+    timerrealTimeQcpReplot = new QTimer(this);
+    timerrealTimeQcpReplot->setInterval(plotUpdateIntervalMSEC);
+    //connect(timerrealTimeQcpReplot, SIGNAL(timeout()), this, SLOT(timerrealTimeQcpReplotTimeout()));
+    connect(timerrealTimeQcpReplot, &QTimer::timeout, ui->realTimeQcpU, &RealTimeQCP::moveTimeAxisRealTime);
+    timerrealTimeQcpReplot->start();
 }
 
 void MainWindow::configureGradientLineEdit()
@@ -194,38 +194,38 @@ MainWindow::~MainWindow()
 
 void MainWindow::configureRealTimeQcpPlot()
 {
-    mg = new QCPMarginGroup(ui->realTimeQCPU->plot());
+    mg = new QCPMarginGroup(ui->realTimeQcpU->plot());
 
     RealTimeQCP * plot;
 
-    plot = ui->realTimeQCPU;
+    plot = ui->realTimeQcpU;
     plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
     configureRealTimeQcpPlot(plot);
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPI->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPTemperature->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPPower->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPPersent->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPBool->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPVacuum->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQCPRadiation->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpI->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpTemperature->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpPower->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpPersent->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpBool->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpVacuum->plot(), SLOT(replot()));
+    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpRadiation->plot(), SLOT(replot()));
 
-    plot = ui->realTimeQCPI;
+    plot = ui->realTimeQcpI;
     plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10, 2);
     configureRealTimeQcpPlot(plot);
 
-    plot = ui->realTimeQCPTemperature;
+    plot = ui->realTimeQcpTemperature;
     plot->configureAxis(plot->plot()->yAxis, tr("Температурим"), EasyLiving::postfixCelsius(), 0, 200);
     configureRealTimeQcpPlot(plot);
 
-    plot = ui->realTimeQCPPower;
+    plot = ui->realTimeQcpPower;
     plot->configureAxis(plot->plot()->yAxis, tr("МОООЩА!"), EasyLiving::postfixWatt(), 0, 700);
     configureRealTimeQcpPlot(plot);
 
-    plot = ui->realTimeQCPPersent;
+    plot = ui->realTimeQcpPersent;
     plot->configureAxis(plot->plot()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
     configureRealTimeQcpPlot(plot);
 
-    plot = ui->realTimeQCPBool;
+    plot = ui->realTimeQcpBool;
     plot->configureAxis(plot->plot()->yAxis, tr("True/False"), "", -0.2, 1.2);
     QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
     textTicker->addTick(0, "False\nOff");
@@ -234,11 +234,11 @@ void MainWindow::configureRealTimeQcpPlot()
     //plot->plot()->yAxis->setSubTicks(false);
     configureRealTimeQcpPlot(plot);
 
-    plot = ui->realTimeQCPVacuum;
+    plot = ui->realTimeQcpVacuum;
     plot->configureAxis(plot->plot()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, 0, QCPAxis::stLogarithmic);
     configureRealTimeQcpPlot(plot);
 
-    plot = ui->realTimeQCPRadiation;
+    plot = ui->realTimeQcpRadiation;
     plot->configureAxis(plot->plot()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, 0, QCPAxis::stLogarithmic);
     configureRealTimeQcpPlot(plot);
 }
@@ -247,121 +247,121 @@ void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
 {
     plot->setMarginGroup(mg);
 
-    connect(plot, &RealTimeQCP::timeAxisRangeChanged, this, &MainWindow::realTimeQCPSetTimeAxisRange);
-    connect(plot, &RealTimeQCP::cursorKeyChanged, this, &MainWindow::realTimeQCPSetCursorKey);
-    connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQCPSetRealTime);
-    connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQCPSetMoveLineRealTime);
+    connect(plot, &RealTimeQCP::timeAxisRangeChanged, this, &MainWindow::realTimeQcpSetTimeAxisRange);
+    connect(plot, &RealTimeQCP::cursorKeyChanged, this, &MainWindow::realTimeQcpSetCursorKey);
+    connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQcpSetRealTime);
+    connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQcpSetMoveLineRealTime);
 
-    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQCPSetCursor2Visible);
-    connect(plot, &RealTimeQCP::cursor2KeyChanged, this, &MainWindow::realTimeQCPSetCursor2Key);
+    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQcpSetCursor2Visible);
+    connect(plot, &RealTimeQCP::cursor2KeyChanged, this, &MainWindow::realTimeQcpSetCursor2Key);
 }
 
 void MainWindow::configureRealTimeQcpGraphs()
 {
-    graphRealTimeQcpUa = ui->realTimeQCPU->addGraph("ELV/E", EasyLiving::postfixVolt(), 2);
-    graphRealTimeQcpUb = ui->realTimeQCPU->addGraph("Ultravolt/-300", EasyLiving::postfixVolt());
+    graphRealTimeQcpUa = ui->realTimeQcpU->addGraph("ELV/E", EasyLiving::postfixVolt(), 2);
+    graphRealTimeQcpUb = ui->realTimeQcpU->addGraph("Ultravolt/-300", EasyLiving::postfixVolt());
 
-    graphRealTimeQcpIa = ui->realTimeQCPI->addGraph("Bergoz/Hebl", EasyLiving::postfixMilliAmpere(), 3);
+    graphRealTimeQcpIa = ui->realTimeQcpI->addGraph("Bergoz/Hebl", EasyLiving::postfixMilliAmpere(), 3);
 
-    graphRealTimeQcpBoola = ui->realTimeQCPBool->addGraph("ЭЛВ/Напуск аргона", "", 0);
+    graphRealTimeQcpBoola = ui->realTimeQcpBool->addGraph("ЭЛВ/Напуск аргона", "", 0);
 }
 
 
 
 ////////////////////////////////
 
-void MainWindow::realTimeQCPSetTimeAxisRange(QCPRange range)
+void MainWindow::realTimeQcpSetTimeAxisRange(QCPRange range)
 {
 
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    ui->realTimeQCPU->setTimeAxisRange(range, _sender);
-    ui->realTimeQCPI->setTimeAxisRange(range, _sender);
-    ui->realTimeQCPTemperature->setTimeAxisRange(range, _sender);
-    ui->realTimeQCPPower->setTimeAxisRange(range, _sender);
-    ui->realTimeQCPPersent->setTimeAxisRange(range, _sender);
-    ui->realTimeQCPBool->setTimeAxisRange(range, _sender);
-    ui->realTimeQCPVacuum->setTimeAxisRange(range, _sender);
-    ui->realTimeQCPRadiation->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpU->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpI->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpTemperature->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpPower->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpPersent->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpBool->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpVacuum->setTimeAxisRange(range, _sender);
+    ui->realTimeQcpRadiation->setTimeAxisRange(range, _sender);
 
 }
 
-void MainWindow::realTimeQCPSetCursorKey(double key)
+void MainWindow::realTimeQcpSetCursorKey(double key)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    ui->realTimeQCPU->setCursorKey(key, _sender);
-    ui->realTimeQCPI->setCursorKey(key, _sender);
-    ui->realTimeQCPTemperature->setCursorKey(key, _sender);
-    ui->realTimeQCPPower->setCursorKey(key, _sender);
-    ui->realTimeQCPPersent->setCursorKey(key, _sender);
-    ui->realTimeQCPBool->setCursorKey(key, _sender);
-    ui->realTimeQCPVacuum->setCursorKey(key, _sender);
-    ui->realTimeQCPRadiation->setCursorKey(key, _sender);
+    ui->realTimeQcpU->setCursorKey(key, _sender);
+    ui->realTimeQcpI->setCursorKey(key, _sender);
+    ui->realTimeQcpTemperature->setCursorKey(key, _sender);
+    ui->realTimeQcpPower->setCursorKey(key, _sender);
+    ui->realTimeQcpPersent->setCursorKey(key, _sender);
+    ui->realTimeQcpBool->setCursorKey(key, _sender);
+    ui->realTimeQcpVacuum->setCursorKey(key, _sender);
+    ui->realTimeQcpRadiation->setCursorKey(key, _sender);
 
 }
 
-void MainWindow::realTimeQCPSetRealTime(bool newValue)
+void MainWindow::realTimeQcpSetRealTime(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    ui->realTimeQCPU->setRealTime(newValue, _sender);
-    ui->realTimeQCPI->setRealTime(newValue, _sender);
-    ui->realTimeQCPTemperature->setRealTime(newValue, _sender);
-    ui->realTimeQCPPower->setRealTime(newValue, _sender);
-    ui->realTimeQCPPersent->setRealTime(newValue, _sender);
-    ui->realTimeQCPBool->setRealTime(newValue, _sender);
-    ui->realTimeQCPVacuum->setRealTime(newValue, _sender);
-    ui->realTimeQCPRadiation->setRealTime(newValue, _sender);
+    ui->realTimeQcpU->setRealTime(newValue, _sender);
+    ui->realTimeQcpI->setRealTime(newValue, _sender);
+    ui->realTimeQcpTemperature->setRealTime(newValue, _sender);
+    ui->realTimeQcpPower->setRealTime(newValue, _sender);
+    ui->realTimeQcpPersent->setRealTime(newValue, _sender);
+    ui->realTimeQcpBool->setRealTime(newValue, _sender);
+    ui->realTimeQcpVacuum->setRealTime(newValue, _sender);
+    ui->realTimeQcpRadiation->setRealTime(newValue, _sender);
 
 }
 
-void MainWindow::realTimeQCPSetMoveLineRealTime(bool newValue)
+void MainWindow::realTimeQcpSetMoveLineRealTime(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    ui->realTimeQCPU->setMoveLineRealTime(newValue, _sender);
-    ui->realTimeQCPI->setMoveLineRealTime(newValue, _sender);
-    ui->realTimeQCPTemperature->setMoveLineRealTime(newValue, _sender);
-    ui->realTimeQCPPower->setMoveLineRealTime(newValue, _sender);
-    ui->realTimeQCPPersent->setMoveLineRealTime(newValue, _sender);
-    ui->realTimeQCPBool->setMoveLineRealTime(newValue, _sender);
-    ui->realTimeQCPVacuum->setMoveLineRealTime(newValue, _sender);
-    ui->realTimeQCPRadiation->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpU->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpI->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpTemperature->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpPower->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpPersent->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpBool->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpVacuum->setMoveLineRealTime(newValue, _sender);
+    ui->realTimeQcpRadiation->setMoveLineRealTime(newValue, _sender);
 
 }
 
-void MainWindow::realTimeQCPSetCursor2Visible(bool newValue)
+void MainWindow::realTimeQcpSetCursor2Visible(bool newValue)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    ui->realTimeQCPU->setCursor2Visible(newValue, _sender);
-    ui->realTimeQCPI->setCursor2Visible(newValue, _sender);
-    ui->realTimeQCPTemperature->setCursor2Visible(newValue, _sender);
-    ui->realTimeQCPPower->setCursor2Visible(newValue, _sender);
-    ui->realTimeQCPPersent->setCursor2Visible(newValue, _sender);
-    ui->realTimeQCPBool->setCursor2Visible(newValue, _sender);
-    ui->realTimeQCPVacuum->setCursor2Visible(newValue, _sender);
-    ui->realTimeQCPRadiation->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpU->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpI->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpTemperature->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpPower->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpPersent->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpBool->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpVacuum->setCursor2Visible(newValue, _sender);
+    ui->realTimeQcpRadiation->setCursor2Visible(newValue, _sender);
 }
 
-void MainWindow::realTimeQCPSetCursor2Key(double key)
+void MainWindow::realTimeQcpSetCursor2Key(double key)
 {
     auto _sender = dynamic_cast<RealTimeQCP *>(sender());
 
-    ui->realTimeQCPU->setCursor2Key(key, _sender);
-    ui->realTimeQCPI->setCursor2Key(key, _sender);
-    ui->realTimeQCPTemperature->setCursor2Key(key, _sender);
-    ui->realTimeQCPPower->setCursor2Key(key, _sender);
-    ui->realTimeQCPPersent->setCursor2Key(key, _sender);
-    ui->realTimeQCPBool->setCursor2Key(key, _sender);
-    ui->realTimeQCPVacuum->setCursor2Key(key, _sender);
-    ui->realTimeQCPRadiation->setCursor2Key(key, _sender);
+    ui->realTimeQcpU->setCursor2Key(key, _sender);
+    ui->realTimeQcpI->setCursor2Key(key, _sender);
+    ui->realTimeQcpTemperature->setCursor2Key(key, _sender);
+    ui->realTimeQcpPower->setCursor2Key(key, _sender);
+    ui->realTimeQcpPersent->setCursor2Key(key, _sender);
+    ui->realTimeQcpBool->setCursor2Key(key, _sender);
+    ui->realTimeQcpVacuum->setCursor2Key(key, _sender);
+    ui->realTimeQcpRadiation->setCursor2Key(key, _sender);
 }
 
-void MainWindow::timerRealTimeQCPReplotTimeout()
+void MainWindow::timerrealTimeQcpReplotTimeout()
 {
-    ui->realTimeQCPU->moveTimeAxisRealTime();
+    ui->realTimeQcpU->moveTimeAxisRealTime();
 }
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)

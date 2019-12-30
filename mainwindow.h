@@ -44,7 +44,7 @@ private:
     int addData2MSEC = 1000;
 
 
-    QTimer *timerAddData1, *timerAddData2, *timerRealTimeQCPReplot;
+    QTimer *timerAddData1, *timerAddData2, *timerrealTimeQcpReplot;
 
     Graph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt;
     Graph *graphTemperaturePyrometer;
@@ -81,13 +81,13 @@ private slots:
     void addData1();
     void addData2();
 
-    void realTimeQCPSetTimeAxisRange(QCPRange range);
-    void realTimeQCPSetCursorKey(double key);
-    void realTimeQCPSetRealTime(bool newValue);
-    void realTimeQCPSetMoveLineRealTime(bool newValue);
-    void realTimeQCPSetCursor2Visible(bool newValue);
-    void realTimeQCPSetCursor2Key(double key);
-    void timerRealTimeQCPReplotTimeout();
+    void realTimeQcpSetTimeAxisRange(QCPRange range);
+    void realTimeQcpSetCursorKey(double key);
+    void realTimeQcpSetRealTime(bool newValue);
+    void realTimeQcpSetMoveLineRealTime(bool newValue);
+    void realTimeQcpSetCursor2Visible(bool newValue);
+    void realTimeQcpSetCursor2Key(double key);
+    void timerrealTimeQcpReplotTimeout();
 
     void plotLineRealTimeMoved();
     void on_horizontalSlider_valueChanged(int value);
