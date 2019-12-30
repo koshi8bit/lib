@@ -38,8 +38,6 @@ bool RealTimeQCP::realTime() const
 
 void RealTimeQCP::configurePlot()
 {
-
-
     //WARNING dublicate configureAxesZoomAndDrag??
     plot()->setInteraction(QCP::iRangeZoom, true);
     plot()->setInteraction(QCP::iRangeDrag, true);
