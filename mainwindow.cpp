@@ -118,7 +118,6 @@ void MainWindow::configureTimers()
 
     timerrealTimeQcpReplot = new QTimer(this);
     timerrealTimeQcpReplot->setInterval(plotUpdateIntervalMSEC);
-    //connect(timerrealTimeQcpReplot, SIGNAL(timeout()), this, SLOT(timerrealTimeQcpReplotTimeout()));
     connect(timerrealTimeQcpReplot, &QTimer::timeout, ui->realTimeQcpU, &RealTimeQCP::moveTimeAxisRealTime);
     timerrealTimeQcpReplot->start();
 }
@@ -359,10 +358,6 @@ void MainWindow::realTimeQcpSetCursor2Key(double key)
     ui->realTimeQcpRadiation->setCursor2Key(key, _sender);
 }
 
-void MainWindow::timerrealTimeQcpReplotTimeout()
-{
-    ui->realTimeQcpU->moveTimeAxisRealTime();
-}
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {

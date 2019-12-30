@@ -87,7 +87,6 @@ private slots:
     void realTimeQcpSetMoveLineRealTime(bool newValue);
     void realTimeQcpSetCursor2Visible(bool newValue);
     void realTimeQcpSetCursor2Key(double key);
-    void timerrealTimeQcpReplotTimeout();
 
     void plotLineRealTimeMoved();
     void on_horizontalSlider_valueChanged(int value);
