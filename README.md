@@ -17,8 +17,6 @@ INCLUDEPATH += ./
 * In project area click on *projectName* -> *Add existing directory* and select *lib* folder
 * Fin. You are perfect!
 
-*This steps not tested yet*
-
 # Most common classes and methods:
 
 ## UI
