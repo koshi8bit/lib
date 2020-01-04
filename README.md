@@ -56,7 +56,8 @@ This widget allow to display and set values in **scientific notation**. See exam
 
 ### ValueDouble
 
-This widget allow to display and set double values. This widget have *set value* field, *Set* button (Enter also works), *get value*. In picture first is with setter fields, and in second picture are only display fields
+This widget allow to display and set double values. This widget have *set value* field, *Set* button (Enter also works), *get value*.
+In picture first is with setter fields, and in second picture are only display fields
 
 ![RealTimeQCP](readme-pic/valuedouble01.png)
 
