@@ -66,12 +66,12 @@ In picture first is with setter fields, and in second picture are only display f
 ### Channel \<Templated\>
 
 This class allow to make any type of cahnnels (double, bool, int and ect.) with this basic fields:
-* plotName
-* widgetName
+* value (any type)
+* postfix (usually physical value)
 * color
-* postfix (physical value)
 * logName
-* value
+* widgetName
+* plotName
 
 ### ChannelDouble 
 * addGraphToPlot (easely works with *RealTimeQCP*)
