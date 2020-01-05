@@ -34,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [](double a) { qDebug() << a; });
 
+    qDebug() << "writeToFile" << EasyLiving::writeToFile("D:/123-.txt", "sup bro\nsup buddy", false);
+
 
 
     eh.checkForErrors();

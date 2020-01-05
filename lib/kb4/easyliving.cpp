@@ -221,6 +221,25 @@ bool EasyLiving::createDir(QString path)
     return dir.exists();
 }
 
+bool EasyLiving::writeToFile(QString path, QString text, bool append)
+{
+    QFile file(path);
+    QIODevice::OpenMode flags = QIODevice::WriteOnly;
+    if (append) {
+        flags |= QIODevice::Append;
+    }
+
+    if (file.open(flags)) {
+        QTextStream stream(&file);
+        stream << text;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 QString EasyLiving::formatWindowTitle(QString text)
 {
     return QString("%1 /// Alexey K. AKA koshi8bit").arg(text);
