@@ -221,7 +221,7 @@ bool EasyLiving::createDir(QString path)
     return dir.exists();
 }
 
-bool EasyLiving::writeToFile(QString path, QString text, bool append)
+bool EasyLiving::writeFile(QString path, QString text, bool append)
 {
     QFile file(path);
     QIODevice::OpenMode flags = QIODevice::WriteOnly;
@@ -238,6 +238,24 @@ bool EasyLiving::writeToFile(QString path, QString text, bool append)
     {
         return false;
     }
+}
+
+QString EasyLiving::readFile(QString path)
+{
+    QFile file(path);
+
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        qCritical() << EL_FORMAT_ERR("error opening file: ") << file.error();
+        return "";
+    }
+
+    QTextStream instream(&file);
+    QString line = instream.readAll();
+
+    file.close();
+    return line;
+
 }
 
 QString EasyLiving::formatWindowTitle(QString text)

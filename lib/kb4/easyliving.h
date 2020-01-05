@@ -88,7 +88,8 @@ public:
 
     //files
     static bool createDir(QString path);
-    static bool writeToFile(QString path, QString text, bool append = false);
+    static bool writeFile(QString path, QString text, bool append = false);
+    static QString readFile(QString path);
 
     //ui
     static QString formatWindowTitle(QString text);
