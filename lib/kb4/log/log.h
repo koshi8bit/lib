@@ -30,11 +30,11 @@ private:
 
     QTimer *timerCommit;
     QTimer *timerPush;
-    QThread *thread;
 
 
 protected:
     QList<Channel *> channels;
+    QThread *thread;
 
     virtual void finishConfigureChild() = 0;
 

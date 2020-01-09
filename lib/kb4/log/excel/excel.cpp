@@ -24,11 +24,11 @@ void Excel::configure(QString path, HeaderMode headerMode)
     auto _path = QDir(path);
     auto date = QDateTime::currentDateTime();
 
-    currentDay = new ExcelFile();
+    currentDay = new ExcelFile(thread);
     connect(currentDay, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
     currentDay->configure(date, EasyLiving::formatDateFile(), _path.filePath(".days"));
 
-    currentSession = new ExcelFile();
+    currentSession = new ExcelFile(thread);
     connect(currentSession, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
     currentSession->configure(date, EasyLiving::formatDateTimeFile(), _path.filePath(".sessions"));
 
@@ -65,7 +65,7 @@ void Excel::generateHeaderLine(Excel::HeaderModeFlag flag)
 
     foreach (auto channel, channels)
     {
-
+        //BUG? may be need to use testFlag?
         if (flag == Excel::HeaderModeFlag::LogName)
             line.append(channel->logName());
 
