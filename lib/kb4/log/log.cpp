@@ -1,6 +1,6 @@
 #include "log.h"
 
-Log::Log(QObject *parent)
+Log::Log(QObject *parent) : QObject(parent)
 {
     timerCommit = new QTimer;
     timerCommit->setInterval(intervalCommitMSEC);

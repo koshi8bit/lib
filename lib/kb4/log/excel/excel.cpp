@@ -24,11 +24,11 @@ void Excel::configure(QString path, HeaderMode headerMode)
     auto _path = QDir(path);
     auto date = QDateTime::currentDateTime();
 
-    currentDay = new ExcelFile(this);
+    currentDay = new ExcelFile();
     connect(currentDay, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
     currentDay->configure(date, EasyLiving::formatDateFile(), _path.filePath(".days"));
 
-    currentSession = new ExcelFile(this);
+    currentSession = new ExcelFile();
     connect(currentSession, &ExcelFile::errorOcurred, this, &Excel::errorOcurred);
     currentSession->configure(date, EasyLiving::formatDateTimeFile(), _path.filePath(".sessions"));
 

@@ -1,11 +1,11 @@
 #include "worker.h"
 
 
-Worker::Worker(QString name)
-    :QObject()
+Worker::Worker(QString name, QObject *parent)
+    :QObject(parent)
 {
     this->name = name;
-    thread = new QThread();
+    thread = new QThread(parent);
     this->moveToThread(thread);
 
 }
