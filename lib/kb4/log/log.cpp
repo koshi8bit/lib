@@ -1,6 +1,6 @@
 #include "log.h"
 
-Log::Log(QObject *parent) : QObject(parent)
+Log::Log(QObject *parent)
 {
     timerCommit = new QTimer;
     timerCommit->setInterval(intervalCommitMSEC);
@@ -10,7 +10,7 @@ Log::Log(QObject *parent) : QObject(parent)
     timerPush->setInterval(intervalPushSEC*1000);
     connect(timerPush, &QTimer::timeout, this, &Log::timeoutPush, Qt::ConnectionType::QueuedConnection);
 
-    thread = new QThread;
+    thread = new QThread(parent);
     this->moveToThread(thread);
     thread->start();
 }

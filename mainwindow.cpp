@@ -34,8 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [](double a) { qDebug() << a; });
 
-    qDebug() << "writeFile" << EasyLiving::writeFile("D:/123-.txt", "sup bro\nsup buddy", false);
-    qDebug() << "readFile" << EasyLiving::readFile("D:/123-.txt");
+//    qDebug() << "writeFile" << EasyLiving::writeFile("D:/123-.txt", "sup bro\nsup buddy", false);
+//    qDebug() << "readFile" << EasyLiving::readFile("D:/123-.txt");
 
 
 
@@ -78,7 +78,7 @@ void MainWindow::configureExcelLog()
     c = new ChannelDouble("ЭЛВ/EnergyU get", this);
     //FIXME !tima45!
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
-    connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
+    //connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));
     c->setValue(3.009);
     excelLog->addChannel(c);
 
@@ -92,7 +92,7 @@ void MainWindow::configureExcelLog()
 
 void MainWindow::configureWorker()
 {
-    w = new Worker("test", this);
+    w = new Worker("test");
     w->heavyWork = [this]() { this->heavyWork();};
     w->start();
 }
