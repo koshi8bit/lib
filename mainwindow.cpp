@@ -56,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     simpleLog = new SimpleLog("log.txt", true, this);
     simpleLog->append("afds");
+    simpleLog->append("agg");
     //simpleLog << "1";
     //sl << "asd";
 

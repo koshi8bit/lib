@@ -25,14 +25,23 @@ SimpleLog::~SimpleLog()
     file->deleteLater();
 }
 
-void SimpleLog::append(QString message)
+void SimpleLog::append(QString message, bool critical)
 {
     auto formattedMessage = QString("%1 %2\n")
             .arg(QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeUi(true)))
             .arg(message);
 
-    qDebug() << message;
-    stream << formattedMessage;
+    if (critical)
+    {
+        qDebug() << message;
+    }
+    else
+    {
+        qCritical() << message;
+    }
+
+
+    stream.flush();
 }
 
 

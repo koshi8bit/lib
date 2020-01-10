@@ -22,7 +22,7 @@ public:
     ~SimpleLog();
     QTextStream stream;
 
-    void append(QString message);
+    void append(QString message, bool critical = false);
 
 private:
     QFile *file;
