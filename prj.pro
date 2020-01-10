@@ -62,6 +62,7 @@ HEADERS += \
     lib/kb4/log/excel/excelfile.h \
     lib/kb4/log/excel/timelog/timelog.h \
     lib/kb4/log/log.h \
+    lib/kb4/log/simple/simplelog.h \
     lib/kb4/log/sql/sql.h \
     lib/kb4/qdebuglogger/qdebuglogger.h \
     lib/kb4/shared-variable/tcp/netvars.h \
@@ -95,6 +96,7 @@ SOURCES += \
     lib/kb4/log/excel/excelfile.cpp \
     lib/kb4/log/excel/timelog/timelog.cpp \
     lib/kb4/log/log.cpp \
+    lib/kb4/log/simple/simplelog.cpp \
     lib/kb4/log/sql/sql.cpp \
     lib/kb4/qdebuglogger/qdebuglogger.cpp \
     lib/kb4/shared-variable/tcp/netvars/initnvclient.cpp \

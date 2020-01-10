@@ -54,6 +54,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    qDebug() << t3;
 
+    simpleLog = new SimpleLog("log.txt", true, this);
+    simpleLog->append("afds");
+    //simpleLog << "1";
+    //sl << "asd";
+
 }
 
 

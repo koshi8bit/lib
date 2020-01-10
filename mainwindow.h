@@ -19,6 +19,7 @@
 #include <lib/kb4/errorhandler/errorhandler.h>
 #include <lib/kb4/qdebuglogger/qdebuglogger.h>
 #include <lib/kb4/worker/worker.h>
+#include <lib/kb4/log/simple/simplelog.h>
 
 namespace Ui {
 class MainWindow;
@@ -60,6 +61,7 @@ private:
     ChannelDouble *a, *b, *c;
 
     QSettings *settings;
+    SimpleLog *simpleLog;
 
 
     void configureRealTimeQcpPlot();

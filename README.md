@@ -11,7 +11,7 @@ This lib is tested in Qt 5.14.0 and Qt Creator 4.11.0
 * Add *lib* folder to your project
 * Add in .pro file this lines
 ```
-QT       += printsupport network
+QT += printsupport network
 INCLUDEPATH += ./
 ```
 * In project area click on *projectName* -> *Add existing directory* and select *lib* folder
