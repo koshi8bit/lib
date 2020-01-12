@@ -13,7 +13,7 @@ public:
 
     }
     TypeName value(){
-        return this->_value.value<TypeName>();
+        return this->_value.template value<TypeName>();
     }
     void setValue(TypeName val){
         this->_value.setValue(val);
