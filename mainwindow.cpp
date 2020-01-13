@@ -57,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
     simpleLog = new SimpleLog("log.txt", true, this);
     simpleLog->append("afds");
     simpleLog->append("agg");
+    EasyLiving::writeFile("1.txt", "aaaaaa");
     //simpleLog << "1";
     //sl << "asd";
 

@@ -40,7 +40,7 @@ void SimpleLog::append(QString message, bool critical)
         qCritical() << message;
     }
 
-
+    stream << formattedMessage;
     stream.flush();
 }
 

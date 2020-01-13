@@ -77,7 +77,9 @@ void InitNVClient::connectToServer()
 {
     tcpclient->abort();
     tcpclient->connectToHost(serverIp,serverPort);
+#ifdef K8B_LIB_SV_SHOW_DEBUG
     nvDebug << "Connecting to" << serverIp << serverPort;
+#endif
 }
 
 void InitNVClient::readFullMessage()
