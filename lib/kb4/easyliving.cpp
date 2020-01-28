@@ -1,21 +1,32 @@
 #include "easyliving.h"
 
+QLocale EasyLiving::localeMy = QLocale(QLocale::Russian);
+
 EasyLiving::EasyLiving()
 {
-
+    //THIS IS NOT STATIC CONSTRUCTOR
+    //localeMy.setNumberOptions(QLocale::OmitGroupSeparator);
 }
 
 
 
 //double
-QString EasyLiving::formatDouble(double value, int precision, bool scientificNotation, EasyLiving::DoubleSeporatorSign seporatorSign)
+QString EasyLiving::formatDouble(double value, int precision, bool scientificNotation, EasyLiving::DoubleSeporatorSign seporatorSign, bool showGroupSeparator)
 {
     char _format= scientificNotation ? 'e' : 'f';
 
     switch (seporatorSign)
     {
         case DoubleSeporatorSign::Comma:
-            return QLocale(QLocale::Russian).toString(value, _format, precision);
+            if (showGroupSeparator)
+            {
+                return QLocale(QLocale::Russian).toString(value, _format, precision);
+            }
+            else
+            {
+                localeMy.setNumberOptions(QLocale::OmitGroupSeparator);
+                return localeMy.toString(value, _format, precision);
+            }
 
         case DoubleSeporatorSign::Point:
             return QString::number(value, _format, precision);
@@ -111,6 +122,11 @@ QString EasyLiving::postfixVolt()
     return tr("В");
 }
 
+QString EasyLiving::postfixVoltEn()
+{
+    return tr("V");
+}
+
 QString EasyLiving::postfixEnergy()
 {
     return tr("Эв");
@@ -204,6 +220,11 @@ QString EasyLiving::postfixMilliAmpereEn()
 QString EasyLiving::postfixKiloVolt()
 {
     return EasyLiving::postfixKilo() + EasyLiving::postfixVolt();
+}
+
+QString EasyLiving::postfixKiloVoltEn()
+{
+    return postfixKiloEn() + postfixVoltEn();
 }
 
 bool EasyLiving::isChecked(int arg1)

@@ -120,11 +120,11 @@ QString Excel::formatDoubleValue(double value)
 
     if ((0.001 < value) && (value < 2000))
     {
-        return  EasyLiving::formatDouble(value);
+        return  EasyLiving::formatDouble(value, 3, true, EasyLiving::Comma, false);
     }
     else
     {
-        return  EasyLiving::formatDouble(value, 3, true);
+        return  EasyLiving::formatDouble(value, 3, true, EasyLiving::Comma, false);
     }
 }
 

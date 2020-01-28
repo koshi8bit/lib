@@ -33,7 +33,9 @@ public:
     EasyLiving();
 
     //double
-    static QString formatDouble(double value, int precision = 3, bool scientificNotation = false, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
+    static QLocale localeMy;
+    //fixme double value, int precision = 3, bool scientificNotation = false, bool showGroupSeparator = false, bool seporatorPoint = false)
+    static QString formatDouble(double value, int precision = 3, bool scientificNotation = false, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma, bool showGroupSeparator = true);
     static bool isBetween(double value, double min, double max);
     static bool isEqualDouble(double a, double b);
 
@@ -81,6 +83,7 @@ public:
     static QString postfixMilliAmpere();
     static QString postfixMilliAmpereEn();
     static QString postfixKiloVolt();
+    static QString postfixKiloVoltEn();
 
 
     //bool

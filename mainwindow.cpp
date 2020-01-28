@@ -41,10 +41,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     eh.checkForErrors();
 
-//    auto a = QLocale(QLocale::Russian);
-//    qDebug() << "Разделитель тчк/зпт" << a.decimalPoint();
-//    qDebug() << "Разделитель группы" << QString(a.groupSeparator());
-//    qDebug() << QString::number(1300.2, 'f', 2);
+    auto a = QLocale(QLocale::Russian);
+    qDebug() << "Разделитель тчк/зпт" << a.decimalPoint();
+    qDebug() << "Разделитель группы" << QString(a.groupSeparator());
+    //qDebug() << QString::number(1300.2, 'f', 2);
+    a.setNumberOptions(QLocale::OmitGroupSeparator);
+    qDebug() << a.toString(1300.2, 'f', 2);
+
 
 //    QTime t1(15, 23, 16);
 //    QTime t2(12, 11, 02);
@@ -57,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent) :
     simpleLog = new SimpleLog("log.txt", true, this);
     simpleLog->append("afds");
     simpleLog->append("agg");
+
     EasyLiving::writeFile("1.txt", "aaaaaa");
     //simpleLog << "1";
     //sl << "asd";
