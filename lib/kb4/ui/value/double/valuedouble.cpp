@@ -39,9 +39,43 @@ void ValueDouble::configure(QString name, QString postfix, int precision, bool h
 
 }
 
-void ValueDouble::configure(ChannelDouble *channel, bool hideSetWidget, int fontSize)
+void ValueDouble::configure(ChannelDouble *channel, bool hideSetWidget, int fontSize, bool connectSlot)
 {
+    if (connectSlot)
+    {
+        connect(channel, &ChannelDouble::valueChangedDouble, this, &ValueDouble::setValue);
+    }
+
     configure(channel->widgetName(), channel->postfix(), channel->precision(), hideSetWidget, channel->scientificNotation(), fontSize);
+}
+
+
+void ValueDouble::setFontSize(int newValue)
+{
+    _setFontSize(ui->labelNameAndPostfix, newValue);
+    _setFontSize(ui->lineEditValueGet, newValue);
+    _setFontSize(ui->doubleSpinBoxValueSet, newValue);
+    _setFontSize(ui->pushButtonSet, newValue);
+
+    if (newValue == 30)
+    {
+        this->setMinimumHeight(71);
+    }
+
+    if (newValue == 25)
+    {
+        this->setMinimumHeight(62);
+    }
+
+    if (newValue == 14)
+    {
+        this->setMinimumHeight(36);
+    }
+
+    if (newValue == 8)
+    {
+        this->setMinimumHeight(38);
+    }
 }
 
 void ValueDouble::setMaxWidth()
@@ -96,29 +130,6 @@ int ValueDouble::precision() const
 void ValueDouble::setPrecision(int precision)
 {
     _precision = precision;
-}
-
-void ValueDouble::setFontSize(int newValue)
-{
-    _setFontSize(ui->labelNameAndPostfix, newValue);
-    _setFontSize(ui->lineEditValueGet, newValue);
-    _setFontSize(ui->doubleSpinBoxValueSet, newValue);
-    _setFontSize(ui->pushButtonSet, newValue);
-
-    if (newValue == 30)
-    {
-        this->setMinimumHeight(71);
-    }
-
-    if (newValue == 25)
-    {
-        this->setMinimumHeight(62);
-    }
-
-    if (newValue == 8)
-    {
-        this->setMinimumHeight(38);
-    }
 }
 
 void ValueDouble::setNameAndPostfix(QString name, QString postfix)
