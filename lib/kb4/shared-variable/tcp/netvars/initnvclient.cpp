@@ -149,7 +149,9 @@ void InitNVClient::stopAutoReconnect()
 
 void InitNVClient::onConnect()
 {
+    #ifndef K8B_LIB_SV_HIDE_MESSAGES
     nvDebug << "Connected.";
+#endif
     emit connected();
     emit connectionChanged(true);
 }

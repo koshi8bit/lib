@@ -36,7 +36,9 @@ void VarsContainer::updateLocalVar(QString name, QVariant value)
 {
     int id = localVarsIdByName(name);
     if(id == -1){
+#ifndef K8B_LIB_SV_HIDE_MESSAGES
         nvDebug << "update an unknown variable" << name;
+#endif
         return;
     }
     localVars.at(id)->updateNewValue(value);

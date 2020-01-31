@@ -129,7 +129,7 @@ QString EasyLiving::postfixVoltEn()
 
 QString EasyLiving::postfixEnergy()
 {
-    return tr("Эв");
+    return tr("эВ");
 }
 
 QString EasyLiving::postfixEnergyEn()

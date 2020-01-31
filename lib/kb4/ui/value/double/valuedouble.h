@@ -23,11 +23,15 @@ public:
     void configure(ChannelDouble *channel, bool hideSetWidget = true, int fontSize = 10, bool connectSlot = true);
     void setRangeSetter(double min, double max);
 
+    QString name() const;
+    void setName(const QString &name);
     int precision() const;
     void setPrecision(int precision);
+    double value() const;
 
     bool scientificNotation() const;
     void setScientificNotation(bool scientificNotation);
+
 
     void setNameAndPostfix(QString name, QString postfix);
     void setFontSize(int newValue);
@@ -40,9 +44,13 @@ public:
 
 
 
+
+
 private:
     int _precision;
     bool _scientificNotation;
+    double _value;
+    QString _name;
     Ui::ValueDouble *ui;
     void _setFontSize(QWidget *widget, int newValue);
 
@@ -52,6 +60,7 @@ private:
     
 signals:
     void valueChanged(double newValue);
+    void valueCopyedToClipboard(QString newValue, QString message);
 
 
 public slots:
@@ -59,6 +68,10 @@ public slots:
 private slots:
     void on_pushButtonSet_clicked();
     void on_doubleSpinBoxValueSet_editingFinished();
+
+    // QWidget interface
+protected:
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
 };
 
 #endif // VALUEDOUBLE_H

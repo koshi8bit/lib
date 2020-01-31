@@ -60,7 +60,7 @@ public:
     void configureSharedVariable(bool enableWriteFromNet = false)
     {
         sharedVariable = new NetVar<T>(logName());
-#ifdef K8B_LIB_CHANNELS_SHOW_CREATED
+#ifdef K8B_LIB_CHANNELS_SHOW_SV_CREATED
         qDebug() << "sharedVariable" << logName() << "created";
 #endif
         setSharedVariableEnableWriteFromNet(enableWriteFromNet);
