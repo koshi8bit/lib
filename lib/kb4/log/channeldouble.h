@@ -21,7 +21,7 @@ public:
 
 //    ChannelDouble(QString name, QString postfix, QStringList &prefix, QObject *parent = nullptr);
 //    ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
-    void addGraphToPlot(RealTimeQCP *plot);
+    void addGraphToPlot(RealTimeQCP *plot, bool visible=true);
 
     bool scientificNotation();
     void setScientificNotation(bool newValue);

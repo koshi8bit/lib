@@ -18,9 +18,12 @@ ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
     configure();
 }
 
-void ChannelDouble::addGraphToPlot(RealTimeQCP *plot)
+void ChannelDouble::addGraphToPlot(RealTimeQCP *plot, bool visible)
 {
-    this->graph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
+    graph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
+    graph->setVisible(visible);
+    if (color().isValid())
+        graph->setColor(color());
 }
 
 bool ChannelDouble::scientificNotation()
