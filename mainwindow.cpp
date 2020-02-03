@@ -77,16 +77,16 @@ void MainWindow::configureExcelLog()
     ///////
 
 
-    a = new ChannelDouble("AAA", EasyLiving::postfixCelsius(), this);
-    connect(ui->dialA, &QDial::valueChanged, a, &ChannelDouble::setValue);
+    a = new ChannelBool("AAA", EasyLiving::postfixCelsius(), this);
+    connect(ui->dialA, &QDial::valueChanged, a, &ChannelBool::setValue);
     a->addGraphToPlot(ui->realTimeQcpPower);
     excelLog->addChannel(a);
 
-    b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), QStringList() << "b/middle2", this);
-    connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
+    b = new ChannelBool("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), QStringList() << "b/middle2", this);
+    connect(ui->dialB, &QDial::valueChanged, b, &ChannelBool::setValue);
     excelLog->addChannel(b);
 
-    c = new ChannelDouble("ЭЛВ/EnergyU get", this);
+    c = new ChannelBool("ЭЛВ/EnergyU get", this);
     //FIXME !tima45!
     //connect(ui->doubleSpinBoxC, &QDoubleSpinBox::valueChanged, c, &ChannelDouble::setValue);
     //connect(ui->doubleSpinBoxC, SIGNAL(valueChanged(double)), c, SLOT(setValue(double)));

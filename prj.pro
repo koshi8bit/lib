@@ -55,6 +55,7 @@ HEADERS += \
     lib/kb4/easyliving.h \
     lib/kb4/errorhandler/errorhandler.h \
     lib/kb4/log/channel.h \
+    lib/kb4/log/channelbool.h \
     lib/kb4/log/channeldouble.h \
     lib/kb4/log/channelt.h \
     lib/kb4/log/excel/excel.cpp.orig \
@@ -91,6 +92,7 @@ SOURCES += \
     lib/kb4/easyliving.cpp \
     lib/kb4/errorhandler/errorhandler.cpp \
     lib/kb4/log/channel.cpp \
+    lib/kb4/log/channelbool.cpp \
     lib/kb4/log/channeldouble.cpp \
     lib/kb4/log/excel/excel.cpp \
     lib/kb4/log/excel/excelfile.cpp \

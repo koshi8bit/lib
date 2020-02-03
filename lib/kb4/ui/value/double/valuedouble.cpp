@@ -39,11 +39,11 @@ void ValueDouble::configure(QString name, QString postfix, int precision, bool h
 
 }
 
-void ValueDouble::configure(ChannelDouble *channel, bool hideSetWidget, int fontSize, bool connectSlot)
+void ValueDouble::configure(ChannelBool *channel, bool hideSetWidget, int fontSize, bool connectSlot)
 {
     if (connectSlot)
     {
-        connect(channel, &ChannelDouble::valueChangedDouble, this, &ValueDouble::setValue);
+        connect(channel, &ChannelBool::valueChangedDouble, this, &ValueDouble::setValue);
     }
 
     configure(channel->widgetName(), channel->postfix(), channel->precision(), hideSetWidget, channel->scientificNotation(), fontSize);
