@@ -78,6 +78,10 @@ private:
     Worker *w;
     void configureWorker();
     void heavyWork();
+
+public slots:
+    void valueDoubleCopyedToClipboard(QString newValue, QString message);
+
     
 private slots:
     void addData1();

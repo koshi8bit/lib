@@ -25,13 +25,14 @@ public:
 
     QString name() const;
     void setName(const QString &name);
+
     int precision() const;
     void setPrecision(int precision);
-    double value() const;
 
     bool scientificNotation() const;
     void setScientificNotation(bool scientificNotation);
 
+    double value() const;
 
     void setNameAndPostfix(QString name, QString postfix);
     void setFontSize(int newValue);
@@ -65,6 +66,7 @@ signals:
 
 public slots:
     void setValue(double newValue);
+
 private slots:
     void on_pushButtonSet_clicked();
     void on_doubleSpinBoxValueSet_editingFinished();

@@ -77,6 +77,7 @@ HEADERS += \
     lib/kb4/shared-variable/udp/shared-variable.h \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \
     lib/kb4/ui/gradientlineedit/minmax.h \
+    lib/kb4/ui/label/qlabelext.h \
     lib/kb4/ui/realtimeqcp/axisconfig.h \
     lib/kb4/ui/realtimeqcp/colorsetter.h \
     lib/kb4/ui/realtimeqcp/graph.h \
@@ -110,6 +111,7 @@ SOURCES += \
     lib/kb4/shared-variable/udp/shared-variable.cpp \
     lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
     lib/kb4/ui/gradientlineedit/minmax.cpp \
+    lib/kb4/ui/label/qlabelext.cpp \
     lib/kb4/ui/realtimeqcp/axisconfig.cpp \
     lib/kb4/ui/realtimeqcp/colorsetter.cpp \
     lib/kb4/ui/realtimeqcp/graph.cpp \

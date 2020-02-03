@@ -188,11 +188,10 @@ void ValueDouble::mouseDoubleClickEvent(QMouseEvent *event)
     QClipboard *clipboard = QApplication::clipboard();
     auto valueStr = EasyLiving::formatDouble(value(), _precision, _scientificNotation);
 
-    auto tmp = ui->lineEditValueGet->text();
+    auto tmp = EasyLiving::formatDouble(value(), 3, scientificNotation());
     clipboard->setText(tmp);
+    emit valueCopyedToClipboard(tmp, QString("Значение '%1' скопировано в буфер обмена (%2)").arg(name()).arg(tmp));
 
     QWidget::mouseDoubleClickEvent(event);
-
-    emit valueCopyedToClipboard(tmp, QString("Значение '%1' скопировано в буфер обмена (%2)").arg(name()).arg(tmp));
 
 }

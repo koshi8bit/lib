@@ -25,10 +25,12 @@ MainWindow::MainWindow(QWidget *parent) :
     configureWorker();
 
     ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpere());
+    connect(ui->valuedoubleTest, &ValueDouble::valueCopyedToClipboard, this, &MainWindow::valueDoubleCopyedToClipboard);
     ui->valuedoubleTest->setValue(8.7);
 
-    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpere(), 1, false, true);
-    ui->valuedoubleTest_2->setValue(8.7);
+    ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpere(), 2, false, true);
+    connect(ui->valuedoubleTest_2, &ValueDouble::valueCopyedToClipboard, this, &MainWindow::valueDoubleCopyedToClipboard);
+    ui->valuedoubleTest_2->setValue(8.7654);
 
 
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
@@ -111,6 +113,12 @@ void MainWindow::configureWorker()
 void MainWindow::heavyWork()
 {
     qDebug() << "heavyWork";
+}
+
+void MainWindow::valueDoubleCopyedToClipboard(QString newValue, QString message)
+{
+    Q_UNUSED(newValue)
+    ui->statusBar->showMessage(message, 5000);
 }
 
 void MainWindow::configureTimers()
