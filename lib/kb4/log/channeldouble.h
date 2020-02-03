@@ -35,8 +35,10 @@ public:
     void setToRawFunc(std::function<double(double)> f);
     double rawValue();
 
+    Graph *graph() const;
+
 private:
-    Graph *graph = nullptr;
+    Graph *_graph = nullptr;
     int _precision;
     bool _scientificNotation = false;
 
