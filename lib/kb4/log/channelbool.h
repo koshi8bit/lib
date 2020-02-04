@@ -1,5 +1,5 @@
-#ifndef CHANNELDOUBLE_H
-#define CHANNELDOUBLE_H
+#ifndef CHANNELBOOL_H
+#define CHANNELBOOL_H
 
 #include "channelt.h"
 
@@ -31,4 +31,4 @@ protected:
 private slots:
 };
 
-#endif // CHANNELDOUBLE_H
+#endif // CHANNELBOOL_H
