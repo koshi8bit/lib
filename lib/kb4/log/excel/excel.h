@@ -25,7 +25,7 @@ public:
     };
     Q_DECLARE_FLAGS(HeaderMode, HeaderModeFlag)
 
-    Excel(QObject *parent = nullptr);
+    Excel();
     ~Excel();
 
     void configure(QString path, HeaderMode headerMode);

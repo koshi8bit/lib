@@ -1,7 +1,7 @@
 #include "timelog.h"
 
-TimeLog::TimeLog(QObject *parent)
-    : Excel(parent)
+TimeLog::TimeLog()
+    : Excel()
 
 {
 

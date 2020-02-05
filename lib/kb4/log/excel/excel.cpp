@@ -4,8 +4,8 @@ const QString Excel::elementDelimeter = "\t";
 const QString Excel::lineDelimeter = "\r\n";
 
 //TODO clean from currentSession
-Excel::Excel(QObject *parent)
-    : Log(parent)
+Excel::Excel()
+    : Log()
 {
 
 }

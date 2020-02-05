@@ -10,7 +10,7 @@
 class TimeLog : public Excel
 {
 public:
-    TimeLog(QObject *parent = nullptr);
+    TimeLog();
 
 protected:
     QString headersPrefix() override;

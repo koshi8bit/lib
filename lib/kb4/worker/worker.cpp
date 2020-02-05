@@ -1,8 +1,8 @@
 #include "worker.h"
 
 
-Worker::Worker(QString name, QObject *parent)
-    :QObject(parent)
+Worker::Worker(QString name)
+    :QObject()
 {
     this->name = name;
     thread = new QThread();
