@@ -159,6 +159,15 @@ void Excel::commit()
             line.append(elementDelimeter);
             continue;
         }
+
+        auto channel_qdatetime = dynamic_cast<ChannelT<QDateTime> *>(channel);
+        if (channel_qdatetime)
+        {
+            value = channel_qdatetime->value().toString(EasyLiving::formatDateTimeFile());
+            line.append(value);
+            line.append(elementDelimeter);
+            continue;
+        }
     }
     appendToBuffers(line);
     appendToBuffers(lineDelimeter);

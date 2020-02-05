@@ -12,6 +12,7 @@ class Worker : public QObject
 
 public:
     explicit Worker(QString name, QObject *parent = nullptr);
+    ~Worker();
     std::function<void()> heavyWork;
 
 private:

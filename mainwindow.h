@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QRandomGenerator>
 #include <QtMath>
+#include <QDateTime>
 
 
 #include <lib/kb4/ui/realtimeqcp/axisconfig.h>
@@ -59,6 +60,7 @@ private:
 
     TimeLog *excelLog;
     ChannelDouble *a, *b, *c;
+    ChannelT<QDateTime> *t;
 
     QSettings *settings;
     SimpleLog *simpleLog;
@@ -104,6 +106,7 @@ private slots:
     void on_pushButtonExit_clicked();
 
     void on_pushButton_2_clicked();
+    void on_pushButtonNow_clicked();
 };
 
 #endif // MAINWINDOW_H

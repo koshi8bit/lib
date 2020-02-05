@@ -5,9 +5,19 @@ Worker::Worker(QString name, QObject *parent)
     :QObject(parent)
 {
     this->name = name;
-    thread = new QThread(parent);
+    thread = new QThread();
     this->moveToThread(thread);
+    //thread->start();
 
+}
+
+Worker::~Worker()
+{
+    timer->stop();
+    thread->terminate(); //TODO quit
+
+    timer->deleteLater();
+    thread->deleteLater();
 }
 
 void Worker::start()

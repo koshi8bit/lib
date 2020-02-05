@@ -95,6 +95,9 @@ void MainWindow::configureExcelLog()
     c->setValue(3.009);
     excelLog->addChannel(c);
 
+    t = new ChannelT<QDateTime>("time", "", this);
+    excelLog->addChannel(t);
+
     excelLog->finishConfigure();
 
 
@@ -420,4 +423,9 @@ void MainWindow::on_pushButtonExit_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     graphRealTimeQcpUa->setVisible(!graphRealTimeQcpUa->visible());
+}
+
+void MainWindow::on_pushButtonNow_clicked()
+{
+    t->setValue(QDateTime::currentDateTime());
 }
