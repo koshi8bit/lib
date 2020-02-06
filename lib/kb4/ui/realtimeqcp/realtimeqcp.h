@@ -14,10 +14,6 @@
 #include "graph.h"
 #include "colorsetter.h"
 
-//f8f1856 - old widget rtPlotWithLegend
-
-//FIXME при движении курсора мелькает время
-
 //FIXME в графе хранить ссылку на channel?
 
 

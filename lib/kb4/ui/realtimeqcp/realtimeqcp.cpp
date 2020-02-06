@@ -432,11 +432,11 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
 
 void RealTimeQCP::mouseMove(QMouseEvent *event)
 {
-    if (!realTime())
-    {
-        auto time = plot()->xAxis->pixelToCoord(event->x());
-        setCursorKey(time);
-    }
+    if (realTime() && moveLineRealTime())
+        return;
+
+    auto time = plot()->xAxis->pixelToCoord(event->x());
+    setCursorKey(time);
 }
 
 void RealTimeQCP::mousePress(QMouseEvent *event)
@@ -565,7 +565,7 @@ QString RealTimeQCP::formatLabelTime(double time)
     {
         auto deltaTimeMSEC = QDateTime::currentDateTime().msecsTo(mouseTimeQDT);
         //qDebug() << deltaTimeMSEC;
-        if (deltaTimeMSEC > -1000)
+        if (deltaTimeMSEC > -1000 )
             return mouseTimeStr;
 
         auto deltaTimeQT = QTime(0,0,0);
