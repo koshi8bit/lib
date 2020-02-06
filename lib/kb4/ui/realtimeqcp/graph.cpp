@@ -101,9 +101,9 @@ void Graph::updateValue()
 
 void Graph::moveCursor(double key)
 {
+    _cursor->setGraphKey(key);
     if (visible())
     {
-        _cursor->setGraphKey(key);
         updateValue();
     }
 }
@@ -129,7 +129,9 @@ void Graph::configureCursor(QCPItemTracer **cursor)
 
 void Graph::setCursor2Visible(bool newValue)
 {
-    if (visible()) { _cursor2->setVisible(newValue); }
+    //if (visible()) {
+        _cursor2->setVisible(newValue);
+    //}
 }
 
 void Graph::setVisible(bool newValue)
@@ -144,7 +146,7 @@ void Graph::_setVisible(bool newValue)
 {
     _graph->setVisible(newValue);
     _cursor->setVisible(newValue);
-    _cursor2->setVisible(newValue);
+    //_cursor2->setVisible(newValue);
     _visible = newValue;
 }
 
