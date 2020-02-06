@@ -432,8 +432,11 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
 
 void RealTimeQCP::mouseMove(QMouseEvent *event)
 {
-    auto time = plot()->xAxis->pixelToCoord(event->x());
-    setCursorKey(time);
+    if (!realTime())
+    {
+        auto time = plot()->xAxis->pixelToCoord(event->x());
+        setCursorKey(time);
+    }
 }
 
 void RealTimeQCP::mousePress(QMouseEvent *event)
