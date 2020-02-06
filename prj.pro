@@ -58,7 +58,6 @@ HEADERS += \
     lib/kb4/log/channelbool.h \
     lib/kb4/log/channeldouble.h \
     lib/kb4/log/channelt.h \
-    lib/kb4/log/excel/excel.cpp.orig \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
     lib/kb4/log/excel/timelog/timelog.h \
