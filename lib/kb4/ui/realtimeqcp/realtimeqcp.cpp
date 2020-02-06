@@ -93,6 +93,11 @@ void RealTimeQCP::setTimeAxisRange(const QCPRange &newValue)
     emit timeAxisRangeChanged(newValue);
 }
 
+QCPItemLine *RealTimeQCP::cursor2() const
+{
+    return _cursor2;
+}
+
 bool RealTimeQCP::moveLineRealTime() const
 {
     return _moveLineRealTime;

@@ -56,6 +56,8 @@ public:
 
 
 
+    QCPItemLine *cursor2() const;
+
 signals:
     void cursor2VisibleValueChanged(bool newValue);
     void moveLineRealTimeChanged(bool newValue);
