@@ -87,16 +87,19 @@ bool Graph::visible()
 
 void Graph::updateValue()
 {
-    if (_cursor2->visible())
+    if (visible())
     {
-        auto deltaValue = _cursor->position->value() - _cursor2->position->value();
-        _graphLegendItem->setValue(deltaValue, true);
+        if (_cursor2->visible())
+        {
+            auto deltaValue = _cursor->position->value() - _cursor2->position->value();
+            _graphLegendItem->setValue(deltaValue, true);
+        }
+        else
+        {
+            _graphLegendItem->setValue(_valueCursor);
+        }
+        _valueCursor = _cursor->position->value();
     }
-    else
-    {
-        _graphLegendItem->setValue(_valueCursor);
-    }
-    _valueCursor = _cursor->position->value();
 }
 
 void Graph::moveCursor(double key)
@@ -110,10 +113,10 @@ void Graph::moveCursor(double key)
 
 void Graph::moveCursor2(double key)
 {
-//    if (visible())
-//    {
+    if (visible())
+    {
         _cursor2->setGraphKey(key);
-//    }
+    }
 }
 
 void Graph::configureCursor(QCPItemTracer **cursor)
@@ -129,9 +132,9 @@ void Graph::configureCursor(QCPItemTracer **cursor)
 
 void Graph::setCursor2Visible(bool newValue)
 {
-    //if (visible()) {
+    if (visible()) {
         _cursor2->setVisible(newValue);
-    //}
+    }
 }
 
 void Graph::setVisible(bool newValue)
@@ -146,7 +149,8 @@ void Graph::_setVisible(bool newValue)
 {
     _graph->setVisible(newValue);
     _cursor->setVisible(newValue);
-    //_cursor2->setVisible(newValue);
+    if (!newValue)
+        _cursor2->setVisible(false);
     _visible = newValue;
 }
 
