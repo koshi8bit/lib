@@ -139,7 +139,7 @@ void Excel::commit()
 
     foreach (auto channel, this->channels)
     {
-        auto channel_double = dynamic_cast<ChannelT<double> *>(channel);
+        auto channel_double = dynamic_cast<ChannelDouble *>(channel);
         if (channel_double)
         {
             value = formatDoubleValue(channel_double->value());
@@ -151,7 +151,7 @@ void Excel::commit()
             continue;
         }
 
-        auto channel_bool = dynamic_cast<ChannelT<bool> *>(channel);
+        auto channel_bool = dynamic_cast<ChannelBool *>(channel);
         if (channel_bool)
         {
             value = QString("%1").arg(channel_bool->value() ? 1 : 0);
@@ -164,6 +164,19 @@ void Excel::commit()
         if (channel_qdatetime)
         {
             value = channel_qdatetime->value().toString(EasyLiving::formatDateTimeFile());
+            line.append(value);
+            line.append(elementDelimeter);
+            continue;
+        }
+
+        auto channelQStringTmp = dynamic_cast<ChannelQString *>(channel);
+        if (channelQStringTmp)
+        {
+            if (channelQStringTmp->isLogged())
+                continue;
+
+            value = channelQStringTmp->value();
+            channelQStringTmp->valueReadByLogger();
             line.append(value);
             line.append(elementDelimeter);
             continue;

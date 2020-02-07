@@ -18,7 +18,7 @@ TEMPLATE = app
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-#DEFINES += SV_SHOW_CREATED
+#DEFINES += K8B_LIB_CHANNELS_SHOW_SV_CREATED
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -57,6 +57,7 @@ HEADERS += \
     lib/kb4/log/channel.h \
     lib/kb4/log/channelbool.h \
     lib/kb4/log/channeldouble.h \
+    lib/kb4/log/channelqstring.h \
     lib/kb4/log/channelt.h \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
@@ -94,6 +95,7 @@ SOURCES += \
     lib/kb4/log/channel.cpp \
     lib/kb4/log/channelbool.cpp \
     lib/kb4/log/channeldouble.cpp \
+    lib/kb4/log/channelqstring.cpp \
     lib/kb4/log/excel/excel.cpp \
     lib/kb4/log/excel/excelfile.cpp \
     lib/kb4/log/excel/timelog/timelog.cpp \

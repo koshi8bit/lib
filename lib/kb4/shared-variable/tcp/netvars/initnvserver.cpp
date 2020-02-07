@@ -19,7 +19,7 @@ InitNVServer::InitNVServer(quint16 port) : VarsContainer(nullptr)
         tcpserver = new QTcpServer(nullptr);
 
         if(tcpserver->listen(QHostAddress::Any,port)){
-#ifdef SV_SHOW_DEBUG
+#ifdef K8B_LIB_SV_SHOW_DEBUG
             nvDebug << "Listening on" << port << "port";
 #endif
         }else{

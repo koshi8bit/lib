@@ -79,7 +79,6 @@ public slots:
     }
 
 
-
 private:
     static QString getName(QString sharedVariableName)
     {
@@ -87,6 +86,7 @@ private:
     }
 
     T _value;
+
     NetVar<T> *sharedVariable = nullptr;
 
     void _setValue(T newValue)
