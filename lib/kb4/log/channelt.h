@@ -54,7 +54,7 @@ public:
         else
         {
             disconnect(sharedVariable, &NetVarBase::valueChanged,
-                       this, &ChannelT::sharedVariableUpdated, Qt::QueuedConnection);
+                       this, &ChannelT::sharedVariableUpdated);
         }
 
     }
@@ -76,11 +76,11 @@ public slots:
     {
         _setValue(newValue);
 
-        if (sharedVariable)
-        {
-            sharedVariable->setValue(newValue);
-            sharedVariable->send();
-        }
+//        if (sharedVariable)
+//        {
+//            sharedVariable->setValue(newValue);
+//            sharedVariable->send();
+//        }
     }
 
 private slots:
