@@ -44,15 +44,17 @@ public:
         return _value;
     }
 
-    void setSharedVariableEnableWriteFromNet(bool enable)
+    void setSharedVariableEnableReadFromNet(bool enable)
     {
         if (enable)
         {
-            connect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);
+            connect(sharedVariable, &NetVarBase::valueChanged,
+                    this, &ChannelT::sharedVariableUpdated, Qt::QueuedConnection);
         }
         else
         {
-            disconnect(sharedVariable, &NetVarBase::valueChanged, this, &ChannelT::sharedVariableUpdated);
+            disconnect(sharedVariable, &NetVarBase::valueChanged,
+                       this, &ChannelT::sharedVariableUpdated, Qt::QueuedConnection);
         }
 
     }
@@ -60,11 +62,14 @@ public:
     void configureSharedVariable(bool enableWriteFromNet = false)
     {
         sharedVariable = new NetVar<T>(logName());
+        connect(sharedVariable, &NetVarBase::valueChanged,
+                this, &ChannelT<T>::updateSharedVariable, Qt::QueuedConnection);
 #ifdef K8B_LIB_CHANNELS_SHOW_SV_CREATED
         qDebug() << "sharedVariable" << logName() << "created";
 #endif
-        setSharedVariableEnableWriteFromNet(enableWriteFromNet);
+        setSharedVariableEnableReadFromNet(enableWriteFromNet);
     }
+
 
 public slots:
     void setValue(T newValue)
@@ -77,6 +82,15 @@ public slots:
             sharedVariable->send();
         }
     }
+
+private slots:
+    void updateSharedVariable()
+    {
+        sharedVariable->setValue(value());
+        sharedVariable->send();
+    }
+
+
 
 
 private:

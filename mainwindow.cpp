@@ -110,7 +110,7 @@ void MainWindow::configureWorker()
 {
     w = new Worker("test");
     w->heavyWork = [this]() { this->heavyWork();};
-    w->start();
+    w->start(1000);
 }
 
 void MainWindow::heavyWork()

@@ -7,7 +7,7 @@ Worker::Worker(QString name)
     this->name = name;
     thread = new QThread();
     this->moveToThread(thread);
-    //thread->start();
+    thread->start();
 
 }
 
@@ -28,10 +28,13 @@ void Worker::start()
 
 void Worker::start(int intervalMSEC)
 {
-    timer = new QTimer;
+    timer = new QTimer();
     timer->setInterval(intervalMSEC);
-    timer->setSingleShot(true);
-    connect(timer, &QTimer::timeout, this, &Worker::timerTimeout);
+    //FIXME если процесс занимает больше времени, чем интервал - то на стеке он будет копиться.
+    //мб вообще нах таймер?
+    //timer->setSingleShot(true);
+    connect(timer, &QTimer::timeout,
+            this, &Worker::timerTimeout);
     timer->start();
 }
 
@@ -39,7 +42,7 @@ void Worker::timerTimeout()
 {
     heavyWork();
     emit heavyWorkFinished();
-    timer->start();
+    //timer->start();
 }
 
 
