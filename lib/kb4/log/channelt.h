@@ -49,7 +49,7 @@ public:
         if (enable)
         {
             connect(sharedVariable, &NetVarBase::valueChanged,
-                    this, &ChannelT::sharedVariableUpdated, Qt::QueuedConnection);
+                    this, &ChannelT::sharedVariableUpdated);
         }
         else
         {
@@ -62,13 +62,27 @@ public:
     void configureSharedVariable(bool enableWriteFromNet = false)
     {
         sharedVariable = new NetVar<T>(logName());
-        connect(sharedVariable, &NetVarBase::valueChanged,
-                this, &ChannelT<T>::updateSharedVariable, Qt::QueuedConnection);
+
 #ifdef K8B_LIB_CHANNELS_SHOW_SV_CREATED
         qDebug() << "sharedVariable" << logName() << "created";
 #endif
         setSharedVariableEnableReadFromNet(enableWriteFromNet);
     }
+
+//    void setMultithreading(bool enable)
+//    {
+//        _multithreading = enable;
+//        if (enable)
+//        {
+//            connect(this, &Channel::valueChanged,
+//                    this, &ChannelT<T>::updateSharedVariable, Qt::QueuedConnection);
+//        }
+//        else
+//        {
+//            disconnect(this, &Channel::valueChanged,
+//                    this, &ChannelT<T>::updateSharedVariable);
+//        }
+//    }
 
 
 public slots:
@@ -76,11 +90,11 @@ public slots:
     {
         _setValue(newValue);
 
-//        if (sharedVariable)
-//        {
-//            sharedVariable->setValue(newValue);
-//            sharedVariable->send();
-//        }
+        if (sharedVariable)
+        {
+            sharedVariable->setValue(newValue);
+            sharedVariable->send();
+        }
     }
 
 private slots:
@@ -100,6 +114,7 @@ private:
     }
 
     T _value;
+    bool _multithreading = false;
 
     NetVar<T> *sharedVariable = nullptr;
 
