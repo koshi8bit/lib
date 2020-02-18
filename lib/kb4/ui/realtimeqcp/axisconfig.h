@@ -42,6 +42,12 @@ private slots:
     void on_spinBoxFullSec_valueChanged(int arg1);
     void spinBoxHoursMinutesSecondsValueChanged(int arg1);
 
+    void on_pushButtonTime010000_clicked();
+    void on_pushButtonTime001000_clicked();
+    void on_pushButtonTime000100_clicked();
+    void on_pushButtonTime000030_clicked();
+
+
 private:
 
 

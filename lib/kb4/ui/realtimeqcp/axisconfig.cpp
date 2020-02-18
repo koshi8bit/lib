@@ -185,3 +185,24 @@ void AxisConfig::spinBoxHoursMinutesSecondsValueChanged(int arg1)
 
     ui->spinBoxFullSec->setValue(-t.secsTo(QTime(0, 0, 0)));
 }
+
+void AxisConfig::on_pushButtonTime010000_clicked()
+{
+    ui->spinBoxFullSec->setValue(3600);
+}
+
+void AxisConfig::on_pushButtonTime001000_clicked()
+{
+    ui->spinBoxFullSec->setValue(600);
+}
+
+void AxisConfig::on_pushButtonTime000100_clicked()
+{
+    ui->spinBoxFullSec->setValue(60);
+}
+
+void AxisConfig::on_pushButtonTime000030_clicked()
+{
+    ui->spinBoxFullSec->setValue(30);
+}
+
