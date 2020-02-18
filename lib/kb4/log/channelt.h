@@ -69,6 +69,11 @@ public:
         setSharedVariableEnableReadFromNet(enableWriteFromNet);
     }
 
+    void askSharedVariable()
+    {
+        sharedVariable->ask();
+    }
+
 //    void setMultithreading(bool enable)
 //    {
 //        _multithreading = enable;
