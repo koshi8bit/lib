@@ -35,12 +35,23 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    ui-res.qrc
+    lib/kb4/pic/ui-res.qrc
 
 DISTFILES += \
+    lib/kb4/pic/ui-gradientlineedit-gears.png \
+    lib/kb4/pic/ui-realtimeqcp-cursor01.PNG \
+    lib/kb4/pic/ui-realtimeqcp-cursor0102.PNG \
+    lib/kb4/pic/ui-realtimeqcp-cursor02.PNG \
+    lib/kb4/pic/ui-realtimeqcp-realtime.PNG \
+    lib/kb4/pic/ui-realtimeqcp.PNG \
     lib/kb4/shared-variable/tcp/netvars/example/example.7z \
-    lib/kb4/ui/gradientlineedit/gears.png \
-    lib/update-kb4.bat
+    lib/update-kb4.bat \
+    readme-pic/gradientlineedit01.png \
+    readme-pic/realtimeqcp01.png \
+    readme-pic/realtimeqcp02--.png \
+    readme-pic/realtimeqcp03-.png \
+    readme-pic/realtimeqcp04.png \
+    readme-pic/valuedouble01.png
 
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \

@@ -97,8 +97,8 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="../../../../ui-res.qrc">
-       <normaloff>:/gradientlineedit/lib/kb4/ui/gradientlineedit/gears.png</normaloff>:/gradientlineedit/lib/kb4/ui/gradientlineedit/gears.png</iconset>
+      <iconset resource="../../pic/ui-res.qrc">
+       <normaloff>:/ui/ui-gradientlineedit-gears.png</normaloff>:/ui/ui-gradientlineedit-gears.png</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -111,7 +111,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../../ui-res.qrc"/>
+  <include location="../../pic/ui-res.qrc"/>
  </resources>
  <connections/>
 </ui>

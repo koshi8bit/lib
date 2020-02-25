@@ -13,9 +13,42 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="toolTip">
+   <string/>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QCustomPlot" name="plot" native="true"/>
+    <widget class="QCustomPlot" name="plot" native="true">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Как масштабировать ось:&lt;/span&gt; навести курсор на ось и крутить колесико &lt;span style=&quot; font-style:italic;&quot;&gt;или &lt;/span&gt;сделать двойнок клик на ось и появятся настройки.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Режимы работы графика: &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;realtime&lt;/span&gt; или &lt;span style=&quot; font-style:italic;&quot;&gt;показ истории&lt;/span&gt;. Режим изменяется двойным кликом мышки по области графика.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;В режиме &lt;span style=&quot; font-style:italic;&quot;&gt;realtime&lt;/span&gt; показывается только последние несколько минут без возможности прокрутки графика, а сверху появится буква &lt;span style=&quot; font-style:italic;&quot;&gt;R&lt;/span&gt;.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/ui/ui-realtimeqcp-realtime.PNG&quot;/&gt;&lt;/p&gt;&lt;p&gt;В режиме &lt;span style=&quot; font-style:italic;&quot;&gt;показ истории&lt;/span&gt; можно листать график во времени, буквы &lt;span style=&quot; font-style:italic;&quot;&gt;R&lt;/span&gt; не будет&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Как включить курсор: &lt;/span&gt;нужно нажать правой кнопкой мыши, и справа в легенде будет показано значение в позиции курсора (C1).&lt;br/&gt;Можно активировать второй курсор нажатием на колесико мыши (С2), и тогда в легенде будет показываться разница между значений под курсором.&lt;/p&gt;&lt;p&gt;&lt;img src=&quot;:/ui/ui-realtimeqcp-cursor0102.PNG&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Легенда: &lt;/span&gt;В легенде можно отключить видимость графика и изменить его цвет.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>1</x>
+        <y>1</y>
+        <width>16</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../../pic/ui-res.qrc">
+        <normaloff>:/ico/ico/020/icons8-ask-question-20.png</normaloff>:/ico/ico/020/icons8-ask-question-20.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
    </item>
    <item>
     <widget class="QScrollArea" name="scrollAreaLegend">
@@ -56,6 +89,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../pic/ui-res.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>658</width>
-    <height>265</height>
+    <height>280</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -110,43 +110,37 @@
           <item>
            <widget class="QPushButton" name="pushButtonTime010000">
             <property name="text">
-             <string>01:00:00</string>
+             <string>1 час</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonTime001000">
             <property name="text">
-             <string>00:10:00</string>
+             <string>10 мин</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonTime000500">
+            <property name="text">
+             <string>5 мин</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonTime000100">
             <property name="text">
-             <string>00:01:00</string>
+             <string>1 мин</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonTime000030">
             <property name="text">
-             <string>00:00:30</string>
+             <string>30 сек</string>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>

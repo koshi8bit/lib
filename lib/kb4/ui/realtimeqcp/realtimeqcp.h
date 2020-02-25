@@ -38,7 +38,7 @@ public:
 
     QCustomPlot* plot() const;
 
-    void setTimeAxisRange(int newRangeSEC);
+    void setTimeAxisRange(int newRangeMSEC);
     void setTimeLabelVisible(bool newValue);
 
     void setMarginGroup(QCPMarginGroup *mg);
@@ -82,6 +82,8 @@ private:
     bool _realTime;
     bool _moveLineRealTime;
     const QString timeLabel = tr("Время");
+
+    QCPItemText *statusLabel;
 
     //TODO make 2 lines same as oscillograph switching by Mouse wheel button
     QCPItemLine *_cursor;
@@ -130,6 +132,10 @@ private:
 
     void _setCursorKey(double time);
 
+    void configureStatusLabel();
+    void updateStatusLabel();
+    bool updateStatusLabelFlag = false;
+
 private slots:
     void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
@@ -141,6 +147,7 @@ private slots:
     void beforeReplot();
     void _setTimeAxisRange(const QCPRange &newRange);
 
+    void on_pushButton_clicked();
 };
 
 #endif // REALTIMEQCP_H

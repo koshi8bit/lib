@@ -6,6 +6,7 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
     ui(new Ui::RealTimeQCP)
 {
     ui->setupUi(this);
+    ui->plot->setToolTip("");
 
     connect(plot(), &QCustomPlot::axisClick, this, &RealTimeQCP::axisClick);
     connect(plot(), &QCustomPlot::axisDoubleClick, this, &RealTimeQCP::axisDoubleClick);
@@ -18,10 +19,12 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
     connect(plot(), &QCustomPlot::beforeReplot, this, &RealTimeQCP::beforeReplot);
     connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(setTimeAxisRange(QCPRange)));
 
+    configureStatusLabel();
     configurePlot();
     configureLegend();
     _setCursor2Visible(false);
     //configureSplitter();
+    updateStatusLabelFlag = true;
 
 }
 
@@ -35,6 +38,34 @@ bool RealTimeQCP::realTime() const
 {
     return _realTime;
 }
+
+void RealTimeQCP::configureStatusLabel()
+{
+    statusLabel = new QCPItemText(plot());
+    statusLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    statusLabel->setPositionAlignment(Qt::AlignRight|Qt::AlignBottom);
+    statusLabel->position->setCoords(1.0, 0.95); // lower right corner of axis rect
+
+    statusLabel->setTextAlignment(Qt::AlignLeft);
+    statusLabel->setFont(QFont(font().family(), 10));
+    statusLabel->setPadding(QMargins(2, 0, 2, 0));
+    statusLabel->setBrush(QColor("#C0C0C0"));
+}
+
+void RealTimeQCP::updateStatusLabel()
+{
+    if (updateStatusLabelFlag)
+    {
+        QString text;
+        if (realTime()) text.append("R ");
+        if (!moveLineRealTime()) text.append("C1 ");
+        if (cursor2Visible()) text.append("C2 ");
+        statusLabel->setText(text.trimmed());
+        statusLabel->setVisible(!text.isEmpty());
+    }
+}
+
+
 
 void RealTimeQCP::configurePlot()
 {
@@ -54,12 +85,15 @@ void RealTimeQCP::configurePlot()
     setMoveLineRealTime(true);
     plot()->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
     plot()->xAxis->setRangeUpper(RealTimeQCP::currentDateTime());
-    setTimeAxisRange(30);
+    setTimeAxisRange(60);
 
     // { Tests
     //plot()->setNoAntialiasingOnDrag(true);
     //plot()->setPlottingHint(QCP::phFastPolylines,true); // ?tima45 line from ethernet
+
     // } Tests
+
+
 }
 
 
@@ -67,6 +101,7 @@ void RealTimeQCP::_setRealTime(bool newValue)
 {
     _realTime = newValue;
     configureAxesZoomAndDrag(!newValue);
+    updateStatusLabel();
 }
 
 void RealTimeQCP::setRealTime(bool newValue)
@@ -122,9 +157,9 @@ void RealTimeQCP::moveTimeAxisRealTime()
     plot()->replot();
 }
 
-void RealTimeQCP::setTimeAxisRange(int newRangeSEC)
+void RealTimeQCP::setTimeAxisRange(int newRangeMSEC)
 {
-    plot()->xAxis->setRangeLower(plot()->xAxis->range().upper - newRangeSEC);
+    plot()->xAxis->setRangeLower(plot()->xAxis->range().upper - newRangeMSEC);
     updateTimeAxisLabel();
 }
 
@@ -215,6 +250,8 @@ void RealTimeQCP::_setCursor2Visible(bool newValue)
 
     if (labelTime->isVisible())
         labelTime->setText(formatLabelTime(_cursor->start->key()));
+
+    updateStatusLabel();
 }
 
 void RealTimeQCP::_setCursor2Key(double key)
@@ -228,6 +265,7 @@ void RealTimeQCP::_setCursor2Key(double key)
     _cursor2->end->setCoords(key, _cursor->end->coords().y());
     _setCursor2Visible(true);
     plot()->replot();
+    updateStatusLabel();
 }
 
 double RealTimeQCP::getYAxisUpper()
@@ -295,6 +333,7 @@ void RealTimeQCP::setTimeAxisRange(const QCPRange &newRange, RealTimeQCP *sender
 void RealTimeQCP::_setMoveLineRealTime(bool newValue)
 {
     _moveLineRealTime = newValue;
+    updateStatusLabel();
 }
 
 void RealTimeQCP::setMoveLineRealTime(bool newValue)
@@ -472,6 +511,7 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
 
 
         }
+
     }
 }
 
@@ -510,6 +550,7 @@ void RealTimeQCP::_setTimeAxisRange(const QCPRange &newRange)
         timeAxisOldRange = delta;
         updateTimeAxisLabel();
     }
+    updateStatusLabel();
 }
 
 
@@ -587,4 +628,15 @@ QString RealTimeQCP::formatLabelTime(double time)
 bool RealTimeQCP::isInAxisRect(QPoint pos)
 {
     return plot()->axisRect()->rect().contains(pos);
+}
+
+void RealTimeQCP::on_pushButton_clicked()
+{
+    QMessageBox::about(this, "Help", "<html><head/><body><p><span style=\" font-weight:600;\">\320\232\320\260\320\272 \320\274\320\260\321\201\321\210\321\202\320\260\320\261\320\270\321\200\320\276\320\262\320\260\321\202\321\214 \320\276\321\201\321\214:</span> \320\275\320\260\320\262\320\265\321\201\321\202\320\270 \320\272\321\203\321\200\321\201\320\276\321\200 \320\275\320\260 \320\276\321\201\321\214 \320\270 \320\272\321\200\321\203\321\202\320\270\321\202\321\214 \320\272\320\276\320\273\320\265\321\201\320\270\320\272\320\276 <span style=\" font-style:italic;\">\320\270\320\273\320\270 </span>\321\201\320\264\320\265\320\273\320\260\321\202\321\214 \320\264\320\262\320\276\320\271\320\275\320\276\320\272 \320\272\320\273\320\270\320\272 \320\275\320\260 \320\276\321\201\321\214 \320\270 \320\277\320\276\321\217\320\262\321\217\321\202\321\201\321\217 \320\275\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270.</p><p><span style=\" font-weight:600;\">\320\240\320\265\320\266\320\270\320\274\321\213 \321\200\320\260\320\261\320"
+                                     "\276\321\202\321\213 \320\263\321\200\320\260\321\204\320\270\320\272\320\260: </span><span style=\" font-style:italic;\">realtime</span> \320\270\320\273\320\270 <span style=\" font-style:italic;\">\320\277\320\276\320\272\320\260\320\267 \320\270\321\201\321\202\320\276\321\200\320\270\320\270</span>. <br/>\320\222 \321\200\320\265\320\266\320\270\320\274\320\265 <span style=\" font-style:italic;\">realtime</span> \320\277\320\276\320\272\320\260\320\267\321\213\320\262\320\260\320\265\321\202\321\201\321\217 \321\202\320\276\320\273\321\214\320\272\320\276 \320\277\320\276\321\201\320\273\320\265\320\264\320\275\320\270\320\265 \320\275\320\265\321\201\320\272\320\276\320\273\321\214\320\272\320\276 \320\274\320\270\320\275\321\203\321\202 \320\261\320\265\320\267 \320\262\320\276\320\267\320\274\320\276\320\266\320\275\320\276\321\201\321\202\320\270 \320\277\321\200\320\276\320\272\321\200\321\203\321\202\320\272\320\270 \320\263\321\200\320\260\321\204\320\270\320\272\320\260, \320\260 \321\201\320\262\320"
+                                     "\265\321\200\321\205\321\203 \320\277\320\276\321\217\320\262\320\270\321\202\321\201\321\217 \320\261\321\203\320\272\320\262\320\260 <span style=\" font-style:italic;\">R</span>.</p><p><img src=\":/ui/ui-realtimeqcp-realtime.PNG\"/></p><p>\320\222 \321\200\320\265\320\266\320\270\320\274\320\265 <span style=\" font-style:italic;\">\320\277\320\276\320\272\320\260\320\267 \320\270\321\201\321\202\320\276\321\200\320\270\320\270</span> \320\274\320\276\320\266\320\275\320\276 \320\273\320\270\321\201\321\202\320\260\321\202\321\214 \320\263\321\200\320\260\321\204\320\270\320\272 \320\262\320\276 \320\262\321\200\320\265\320\274\320\265\320\275\320\270, \320\261\321\203\320\272\320\262\321\213 <span style=\" font-style:italic;\">R</span> \320\275\320\265 \320\261\321\203\320\264\320\265\321\202</p><p><span style=\" font-weight:600;\">\320\232\320\260\320\272 \320\262\320\272\320\273\321\216\321\207\320\270\321\202\321\214 \320\272\321\203\321\200\321\201\320\276\321\200: </span>\320\275\321\203\320\266\320\275"
+                                     "\320\276 \320\275\320\260\320\266\320\260\321\202\321\214 \320\277\321\200\320\260\320\262\320\276\320\271 \320\272\320\275\320\276\320\277\320\272\320\276\320\271 \320\274\321\213\321\210\320\270, \320\270 \321\201\320\277\321\200\320\260\320\262\320\260 \320\262 \320\273\320\265\320\263\320\265\320\275\320\264\320\265 \320\261\321\203\320\264\320\265\321\202 \320\277\320\276\320\272\320\260\320\267\320\260\320\275\320\276 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 \320\262 \320\277\320\276\320\267\320\270\321\206\320\270\320\270 \320\272\321\203\321\200\321\201\320\276\321\200\320\260 (C1).<br/>\320\234\320\276\320\266\320\275\320\276 \320\260\320\272\321\202\320\270\320\262\320\270\321\200\320\276\320\262\320\260\321\202\321\214 \320\262\321\202\320\276\321\200\320\276\320\271 \320\272\321\203\321\200\321\201\320\276\321\200 \320\275\320\260\320\266\320\260\321\202\320\270\320\265\320\274 \320\275\320\260 \320\272\320\276\320\273\320\265\321\201\320\270\320\272\320\276 \320\274\321\213"
+                                     "\321\210\320\270 (\320\2412), \320\270 \321\202\320\276\320\263\320\264\320\260 \320\262 \320\273\320\265\320\263\320\265\320\275\320\264\320\265 \320\261\321\203\320\264\320\265\321\202 \320\277\320\276\320\272\320\260\320\267\321\213\320\262\320\260\321\202\321\214\321\201\321\217 \321\200\320\260\320\267\320\275\320\270\321\206\320\260 \320\274\320\265\320\266\320\264\321\203 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\271 \320\277\320\276\320\264 \320\272\321\203\321\200\321\201\320\276\321\200\320\276\320\274.</p><p><img src=\":/ui/ui-realtimeqcp-cursor0102.PNG\"/></p><p><span style=\" font-weight:600;\">\320\233\320\265\320\263\320\265\320\275\320\264\320\260: </span>\320\222 \320\273\320\265\320\263\320\265\320\275\320\264\320\265 \320\274\320\276\320\266\320\275\320\276 \320\276\321\202\320\272\320\273\321\216\321\207\320\270\321\202\321\214 \320\262\320\270\320\264\320\270\320\274\320\276\321\201\321\202\321\214 \320\263\321\200\320\260\321\204\320\270\320\272\320\260 \320\270 \320\270"
+                                     "\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\265\320\263\320\276 \321\206\320\262\320\265\321\202.</p></body></html>");
+
 }

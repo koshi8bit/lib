@@ -44,13 +44,11 @@ private slots:
 
     void on_pushButtonTime010000_clicked();
     void on_pushButtonTime001000_clicked();
+    void on_pushButtonTime000500_clicked();
     void on_pushButtonTime000100_clicked();
     void on_pushButtonTime000030_clicked();
 
-
 private:
-
-
     Ui::AxisConfig *ui;
     QCPAxis *axis;
     AxisType axisType;

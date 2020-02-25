@@ -66,7 +66,6 @@ MainWindow::MainWindow(QWidget *parent) :
     EasyLiving::writeFile("1.txt", "aaaaaa");
     //simpleLog << "1";
     //sl << "asd";
-
 }
 
 
@@ -428,4 +427,11 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButtonNow_clicked()
 {
     t->setValue(QDateTime::currentDateTime());
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    qDebug() << size();
+    this->resize(QSize(1324, 790));
+    ui->realTimeQcpU->setTimeAxisRange(35);
 }
