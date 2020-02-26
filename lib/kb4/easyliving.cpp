@@ -281,5 +281,5 @@ QString EasyLiving::readFile(QString path)
 
 QString EasyLiving::formatWindowTitle(QString text)
 {
-    return QString("%1 /// Alexey K. AKA koshi8bit").arg(text);
+    return QString("%1 /// Aleksey K. [koshi8bit]").arg(text);
 }
