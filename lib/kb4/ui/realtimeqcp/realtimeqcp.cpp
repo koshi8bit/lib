@@ -15,6 +15,8 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
     connect(plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     connect(plot(), &QCustomPlot::mousePress, this, &RealTimeQCP::mousePress);
     connect(plot(), &QCustomPlot::mouseDoubleClick, this, &RealTimeQCP::mouseDoubleClick);
+    //connect(plot(), &QCustomPlot::mouseWheel, this, &RealTimeQCP::mouseWheel);
+    connect(plot(), SIGNAL(mouseWheel(QMouseEvent*)), this, SLOT(mouseWheel(QMouseEvent*)));
 
     connect(plot(), &QCustomPlot::beforeReplot, this, &RealTimeQCP::beforeReplot);
     connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(setTimeAxisRange(QCPRange)));
@@ -343,19 +345,32 @@ void RealTimeQCP::setMoveLineRealTime(bool newValue)
 }
 
 
-void RealTimeQCP::configureAxesZoomAndDrag(bool configureTimeAxis)
+void RealTimeQCP::configureAxesZoomAndDrag(bool configureYAxises)
 {
-    auto axes = QList<QCPAxis*>()
+//    auto axis = QList<QCPAxis*>()
+//            << plot()->yAxis
+//            << plot()->yAxis2;
+
+//    Q_UNUSED(configureTimeAxis)
+//    //if (configureTimeAxis)
+//        axis << plot()->xAxis;
+
+    auto zoom = QList<QCPAxis*>()
+            << plot()->xAxis;
+
+    if (configureYAxises)
+    {
+        zoom << plot()->yAxis
+             << plot()->yAxis2;
+    }
+
+    auto drag = QList<QCPAxis*>()
             << plot()->yAxis
-            << plot()->yAxis2;
+            << plot()->yAxis2
+            << plot()->xAxis;
 
-    Q_UNUSED(configureTimeAxis)
-    if (configureTimeAxis)
-        axes << plot()->xAxis;
-
-
-    plot()->axisRect()->setRangeZoomAxes(axes);
-    plot()->axisRect()->setRangeDragAxes(axes);
+    plot()->axisRect()->setRangeZoomAxes(zoom);
+    plot()->axisRect()->setRangeDragAxes(drag);
 
 
 }
@@ -478,6 +493,10 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
 
 void RealTimeQCP::mouseMove(QMouseEvent *event)
 {
+    if (isInAxisRect(event->pos()))
+    {
+
+    }
     if (realTime() && moveLineRealTime())
         return;
 
@@ -487,6 +506,9 @@ void RealTimeQCP::mouseMove(QMouseEvent *event)
 
 void RealTimeQCP::mousePress(QMouseEvent *event)
 {
+    qDebug() << "aaa";
+    //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
+    //qDebug() << isInAxisRect(event->pos());
     if (isInAxisRect(event->pos()))
     {
         if (event->button() == Qt::MouseButton::RightButton)
@@ -530,6 +552,13 @@ void RealTimeQCP::mouseDoubleClick(QMouseEvent *event)
 
         }
     }
+}
+
+void RealTimeQCP::mouseWheel(QMouseEvent *event)
+{
+    qDebug() << "aaa";
+    //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
+    //qDebug() << isInAxisRect(event->pos());
 }
 
 void RealTimeQCP::beforeReplot()

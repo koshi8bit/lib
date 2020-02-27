@@ -52,7 +52,7 @@ public:
     static QString formatDateUi();
     static QString formatTimeUi(bool showMS = false);
     static QString formatDateTimeUiSeporator(QString seporator = "@");
-    static QString formatDateTimeUi(bool showMS);
+    static QString formatDateTimeUi(bool showMS = false);
 
 
     //postfix

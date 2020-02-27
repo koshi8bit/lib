@@ -91,7 +91,7 @@ private:
     //bool _cursor2CanMove = false;
 
     void configurePlot();
-    void configureAxesZoomAndDrag(bool configureTimeAxis);
+    void configureAxesZoomAndDrag(bool configureYAxises);
     void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);
     void configurePlotTimeAxis();
@@ -143,6 +143,7 @@ private slots:
     void mouseMove(QMouseEvent *event);
     void mousePress(QMouseEvent *event);
     void mouseDoubleClick(QMouseEvent *event);
+    void mouseWheel(QMouseEvent *event);
 
     void beforeReplot();
     void _setTimeAxisRange(const QCPRange &newRange);
