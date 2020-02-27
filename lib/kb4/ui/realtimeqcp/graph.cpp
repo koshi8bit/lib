@@ -14,7 +14,13 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
 
     _graph = plot->addGraph(plot->xAxis, yAxis);
     _graph->setName(label);
-    _graph->setPen(color);
+    ///
+    QPen pen;
+    pen.setColor(color);
+    pen.setWidth(2);
+    _graph->setPen(pen);
+
+    ///
     _graph->setLineStyle(QCPGraph::LineStyle::lsStepLeft);
     _graph->setAdaptiveSampling(true);
 

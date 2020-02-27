@@ -350,12 +350,14 @@ void RealTimeQCP::configureAxesZoomAndDrag(bool configureTimeAxis)
             << plot()->yAxis2;
 
     Q_UNUSED(configureTimeAxis)
-    //if (configureTimeAxis)
+    if (configureTimeAxis)
         axes << plot()->xAxis;
 
 
     plot()->axisRect()->setRangeZoomAxes(axes);
     plot()->axisRect()->setRangeDragAxes(axes);
+
+
 }
 
 void RealTimeQCP::configurePlotBackground()
