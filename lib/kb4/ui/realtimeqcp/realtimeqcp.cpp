@@ -52,6 +52,7 @@ void RealTimeQCP::configureStatusLabel()
     statusLabel->setFont(QFont(font().family(), 10));
     statusLabel->setPadding(QMargins(2, 0, 2, 0));
     statusLabel->setBrush(QColor("#C0C0C0"));
+    statusLabel->setVisible(false);
 }
 
 void RealTimeQCP::updateStatusLabel()
@@ -177,10 +178,14 @@ void RealTimeQCP::setMarginGroup(QCPMarginGroup *mg)
 
 double RealTimeQCP::currentDateTime()
 {
-    auto time = QDateTime::currentDateTime();
-    auto now = time.toTime_t() + static_cast<double>(time.time().msec())/1000;
-    return now;
+    return dateTimeToKey(QDateTime::currentDateTime());
 }
+
+double RealTimeQCP::dateTimeToKey(QDateTime dt)
+{
+    return dt.toTime_t() + static_cast<double>(dt.time().msec())/1000;
+}
+
 
 void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
 {

@@ -17,7 +17,7 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
     ///
     QPen pen;
     pen.setColor(color);
-    pen.setWidth(2);
+    pen.setWidth(1);
     _graph->setPen(pen);
 
     ///
@@ -80,7 +80,6 @@ double Graph::valueCursor()
 
 double Graph::valueLast()
 {
-    //TODO tima45
     qWarning() << EL_FORMAT_ERR("Method is not completed");
     return 0;
     //return _graph->data()->last());
