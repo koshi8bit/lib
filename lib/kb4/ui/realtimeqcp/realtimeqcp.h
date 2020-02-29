@@ -58,6 +58,8 @@ public:
 
 
     QCPItemLine *cursor2() const;
+    void autoScaleAxis(QCPAxis *axis);
+
 
 signals:
     void cursor2VisibleValueChanged(bool newValue);
@@ -108,7 +110,6 @@ private:
     void configureSplitter();
     QSplitter *splitter;
 
-    void autoScaleAxis(QCPAxis *axis);
 
     //WARNING rename to _graphs?
     QVector<Graph *> graphs;
