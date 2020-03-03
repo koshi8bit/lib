@@ -70,6 +70,7 @@ private:
     void configureRealTimeQcpPlot(RealTimeQCP * plot);
 
     void configureRealTimeQcpGraphs();
+    void configureRealTimeQcpPlotDayStyle();
 
     void configureGradientLineEdit();
     

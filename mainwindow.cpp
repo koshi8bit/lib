@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     configureRealTimeQcpPlot();
     configureRealTimeQcpGraphs();
 
+    configureRealTimeQcpPlotDayStyle();
+
     configureTimers();
 
     configureGradientLineEdit();
@@ -66,6 +68,8 @@ MainWindow::MainWindow(QWidget *parent) :
     EasyLiving::writeFile("1.txt", "aaaaaa");
     //simpleLog << "1";
     //sl << "asd";
+
+    qDebug() << EasyLiving::pathConcat("C:/1", "2\\3");
 }
 
 
@@ -287,6 +291,13 @@ void MainWindow::configureRealTimeQcpGraphs()
     graphRealTimeQcpIa = ui->realTimeQcpI->addGraph("Bergoz/Hebl", EasyLiving::postfixMilliAmpere(), 3);
 
     graphRealTimeQcpBoola = ui->realTimeQcpBool->addGraph("ЭЛВ/Напуск аргона", "", 0);
+}
+
+void MainWindow::configureRealTimeQcpPlotDayStyle()
+{
+    auto plot = ui->realTimeQcpDayStyle;
+    plot->configureAxis(plot->plot()->yAxis, tr("Шкала"), "", 0, 10, 2);
+    plot->setDayStyle();
 }
 
 

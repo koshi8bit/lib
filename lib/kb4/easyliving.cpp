@@ -279,6 +279,14 @@ QString EasyLiving::readFile(QString path)
 
 }
 
+QString EasyLiving::pathConcat(QString path1, QString path2)
+{
+    path1 = QDir::fromNativeSeparators(path1);
+    path2 = QDir::fromNativeSeparators(path2);
+    auto finalPath = QDir(path1).filePath(path2);
+    return finalPath;
+}
+
 QString EasyLiving::formatWindowTitle(QString text)
 {
     return QString("%1 /// Aleksey K. [koshi8bit]").arg(text);

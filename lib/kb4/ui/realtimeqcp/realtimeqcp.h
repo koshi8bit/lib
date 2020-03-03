@@ -60,6 +60,8 @@ public:
     QCPItemLine *cursor2() const;
     void autoScaleAxis(QCPAxis *axis);
 
+    void setDayStyle();
+
 
 signals:
     void cursor2VisibleValueChanged(bool newValue);
@@ -84,6 +86,7 @@ private:
 
     bool _realTime;
     bool _moveLineRealTime;
+    bool dayStyle = false;
     const QString timeLabel = tr("Время");
 
     QCPItemText *statusLabel;
@@ -145,7 +148,7 @@ private slots:
     void mouseMove(QMouseEvent *event);
     void mousePress(QMouseEvent *event);
     void mouseDoubleClick(QMouseEvent *event);
-    void mouseWheel(QMouseEvent *event);
+    void mouseWheel(QWheelEvent *event);
 
     void beforeReplot();
     void _setTimeAxisRange(const QCPRange &newRange);

@@ -93,6 +93,7 @@ public:
     static bool createDir(QString path);
     static bool writeFile(QString path, QString text, bool append = false);
     static QString readFile(QString path);
+    static QString pathConcat(QString path1, QString path2);
 
     //ui
     static QString formatWindowTitle(QString text);

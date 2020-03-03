@@ -15,8 +15,8 @@ RealTimeQCP::RealTimeQCP(QWidget *parent) :
     connect(plot(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     connect(plot(), &QCustomPlot::mousePress, this, &RealTimeQCP::mousePress);
     connect(plot(), &QCustomPlot::mouseDoubleClick, this, &RealTimeQCP::mouseDoubleClick);
-    //connect(plot(), &QCustomPlot::mouseWheel, this, &RealTimeQCP::mouseWheel);
-    connect(plot(), SIGNAL(mouseWheel(QMouseEvent*)), this, SLOT(mouseWheel(QMouseEvent*)));
+    connect(plot(), &QCustomPlot::mouseWheel, this, &RealTimeQCP::mouseWheel);
+    //connect(plot(), SIGNAL(mouseWheel(QMouseEvent*)), this, SLOT(mouseWheel(QMouseEvent*)));
 
     connect(plot(), &QCustomPlot::beforeReplot, this, &RealTimeQCP::beforeReplot);
     connect(plot()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(setTimeAxisRange(QCPRange)));
@@ -472,6 +472,16 @@ void RealTimeQCP::autoScaleAxis(QCPAxis *axis)
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
+void RealTimeQCP::setDayStyle()
+{
+    dayStyle = true;
+    QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
+    dateTicker->setDateTimeFormat(EasyLiving::formatDateUi()+"\n"+EasyLiving::formatTimeUi());
+    plot()->xAxis->setTicker(dateTicker);
+
+    setRealTime(false);
+}
+
 
 void RealTimeQCP::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
@@ -511,7 +521,6 @@ void RealTimeQCP::mouseMove(QMouseEvent *event)
 
 void RealTimeQCP::mousePress(QMouseEvent *event)
 {
-    qDebug() << "aaa";
     //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
     //qDebug() << isInAxisRect(event->pos());
     if (isInAxisRect(event->pos()))
@@ -559,9 +568,9 @@ void RealTimeQCP::mouseDoubleClick(QMouseEvent *event)
     }
 }
 
-void RealTimeQCP::mouseWheel(QMouseEvent *event)
+void RealTimeQCP::mouseWheel(QWheelEvent *event)
 {
-    qDebug() << "aaa";
+    qDebug() << "mouseWheel";
     //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
     //qDebug() << isInAxisRect(event->pos());
 }
@@ -633,6 +642,11 @@ QString RealTimeQCP::formatLabelTime(double time)
 
     auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
     auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
+
+    if (dayStyle)
+    {
+        return mouseTimeQDT.toString(EasyLiving::formatDateTimeUi());
+    }
 
     if (cursor2Visible())
     {
