@@ -612,8 +612,8 @@ void RealTimeQCP::_setCursorKey(double time)
 
     //    auto lower = getYAxisLower();
     //    auto upper = getYAxisUpper();
-    auto lower = -999999;
-    auto upper = +999999;
+    auto lower = -9999999999;
+    auto upper = +9999999999;
 
 
     _cursor->start->setCoords(time, lower);
