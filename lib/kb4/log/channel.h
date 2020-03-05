@@ -45,6 +45,7 @@ protected:
 
 signals:
     void valueChanged();
+    void valueChangedByNet();
     void valueChangedDouble(double newValue);
     void errorOccurred(QString message);
 

@@ -136,6 +136,7 @@ private:
     void sharedVariableUpdated()
     {
         _setValue(sharedVariable->value());
+        emit valueChangedByNet();
     }
 
 protected:
@@ -144,7 +145,6 @@ protected:
 
     }
 
-//signals:
 //    void valueChanged777(T newValue);
 
 };

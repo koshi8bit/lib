@@ -131,6 +131,11 @@ void RealTimeQCP::setTimeAxisRange(const QCPRange &newValue)
     emit timeAxisRangeChanged(newValue);
 }
 
+bool RealTimeQCP::dayStyle() const
+{
+    return _dayStyle;
+}
+
 QCPItemLine *RealTimeQCP::cursor2() const
 {
     return _cursor2;
@@ -472,14 +477,24 @@ void RealTimeQCP::autoScaleAxis(QCPAxis *axis)
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
-void RealTimeQCP::setDayStyle()
+void RealTimeQCP::setDayStyle(bool newValue)
 {
-    dayStyle = true;
-    QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-    dateTicker->setDateTimeFormat(EasyLiving::formatDateUi()+"\n"+EasyLiving::formatTimeUi());
-    plot()->xAxis->setTicker(dateTicker);
+    _dayStyle = newValue;
+    if (dayStyle())
+    {
+        QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
+        dateTicker->setDateTimeFormat(EasyLiving::formatDateUi()+"\n"+EasyLiving::formatTimeUi());
+        plot()->xAxis->setTicker(dateTicker);
 
-    setRealTime(false);
+        setRealTime(false);
+
+        foreach(auto g, graphs)
+        {
+            g->graph()->setLineStyle(QCPGraph::lsLine);
+//            g->graph()->setLineStyle(QCPGraph::lsNone);
+//            g->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 5));
+        }
+    }
 }
 
 
@@ -643,7 +658,7 @@ QString RealTimeQCP::formatLabelTime(double time)
     auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
     auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
 
-    if (dayStyle)
+    if (dayStyle())
     {
         return mouseTimeQDT.toString(EasyLiving::formatDateTimeUi());
     }

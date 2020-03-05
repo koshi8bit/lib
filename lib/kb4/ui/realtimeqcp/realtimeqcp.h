@@ -60,7 +60,9 @@ public:
     QCPItemLine *cursor2() const;
     void autoScaleAxis(QCPAxis *axis);
 
-    void setDayStyle();
+    bool dayStyle() const;
+    void setDayStyle(bool newValue);
+
 
 
 signals:
@@ -86,7 +88,7 @@ private:
 
     bool _realTime;
     bool _moveLineRealTime;
-    bool dayStyle = false;
+    bool _dayStyle = false;
     const QString timeLabel = tr("Время");
 
     QCPItemText *statusLabel;

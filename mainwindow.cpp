@@ -297,7 +297,7 @@ void MainWindow::configureRealTimeQcpPlotDayStyle()
 {
     auto plot = ui->realTimeQcpDayStyle;
     plot->configureAxis(plot->plot()->yAxis, tr("Шкала"), "", 0, 10, 2);
-    plot->setDayStyle();
+    plot->setDayStyle(true);
 }
 
 
@@ -445,4 +445,83 @@ void MainWindow::on_pushButton_3_clicked()
     qDebug() << size();
     this->resize(QSize(1324, 790));
     ui->realTimeQcpU->setTimeAxisRange(35);
+}
+
+static const int textMargins = 12; // in millimeters
+static const int borderMargins = 10; // in millimeters
+
+static double mmToPixels(QPrinter& printer, int mm)
+{
+    return mm * 0.039370147 * printer.resolution();
+}
+
+static void paintPage(int pageNumber, int pageCount,
+                      QPainter* painter, QTextDocument* doc,
+                      const QRectF& textRect, qreal footerHeight)
+{
+
+
+    painter->save();
+    // textPageRect is the rectangle in the coordinate system of the QTextDocument, in pixels,
+    // and starting at (0,0) for the first page. Second page is at y=doc->pageSize().height().
+    const QRectF textPageRect(0, pageNumber * doc->pageSize().height(), doc->pageSize().width(), doc->pageSize().height());
+    // Clip the drawing so that the text of the other pages doesn't appear in the margins
+    painter->setClipRect(textRect);
+    // Translate so that 0,0 is now the page corner
+    painter->translate(0, -textPageRect.top());
+    // Translate so that 0,0 is the text rect corner
+    painter->translate(textRect.left(), textRect.top());
+    doc->drawContents(painter);
+    painter->restore();
+    QRectF footerRect = textRect;
+    footerRect.setTop(textRect.bottom());
+    footerRect.setHeight(footerHeight);
+    //painter->drawText(footerRect, Qt::AlignVCenter | Qt::AlignRight, QObject::tr("Page %1 of %2").arg(pageNumber+1).arg(pageCount));
+}
+
+static void printDocument(QPrinter& printer, QTextDocument* doc)
+{
+    QPainter painter( &printer );
+    doc->documentLayout()->setPaintDevice(&printer);
+    doc->setPageSize(printer.pageRect().size());
+    QSizeF pageSize = printer.pageRect().size(); // page size in pixels
+    // Calculate the rectangle where to lay out the text
+    const double tm = mmToPixels(printer, textMargins);
+    const qreal footerHeight = painter.fontMetrics().height();
+    const QRectF textRect(tm, tm, pageSize.width() - 2 * tm, pageSize.height() - 2 * tm - footerHeight);
+    doc->setPageSize(textRect.size());
+
+    const int pageCount = doc->pageCount();
+
+    bool firstPage = true;
+    for (int pageIndex = 0; pageIndex < pageCount; ++pageIndex) {
+
+        if (!firstPage)
+            printer.newPage();
+
+        paintPage(pageIndex, pageCount, &painter, doc, textRect, footerHeight );
+        firstPage = false;
+    }
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    QTextDocument *document = new QTextDocument();
+    QTextCursor cursor(document);
+    QTextBlockFormat blockFormat;
+
+
+    for(int i=0; i < 10; i++){
+       cursor.insertBlock(blockFormat);
+       cursor.insertHtml(QString("<h1>This is the %1 page</h1>").arg(i+1));
+       blockFormat.setPageBreakPolicy(QTextFormat::PageBreak_AlwaysBefore);
+    }
+
+
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setPageSize(QPrinter::A4);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName("filename.pdf");
+
+    printDocument(printer, document);
 }
