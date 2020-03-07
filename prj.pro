@@ -94,6 +94,7 @@ HEADERS += \
     lib/kb4/ui/realtimeqcp/graph.h \
     lib/kb4/ui/realtimeqcp/graphlegenditem.h \
     lib/kb4/ui/realtimeqcp/realtimeqcp.h \
+    lib/kb4/ui/realtimeqcp/realtimeqcpglobal.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/ui/value/double/valuedouble.h \
     lib/kb4/worker/worker.h \
