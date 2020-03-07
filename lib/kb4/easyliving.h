@@ -104,6 +104,7 @@ public:
 
 private:
     static void del(long long &delta, int &v, int delitel);
+    static void messageAppend(QString &message, int value, QString postfix);
 
 };
 

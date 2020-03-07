@@ -71,8 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     qDebug() << EasyLiving::pathConcat("C:/1", "2\\3");
 
-    QDateTime begin(QDate(2020, 1, 3), QTime(9, 0, 0));
-    QDateTime end(QDate(2020, 1, 3), QTime(10, 0, 0));
+    QDateTime begin(QDate(2020, 3, 1), QTime(9, 0, 0));
+    QDateTime end(QDate(2021, 3, 1), QTime(9, 0, 0));
 
     qDebug() << EasyLiving::dateTimeDelta(begin, end);
 
