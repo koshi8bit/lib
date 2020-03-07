@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(EasyLiving::formatWindowTitle("Tests"));
+    setWindowTitle(EasyLiving::setWindowTitle("Tests"));
 
     settings = new QSettings("settings.ini", QSettings::IniFormat, this);
 

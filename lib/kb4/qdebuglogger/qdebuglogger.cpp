@@ -2,7 +2,7 @@
 
 static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
 
-QString filename = "./qDebug.txt";
+QString filename = "./qDebug.log";
 
 void writeMessage(QString msg)
 {

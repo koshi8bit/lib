@@ -100,7 +100,7 @@ public:
     static QString pathConcat(QString path1, QString path2);
 
     //ui
-    static QString formatWindowTitle(QString text);
+    static QString setWindowTitle(QString text);
 
 private:
     static void del(long long &delta, int &v, int divider);

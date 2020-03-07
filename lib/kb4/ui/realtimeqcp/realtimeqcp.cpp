@@ -720,3 +720,9 @@ void RealTimeQCP::on_pushButton_clicked()
     QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
 
 }
+
+void RealTimeQCP::on_pushButtonPrintScreen_clicked()
+{
+    PrintScreener::save(this);
+
+}

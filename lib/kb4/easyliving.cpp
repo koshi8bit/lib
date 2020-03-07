@@ -344,7 +344,7 @@ QString EasyLiving::pathConcat(QString path1, QString path2)
     return finalPath;
 }
 
-QString EasyLiving::formatWindowTitle(QString text)
+QString EasyLiving::setWindowTitle(QString text)
 {
     return QString("%1 /// Aleksey K. [koshi8bit]").arg(text);
 }

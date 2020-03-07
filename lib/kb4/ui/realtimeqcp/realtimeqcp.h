@@ -8,6 +8,7 @@
 #include <lib/qcustomplot/qcustomplot.h>
 
 #include <lib/kb4/easyliving.h>
+#include <lib/kb4/ui/printscreener/printscreener.h>
 //#include <lib/kb4/log/channeldouble.h>
 
 #include "axisconfig.h"
@@ -157,6 +158,7 @@ private slots:
     void _setTimeAxisRange(const QCPRange &newRange);
 
     void on_pushButton_clicked();
+    void on_pushButtonPrintScreen_clicked();
 };
 
 #endif // REALTIMEQCP_H
