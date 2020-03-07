@@ -52,6 +52,38 @@ bool EasyLiving::isBetween(QDateTime value, QDateTime min, QDateTime max)
     return (value >= min) && (value <= max);
 }
 
+QString EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, bool showMs)
+{
+    int years, month, days, hours, minutes, seconds, milliseconds;
+
+    EasyLiving::dateTimeDelta(begin, end, years, month, days, hours, minutes, seconds, milliseconds);
+    QTime time(hours, minutes, seconds, milliseconds);
+
+    return QString("%1y %2m %3d %4")
+            .arg(years).arg(month).arg(days)
+            .arg(time.toString(EasyLiving::formatTimeUi(showMs)));
+
+
+}
+
+void EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, int &years, int &month, int &days,
+                               int &hours, int &minutes, int &seconds, int &milliseconds)
+{
+    auto delta = qAbs(begin.toMSecsSinceEpoch() - end.toMSecsSinceEpoch());
+
+    del(delta, milliseconds, 1000);
+    del(delta, seconds, 60);
+    del(delta, minutes, 60);
+    del(delta, hours, 60);
+
+}
+
+void EasyLiving::del(long long &delta, int &v, int delitel)
+{
+    v = static_cast<int>(delta % delitel);
+    delta /= delitel;
+}
+
 
 //dateTime
 QString EasyLiving::formatDate()
@@ -291,3 +323,5 @@ QString EasyLiving::formatWindowTitle(QString text)
 {
     return QString("%1 /// Aleksey K. [koshi8bit]").arg(text);
 }
+
+

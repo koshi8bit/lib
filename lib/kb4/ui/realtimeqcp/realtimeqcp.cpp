@@ -448,8 +448,17 @@ void RealTimeQCP::configurePlotLine(QCPItemLine **line)
 void RealTimeQCP::updateTimeAxisLabel()
 {
     auto delta = plot()->xAxis->range().upper - plot()->xAxis->range().lower;
-    auto t = QTime(0, 0, 0).addSecs(static_cast<int>(delta));
-    plot()->xAxis->setLabel(QString("%1 [%2]").arg(timeLabel).arg(t.toString(EasyLiving::formatTimeUi(false))));
+    if (dayStyle())
+    {
+        auto dt = new QDateTime(QDate(0, 0, 0), QTime(0, 0, 0));
+
+    }
+    else
+    {
+        auto t = QTime(0, 0, 0).addSecs(static_cast<int>(delta));
+        plot()->xAxis->setLabel(QString("%1 [%2]").arg(timeLabel).arg(t.toString(EasyLiving::formatTimeUi(false))));
+    }
+
 }
 
 void RealTimeQCP::configureLegend()

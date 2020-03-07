@@ -42,6 +42,10 @@ public:
 
     //dateTime
     static bool isBetween(QDateTime value, QDateTime min, QDateTime max);
+    static QString dateTimeDelta(QDateTime begin, QDateTime end, bool showMs = false);
+    static void dateTimeDelta(QDateTime begin, QDateTime end, int &years, int &month, int &days,
+                              int &hours, int &minutes, int &seconds, int &milliseconds);
+
     static QString formatDate();
 
     static QString formatDateFile();
@@ -97,6 +101,9 @@ public:
 
     //ui
     static QString formatWindowTitle(QString text);
+
+private:
+    static void del(long long &delta, int &v, int delitel);
 
 };
 

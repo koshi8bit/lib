@@ -70,6 +70,24 @@ MainWindow::MainWindow(QWidget *parent) :
     //sl << "asd";
 
     qDebug() << EasyLiving::pathConcat("C:/1", "2\\3");
+
+    QDateTime begin(QDate(2020, 1, 3), QTime(9, 0, 0));
+    QDateTime end(QDate(2020, 1, 3), QTime(10, 0, 0));
+
+    qDebug() << EasyLiving::dateTimeDelta(begin, end);
+
+//    QDateTime interval = QDateTime::fromMSecsSinceEpoch(begin.toMSecsSinceEpoch() - end.toMSecsSinceEpoch());
+//    interval = interval.addYears(-1970);
+//    qDebug() << interval.toString(EasyLiving::formatDateTimeUi());
+//    int years;
+//    int month;
+//    int days;
+//    int hours;
+//    int minutes;
+//    int seconds;
+//    int milliseconds;
+//    EasyLiving::dateTimeDelta(begin, end, years, month, days, hours, minutes, seconds, milliseconds);
+//    qDebug() << years << month << days << hours;// << minutes << seconds << milliseconds;
 }
 
 
