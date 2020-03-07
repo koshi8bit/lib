@@ -188,5 +188,6 @@
         <file>ico/020/icons8-window-cloud-20.png</file>
         <file>ico/020/icons8-window-settings-20.png</file>
         <file>ico/print.png</file>
+        <file>ico/screenshot.png</file>
     </qresource>
 </RCC>

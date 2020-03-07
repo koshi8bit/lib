@@ -157,8 +157,8 @@ private slots:
     void beforeReplot();
     void _setTimeAxisRange(const QCPRange &newRange);
 
-    void on_pushButton_clicked();
     void on_pushButtonPrintScreen_clicked();
+    void on_pushButtonHelp_clicked();
 };
 
 #endif // REALTIMEQCP_H

@@ -715,14 +715,12 @@ bool RealTimeQCP::isInAxisRect(QPoint pos)
     return plot()->axisRect()->rect().contains(pos);
 }
 
-void RealTimeQCP::on_pushButton_clicked()
-{
-    QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
-
-}
-
 void RealTimeQCP::on_pushButtonPrintScreen_clicked()
 {
     PrintScreener::save(this);
+}
 
+void RealTimeQCP::on_pushButtonHelp_clicked()
+{
+    QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
 }

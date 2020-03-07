@@ -55,7 +55,6 @@ DISTFILES += \
 
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
-    lib/kb4/ui/printscreener/printscreener.ui \
     lib/kb4/ui/realtimeqcp/axisconfig.ui \
     lib/kb4/ui/realtimeqcp/graphlegenditem.ui \
     lib/kb4/ui/realtimeqcp/realtimeqcp.ui \
