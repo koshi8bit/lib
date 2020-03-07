@@ -56,6 +56,9 @@
         <height>0</height>
        </size>
       </property>
+      <property name="toolTip">
+       <string>Помощь</string>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
       </property>
@@ -87,6 +90,9 @@
         <width>0</width>
         <height>0</height>
        </size>
+      </property>
+      <property name="toolTip">
+       <string>Сделать скриншот</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>

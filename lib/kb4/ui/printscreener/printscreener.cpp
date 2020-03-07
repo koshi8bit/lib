@@ -7,7 +7,8 @@ PrintScreener::PrintScreener()
 
 bool PrintScreener::save(QWidget *widget)
 {
-    auto defaultFileName = QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeFile());
+    auto defaultFileName = QString("screenshot--%1")
+            .arg(QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeFile()));
     auto defaultPath = EasyLiving::pathConcat(qApp->applicationDirPath(), defaultFileName);
 
     QString fileName = QFileDialog::getSaveFileName(widget, QObject::tr("Save File"),
