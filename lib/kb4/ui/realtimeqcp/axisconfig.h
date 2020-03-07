@@ -41,7 +41,7 @@ private slots:
 
 
     void on_spinBoxFullSec_valueChanged(int arg1);
-    void spinBoxHoursMinutesSecondsValueChanged(int arg1);
+    void spinBoxDaysHoursMinutesSecondsValueChanged(int arg1);
 
     void on_pushButtonTime010000_clicked();
     void on_pushButtonTime001000_clicked();
@@ -49,10 +49,12 @@ private slots:
     void on_pushButtonTime000100_clicked();
     void on_pushButtonTime000030_clicked();
 
+
 private:
     Ui::AxisConfig *ui;
     QCPAxis *axis;
     AxisType axisType;
+    const int dayToSecond = 24 * 60 * 60;
     //RealTimeQCP *plot;
 
 

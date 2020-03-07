@@ -27,9 +27,10 @@ AxisConfig::AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
         ui->lineEditLabel->setVisible(false);
 
         ui->spinBoxFullSec->setValue(static_cast<int>(axis->range().upper - axis->range().lower));
-        connect(ui->spinBoxHours, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
-        connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
-        connect(ui->spinBoxSeconds, SIGNAL(valueChanged(int)), this, SLOT(spinBoxHoursMinutesSecondsValueChanged(int)));
+        connect(ui->spinBoxDays, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
+        connect(ui->spinBoxHours, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
+        connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
+        connect(ui->spinBoxSeconds, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
 
         resize(450, 110);
 
@@ -171,19 +172,23 @@ void AxisConfig::on_checkBoxLog10_stateChanged(int arg1)
 void AxisConfig::on_spinBoxFullSec_valueChanged(int arg1)
 {
     QTime t = QTime(0, 0, 0).addSecs(arg1);
+    ui->spinBoxDays->setValue(arg1 / dayToSecond);
     ui->spinBoxHours->setValue(t.hour());
     ui->spinBoxMinutes->setValue(t.minute());
     ui->spinBoxSeconds->setValue(t.second());
 }
 
-void AxisConfig::spinBoxHoursMinutesSecondsValueChanged(int arg1)
+void AxisConfig::spinBoxDaysHoursMinutesSecondsValueChanged(int arg1)
 {
     Q_UNUSED(arg1)
     QTime t = QTime(ui->spinBoxHours->value(),
                     ui->spinBoxMinutes->value(),
                     ui->spinBoxSeconds->value());
 
-    ui->spinBoxFullSec->setValue(-t.secsTo(QTime(0, 0, 0)));
+    auto sec = -t.secsTo(QTime(0, 0, 0));
+    sec += ui->spinBoxDays->value() * dayToSecond;
+
+    ui->spinBoxFullSec->setValue(sec);
 }
 
 void AxisConfig::on_pushButtonTime010000_clicked()
@@ -210,5 +215,4 @@ void AxisConfig::on_pushButtonTime000030_clicked()
 {
     ui->spinBoxFullSec->setValue(30);
 }
-
 
