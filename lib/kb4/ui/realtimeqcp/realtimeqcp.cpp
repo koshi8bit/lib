@@ -457,6 +457,8 @@ void RealTimeQCP::updateTimeAxisLabel()
     auto end = keyToDateTime(plot()->xAxis->range().lower);
     auto delta = EasyLiving::dateTimeDelta(begin, end, false);
     plot()->xAxis->setLabel(QString("%1 [%2]").arg(timeLabel).arg(delta));
+
+    //  deleteLater
 //    if (dayStyle())
 //    {
 //        auto dt = new QDateTime(QDate(0, 0, 0), QTime(0, 0, 0));

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <lib/qcustomplot/qcustomplot.h>
 
+//#include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
 #include <lib/kb4/easyliving.h>
 
 namespace Ui {
@@ -52,6 +53,7 @@ private:
     Ui::AxisConfig *ui;
     QCPAxis *axis;
     AxisType axisType;
+    //RealTimeQCP *plot;
 
 
 };
