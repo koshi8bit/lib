@@ -52,11 +52,12 @@ bool EasyLiving::isBetween(QDateTime value, QDateTime min, QDateTime max)
     return (value >= min) && (value <= max);
 }
 
-QString EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, bool showMs)
+QString EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, bool daysOnly, bool showMs)
 {
     int years=0, month=0, days, hours, minutes, seconds, milliseconds;
 
-    EasyLiving::dateTimeDelta(begin, end, years, month, days, hours, minutes, seconds, milliseconds);
+    EasyLiving::dateTimeDelta(begin, end, years, month, days,
+                              hours, minutes, seconds, milliseconds, daysOnly);
     QTime time(hours, minutes, seconds, milliseconds);
 
     QString message;
@@ -76,7 +77,7 @@ void EasyLiving::messageAppend(QString &message, int value, QString postfix)
 }
 
 void EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, int &years, int &month, int &days,
-                               int &hours, int &minutes, int &seconds, int &milliseconds)
+                               int &hours, int &minutes, int &seconds, int &milliseconds, bool daysOnly)
 {
     auto delta = qAbs(begin.toMSecsSinceEpoch() - end.toMSecsSinceEpoch());
 
@@ -85,18 +86,22 @@ void EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, int &years, int &
     del(delta, minutes, 60);
     del(delta, hours, 24);
 
-//    del(delta, days, 30);
-//    del(delta, month, 12);
-//    years = static_cast<int>(delta);
-
-    days = static_cast<int>(delta);
-
+    if (daysOnly)
+    {
+        days = static_cast<int>(delta);
+    }
+    else
+    {
+        del(delta, days, 30);
+        del(delta, month, 12);
+        years = static_cast<int>(delta);
+    }
 }
 
-void EasyLiving::del(long long &delta, int &v, int delitel)
+void EasyLiving::del(long long &delta, int &v, int divider)
 {
-    v = static_cast<int>(delta % delitel);
-    delta /= delitel;
+    v = static_cast<int>(delta % divider);
+    delta /= divider;
 }
 
 

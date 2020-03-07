@@ -191,6 +191,11 @@ double RealTimeQCP::dateTimeToKey(QDateTime dt)
     return dt.toTime_t() + static_cast<double>(dt.time().msec())/1000;
 }
 
+QDateTime RealTimeQCP::keyToDateTime(double key)
+{
+    return QDateTime::fromTime_t(static_cast<uint>(key));
+}
+
 
 void RealTimeQCP::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
 {
@@ -447,17 +452,21 @@ void RealTimeQCP::configurePlotLine(QCPItemLine **line)
 
 void RealTimeQCP::updateTimeAxisLabel()
 {
-    auto delta = plot()->xAxis->range().upper - plot()->xAxis->range().lower;
-    if (dayStyle())
-    {
-        auto dt = new QDateTime(QDate(0, 0, 0), QTime(0, 0, 0));
+    //auto delta = plot()->xAxis->range().upper - plot()->xAxis->range().lower;
+    auto begin = keyToDateTime(plot()->xAxis->range().upper);
+    auto end = keyToDateTime(plot()->xAxis->range().lower);
+    auto delta = EasyLiving::dateTimeDelta(begin, end, false);
+    plot()->xAxis->setLabel(QString("%1 [%2]").arg(timeLabel).arg(delta));
+//    if (dayStyle())
+//    {
+//        auto dt = new QDateTime(QDate(0, 0, 0), QTime(0, 0, 0));
 
-    }
-    else
-    {
-        auto t = QTime(0, 0, 0).addSecs(static_cast<int>(delta));
-        plot()->xAxis->setLabel(QString("%1 [%2]").arg(timeLabel).arg(t.toString(EasyLiving::formatTimeUi(false))));
-    }
+//    }
+//    else
+//    {
+//        auto t = QTime(0, 0, 0).addSecs(static_cast<int>(delta));
+//        plot()->xAxis->setLabel(QString("%1 [%2]").arg(timeLabel).arg(t.toString(EasyLiving::formatTimeUi(false))));
+//    }
 
 }
 
@@ -659,12 +668,12 @@ void RealTimeQCP::setCursorKey(double time)
 }
 
 
-QString RealTimeQCP::formatLabelTime(double time)
+QString RealTimeQCP::formatLabelTime(double key)
 {
     //TODO show MSEC ?formatTimeUi(true) and +07:00
     //auto mouseTimeQDT = QDateTime().fromString("1970-01-01T00:00:00", Qt::ISODate).addMSecs(static_cast<qint64>(time*1000));
 
-    auto mouseTimeQDT = QDateTime::fromTime_t(static_cast<uint>(time));
+    auto mouseTimeQDT = keyToDateTime(key);
     auto mouseTimeStr = mouseTimeQDT.toString(EasyLiving::formatTimeUi(false));
 
     if (dayStyle())

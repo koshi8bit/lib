@@ -42,9 +42,9 @@ public:
 
     //dateTime
     static bool isBetween(QDateTime value, QDateTime min, QDateTime max);
-    static QString dateTimeDelta(QDateTime begin, QDateTime end, bool showMs = false);
+    static QString dateTimeDelta(QDateTime begin, QDateTime end, bool daysOnly = true, bool showMs = false);
     static void dateTimeDelta(QDateTime begin, QDateTime end, int &years, int &month, int &days,
-                              int &hours, int &minutes, int &seconds, int &milliseconds);
+                              int &hours, int &minutes, int &seconds, int &milliseconds, bool daysOnly = true);
 
     static QString formatDate();
 
@@ -103,7 +103,7 @@ public:
     static QString formatWindowTitle(QString text);
 
 private:
-    static void del(long long &delta, int &v, int delitel);
+    static void del(long long &delta, int &v, int divider);
     static void messageAppend(QString &message, int value, QString postfix);
 
 };
