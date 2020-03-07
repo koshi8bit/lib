@@ -54,26 +54,30 @@ bool EasyLiving::isBetween(QDateTime value, QDateTime min, QDateTime max)
 
 QString EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, bool daysOnly, bool showMs)
 {
-    int years=0, month=0, days, hours, minutes, seconds, milliseconds;
+    int years=0, months=0, days, hours, minutes, seconds, milliseconds;
 
-    EasyLiving::dateTimeDelta(begin, end, years, month, days,
+    EasyLiving::dateTimeDelta(begin, end, years, months, days,
                               hours, minutes, seconds, milliseconds, daysOnly);
     QTime time(hours, minutes, seconds, milliseconds);
 
     QString message;
 
     messageAppend(message, years, "y");
-    messageAppend(message, month, "m");
-    messageAppend(message, days, "d");
+    messageAppend(message, months, "m", (years!=0));
+    messageAppend(message, days, "d", (years!=0)||(months!=0));
     message.append(time.toString(EasyLiving::formatTimeUi(showMs)));
     return message;
 }
 
 
-void EasyLiving::messageAppend(QString &message, int value, QString postfix)
+void EasyLiving::messageAppend(QString &message, int value, QString postfix, bool forseAppend)
 {
-    if (value != 0)
-        message.append(QString("%1%2 ").arg(value).arg(postfix));
+    if ((value != 0) || forseAppend)
+    {
+        message.append(QString("%1%2 ")
+                       .arg(value, 2, 10, QChar('0'))
+                       .arg(postfix));
+    }
 }
 
 void EasyLiving::dateTimeDelta(QDateTime begin, QDateTime end, int &years, int &month, int &days,
