@@ -5,15 +5,18 @@ PrintScreener::PrintScreener()
 
 }
 
-bool PrintScreener::save(QWidget *widget)
+bool PrintScreener::save(QWidget *widget, QString fileName)
 {
-    auto defaultFileName = QString("screenshot--%1")
-            .arg(QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeFile()));
-    auto defaultPath = EasyLiving::pathConcat(qApp->applicationDirPath(), defaultFileName);
+    if (fileName.isEmpty())
+    {
+        auto defaultFileName = QString("screenshot--%1")
+                .arg(QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeFile()));
+        auto defaultPath = EasyLiving::pathConcat(qApp->applicationDirPath(), defaultFileName);
 
-    QString fileName = QFileDialog::getSaveFileName(widget, QObject::tr("Save File"),
-                               defaultPath,
-                               QObject::tr("PNG (*.png);;JPEG (*.jpeg *.jpg)"));
+        fileName = QFileDialog::getSaveFileName(widget, QObject::tr("Save File"),
+                                   defaultPath,
+                                   QObject::tr("PNG (*.png);;JPEG (*.jpeg *.jpg)"));
+    }
 
     if (fileName.isEmpty())
         return false;

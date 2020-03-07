@@ -315,7 +315,7 @@ void MainWindow::configureRealTimeQcpPlotDayStyle()
 {
     auto plot = ui->realTimeQcpDayStyle;
     plot->configureAxis(plot->plot()->yAxis, tr("Шкала"), "", 0, 10, 2);
-    plot->setDayStyle(true);
+    plot->setDayStyle(true, false);
 }
 
 

@@ -497,13 +497,16 @@ void RealTimeQCP::autoScaleAxis(QCPAxis *axis)
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
-void RealTimeQCP::setDayStyle(bool newValue)
+void RealTimeQCP::setDayStyle(bool newValue, bool showTime)
 {
     _dayStyle = newValue;
     if (dayStyle())
     {
         QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
-        dateTicker->setDateTimeFormat(EasyLiving::formatDateUi()+"\n"+EasyLiving::formatTimeUi());
+        auto format = EasyLiving::formatDateUi();
+        if (showTime)
+            format.append("\n"+EasyLiving::formatTimeUi());
+        dateTicker->setDateTimeFormat(format);
         plot()->xAxis->setTicker(dateTicker);
 
         setRealTime(false);
@@ -538,6 +541,7 @@ void RealTimeQCP::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
         AxisConfig ac(axis, plot->xAxis == axis, this);
         ac.setModal(true);
         ac.exec();
+        plot->replot();
     }
 }
 
