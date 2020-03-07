@@ -67,6 +67,8 @@ public:
 
 
 
+    QVector<Graph *> graphs() const;
+
 signals:
     void cursor2VisibleValueChanged(bool newValue);
     void moveLineRealTimeChanged(bool newValue);
@@ -119,7 +121,7 @@ private:
 
 
     //WARNING rename to _graphs?
-    QVector<Graph *> graphs;
+    QVector<Graph *> _graphs;
     QString formatLabelTime(double key);
 
     bool isInAxisRect(QPoint pos);

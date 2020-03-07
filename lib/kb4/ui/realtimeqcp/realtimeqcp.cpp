@@ -230,7 +230,7 @@ Graph *RealTimeQCP::addGraph(QCPAxis *axis, const QString &label, const QString 
                             precision,
                             scientificNotation);
 
-    graphs.append(graph);
+    _graphs.append(graph);
     legendLayout->insertWidget(legendLayout->count()-1, graph->graphLegendItem());
     return graph;
 }
@@ -260,7 +260,7 @@ void RealTimeQCP::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
 void RealTimeQCP::_setCursor2Visible(bool newValue)
 {
     _cursor2->setVisible(newValue);
-    foreach (auto graphElement, graphs)
+    foreach (auto graphElement, _graphs)
     {
         graphElement->setCursor2Visible(newValue);
     }
@@ -273,7 +273,7 @@ void RealTimeQCP::_setCursor2Visible(bool newValue)
 
 void RealTimeQCP::_setCursor2Key(double key)
 {
-    foreach (auto graphElement, graphs)
+    foreach (auto graphElement, _graphs)
     {
         graphElement->moveCursor2(_cursor->start->key());
     }
@@ -490,6 +490,11 @@ void RealTimeQCP::configureSplitter()
     ui->horizontalLayout->insertWidget(1, splitter);
 }
 
+QVector<Graph *> RealTimeQCP::graphs() const
+{
+    return _graphs;
+}
+
 void RealTimeQCP::autoScaleAxis(QCPAxis *axis)
 {
     axis->rescale(true);
@@ -511,7 +516,7 @@ void RealTimeQCP::setDayStyle(bool newValue, bool showTime)
 
         setRealTime(false);
 
-        foreach(auto g, graphs)
+        foreach(auto g, _graphs)
         {
             g->graph()->setLineStyle(QCPGraph::lsLine);
 //            g->graph()->setLineStyle(QCPGraph::lsNone);
@@ -581,7 +586,7 @@ void RealTimeQCP::mousePress(QMouseEvent *event)
             }
 
 
-            foreach (auto graphElement, graphs)
+            foreach (auto graphElement, _graphs)
             {
                 graphElement->updateValue();
             }
@@ -644,7 +649,7 @@ void RealTimeQCP::_setCursorKey(double time)
     if (labelTime->isVisible())
         labelTime->setText(formatLabelTime(time));
 
-    foreach (auto graphElement, graphs)
+    foreach (auto graphElement, _graphs)
     {
         graphElement->moveCursor(time);
     }
