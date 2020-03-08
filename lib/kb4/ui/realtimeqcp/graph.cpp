@@ -41,10 +41,10 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
 Graph::~Graph()
 {
     //FIXME exception
-    //_graph->deleteLater();
-    //_tracer->deleteLater();
-
-    //_graphLegendItem->deleteLater();
+//    _graph->deleteLater();
+    _graphLegendItem->deleteLater();
+//    _cursor->deleteLater();
+//    _cursor2->deleteLater();
 }
 
 
@@ -94,14 +94,17 @@ void Graph::updateValue()
 {
     if (visible())
     {
-        if (_cursor2->visible())
+        if (_graphLegendItem)
         {
-            auto deltaValue = _cursor->position->value() - _cursor2->position->value();
-            _graphLegendItem->setValue(deltaValue, true);
-        }
-        else
-        {
-            _graphLegendItem->setValue(_valueCursor);
+            if (_cursor2->visible())
+            {
+                auto deltaValue = _cursor->position->value() - _cursor2->position->value();
+                    _graphLegendItem->setValue(deltaValue, true);
+            }
+            else
+            {
+                _graphLegendItem->setValue(_valueCursor);
+            }
         }
         _valueCursor = _cursor->position->value();
     }
@@ -146,7 +149,8 @@ void Graph::setVisible(bool newValue)
 {
     //TODO autoscale without unsivible graphs
     _setVisible(newValue);
-    _graphLegendItem->setVisibleValue(newValue);
+    if (_graphLegendItem)
+        _graphLegendItem->setVisibleValue(newValue);
 }
 
 
@@ -181,7 +185,8 @@ void Graph::setColor(QColor newValue)
 {
     _setColor(newValue);
 
-    _graphLegendItem->setColor(newValue);
+    if (_graphLegendItem)
+        _graphLegendItem->setColor(newValue);
 }
 
 void Graph::setColorByWidget(QColor newValue)

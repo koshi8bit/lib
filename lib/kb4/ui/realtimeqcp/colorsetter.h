@@ -17,6 +17,7 @@ public:
     explicit ColorSetter(QObject *parent = nullptr);
 
     QColor getColor();
+    void resetColors();
 
 private:
     QQueue<QColor> *colors;

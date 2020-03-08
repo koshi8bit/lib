@@ -235,6 +235,16 @@ Graph *RealTimeQCP::addGraph(QCPAxis *axis, const QString &label, const QString 
     return graph;
 }
 
+void RealTimeQCP::removeGraphs()
+{
+    foreach(auto g , graphs())
+    {
+        g->deleteLater();
+    }
+    _graphs.clear();
+    colorSetter.resetColors();
+}
+
 
 void RealTimeQCP::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
 {

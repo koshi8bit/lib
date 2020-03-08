@@ -38,6 +38,8 @@ public:
     Graph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     //Graph* addGraph(ChannelDouble *channel, bool visible = true);
+    //void removeGraph(QCPGraph *graph);
+    void removeGraphs();
 
     QCustomPlot* plot() const;
 
