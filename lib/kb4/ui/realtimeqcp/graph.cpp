@@ -41,7 +41,7 @@ Graph::Graph(const QString &label, const QString &postfix, QColor color, QCustom
 Graph::~Graph()
 {
     //FIXME exception
-    _graph->deleteLater();
+//    _graph->deleteLater();
     _graphLegendItem->deleteLater();
 //    _cursor->deleteLater();
 //    _cursor2->deleteLater();
