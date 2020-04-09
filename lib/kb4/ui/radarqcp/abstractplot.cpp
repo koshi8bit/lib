@@ -9,7 +9,7 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
     ui->widgetToolTip->setVisible(false);
     configureLegend();
 
-    plot = ui->plot;
+    _plot = ui->plot;
 
 }
 
@@ -18,27 +18,17 @@ AbstractPlot::~AbstractPlot()
     delete ui;
 }
 
-Graph *AbstractPlot::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
-{
-    return addGraph(plot->yAxis, label, postfix, precision, scientificNotation);
-}
 
-Graph *AbstractPlot::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, int precision, bool scientificNotation)
+AbstractGraph *AbstractPlot::addGraph()
 {
-    auto graph = new Graph( label,
-                            postfix,
-                            colorSetter.getColor(),
-                            plot,
-                            axis,
-                            precision,
-                            scientificNotation);
+    auto graph = abstractAddGraphGraph();
 
     _graphs.append(graph);
     legendLayout->insertWidget(legendLayout->count()-1, graph->graphLegendItem());
     return graph;
 }
 
-QVector<Graph *> AbstractPlot::graphs() const
+QVector<AbstractGraph *> AbstractPlot::graphs() const
 {
     return _graphs;
 }
@@ -63,4 +53,9 @@ void AbstractPlot::configureLegend()
 
     auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
     legendLayout->addItem(spacer);
+}
+
+QCustomPlot *AbstractPlot::qcp() const
+{
+    return _plot;
 }

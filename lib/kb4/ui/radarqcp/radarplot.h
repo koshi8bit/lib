@@ -2,11 +2,12 @@
 #define RADARQCP_H
 
 #include "abstractplot.h"
+#include "radargraph.h"
 
-class RadarQcp : public AbstractPlot
+class RadarPlot : public AbstractPlot
 {
 public:
-    RadarQcp(QWidget *parent);
+    RadarPlot(QWidget *parent);
 
 protected:
     void configurePlot() override;
@@ -17,6 +18,10 @@ private:
 
     QCPItemEllipse *drawCircle(double radius, QColor color);
     void configureLines(double maxDiameter);
+
+    // AbstractPlot interface
+protected:
+    AbstractGraph *abstractAddGraphGraph() override;
 };
 
 #endif // RADARQCP_H

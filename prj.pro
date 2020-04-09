@@ -94,7 +94,7 @@ HEADERS += \
     lib/kb4/ui/radarqcp/abstractgraph.h \
     lib/kb4/ui/radarqcp/abstractplot.h \
     lib/kb4/ui/radarqcp/radargraph.h \
-    lib/kb4/ui/radarqcp/radarqcp.h \
+    lib/kb4/ui/radarqcp/radarplot.h \
     lib/kb4/ui/realtimeqcp/axisconfig.h \
     lib/kb4/ui/realtimeqcp/colorsetter.h \
     lib/kb4/ui/realtimeqcp/graph.h \
@@ -135,7 +135,7 @@ SOURCES += \
     lib/kb4/ui/radarqcp/abstractgraph.cpp \
     lib/kb4/ui/radarqcp/abstractplot.cpp \
     lib/kb4/ui/radarqcp/radargraph.cpp \
-    lib/kb4/ui/radarqcp/radarqcp.cpp \
+    lib/kb4/ui/radarqcp/radarplot.cpp \
     lib/kb4/ui/realtimeqcp/axisconfig.cpp \
     lib/kb4/ui/realtimeqcp/colorsetter.cpp \
     lib/kb4/ui/realtimeqcp/graph.cpp \

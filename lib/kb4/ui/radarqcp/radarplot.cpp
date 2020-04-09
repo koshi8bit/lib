@@ -1,12 +1,12 @@
-#include "radarqcp.h"
+#include "radarplot.h"
 
-RadarQcp::RadarQcp(QWidget *parent)
+RadarPlot::RadarPlot(QWidget *parent)
     :AbstractPlot(parent)
 {
     configurePlot();
 }
 
-void RadarQcp::configurePlot()
+void RadarPlot::configurePlot()
 {
 //    plot->setInteraction(QCP::iRangeZoom, true);
 //    plot->setInteraction(QCP::iRangeDrag, true);
@@ -26,7 +26,7 @@ void RadarQcp::configurePlot()
     configureLines(maxDiameter);
 }
 
-void RadarQcp::configureLines(double maxDiameter)
+void RadarPlot::configureLines(double maxDiameter)
 {
     QCPItemLine *hLine = new QCPItemLine(plot);
     hLine->setPen(QPen(Qt::black));
@@ -47,7 +47,12 @@ void RadarQcp::configureLines(double maxDiameter)
     line135->end->setCoords(toPolar(maxDiameter, 180+135));
 }
 
-QPointF RadarQcp::toPolar(double r, double angle)
+AbstractGraph *RadarPlot::abstractAddGraphGraph()
+{
+    return RadarGraph()
+}
+
+QPointF RadarPlot::toPolar(double r, double angle)
 {
     //TODO rewrite to standart pos
     auto angleDegree = angle*M_PI/180.0;
@@ -56,7 +61,7 @@ QPointF RadarQcp::toPolar(double r, double angle)
 
 
 
-QCPItemEllipse* RadarQcp::drawCircle(double radius, QColor color)
+QCPItemEllipse* RadarPlot::drawCircle(double radius, QColor color)
 {
     auto ellipse = new QCPItemEllipse(plot);
     ellipse->topLeft->setCoords(-radius/2.0, -radius/2.0);

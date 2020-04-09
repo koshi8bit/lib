@@ -5,8 +5,9 @@
 
 #include <lib/qcustomplot/qcustomplot.h>
 #include <lib/kb4/ui/printscreener/printscreener.h>
-#include <lib/kb4/ui/realtimeqcp/graph.h>
 #include <lib/kb4/ui/realtimeqcp/colorsetter.h>
+
+#include "abstractgraph.h"
 
 namespace Ui {
 class AbstractPlot;
@@ -20,10 +21,13 @@ public:
     explicit AbstractPlot(QWidget *parent = nullptr);
     ~AbstractPlot();
 
-    Graph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
-    Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
 
-    QVector<Graph *> graphs() const;
+    AbstractGraph* addGraph();
+
+
+    QVector<AbstractGraph *> graphs() const;
+
+    QCustomPlot *qcp() const;
 
 private slots:
     void on_pushButtonPrintScreen_clicked();
@@ -34,14 +38,16 @@ private:
     Ui::AbstractPlot *ui;
     void configureLegend();
     ColorSetter colorSetter;
-    QVector<Graph *> _graphs;
+    QVector<AbstractGraph *> _graphs;
 
 protected:
     const QString timeLabel = tr("Время");
 
     virtual void configurePlot() = 0;
 
-    QCustomPlot *plot;
+    virtual AbstractGraph *abstractAddGraphGraph() = 0;
+
+    QCustomPlot *_plot;
     QVBoxLayout *legendLayout;
     QLabel *labelTime;
 
