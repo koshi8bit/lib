@@ -4,5 +4,10 @@ RadarGraph::RadarGraph(const QString &label, const QString &postfix, QColor colo
                        RadarQcp *plot, int precision, bool scientificNotation)
     :AbstractGraph(label, postfix, color, precision, scientificNotation, plot)
 {
+    this->plot = plot;
+}
 
+void RadarGraph::setValue(double newValue)
+{
+    _graphLegendItem->setValue(newValue);
 }

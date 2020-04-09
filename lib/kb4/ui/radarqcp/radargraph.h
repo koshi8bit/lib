@@ -9,6 +9,12 @@ class RadarGraph : public AbstractGraph
 public:
     RadarGraph(const QString &label, const QString &postfix, QColor color, RadarQcp *plot,
                int precision = 3, bool scientificNotation = false);
+
+public slots:
+    void setValue(double newValue);
+
+private:
+    RadarQcp *plot;
 };
 
 #endif // RADARGRAPH_H

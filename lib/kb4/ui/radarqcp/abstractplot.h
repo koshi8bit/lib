@@ -9,16 +9,16 @@
 #include <lib/kb4/ui/realtimeqcp/colorsetter.h>
 
 namespace Ui {
-class QcpWithLegend;
+class AbstractPlot;
 }
 
-class QcpWithLegend : public QWidget
+class AbstractPlot : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QcpWithLegend(QWidget *parent = nullptr);
-    ~QcpWithLegend();
+    explicit AbstractPlot(QWidget *parent = nullptr);
+    ~AbstractPlot();
 
     Graph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     Graph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
@@ -31,7 +31,7 @@ private slots:
     void on_pushButtonHelp_clicked();
 
 private:
-    Ui::QcpWithLegend *ui;
+    Ui::AbstractPlot *ui;
     void configureLegend();
     ColorSetter colorSetter;
     QVector<Graph *> _graphs;

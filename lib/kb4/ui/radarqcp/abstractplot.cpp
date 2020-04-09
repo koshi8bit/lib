@@ -1,9 +1,9 @@
-#include "qcpwithlegend.h"
+#include "abstractplot.h"
 #include "ui_plotwithlegend.h"
 
-QcpWithLegend::QcpWithLegend(QWidget *parent) :
+AbstractPlot::AbstractPlot(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::QcpWithLegend)
+    ui(new Ui::AbstractPlot)
 {
     ui->setupUi(this);
     ui->widgetToolTip->setVisible(false);
@@ -13,17 +13,17 @@ QcpWithLegend::QcpWithLegend(QWidget *parent) :
 
 }
 
-QcpWithLegend::~QcpWithLegend()
+AbstractPlot::~AbstractPlot()
 {
     delete ui;
 }
 
-Graph *QcpWithLegend::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
+Graph *AbstractPlot::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
 {
     return addGraph(plot->yAxis, label, postfix, precision, scientificNotation);
 }
 
-Graph *QcpWithLegend::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, int precision, bool scientificNotation)
+Graph *AbstractPlot::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, int precision, bool scientificNotation)
 {
     auto graph = new Graph( label,
                             postfix,
@@ -38,22 +38,22 @@ Graph *QcpWithLegend::addGraph(QCPAxis *axis, const QString &label, const QStrin
     return graph;
 }
 
-QVector<Graph *> QcpWithLegend::graphs() const
+QVector<Graph *> AbstractPlot::graphs() const
 {
     return _graphs;
 }
 
-void QcpWithLegend::on_pushButtonPrintScreen_clicked()
+void AbstractPlot::on_pushButtonPrintScreen_clicked()
 {
     PrintScreener::save(this);
 }
 
-void QcpWithLegend::on_pushButtonHelp_clicked()
+void AbstractPlot::on_pushButtonHelp_clicked()
 {
     QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
 }
 
-void QcpWithLegend::configureLegend()
+void AbstractPlot::configureLegend()
 {
     legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
 

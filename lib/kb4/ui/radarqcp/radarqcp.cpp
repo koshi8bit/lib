@@ -1,7 +1,7 @@
 #include "radarqcp.h"
 
 RadarQcp::RadarQcp(QWidget *parent)
-    :QcpWithLegend(parent)
+    :AbstractPlot(parent)
 {
     configurePlot();
 }

@@ -1,9 +1,9 @@
 #ifndef RADARQCP_H
 #define RADARQCP_H
 
-#include "qcpwithlegend.h"
+#include "abstractplot.h"
 
-class RadarQcp : public QcpWithLegend
+class RadarQcp : public AbstractPlot
 {
 public:
     RadarQcp(QWidget *parent);

@@ -32,11 +32,12 @@ private:
     bool _visible;
     bool _scientificNotation;
     int _precision;
-    GraphLegendItem *_graphLegendItem;
 
     void _setVisible(bool newValue);
     void _setColor(QColor newValue);
 
+protected:
+    GraphLegendItem *_graphLegendItem;
 
 };
 

@@ -55,7 +55,7 @@ DISTFILES += \
 
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
-    lib/kb4/ui/radarqcp/qcpwithlegend.ui \
+    lib/kb4/ui/radarqcp/abstractplot.ui \
     lib/kb4/ui/realtimeqcp/axisconfig.ui \
     lib/kb4/ui/realtimeqcp/graphlegenditem.ui \
     lib/kb4/ui/realtimeqcp/realtimeqcp.ui \
@@ -92,7 +92,7 @@ HEADERS += \
     lib/kb4/ui/label/qlabelext.h \
     lib/kb4/ui/printscreener/printscreener.h \
     lib/kb4/ui/radarqcp/abstractgraph.h \
-    lib/kb4/ui/radarqcp/qcpwithlegend.h \
+    lib/kb4/ui/radarqcp/abstractplot.h \
     lib/kb4/ui/radarqcp/radargraph.h \
     lib/kb4/ui/radarqcp/radarqcp.h \
     lib/kb4/ui/realtimeqcp/axisconfig.h \
@@ -133,7 +133,7 @@ SOURCES += \
     lib/kb4/ui/label/qlabelext.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
     lib/kb4/ui/radarqcp/abstractgraph.cpp \
-    lib/kb4/ui/radarqcp/qcpwithlegend.cpp \
+    lib/kb4/ui/radarqcp/abstractplot.cpp \
     lib/kb4/ui/radarqcp/radargraph.cpp \
     lib/kb4/ui/radarqcp/radarqcp.cpp \
     lib/kb4/ui/realtimeqcp/axisconfig.cpp \

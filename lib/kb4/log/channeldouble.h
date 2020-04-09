@@ -5,7 +5,7 @@
 
 #include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
 #include <lib/kb4/ui/realtimeqcp/graph.h>
-#include <lib/kb4/ui/radarqcp/qcpwithlegend.h>
+#include <lib/kb4/ui/radarqcp/abstractplot.h>
 
 class ChannelDouble : public ChannelT<double>
 {
@@ -24,7 +24,7 @@ public:
 //    ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
 //  TODO DELETE LATER
     void addGraphToPlot(RealTimeQCP *plot, bool visible=true);
-    void addGraphToPlot(QcpWithLegend *plot, bool visible=true);
+    void addGraphToPlot(AbstractPlot *plot, bool visible=true);
 
     bool scientificNotation();
     void setScientificNotation(bool newValue);
