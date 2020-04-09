@@ -110,6 +110,7 @@ private slots:
     void on_pushButtonNow_clicked();
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
+    void on_horizontalSlider_2_valueChanged(int value);
 };
 
 #endif // MAINWINDOW_H

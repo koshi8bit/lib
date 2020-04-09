@@ -1,22 +1,22 @@
 #ifndef RADARQCP_H
 #define RADARQCP_H
 
-#include <QWidget>
+#include "qcpwithlegend.h"
 
-namespace Ui {
-class RadarQcp;
-}
-
-class RadarQcp : public QWidget
+class RadarQcp : public QcpWithLegend
 {
-    Q_OBJECT
-
 public:
-    explicit RadarQcp(QWidget *parent = nullptr);
-    ~RadarQcp();
+    RadarQcp(QWidget *parent);
+
+protected:
+    void configurePlot() override;
+    QPointF toPolar(double r, double angle);
 
 private:
-    Ui::RadarQcp *ui;
+    QCPItemEllipse *criticalCircle;
+
+    QCPItemEllipse *drawCircle(double radius, QColor color);
+    void configureLines(double maxDiameter);
 };
 
 #endif // RADARQCP_H

@@ -18,11 +18,11 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
-        <string>RealTimeQCP</string>
+        <string>RealTimeQcp</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="2" column="0">
@@ -67,11 +67,28 @@
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>RealTimeQCP dayStyle</string>
+        <string>RealTimeQcp dayStyle</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="RealTimeQCP" name="realTimeQcpDayStyle" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_9">
+       <attribute name="title">
+        <string>RadarQcp</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="RadarQcp" name="radarQcp" native="true"/>
+        </item>
+        <item>
+         <widget class="QSlider" name="horizontalSlider_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -396,27 +413,17 @@
    <header>lib/kb4/ui/realtimeqcp/realtimeqcp.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>RadarQcp</class>
+   <extends>QWidget</extends>
+   <header>lib/kb4/ui/radarqcp/radarqcp.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="lib/kb4/pic/ui-res.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>dialA</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>lcdNumber_2</receiver>
-   <slot>display(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>215</x>
-     <y>198</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>215</x>
-     <y>305</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>dialB</sender>
    <signal>valueChanged(int)</signal>
@@ -446,6 +453,22 @@
     <hint type="destinationlabel">
      <x>562</x>
      <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialA</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber_2</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>305</y>
     </hint>
    </hints>
   </connection>
