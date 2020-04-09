@@ -372,30 +372,31 @@ void RealTimeQCP::setMoveLineRealTime(bool newValue)
 
 void RealTimeQCP::configureAxesZoomAndDrag(bool configureYAxises)
 {
-//    auto axis = QList<QCPAxis*>()
-//            << plot()->yAxis
-//            << plot()->yAxis2;
-
-//    Q_UNUSED(configureTimeAxis)
-//    //if (configureTimeAxis)
-//        axis << plot()->xAxis;
-
-    auto zoom = QList<QCPAxis*>()
-            << plot()->xAxis;
-
-    if (configureYAxises)
-    {
-        zoom << plot()->yAxis
-             << plot()->yAxis2;
-    }
-
-    auto drag = QList<QCPAxis*>()
+    auto axis = QList<QCPAxis*>()
             << plot()->yAxis
-            << plot()->yAxis2
-            << plot()->xAxis;
+            << plot()->yAxis2;
 
-    plot()->axisRect()->setRangeZoomAxes(zoom);
-    plot()->axisRect()->setRangeDragAxes(drag);
+    Q_UNUSED(configureYAxises)
+    //if (configureTimeAxis)
+        axis << plot()->xAxis;
+    plot()->axisRect()->setRangeZoomAxes(axis);
+
+//    auto zoom = QList<QCPAxis*>()
+//            << plot()->xAxis;
+
+//    if (configureYAxises)
+//    {
+//        zoom << plot()->yAxis
+//             << plot()->yAxis2;
+//    }
+
+//    auto drag = QList<QCPAxis*>()
+//            << plot()->yAxis
+//            << plot()->yAxis2
+//            << plot()->xAxis;
+
+//    plot()->axisRect()->setRangeZoomAxes(zoom);
+//    plot()->axisRect()->setRangeDragAxes(drag);
 
 
 }
