@@ -13,7 +13,7 @@ public:
                int precision = 3, bool scientificNotation = false);
 
 public slots:
-    void setValue(double newValue);
+    void setValue(double r, double angle);
 
 private:
     RadarPlot *plot;

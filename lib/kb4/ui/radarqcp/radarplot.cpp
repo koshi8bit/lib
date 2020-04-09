@@ -10,7 +10,7 @@ void RadarPlot::configurePlot()
 {
 //    plot->setInteraction(QCP::iRangeZoom, true);
 //    plot->setInteraction(QCP::iRangeDrag, true);
-    plot->axisRect()->setupFullAxesBox();
+    _plot->axisRect()->setupFullAxesBox();
 
     auto maxDiameter = 2;
 
@@ -20,29 +20,29 @@ void RadarPlot::configurePlot()
     drawCircle(3, QColor("#AAFFAA"));
     drawCircle(1, QColor("#AAAAFF"));
 
-    plot->xAxis->setRange(-maxDiameter, maxDiameter);
-    plot->yAxis->setRange(-maxDiameter, maxDiameter);
+    _plot->xAxis->setRange(-maxDiameter, maxDiameter);
+    _plot->yAxis->setRange(-maxDiameter, maxDiameter);
 
     configureLines(maxDiameter);
 }
 
 void RadarPlot::configureLines(double maxDiameter)
 {
-    QCPItemLine *hLine = new QCPItemLine(plot);
+    QCPItemLine *hLine = new QCPItemLine(_plot);
     hLine->setPen(QPen(Qt::black));
     hLine->start->setCoords(-maxDiameter, 0);
     hLine->end->setCoords(maxDiameter, 0);
 
-    QCPItemLine *vLine = new QCPItemLine(plot);
+    QCPItemLine *vLine = new QCPItemLine(_plot);
     vLine->setPen(QPen(Qt::black));
     vLine->start->setCoords(0, -maxDiameter);
     vLine->end->setCoords(0, maxDiameter);
 
-    QCPItemLine *line45 = new QCPItemLine(plot);
+    QCPItemLine *line45 = new QCPItemLine(_plot);
     line45->start->setCoords(toPolar(maxDiameter, 45));
     line45->end->setCoords(toPolar(maxDiameter, 180+45));
 
-    QCPItemLine *line135 = new QCPItemLine(plot);
+    QCPItemLine *line135 = new QCPItemLine(_plot);
     line135->start->setCoords(toPolar(maxDiameter, 135));
     line135->end->setCoords(toPolar(maxDiameter, 180+135));
 }
@@ -63,7 +63,7 @@ QPointF RadarPlot::toPolar(double r, double angle)
 
 QCPItemEllipse* RadarPlot::drawCircle(double radius, QColor color)
 {
-    auto ellipse = new QCPItemEllipse(plot);
+    auto ellipse = new QCPItemEllipse(_plot);
     ellipse->topLeft->setCoords(-radius/2.0, -radius/2.0);
     ellipse->bottomRight->setCoords(radius/2.0, radius/2.0);
     ellipse->setBrush(color);

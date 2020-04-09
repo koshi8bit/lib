@@ -81,7 +81,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="RadarQcp" name="radarQcp" native="true"/>
+         <widget class="RadarPlot" name="radarQcp" native="true"/>
         </item>
         <item>
          <widget class="QSlider" name="horizontalSlider_2">
@@ -414,9 +414,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>RadarQcp</class>
+   <class>RadarPlot</class>
    <extends>QWidget</extends>
-   <header>lib/kb4/ui/radarqcp/radarqcp.h</header>
+   <header>lib/kb4/ui/radarqcp/radaplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
