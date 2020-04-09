@@ -122,7 +122,6 @@ private:
     QSplitter *splitter;
 
 
-    //WARNING rename to _graphs?
     QVector<Graph *> _graphs;
     QString formatLabelTime(double key);
 

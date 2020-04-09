@@ -88,6 +88,10 @@ MainWindow::MainWindow(QWidget *parent) :
 //    int milliseconds;
 //    EasyLiving::dateTimeDelta(begin, end, years, month, days, hours, minutes, seconds, milliseconds);
 //    qDebug() << years << month << days << hours;// << minutes << seconds << milliseconds;
+
+    auto temperatureD1 = new ChannelDouble("name", "postfix", this);
+    //temperatureD1->addGraphToPlot(ui->radarQcp);
+
 }
 
 
