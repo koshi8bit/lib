@@ -12,12 +12,20 @@ public:
     RadarGraph(const QString &label, const QString &postfix, QColor color, QCustomPlot *qcp,
                int precision = 3, bool scientificNotation = false);
 
+    double radius() const;
+    void setRadius(double radius);
+
+    double angle() const;
+    void setAngle(double angle);
+
 public slots:
-    void setValue(double r, double angle);
+    void setValue(double radius, double angle);
 
 private:
-    RadarPlot *plot;
+    //RadarPlot *plot;
     QCPItemCurve *arrow;
+    double _radius=0, _angle=0;
+    void redrawArrow();
 };
 
 #endif // RADARGRAPH_H

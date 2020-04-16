@@ -12,9 +12,37 @@ RadarGraph::RadarGraph(const QString &label, const QString &postfix, QColor colo
     arrow->setHead(QCPLineEnding::esSpikeArrow);
 }
 
-void RadarGraph::setValue(double r, double angle)
+void RadarGraph::setValue(double radius, double angle)
 {
-    _legendItem->setValue(r);
-    arrow->end->setCoords(r, angle);
+    _legendItem->setValue(radius);
+    _radius = radius;
+    _angle = angle;
 
+    redrawArrow();
+}
+
+void RadarGraph::redrawArrow()
+{
+    arrow->end->setCoords(RadarPlot::toPolar(radius(), angle()));
+}
+
+double RadarGraph::angle() const
+{
+    return _angle;
+}
+
+void RadarGraph::setAngle(double angle)
+{
+    _angle = angle;
+}
+
+double RadarGraph::radius() const
+{
+    return _radius;
+}
+
+void RadarGraph::setRadius(double radius)
+{
+    _legendItem->setValue(radius);
+    _radius = radius;
 }

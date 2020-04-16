@@ -92,6 +92,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //auto temperatureD1 = new RadarGraph("name", "postfix", this);
     //temperatureD1->addGraphToPlot(ui->radarQcp);
 
+    auto radarTestGraph = ui->radarQcp->addGraph("name", "postfix");
+    radarTestGraph->setV
+
 }
 
 

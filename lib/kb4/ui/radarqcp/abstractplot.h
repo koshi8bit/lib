@@ -22,7 +22,6 @@ public:
     ~AbstractPlot();
 
 
-    AbstractGraph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
 
 
     QVector<AbstractGraph *> graphs() const;
@@ -37,15 +36,14 @@ private slots:
 private:
     Ui::AbstractPlot *ui;
     void configureLegend();
-    ColorSetter colorSetter;
     QVector<AbstractGraph *> _graphs;
 
 protected:
     const QString timeLabel = tr("Время");
 
     virtual void configurePlot() = 0;
-
-    virtual AbstractGraph *abstractAddGraphGraph() = 0;
+    AbstractGraph* addGraph(AbstractGraph *graph);
+    ColorSetter colorSetter;
 
     QCustomPlot *_plot;
     QVBoxLayout *legendLayout;

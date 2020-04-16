@@ -47,17 +47,23 @@ void RadarPlot::configureLines(double maxDiameter)
     line135->end->setCoords(toPolar(maxDiameter, 180+135));
 }
 
-AbstractGraph *RadarPlot::abstractAddGraphGraph()
-{
-    //TODO
-    return nullptr;
-}
-
 QPointF RadarPlot::toPolar(double r, double angle)
 {
     //TODO rewrite to standart pos
     auto angleDegree = angle*M_PI/180.0;
     return QPointF(r*qCos(angleDegree), r*qSin(angleDegree));
+}
+
+RadarGraph *RadarPlot::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
+{
+    auto graph = new RadarGraph(label,
+                                   postfix,
+                                   colorSetter.getColor(),
+                                   qcp(),
+                                   precision,
+                                   scientificNotation);
+    AbstractPlot::addGraph(graph);
+    return graph;
 }
 
 
