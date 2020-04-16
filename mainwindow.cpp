@@ -92,8 +92,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //auto temperatureD1 = new RadarGraph("name", "postfix", this);
     //temperatureD1->addGraphToPlot(ui->radarQcp);
 
-    auto radarTestGraph = ui->radarQcp->addGraph("name");
+    radarTestGraph = ui->radarQcp->addGraph("name");
     radarTestGraph->setValue(2, 30);
+
 
 }
 
@@ -554,4 +555,16 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
 
+}
+
+void MainWindow::on_doubleSpinBoxRadarRadius_valueChanged(double arg1)
+{
+    radarTestGraph->setRadius(arg1);
+    ui->radarQcp->qcp()->replot();
+}
+
+void MainWindow::on_doubleSpinBoxRadarAngle_valueChanged(double arg1)
+{
+    radarTestGraph->setAngle(arg1);
+    ui->radarQcp->qcp()->replot();
 }

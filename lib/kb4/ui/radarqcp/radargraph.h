@@ -26,6 +26,11 @@ private:
     QCPItemCurve *arrow;
     double _radius=0, _angle=0;
     void redrawArrow();
+
+    // AbstractGraph interface
+protected:
+    void abstractSetVisible(bool newValue) override;
+    void abstractSetColor(QColor newValue) override;
 };
 
 #endif // RADARGRAPH_H

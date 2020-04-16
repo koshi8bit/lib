@@ -13,6 +13,12 @@ RadarGraph::RadarGraph(const QString &label, const QString &postfix, QColor colo
 {
     arrow = new QCPItemCurve(qcp);
     arrow->start->setCoords(0, 0);
+
+    QPen pen;
+    pen.setColor(color);
+    pen.setWidth(1);
+    arrow->setPen(pen);
+
 //    arrow->startDir->setCoords(-1, -1.3);
 //    arrow->endDir->setCoords(-5, -0.3);
     setValue(0, 0);
@@ -33,6 +39,19 @@ void RadarGraph::redrawArrow()
     arrow->end->setCoords(toPolar(radius(), angle()));
 }
 
+void RadarGraph::abstractSetVisible(bool newValue)
+{
+    arrow->setVisible(newValue);
+}
+
+void RadarGraph::abstractSetColor(QColor color)
+{
+    QPen pen;
+    pen.setColor(color);
+    pen.setWidth(1);
+    arrow->setPen(pen);
+}
+
 double RadarGraph::angle() const
 {
     return _angle;
@@ -41,6 +60,7 @@ double RadarGraph::angle() const
 void RadarGraph::setAngle(double angle)
 {
     _angle = angle;
+    redrawArrow();
 }
 
 double RadarGraph::radius() const
@@ -52,4 +72,5 @@ void RadarGraph::setRadius(double radius)
 {
     _legendItem->setValue(radius);
     _radius = radius;
+    redrawArrow();
 }

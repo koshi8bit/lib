@@ -66,6 +66,8 @@ private:
     QSettings *settings;
     SimpleLog *simpleLog;
 
+    RadarGraph *radarTestGraph;
+
 
     void configureRealTimeQcpPlot();
     void configureRealTimeQcpPlot(RealTimeQCP * plot);
@@ -112,6 +114,8 @@ private slots:
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
     void on_horizontalSlider_2_valueChanged(int value);
+    void on_doubleSpinBoxRadarRadius_valueChanged(double arg1);
+    void on_doubleSpinBoxRadarAngle_valueChanged(double arg1);
 };
 
 #endif // MAINWINDOW_H

@@ -37,12 +37,16 @@ private:
     bool _visible;
     bool _scientificNotation;
     int _precision;
+    QCustomPlot *_qcp;
 
     void _setVisible(bool newValue);
     void _setColor(QColor newValue);
 
 protected:
     GraphLegendItem *_legendItem;
+
+    virtual void abstractSetVisible(bool newValue) = 0;
+    virtual void abstractSetColor(QColor newValue) = 0;
 
 };
 

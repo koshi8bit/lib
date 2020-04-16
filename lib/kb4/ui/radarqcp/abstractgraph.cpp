@@ -6,6 +6,8 @@ AbstractGraph::AbstractGraph(const QString &label, const QString &postfix, QColo
 {
     _visible = true;
 
+    _qcp = qcp;
+
     _color = color;
 
     _precision = precision;
@@ -53,9 +55,13 @@ void AbstractGraph::setColor(QColor newValue)
 void AbstractGraph::_setVisible(bool newValue)
 {
     _visible = newValue;
+    abstractSetVisible(newValue);
+    _qcp->replot();
 }
 
 void AbstractGraph::_setColor(QColor newValue)
 {
     _color = newValue;
+    abstractSetColor(newValue);
+    _qcp->replot();
 }
