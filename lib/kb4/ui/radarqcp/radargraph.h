@@ -4,11 +4,11 @@
 #include <lib/qcustomplot/qcustomplot.h>
 
 #include <lib/kb4/ui/radarqcp/abstractgraph.h>
-#include <lib/kb4/ui/radarqcp/radarplot.h>
 
 class RadarGraph : public AbstractGraph
 {
 public:
+    static QPointF toPolar(double r, double angle);
     RadarGraph(const QString &label, const QString &postfix, QColor color, QCustomPlot *qcp,
                int precision = 3, bool scientificNotation = false);
 

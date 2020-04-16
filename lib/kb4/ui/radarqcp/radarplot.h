@@ -1,8 +1,8 @@
-#ifndef RADARQCP_H
-#define RADARQCP_H
+#ifndef RADARPLOT_H
+#define RADARPLOT_H
 
-#include "abstractplot.h"
-#include "radargraph.h"
+#include <lib/kb4/ui/radarqcp/abstractplot.h>
+#include <lib/kb4/ui/radarqcp/radargraph.h>
 
 class RadarPlot : public AbstractPlot
 {
@@ -10,7 +10,8 @@ public:
     RadarPlot(QWidget *parent);
     static QPointF toPolar(double r, double angle);
 
-    RadarGraph *addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
+    RadarGraph *addGraph(const QString &label, const QString &postfix = "",
+                         int precision = 3, bool scientificNotation = false);
 
 protected:
     void configurePlot() override;
@@ -24,4 +25,4 @@ private:
 
 };
 
-#endif // RADARQCP_H
+#endif // RADARPLOT_H

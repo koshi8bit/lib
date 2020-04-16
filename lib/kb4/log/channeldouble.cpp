@@ -26,15 +26,15 @@ void ChannelDouble::addGraphToPlot(RealTimeQCP *plot, bool visible)
         _graph->setColor(color());
 }
 
-AbstractGraph *ChannelDouble::addGraphToPlot(AbstractPlot *plot, bool visible)
-{
-    _abstractGraph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
-    _abstractGraph->setVisible(visible);
-    if (color().isValid())
-        _abstractGraph->setColor(color());
+//AbstractGraph *ChannelDouble::addGraphToPlot(AbstractPlot *plot, bool visible)
+//{
+//    _abstractGraph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
+//    _abstractGraph->setVisible(visible);
+//    if (color().isValid())
+//        _abstractGraph->setColor(color());
 
-    return _abstractGraph;
-}
+//    return _abstractGraph;
+//}
 
 
 bool ChannelDouble::scientificNotation()
@@ -108,7 +108,7 @@ void ChannelDouble::valueChangedChild()
 
     if (_graph != nullptr) { _graph->addData(RealTimeQCP::currentDateTime(), value()); }
 
-    if (_abstractGraph != nullptr) { _abstractGraph->addData(RealTimeQCP::currentDateTime(), value()); }
+    //if (_abstractGraph != nullptr) { _abstractGraph->addData(RealTimeQCP::currentDateTime(), value()); }
 }
 
 void ChannelDouble::_valueChanged()

@@ -92,8 +92,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //auto temperatureD1 = new RadarGraph("name", "postfix", this);
     //temperatureD1->addGraphToPlot(ui->radarQcp);
 
-    auto radarTestGraph = ui->radarQcp->addGraph("name", "postfix");
-    radarTestGraph->setV
+    auto radarTestGraph = ui->radarQcp->addGraph("name");
+    radarTestGraph->setValue(2, 30);
 
 }
 
@@ -484,7 +484,7 @@ static void paintPage(int pageNumber, int pageCount,
                       QPainter* painter, QTextDocument* doc,
                       const QRectF& textRect, qreal footerHeight)
 {
-
+    Q_UNUSED(pageCount)
 
     painter->save();
     // textPageRect is the rectangle in the coordinate system of the QTextDocument, in pixels,
