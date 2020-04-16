@@ -24,7 +24,7 @@ AbstractGraph *AbstractPlot::addGraph()
     auto graph = abstractAddGraphGraph();
 
     _graphs.append(graph);
-    legendLayout->insertWidget(legendLayout->count()-1, graph->graphLegendItem());
+    //legendLayout->insertWidget(legendLayout->count()-1, graph->graphLegendItem());
     return graph;
 }
 

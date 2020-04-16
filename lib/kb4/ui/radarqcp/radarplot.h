@@ -2,7 +2,7 @@
 #define RADARQCP_H
 
 #include "abstractplot.h"
-#include "radargraph.h"
+//#include "radargraph.h"
 
 class RadarPlot : public AbstractPlot
 {

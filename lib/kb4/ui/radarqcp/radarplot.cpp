@@ -49,7 +49,8 @@ void RadarPlot::configureLines(double maxDiameter)
 
 AbstractGraph *RadarPlot::abstractAddGraphGraph()
 {
-    return RadarGraph()
+    //TODO
+    return nullptr;
 }
 
 QPointF RadarPlot::toPolar(double r, double angle)
