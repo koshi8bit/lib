@@ -16,7 +16,7 @@ RadarGraph::RadarGraph(const QString &label, const QString &postfix, QColor colo
 
 void RadarGraph::setValue(double r, double angle)
 {
-    _graphLegendItem->setValue(r);
+    _legendItem->setValue(r);
     arrow->end->setCoords(r, angle);
 
 }

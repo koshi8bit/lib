@@ -6,6 +6,7 @@
 #include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
 #include <lib/kb4/ui/realtimeqcp/graph.h>
 #include <lib/kb4/ui/radarqcp/abstractplot.h>
+#include <lib/kb4/ui/radarqcp/abstractgraph.h>
 
 class ChannelDouble : public ChannelT<double>
 {
@@ -42,6 +43,8 @@ public:
 
 private:
     Graph *_graph = nullptr;
+    AbstractGraph *_abstractGraph = nullptr;
+
     int _precision;
     bool _scientificNotation = false;
 

@@ -18,15 +18,17 @@ AbstractPlot::~AbstractPlot()
     delete ui;
 }
 
-
-AbstractGraph *AbstractPlot::addGraph()
+AbstractGraph *AbstractPlot::addGraph(const QString &label, const QString &postfix)
 {
-    auto graph = abstractAddGraphGraph();
-
+    auto graph = new AbstractGraph(label,
+                                   postfix,
+                                   colorSetter.getColor(),
+                                   qcp());
     _graphs.append(graph);
-    //legendLayout->insertWidget(legendLayout->count()-1, graph->graphLegendItem());
+    legendLayout->insertWidget(legendLayout->count()-1, graph->legendItem());
     return graph;
 }
+
 
 QVector<AbstractGraph *> AbstractPlot::graphs() const
 {

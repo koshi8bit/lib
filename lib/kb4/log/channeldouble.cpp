@@ -26,6 +26,14 @@ void ChannelDouble::addGraphToPlot(RealTimeQCP *plot, bool visible)
         _graph->setColor(color());
 }
 
+void ChannelDouble::addGraphToPlot(AbstractPlot *plot, bool visible)
+{
+    _abstractGraph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
+    _abstractGraph->setVisible(visible);
+    if (color().isValid())
+        _abstractGraph->setColor(color());
+}
+
 
 bool ChannelDouble::scientificNotation()
 {

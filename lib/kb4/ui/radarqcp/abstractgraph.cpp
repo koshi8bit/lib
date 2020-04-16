@@ -10,10 +10,15 @@ AbstractGraph::AbstractGraph(const QString &label, const QString &postfix, QColo
     _precision = precision;
     _scientificNotation = scientificNotation;
 
-    _graphLegendItem = new GraphLegendItem(label, postfix, color, _precision, scientificNotation);
-    connect(_graphLegendItem, &GraphLegendItem::visibleChanged, this, &AbstractGraph::setVisibleByWidget);
-    connect(_graphLegendItem, &GraphLegendItem::colorChanged, this, &AbstractGraph::setColorByWidget);
+    _legendItem = new GraphLegendItem(label, postfix, color, _precision, scientificNotation);
+    connect(_legendItem, &GraphLegendItem::visibleChanged, this, &AbstractGraph::setVisibleByWidget);
+    connect(_legendItem, &GraphLegendItem::colorChanged, this, &AbstractGraph::setColorByWidget);
 
+}
+
+GraphLegendItem *AbstractGraph::legendItem()
+{
+    return _legendItem;
 }
 
 void AbstractGraph::setVisibleByWidget(bool newValue)
@@ -32,16 +37,16 @@ void AbstractGraph::setVisible(bool newValue)
 {
     //TODO autoscale without unsivible graphs
     _setVisible(newValue);
-    if (_graphLegendItem)
-        _graphLegendItem->setVisibleValue(newValue);
+    if (_legendItem)
+        _legendItem->setVisibleValue(newValue);
 }
 
 void AbstractGraph::setColor(QColor newValue)
 {
     _setColor(newValue);
 
-    if (_graphLegendItem)
-        _graphLegendItem->setColor(newValue);
+    if (_legendItem)
+        _legendItem->setColor(newValue);
 }
 
 void AbstractGraph::_setVisible(bool newValue)

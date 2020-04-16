@@ -9,8 +9,8 @@ class AbstractGraph : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractGraph(const QString &label, const QString &postfix, QColor color,
-                           int precision = 3, bool scientificNotation = false, QObject *parent = nullptr);
+    explicit AbstractGraph(const QString &label, const QString &postfix, QColor color, QObject *parent = nullptr);
+    GraphLegendItem *legendItem();
 
 signals:
     void visibleChanged(bool newValue);
@@ -37,7 +37,7 @@ private:
     void _setColor(QColor newValue);
 
 protected:
-    GraphLegendItem *_graphLegendItem;
+    GraphLegendItem *_legendItem;
 
 };
 

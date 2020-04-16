@@ -22,7 +22,7 @@ public:
     ~AbstractPlot();
 
 
-    AbstractGraph* addGraph();
+    AbstractGraph* addGraph(const QString &label, const QString &postfix = "");
 
 
     QVector<AbstractGraph *> graphs() const;
