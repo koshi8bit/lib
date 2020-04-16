@@ -1,7 +1,8 @@
 #include "abstractgraph.h"
 
-AbstractGraph::AbstractGraph(const QString &label, const QString &postfix, QColor color, int precision, bool scientificNotation, QObject *parent)
-    :QObject(parent)
+AbstractGraph::AbstractGraph(const QString &label, const QString &postfix, QColor color,
+                             QCustomPlot *qcp, int precision, bool scientificNotation)
+    :QObject(qcp)
 {
     _visible = true;
 

@@ -3,13 +3,18 @@
 
 #include <QObject>
 #include <QColor>
+
+#include <lib/qcustomplot/qcustomplot.h>
+
 #include <lib/kb4/ui/realtimeqcp/graphlegenditem.h>
 
 class AbstractGraph : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractGraph(const QString &label, const QString &postfix, QColor color, QObject *parent = nullptr);
+    explicit AbstractGraph(const QString &label, const QString &postfix, QColor color,
+                           QCustomPlot *qcp = nullptr, int precision = 3,
+                           bool scientificNotation = false);
     GraphLegendItem *legendItem();
 
 signals:

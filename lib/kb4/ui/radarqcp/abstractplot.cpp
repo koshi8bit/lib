@@ -18,12 +18,15 @@ AbstractPlot::~AbstractPlot()
     delete ui;
 }
 
-AbstractGraph *AbstractPlot::addGraph(const QString &label, const QString &postfix)
+AbstractGraph *AbstractPlot::addGraph(const QString &label, const QString &postfix,
+                                      int precision, bool scientificNotation)
 {
     auto graph = new AbstractGraph(label,
                                    postfix,
                                    colorSetter.getColor(),
-                                   qcp());
+                                   qcp(),
+                                   precision,
+                                   scientificNotation);
     _graphs.append(graph);
     legendLayout->insertWidget(legendLayout->count()-1, graph->legendItem());
     return graph;

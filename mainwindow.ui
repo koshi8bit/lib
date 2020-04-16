@@ -416,7 +416,7 @@
   <customwidget>
    <class>RadarPlot</class>
    <extends>QWidget</extends>
-   <header>lib/kb4/ui/radarqcp/radaplot.h</header>
+   <header>lib/kb4/ui/radarqcp/radarplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

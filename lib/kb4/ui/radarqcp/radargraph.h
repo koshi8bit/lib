@@ -9,7 +9,7 @@
 class RadarGraph : public AbstractGraph
 {
 public:
-    RadarGraph(const QString &label, const QString &postfix, QColor color, RadarPlot *plot,
+    RadarGraph(const QString &label, const QString &postfix, QColor color, QCustomPlot *qcp,
                int precision = 3, bool scientificNotation = false);
 
 public slots:
