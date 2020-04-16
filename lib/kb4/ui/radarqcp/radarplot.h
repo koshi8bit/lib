@@ -11,7 +11,7 @@ public:
     static QPointF toPolar(double r, double angle);
 
     RadarGraph *addGraph(const QString &label, const QString &postfix = "",
-                         int precision = 3, bool scientificNotation = false);
+                         int precision = 3, bool scientificNotation = false, int width = 1);
 
 protected:
     void configurePlot() override;

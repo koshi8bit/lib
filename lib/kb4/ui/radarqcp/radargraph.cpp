@@ -1,5 +1,28 @@
 #include "radargraph.h"
 
+RadarGraph::RadarGraph(const QString &label, const QString &postfix,
+                       QColor color, QCustomPlot *qcp, int precision,
+                       bool scientificNotation, int width)
+    :AbstractGraph(label, postfix, color, qcp, precision, scientificNotation)
+{
+    arrow = new QCPItemLine(qcp);
+    arrow->start->setCoords(0, 0);
+    setValue(0, 0);
+
+    arrow->setHead(QCPLineEnding::esSpikeArrow);
+
+    _setColor(color);
+    setWidth(width);
+}
+
+void RadarGraph::_setColor(QColor color)
+{
+    QPen pen;
+    pen.setColor(color);
+    pen.setWidth(width());
+    arrow->setPen(pen);
+}
+
 QPointF RadarGraph::toPolar(double r, double angle)
 {
     //TODO copy from radarplot DRY
@@ -7,23 +30,6 @@ QPointF RadarGraph::toPolar(double r, double angle)
     return QPointF(r*qCos(angleDegree), r*qSin(angleDegree));
 }
 
-RadarGraph::RadarGraph(const QString &label, const QString &postfix, QColor color,
-                       QCustomPlot *qcp, int precision, bool scientificNotation)
-    :AbstractGraph(label, postfix, color, qcp, precision, scientificNotation)
-{
-    arrow = new QCPItemCurve(qcp);
-    arrow->start->setCoords(0, 0);
-
-    QPen pen;
-    pen.setColor(color);
-    pen.setWidth(1);
-    arrow->setPen(pen);
-
-//    arrow->startDir->setCoords(-1, -1.3);
-//    arrow->endDir->setCoords(-5, -0.3);
-    setValue(0, 0);
-    arrow->setHead(QCPLineEnding::esSpikeArrow);
-}
 
 void RadarGraph::setValue(double radius, double angle)
 {
@@ -34,8 +40,23 @@ void RadarGraph::setValue(double radius, double angle)
     redrawArrow();
 }
 
+int RadarGraph::width() const
+{
+    return _width;
+}
+
+void RadarGraph::setWidth(int width)
+{
+    _width = width;
+}
+
 void RadarGraph::redrawArrow()
 {
+    //    _legendItem->setValue(QString("%1 (%2)")
+    //                          .arg(EasyLiving::formatDouble(radius(), 1))
+//                          .arg(EasyLiving::formatDouble(angle(), 0)));
+
+    _legendItem->setValue(radius());
     arrow->end->setCoords(toPolar(radius(), angle()));
 }
 
@@ -46,10 +67,7 @@ void RadarGraph::abstractSetVisible(bool newValue)
 
 void RadarGraph::abstractSetColor(QColor color)
 {
-    QPen pen;
-    pen.setColor(color);
-    pen.setWidth(1);
-    arrow->setPen(pen);
+    _setColor(color);
 }
 
 double RadarGraph::angle() const
@@ -70,7 +88,6 @@ double RadarGraph::radius() const
 
 void RadarGraph::setRadius(double radius)
 {
-    _legendItem->setValue(radius);
     _radius = radius;
     redrawArrow();
 }

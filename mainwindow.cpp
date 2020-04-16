@@ -92,8 +92,17 @@ MainWindow::MainWindow(QWidget *parent) :
     //auto temperatureD1 = new RadarGraph("name", "postfix", this);
     //temperatureD1->addGraphToPlot(ui->radarQcp);
 
-    radarTestGraph = ui->radarQcp->addGraph("name");
-    radarTestGraph->setValue(2, 30);
+    radarTestGraph = ui->radarQcp->addGraph("1 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
+    radarTestGraph->setColor(QColor("#CC0000"));
+
+    radarTestGraph = ui->radarQcp->addGraph("2 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
+    radarTestGraph->setColor(QColor("#00CC00"));
+
+    radarTestGraph = ui->radarQcp->addGraph("3 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
+    radarTestGraph->setColor(QColor("#0000CC"));
+
+    radarTestGraph = ui->radarQcp->addGraph("4 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
+    radarTestGraph->setColor(QColor("#AA99AA"));
 
 
 }
