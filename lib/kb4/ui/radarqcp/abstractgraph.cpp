@@ -52,6 +52,11 @@ void AbstractGraph::setColor(QColor newValue)
         _legendItem->setColor(newValue);
 }
 
+bool AbstractGraph::visible() const
+{
+    return _visible;
+}
+
 void AbstractGraph::_setVisible(bool newValue)
 {
     _visible = newValue;

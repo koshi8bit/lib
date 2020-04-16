@@ -31,8 +31,15 @@ QPointF RadarGraph::toPolar(double r, double angle)
 }
 
 
+void RadarGraph::updateLegendItem()
+{
+    if (visible())
+        _legendItem->setValue(radius());
+}
+
 void RadarGraph::setValue(double radius, double angle)
 {
+    updateLegendItem();
     _legendItem->setValue(radius);
     _radius = radius;
     _angle = angle;
@@ -63,6 +70,7 @@ void RadarGraph::redrawArrow()
 void RadarGraph::abstractSetVisible(bool newValue)
 {
     arrow->setVisible(newValue);
+    updateLegendItem();
 }
 
 void RadarGraph::abstractSetColor(QColor color)

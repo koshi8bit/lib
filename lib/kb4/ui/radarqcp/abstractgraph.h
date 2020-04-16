@@ -17,6 +17,8 @@ public:
                            bool scientificNotation = false);
     GraphLegendItem *legendItem();
 
+    bool visible() const;
+
 signals:
     void visibleChanged(bool newValue);
     void colorChanged(QColor newValue);

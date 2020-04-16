@@ -35,6 +35,8 @@ private:
     // AbstractGraph interface
     void _setColor(QColor color);
 
+    void updateLegendItem();
+
 protected:
     void abstractSetVisible(bool newValue) override;
     void abstractSetColor(QColor newValue) override;
