@@ -39,8 +39,6 @@ void RadarGraph::updateLegendItem()
 
 void RadarGraph::setValue(double radius, double angle)
 {
-    updateLegendItem();
-    _legendItem->setValue(radius);
     _radius = radius;
     _angle = angle;
 
@@ -59,11 +57,11 @@ void RadarGraph::setWidth(int width)
 
 void RadarGraph::redrawArrow()
 {
-    //    _legendItem->setValue(QString("%1 (%2)")
-    //                          .arg(EasyLiving::formatDouble(radius(), 1))
+//        _legendItem->setValue(QString("%1 (%2)")
+//                              .arg(EasyLiving::formatDouble(radius(), 1))
 //                          .arg(EasyLiving::formatDouble(angle(), 0)));
 
-    _legendItem->setValue(radius());
+    updateLegendItem();
     arrow->end->setCoords(toPolar(radius(), angle()));
 }
 

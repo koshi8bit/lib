@@ -18,6 +18,7 @@ void RadarPlot::configurePlot()
     criticalCircle = drawCircle(1, QColor("#FF0000"));
     drawCircle(maxDiameter*maxDiameter, QColor("#FFAAAA"));
     drawCircle(3, QColor("#AAFFAA"));
+    drawCircle(2, QColor("#AAFFAA"));
     drawCircle(1, QColor("#AAAAFF"));
 
     _plot->xAxis->setRange(-maxDiameter, maxDiameter);
