@@ -103,7 +103,8 @@ void RealTimeQCP::configurePlot()
 void RealTimeQCP::_setRealTime(bool newValue)
 {
     _realTime = newValue;
-    configureAxesZoomAndDrag(!newValue);
+    //configureAxesZoomAndDrag(!newValue);
+    configureAxesZoomAndDrag(true);
     updateStatusLabel();
 }
 
