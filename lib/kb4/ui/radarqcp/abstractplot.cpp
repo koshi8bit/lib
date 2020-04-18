@@ -1,5 +1,5 @@
 #include "abstractplot.h"
-#include "ui_plotwithlegend.h"
+#include "ui_abstractplot.h"
 
 AbstractPlot::AbstractPlot(QWidget *parent) :
     QWidget(parent),

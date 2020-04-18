@@ -1,5 +1,5 @@
-#ifndef PLOTWITHLEGEND_H
-#define PLOTWITHLEGEND_H
+#ifndef ABSTRACTPLOT_H
+#define ABSTRACTPLOT_H
 
 #include <QWidget>
 
@@ -51,4 +51,4 @@ protected:
 
 };
 
-#endif // PLOTWITHLEGEND_H
+#endif // ABSTRACTPLOT_H
