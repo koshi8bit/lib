@@ -6,6 +6,11 @@ RealTmePlot::RealTmePlot(QWidget *parent)
     configurePlot();
 }
 
+RealTmePlot::~RealTmePlot()
+{
+
+}
+
 void RealTmePlot::configurePlot()
 {
 

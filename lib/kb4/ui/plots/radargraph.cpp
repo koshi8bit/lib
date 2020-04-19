@@ -2,7 +2,7 @@
 
 RadarGraph::RadarGraph(const QString &label, const QString &postfix,
                        QColor color, QCustomPlot *qcp, int precision,
-                       bool scientificNotation, int width)
+                       bool scientificNotation, int lineWidth)
     :AbstractGraph(label, postfix, color, qcp, precision, scientificNotation)
 {
     arrow = new QCPItemLine(qcp);
@@ -12,7 +12,7 @@ RadarGraph::RadarGraph(const QString &label, const QString &postfix,
     arrow->setHead(QCPLineEnding::esSpikeArrow);
 
     _setColor(color);
-    setWidth(width);
+    setWidth(lineWidth);
 }
 
 void RadarGraph::_setColor(QColor color)

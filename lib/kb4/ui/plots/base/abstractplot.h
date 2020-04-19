@@ -21,11 +21,7 @@ public:
     explicit AbstractPlot(QWidget *parent = nullptr);
     ~AbstractPlot();
 
-
-
-
     QVector<AbstractGraph *> graphs() const;
-
     QCustomPlot *qcp() const;
 
 private slots:

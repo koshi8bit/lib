@@ -11,7 +11,7 @@ public:
     static QPointF toPolar(double r, double angle);
     RadarGraph(const QString &label, const QString &postfix, QColor color,
                QCustomPlot *qcp, int precision = 3,
-               bool scientificNotation = false, int width = 1);
+               bool scientificNotation = false, int lineWidth = 1);
 
     double radius() const;
     void setRadius(double radius);
