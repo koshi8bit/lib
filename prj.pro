@@ -55,7 +55,7 @@ DISTFILES += \
 
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
-    lib/kb4/ui/plots/abstractplot.ui \
+    lib/kb4/ui/plots/base/abstractplot.ui \
     lib/kb4/ui/realtimeqcp/axisconfig.ui \
     lib/kb4/ui/realtimeqcp/graphlegenditem.ui \
     lib/kb4/ui/realtimeqcp/realtimeqcp.ui \
@@ -90,10 +90,9 @@ HEADERS += \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \
     lib/kb4/ui/gradientlineedit/minmax.h \
     lib/kb4/ui/label/qlabelext.h \
-    lib/kb4/ui/plots/realtmeplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
-    lib/kb4/ui/plots/abstractgraph.h \
-    lib/kb4/ui/plots/abstractplot.h \
+    lib/kb4/ui/plots/base/abstractgraph.h \
+    lib/kb4/ui/plots/base/abstractplot.h \
     lib/kb4/ui/plots/radargraph.h \
     lib/kb4/ui/plots/radarplot.h \
     lib/kb4/ui/realtimeqcp/axisconfig.h \
@@ -134,8 +133,8 @@ SOURCES += \
     lib/kb4/ui/label/qlabelext.cpp \
     lib/kb4/ui/plots/realtmeplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
-    lib/kb4/ui/plots/abstractgraph.cpp \
-    lib/kb4/ui/plots/abstractplot.cpp \
+    lib/kb4/ui/plots/base/abstractgraph.cpp \
+    lib/kb4/ui/plots/base/abstractplot.cpp \
     lib/kb4/ui/plots/radargraph.cpp \
     lib/kb4/ui/plots/radarplot.cpp \
     lib/kb4/ui/realtimeqcp/axisconfig.cpp \

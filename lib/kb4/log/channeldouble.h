@@ -5,8 +5,8 @@
 
 #include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
 #include <lib/kb4/ui/realtimeqcp/graph.h>
-#include <lib/kb4/ui/plots/abstractplot.h>
-#include <lib/kb4/ui/plots/abstractgraph.h>
+#include <lib/kb4/ui/plots/base/abstractplot.h>
+#include <lib/kb4/ui/plots/base/abstractgraph.h>
 
 class ChannelDouble : public ChannelT<double>
 {

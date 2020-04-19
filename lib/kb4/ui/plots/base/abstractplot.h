@@ -2,12 +2,12 @@
 #define ABSTRACTPLOT_H
 
 #include <QWidget>
-
 #include <lib/qcustomplot/qcustomplot.h>
+
 #include <lib/kb4/ui/printscreener/printscreener.h>
-#include <lib/kb4/ui/realtimeqcp/colorsetter.h>
 
 #include "abstractgraph.h"
+#include "colorsetter.h"
 
 namespace Ui {
 class AbstractPlot;
