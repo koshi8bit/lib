@@ -8,7 +8,7 @@
 class RealTimeGraph: public AbstractGraph
 {
 public:
-    RealTimeGraph(const QString &label, const QString &postfix, QColor color,
+    RealTimeGraph(const QString &_label, const QString &postfix, QColor color,
                   QCustomPlot *qcp, QCPAxis *yAxis, int precision = 3,
                   bool scientificNotation = false);
     virtual ~RealTimeGraph();
@@ -16,17 +16,12 @@ public:
     //TODO ?rename to qcpGraph
     QCPGraph *graph();
 
-    GraphLegendItem *legendItem();
-    //WARNING delete method graphLegendItem
-    GraphLegendItem *graphLegendItem();
-
     //void addData(double valueCursor);
     void addData(double key, double valueCursor);
 
     double valueCursor();
     double valueLast();
 
-    bool visible();
     void updateValue();
     void moveCursor(double key);
     void moveCursor2(double key);
@@ -34,13 +29,7 @@ public:
 
 
 private:
-    QString label;
-    QString _postfix;
-    QColor _color;
     double _valueCursor;
-    bool _visible;
-    bool _scientificNotation;
-    int _precision;
     //ValueScaler valueScaler;
     QCPAxis *_yAxis;
 
@@ -48,7 +37,6 @@ private:
 
     void configureCursor(QCPItemTracer **cursor);
     QCPItemTracer *_cursor, *_cursor2;
-    GraphLegendItem *_graphLegendItem;
 
     // AbstractGraph interface
 protected:

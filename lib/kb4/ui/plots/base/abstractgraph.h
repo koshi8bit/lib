@@ -11,14 +11,19 @@ class AbstractGraph : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractGraph(const QString &label, const QString &postfix, QColor color,
+    explicit AbstractGraph(const QString &_label, const QString &postfix, QColor color,
                            QCustomPlot *qcp = nullptr, int precision = 3,
                            bool scientificNotation = false);
-    GraphLegendItem *legendItem();
 
+    QString label() const;
+    QString postfix() const;
+    QColor color() const;
     bool visible() const;
-
+    bool scientificNotation() const;
+    int precision() const;
     QCustomPlot *qcp();
+
+    GraphLegendItem *legendItem();
 
 signals:
     void visibleChanged(bool newValue);
@@ -33,10 +38,9 @@ public slots:
     void setColor(QColor newValue);
 
 private:
-    QString label;
+    QString _label;
     QString _postfix;
     QColor _color;
-    double _valueCursor;
     bool _visible;
     bool _scientificNotation;
     int _precision;

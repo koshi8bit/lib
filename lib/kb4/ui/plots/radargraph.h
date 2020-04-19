@@ -9,7 +9,7 @@ class RadarGraph : public AbstractGraph
 {
 public:
     static QPointF toPolar(double r, double angle);
-    RadarGraph(const QString &label, const QString &postfix, QColor color,
+    RadarGraph(const QString &_label, const QString &postfix, QColor color,
                QCustomPlot *qcp, int precision = 3,
                bool scientificNotation = false, int lineWidth = 1);
 

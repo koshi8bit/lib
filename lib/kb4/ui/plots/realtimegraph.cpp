@@ -28,7 +28,7 @@ RealTimeGraph::~RealTimeGraph()
 {
     //FIXME exception
 //    _graph->deleteLater();
-    _graphLegendItem->deleteLater();
+    legendItem()->deleteLater();
 //    _cursor->deleteLater();
 //    _cursor2->deleteLater();
 }
@@ -37,16 +37,6 @@ RealTimeGraph::~RealTimeGraph()
 QCPGraph *RealTimeGraph::graph()
 {
     return _graph;
-}
-
-GraphLegendItem *RealTimeGraph::legendItem()
-{
-    return graphLegendItem();
-}
-
-GraphLegendItem *RealTimeGraph::graphLegendItem()
-{
-    return _graphLegendItem;
 }
 
 //void Graph::addData(double valueCursor)
@@ -72,25 +62,20 @@ double RealTimeGraph::valueLast()
     //return _graph->data()->last());
 }
 
-bool RealTimeGraph::visible()
-{
-    return _visible;
-}
-
 void RealTimeGraph::updateValue()
 {
     if (visible())
     {
-        if (_graphLegendItem)
+        if (legendItem())
         {
             if (_cursor2->visible())
             {
                 auto deltaValue = _cursor->position->value() - _cursor2->position->value();
-                    _graphLegendItem->setValue(deltaValue, true);
+                    legendItem()->setValue(deltaValue, true);
             }
             else
             {
-                _graphLegendItem->setValue(_valueCursor);
+                legendItem()->setValue(_valueCursor);
             }
         }
         _valueCursor = _cursor->position->value();
@@ -121,7 +106,8 @@ void RealTimeGraph::configureCursor(QCPItemTracer **cursor)
     //(*cursor)->setInterpolating(true);
     (*cursor)->setStyle(QCPItemTracer::tsCircle); // tsCircle
     (*cursor)->setPen(_graph->pen());
-    (*cursor)->setBrush(_color);
+    (*cursor)->setBrush(QColor("#000000"));
+    //(*cursor)->setBrush(color());
     (*cursor)->setSize(5);
 }
 

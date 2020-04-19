@@ -52,6 +52,31 @@ void AbstractGraph::setColor(QColor newValue)
         _legendItem->setColor(newValue);
 }
 
+QString AbstractGraph::label() const
+{
+    return _label;
+}
+
+QString AbstractGraph::postfix() const
+{
+    return _postfix;
+}
+
+bool AbstractGraph::scientificNotation() const
+{
+    return _scientificNotation;
+}
+
+int AbstractGraph::precision() const
+{
+    return _precision;
+}
+
+QColor AbstractGraph::color() const
+{
+    return _color;
+}
+
 QCustomPlot *AbstractGraph::qcp()
 {
     return _qcp;
