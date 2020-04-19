@@ -23,7 +23,7 @@ public:
 
     QVector<AbstractGraph *> graphs();
 
-#define graphsCast(element, type) static_cast<type>(element)
+#define graphCast(element, type) static_cast<type>(element)
 //    template < template <typename> class BinPred , typename T >
 //    QVector<T*> foo()
 //    {

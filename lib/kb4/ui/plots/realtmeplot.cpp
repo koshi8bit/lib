@@ -267,8 +267,8 @@ void RealTmePlot::_setCursor2Visible(bool newValue)
     //foreach (auto graphElement, foo<RealTimeGraph*>())
     foreach (auto graphElement, graphs())
     {
-        auto graphsCast()
-        graphElement->setCursor2Visible(newValue);
+        auto t = graphCast(graphElement, RealTimeGraph*);
+        t->setCursor2Visible(newValue);
     }
 
     if (labelTime->isVisible())
