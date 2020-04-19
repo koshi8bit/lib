@@ -28,7 +28,7 @@ RealTimeGraph::~RealTimeGraph()
 {
     //FIXME exception
 //    _graph->deleteLater();
-    legendItem()->deleteLater();
+//    legendItem()->deleteLater();
 //    _cursor->deleteLater();
 //    _cursor2->deleteLater();
 }

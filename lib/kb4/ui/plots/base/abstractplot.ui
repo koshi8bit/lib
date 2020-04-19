@@ -70,7 +70,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../pic/ui-res.qrc">
+        <iconset resource="../../../pic/ui-res.qrc">
          <normaloff>:/ico/ico/032/icons8-ask-question-32.png</normaloff>:/ico/ico/032/icons8-ask-question-32.png</iconset>
        </property>
        <property name="iconSize">
@@ -105,7 +105,7 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="../../pic/ui-res.qrc">
+        <iconset resource="../../../pic/ui-res.qrc">
          <normaloff>:/ico/ico/screenshot.png</normaloff>:/ico/ico/screenshot.png</iconset>
        </property>
        <property name="iconSize">
@@ -144,7 +144,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../pic/ui-res.qrc"/>
+  <include location="../../../pic/ui-res.qrc"/>
  </resources>
  <connections/>
 </ui>

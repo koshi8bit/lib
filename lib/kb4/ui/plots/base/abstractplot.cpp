@@ -11,6 +11,9 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
 
     _qcp = ui->plot;
 
+    ui->splitter->setStretchFactor(0, 5);
+    ui->splitter->setStretchFactor(1, 1);
+
 }
 
 AbstractPlot::~AbstractPlot()
