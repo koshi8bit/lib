@@ -32,7 +32,7 @@ private:
     // AbstractGraph interface
     void _setColor(QColor color);
 
-    void updateLegendItem();
+    virtual void updateLegendItem();
 
 protected:
     void abstractSetVisible(bool newValue) override;

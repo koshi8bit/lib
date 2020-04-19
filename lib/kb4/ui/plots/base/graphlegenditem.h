@@ -22,6 +22,7 @@ public:
 
     void setValue(double value, bool showDelta = false);
     void setValue(const QString &value, bool showDelta = false);
+    void setLabelText(const QString &string);
 
 public slots:
     void setVisibleValue(bool newValue);

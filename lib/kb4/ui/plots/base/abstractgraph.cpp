@@ -4,14 +4,16 @@ AbstractGraph::AbstractGraph(const QString &label, const QString &postfix, QColo
                              QCustomPlot *qcp, int precision, bool scientificNotation)
     :QObject(qcp)
 {
-    _visible = true;
-
-    _qcp = qcp;
+    _label = label;
+    _postfix = postfix;
 
     _color = color;
+    _qcp = qcp;
 
     _precision = precision;
     _scientificNotation = scientificNotation;
+
+    _visible = true;
 
     _legendItem = new GraphLegendItem(label, postfix, color, _precision, scientificNotation);
     connect(_legendItem, &GraphLegendItem::visibleChanged, this, &AbstractGraph::setVisibleByWidget);

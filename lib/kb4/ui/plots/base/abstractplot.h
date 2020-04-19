@@ -48,15 +48,13 @@ private:
     QVector<AbstractGraph *> _graphs;
 
 protected:
-    const QString timeLabel = tr("Время");
-
     virtual void configurePlot() = 0;
     AbstractGraph* addGraph(AbstractGraph *graph);
     ColorSetter colorSetter;
 
     QCustomPlot *_qcp;
     QVBoxLayout *legendLayout;
-    QLabel *labelTime;
+
 
 };
 

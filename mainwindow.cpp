@@ -106,7 +106,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     radarTestGraph = ui->radarTemperature4Plot->addGraph("1 ДК", up, right, down, left);
-    radarTestGraph->setOffset(15);
+    //radarTestGraph->setOffset(15);
     radarTestGraph->setColor(QColor("#CC0000"));
 
 //    radarTestGraph = ui->radarTemperature4Plot->addGraph("2 ДК", 1, false, 5);

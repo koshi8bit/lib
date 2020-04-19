@@ -93,6 +93,8 @@ private:
     void configureSplitter();
     QSplitter *splitter;
 
+    QLabel *labelTime;
+    const QString timeLabel = tr("Время");
 
     QString formatLabelTime(double key);
 

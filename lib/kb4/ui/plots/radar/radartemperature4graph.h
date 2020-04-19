@@ -20,9 +20,17 @@ public:
     double offset() const;
     void setOffset(double offset);
 
+    int legendPrecision() const;
+    void setLegendPrecision(int legendPrecision);
+
 private:
     double _offset=0;
+    int _legendPrecision=0;
 
+
+    // RadarGraph interface
+private:
+    void updateLegendItem() override;
 };
 
 #endif // RADARTEMPERATURE4GRAPH_H

@@ -11,7 +11,7 @@ class AbstractGraph : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractGraph(const QString &_label, const QString &postfix, QColor color,
+    explicit AbstractGraph(const QString &label, const QString &postfix, QColor color,
                            QCustomPlot *qcp = nullptr, int precision = 3,
                            bool scientificNotation = false);
 

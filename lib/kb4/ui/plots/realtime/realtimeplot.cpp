@@ -3,6 +3,10 @@
 RealTimePlot::RealTimePlot(QWidget *parent)
     :AbstractPlot(parent)
 {
+    labelTime = new QLabel(this);
+    labelTime->setText(timeLabel);
+    legendLayout->insertWidget(0, labelTime);
+
     configurePlot();
 }
 

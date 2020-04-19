@@ -57,6 +57,11 @@ void GraphLegendItem::setValue(const QString &value, bool showDelta)
     ui->label->setText(text);
 }
 
+void GraphLegendItem::setLabelText(const QString &string)
+{
+    ui->label->setText(string);
+}
+
 void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
 {
     auto visible = EasyLiving::isChecked(arg1);

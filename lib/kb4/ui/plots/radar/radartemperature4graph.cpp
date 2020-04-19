@@ -11,6 +11,8 @@ RadarTemperature4Graph::RadarTemperature4Graph(const QString &label, QColor colo
     this->right = right;
     this->down = down;
     this->left = left;
+    calcDeviation();
+    updateLegendItem();
 }
 
 void RadarTemperature4Graph::calcDeviation()
@@ -33,4 +35,30 @@ double RadarTemperature4Graph::offset() const
 void RadarTemperature4Graph::setOffset(double offset)
 {
     _offset = offset;
+}
+
+int RadarTemperature4Graph::legendPrecision() const
+{
+    return _legendPrecision;
+}
+
+void RadarTemperature4Graph::setLegendPrecision(int legendPrecision)
+{
+    _legendPrecision = legendPrecision;
+}
+
+void RadarTemperature4Graph::updateLegendItem()
+{
+    if (visible())
+    {
+        auto text = QString("%1: %2%3 [В%4 П%5 Н%6 Л%7]")
+                .arg(label())
+                .arg(EasyLiving::formatDouble(radius(), precision()))
+                .arg(postfix())
+                .arg(EasyLiving::formatDouble(up->value(), legendPrecision()))
+                .arg(EasyLiving::formatDouble(right->value(), legendPrecision()))
+                .arg(EasyLiving::formatDouble(down->value(), legendPrecision()))
+                .arg(EasyLiving::formatDouble(left->value(), legendPrecision()));
+        legendItem()->setLabelText(text);
+    }
 }

@@ -48,11 +48,7 @@ void AbstractPlot::on_pushButtonHelp_clicked()
 
 void AbstractPlot::configureLegend()
 {
-    legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
-
-    labelTime = new QLabel(this);
-    labelTime->setText(timeLabel);
-    legendLayout->addWidget(labelTime);
+    legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());    
 
     auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
     legendLayout->addItem(spacer);
