@@ -22,6 +22,11 @@ void RealTmePlot::configurePlot()
     connect(qcp(), &QCustomPlot::beforeReplot, this, &RealTmePlot::beforeReplot);
     connect(qcp()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(setTimeAxisRange(QCPRange)));
 
+    configureStatusLabel();
+    _configurePlot();
+    _setCursor2Visible(false);
+    updateStatusLabelFlag = true;
+
 }
 
 void RealTmePlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
@@ -138,4 +143,128 @@ void RealTmePlot::_setTimeAxisRange(const QCPRange &newRange)
         updateTimeAxisLabel();
     }
     updateStatusLabel();
+}
+
+void RealTmePlot::updateStatusLabel()
+{
+    if (updateStatusLabelFlag)
+    {
+        QString text;
+        if (realTime()) text.append("R ");
+        if (!moveLineRealTime()) text.append("C1 ");
+        if (cursor2Visible()) text.append("C2 ");
+        statusLabel->setText(text.trimmed());
+        statusLabel->setVisible(!text.isEmpty());
+    }
+}
+
+void RealTmePlot::_configurePlot()
+{
+    //WARNING dublicate configureAxesZoomAndDrag??
+    qcp()->setInteraction(QCP::iRangeZoom, true);
+    qcp()->setInteraction(QCP::iRangeDrag, true);
+
+    setRealTime(true);
+
+    //WARNING dublicate exec in setRealTime
+    //configureAxesZoomAndDrag(false);
+
+    configurePlotBackground();
+
+    configurePlotTimeAxis();
+    configurePlotLine();
+    setMoveLineRealTime(true);
+    plot()->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
+    plot()->xAxis->setRangeUpper(RealTimeQCP::currentDateTime());
+    setTimeAxisRange(60);
+
+    // { Tests
+    //plot()->setNoAntialiasingOnDrag(true);
+    //plot()->setPlottingHint(QCP::phFastPolylines,true); // ?tima45 line from ethernet
+
+    // } Tests
+}
+
+void RealTmePlot::configureAxesZoomAndDrag(bool configureYAxises)
+{
+    auto axis = QList<QCPAxis*>()
+            << qcp()->yAxis
+            << qcp()->yAxis2;
+
+    Q_UNUSED(configureYAxises)
+    //if (configureTimeAxis)
+        axis << qcp()->xAxis;
+    qcp()->axisRect()->setRangeZoomAxes(axis);
+
+//    auto zoom = QList<QCPAxis*>()
+//            << plot()->xAxis;
+
+//    if (configureYAxises)
+//    {
+//        zoom << plot()->yAxis
+//             << plot()->yAxis2;
+//    }
+
+//    auto drag = QList<QCPAxis*>()
+//            << plot()->yAxis
+//            << plot()->yAxis2
+//            << plot()->xAxis;
+
+//    plot()->axisRect()->setRangeZoomAxes(zoom);
+    //    plot()->axisRect()->setRangeDragAxes(drag);
+}
+
+
+bool RealTmePlot::realTime() const
+{
+    return _realTime;
+}
+
+void RealTmePlot::setRealTime(bool newValue, RealTmePlot *senderWidget)
+{
+    if (senderWidget == this) { return; }
+
+    _setRealTime(newValue);
+}
+
+void RealTmePlot::setRealTime(bool realTime)
+{
+    _setRealTime(realTime);
+    emit realTimeChanged(realTime);
+}
+
+void RealTmePlot::_setRealTime(bool newValue)
+{
+    _realTime = newValue;
+    //configureAxesZoomAndDrag(!newValue);
+    configureAxesZoomAndDrag(true);
+    updateStatusLabel();
+}
+
+void RealTmePlot::_setCursor2Visible(bool newValue)
+{
+    _cursor2->setVisible(newValue);
+    foreach (auto graphElement, _graphs)
+    {
+        graphElement->setCursor2Visible(newValue);
+    }
+
+    if (labelTime->isVisible())
+        labelTime->setText(formatLabelTime(_cursor->start->key()));
+
+    updateStatusLabel();
+}
+
+void RealTmePlot::configureStatusLabel()
+{
+    statusLabel = new QCPItemText(qcp());
+    statusLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
+    statusLabel->setPositionAlignment(Qt::AlignRight|Qt::AlignBottom);
+    statusLabel->position->setCoords(1.0, 0.95); // lower right corner of axis rect
+
+    statusLabel->setTextAlignment(Qt::AlignLeft);
+    statusLabel->setFont(QFont(font().family(), 10));
+    statusLabel->setPadding(QMargins(2, 0, 2, 0));
+    statusLabel->setBrush(QColor("#C0C0C0"));
+    statusLabel->setVisible(false);
 }
