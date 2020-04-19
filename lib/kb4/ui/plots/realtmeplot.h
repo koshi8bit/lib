@@ -20,8 +20,6 @@ public:
     //void removeGraph(QCPGraph *graph);
     void removeGraphs();
 
-    QCustomPlot* plot() const;
-
     void setTimeAxisRange(int newRangeMSEC);
     void setTimeLabelVisible(bool newValue);
 
