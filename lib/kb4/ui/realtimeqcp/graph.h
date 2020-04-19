@@ -5,7 +5,8 @@
 
 #include <lib/qcustomplot/qcustomplot.h>
 
-#include "graphlegenditem.h"
+#include <lib/kb4/ui/plots/base/graphlegenditem.h>
+//#include "graphlegenditem.h"
 
 
 class Graph : public QObject

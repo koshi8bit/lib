@@ -11,9 +11,11 @@
 #include <lib/kb4/ui/printscreener/printscreener.h>
 //#include <lib/kb4/log/channeldouble.h>
 
-#include "axisconfig.h"
+#include <lib/kb4/ui/plots/base/axisconfig.h>
+//#include "axisconfig.h"
 #include "graph.h"
-#include "colorsetter.h"
+#include <lib/kb4/ui/plots/base/colorsetter.h>
+//#include "colorsetter.h"
 
 //FIXME в графе хранить ссылку на channel?
 
