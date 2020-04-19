@@ -1,8 +1,7 @@
 #ifndef REALTMEPLOT_H
 #define REALTMEPLOT_H
 
-#include <lib/kb4/ui/plots/abstractplot.h>
-#include <lib/kb4/ui/plots/radargraph.h>
+#include <lib/kb4/ui/plots/base/abstractplot.h>
 
 class RealTmePlot : public AbstractPlot
 {
@@ -46,6 +45,8 @@ private:
     void _setRealTime(bool newValue);
 
     const QString timeLabel = tr("Время");
+
+    void _setCursor2Visible(bool newValue);
 };
 
 #endif // REALTMEPLOT_H

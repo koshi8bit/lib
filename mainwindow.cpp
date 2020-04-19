@@ -483,7 +483,7 @@ void MainWindow::on_pushButton_3_clicked()
 }
 
 static const int textMargins = 12; // in millimeters
-static const int borderMargins = 10; // in millimeters
+//static const int borderMargins = 10; // in millimeters
 
 static double mmToPixels(QPrinter& printer, int mm)
 {
