@@ -14,6 +14,8 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
     ui->splitter->setStretchFactor(0, 5);
     ui->splitter->setStretchFactor(1, 1);
 
+    ui->splitter->widget(1)->setMinimumWidth(200);
+
 }
 
 AbstractPlot::~AbstractPlot()

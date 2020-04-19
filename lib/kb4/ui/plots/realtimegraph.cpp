@@ -106,8 +106,7 @@ void RealTimeGraph::configureCursor(QCPItemTracer **cursor)
     //(*cursor)->setInterpolating(true);
     (*cursor)->setStyle(QCPItemTracer::tsCircle); // tsCircle
     (*cursor)->setPen(_graph->pen());
-    (*cursor)->setBrush(QColor("#000000"));
-    //(*cursor)->setBrush(color());
+    (*cursor)->setBrush(color());
     (*cursor)->setSize(5);
 }
 
