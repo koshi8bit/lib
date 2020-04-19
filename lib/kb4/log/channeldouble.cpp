@@ -18,12 +18,12 @@ ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
     configure();
 }
 
-void ChannelDouble::addGraphToPlot(RealTimeQCP *plot, bool visible)
+void ChannelDouble::addGraphToPlot(RealTimePlot *plot, bool visible)
 {
-    _graph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
-    _graph->setVisible(visible);
+    _graphRealTimePlot = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
+    _graphRealTimePlot->setVisible(visible);
     if (color().isValid())
-        _graph->setColor(color());
+        _graphRealTimePlot->setColor(color());
 }
 
 //AbstractGraph *ChannelDouble::addGraphToPlot(AbstractPlot *plot, bool visible)
@@ -80,11 +80,6 @@ double ChannelDouble::rawValue()
     return _rawValue;
 }
 
-Graph *ChannelDouble::graph() const
-{
-    return _graph;
-}
-
 int ChannelDouble::precision() const
 {
     return _precision;
@@ -106,7 +101,7 @@ void ChannelDouble::valueChangedChild()
 {
     if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
 
-    if (_graph != nullptr) { _graph->addData(RealTimeQCP::currentDateTime(), value()); }
+    if (_graphRealTimePlot != nullptr) { _graphRealTimePlot->addData(RealTimeQCP::currentDateTime(), value()); }
 
     //if (_abstractGraph != nullptr) { _abstractGraph->addData(RealTimeQCP::currentDateTime(), value()); }
 }

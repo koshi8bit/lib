@@ -52,11 +52,11 @@ private:
 
     QTimer *timerAddData1, *timerAddData2, *timerrealTimeQcpReplot;
 
-    Graph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt;
-    Graph *graphTemperaturePyrometer;
-    Graph *graphVacuumTandem;
+    RealTimeGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt;
+    RealTimeGraph *graphTemperaturePyrometer;
+    RealTimeGraph *graphVacuumTandem;
 
-    Graph *graphRealTimeQcpUa, *graphRealTimeQcpUb, *graphRealTimeQcpIa, *graphRealTimeQcpBoola;
+    RealTimeGraph *graphRealTimeQcpUa, *graphRealTimeQcpUb, *graphRealTimeQcpIa, *graphRealTimeQcpBoola;
 
     QCPMarginGroup *mg;
     //double now;
@@ -73,7 +73,7 @@ private:
 
 
     void configureRealTimeQcpPlot();
-    void configureRealTimeQcpPlot(RealTimeQCP * plot);
+    void configureRealTimeQcpPlot(RealTimePlot *plot);
 
     void configureRealTimeQcpGraphs();
     void configureRealTimeQcpPlotDayStyle();

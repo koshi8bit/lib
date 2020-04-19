@@ -181,7 +181,7 @@ void MainWindow::configureTimers()
 
     timerrealTimeQcpReplot = new QTimer(this);
     timerrealTimeQcpReplot->setInterval(plotUpdateIntervalMSEC);
-    connect(timerrealTimeQcpReplot, &QTimer::timeout, ui->realTimeQcpU, &RealTimeQCP::moveTimeAxisRealTime);
+    connect(timerrealTimeQcpReplot, &QTimer::timeout, ui->realTimeQcpU, &RealTimePlot::moveTimeAxisRealTime);
     timerrealTimeQcpReplot->start();
 }
 
@@ -256,66 +256,66 @@ MainWindow::~MainWindow()
 
 void MainWindow::configureRealTimeQcpPlot()
 {
-    mg = new QCPMarginGroup(ui->realTimeQcpU->plot());
+    mg = new QCPMarginGroup(ui->realTimeQcpU->qcp());
 
-    RealTimeQCP * plot;
+    RealTimePlot * plot;
 
     plot = ui->realTimeQcpU;
-    plot->configureAxis(plot->plot()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
     configureRealTimeQcpPlot(plot);
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpI->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpTemperature->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpPower->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpPersent->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpBool->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpVacuum->plot(), SLOT(replot()));
-    connect(plot->plot(), SIGNAL(afterReplot()), ui->realTimeQcpRadiation->plot(), SLOT(replot()));
+    connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpI->qcp(), SLOT(replot()));
+    connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpTemperature->qcp(), SLOT(replot()));
+    connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpPower->qcp(), SLOT(replot()));
+    connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpPersent->qcp(), SLOT(replot()));
+    connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpBool->qcp(), SLOT(replot()));
+    connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpVacuum->qcp(), SLOT(replot()));
+    connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpRadiation->qcp(), SLOT(replot()));
 
     plot = ui->realTimeQcpI;
-    plot->configureAxis(plot->plot()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10, 2);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10, 2);
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpTemperature;
-    plot->configureAxis(plot->plot()->yAxis, tr("Температурим"), EasyLiving::postfixCelsius(), 0, 200);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Температурим"), EasyLiving::postfixCelsius(), 0, 200);
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpPower;
-    plot->configureAxis(plot->plot()->yAxis, tr("МОООЩА!"), EasyLiving::postfixWatt(), 0, 700);
+    plot->configureAxis(plot->qcp()->yAxis, tr("МОООЩА!"), EasyLiving::postfixWatt(), 0, 700);
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpPersent;
-    plot->configureAxis(plot->plot()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpBool;
-    plot->configureAxis(plot->plot()->yAxis, tr("True/False"), "", -0.2, 1.2);
+    plot->configureAxis(plot->qcp()->yAxis, tr("True/False"), "", -0.2, 1.2);
     QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
     textTicker->addTick(0, "False\nOff");
     textTicker->addTick(1, "True\nOn");
-    plot->plot()->yAxis->setTicker(textTicker);
+    plot->qcp()->yAxis->setTicker(textTicker);
     //plot->plot()->yAxis->setSubTicks(false);
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpVacuum;
-    plot->configureAxis(plot->plot()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, 0, QCPAxis::stLogarithmic);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, 0, QCPAxis::stLogarithmic);
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpRadiation;
-    plot->configureAxis(plot->plot()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, 0, QCPAxis::stLogarithmic);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, 0, QCPAxis::stLogarithmic);
     configureRealTimeQcpPlot(plot);
 }
 
-void MainWindow::configureRealTimeQcpPlot(RealTimeQCP *plot)
+void MainWindow::configureRealTimeQcpPlot(RealTimePlot *plot)
 {
     plot->setMarginGroup(mg);
 
-    connect(plot, &RealTimeQCP::timeAxisRangeChanged, this, &MainWindow::realTimeQcpSetTimeAxisRange);
-    connect(plot, &RealTimeQCP::cursorKeyChanged, this, &MainWindow::realTimeQcpSetCursorKey);
-    connect(plot, &RealTimeQCP::realTimeChanged, this, &MainWindow::realTimeQcpSetRealTime);
-    connect(plot, &RealTimeQCP::moveLineRealTimeChanged, this, &MainWindow::realTimeQcpSetMoveLineRealTime);
+    connect(plot, &RealTimePlot::timeAxisRangeChanged, this, &MainWindow::realTimeQcpSetTimeAxisRange);
+    connect(plot, &RealTimePlot::cursorKeyChanged, this, &MainWindow::realTimeQcpSetCursorKey);
+    connect(plot, &RealTimePlot::realTimeChanged, this, &MainWindow::realTimeQcpSetRealTime);
+    connect(plot, &RealTimePlot::moveLineRealTimeChanged, this, &MainWindow::realTimeQcpSetMoveLineRealTime);
 
-    connect(plot, &RealTimeQCP::cursor2VisibleValueChanged, this, &MainWindow::realTimeQcpSetCursor2Visible);
-    connect(plot, &RealTimeQCP::cursor2KeyChanged, this, &MainWindow::realTimeQcpSetCursor2Key);
+    connect(plot, &RealTimePlot::cursor2VisibleValueChanged, this, &MainWindow::realTimeQcpSetCursor2Visible);
+    connect(plot, &RealTimePlot::cursor2KeyChanged, this, &MainWindow::realTimeQcpSetCursor2Key);
 }
 
 void MainWindow::configureRealTimeQcpGraphs()
@@ -331,7 +331,7 @@ void MainWindow::configureRealTimeQcpGraphs()
 void MainWindow::configureRealTimeQcpPlotDayStyle()
 {
     auto plot = ui->realTimeQcpDayStyle;
-    plot->configureAxis(plot->plot()->yAxis, tr("Шкала"), "", 0, 10, 2);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Шкала"), "", 0, 10, 2);
     plot->setDayStyle(true, false);
 }
 
@@ -342,7 +342,7 @@ void MainWindow::configureRealTimeQcpPlotDayStyle()
 void MainWindow::realTimeQcpSetTimeAxisRange(QCPRange range)
 {
 
-    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+    auto _sender = dynamic_cast<RealTimePlot *>(sender());
 
     ui->realTimeQcpU->setTimeAxisRange(range, _sender);
     ui->realTimeQcpI->setTimeAxisRange(range, _sender);
@@ -357,7 +357,7 @@ void MainWindow::realTimeQcpSetTimeAxisRange(QCPRange range)
 
 void MainWindow::realTimeQcpSetCursorKey(double key)
 {
-    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+    auto _sender = dynamic_cast<RealTimePlot *>(sender());
 
     ui->realTimeQcpU->setCursorKey(key, _sender);
     ui->realTimeQcpI->setCursorKey(key, _sender);
@@ -372,7 +372,7 @@ void MainWindow::realTimeQcpSetCursorKey(double key)
 
 void MainWindow::realTimeQcpSetRealTime(bool newValue)
 {
-    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+    auto _sender = dynamic_cast<RealTimePlot *>(sender());
 
     ui->realTimeQcpU->setRealTime(newValue, _sender);
     ui->realTimeQcpI->setRealTime(newValue, _sender);
@@ -387,7 +387,7 @@ void MainWindow::realTimeQcpSetRealTime(bool newValue)
 
 void MainWindow::realTimeQcpSetMoveLineRealTime(bool newValue)
 {
-    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+    auto _sender = dynamic_cast<RealTimePlot *>(sender());
 
     ui->realTimeQcpU->setMoveLineRealTime(newValue, _sender);
     ui->realTimeQcpI->setMoveLineRealTime(newValue, _sender);
@@ -402,7 +402,7 @@ void MainWindow::realTimeQcpSetMoveLineRealTime(bool newValue)
 
 void MainWindow::realTimeQcpSetCursor2Visible(bool newValue)
 {
-    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+    auto _sender = dynamic_cast<RealTimePlot *>(sender());
 
     ui->realTimeQcpU->setCursor2Visible(newValue, _sender);
     ui->realTimeQcpI->setCursor2Visible(newValue, _sender);
@@ -416,7 +416,7 @@ void MainWindow::realTimeQcpSetCursor2Visible(bool newValue)
 
 void MainWindow::realTimeQcpSetCursor2Key(double key)
 {
-    auto _sender = dynamic_cast<RealTimeQCP *>(sender());
+    auto _sender = dynamic_cast<RealTimePlot *>(sender());
 
     ui->realTimeQcpU->setCursor2Key(key, _sender);
     ui->realTimeQcpI->setCursor2Key(key, _sender);

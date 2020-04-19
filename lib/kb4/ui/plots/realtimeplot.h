@@ -44,7 +44,7 @@ public:
     void autoScaleAxis(QCPAxis *axis);
 
     bool dayStyle() const;
-    void setDayStyle(bool newValue, bool showTime = true);
+    void setDayStyle(bool dayStyle, bool showTime = true);
 
 
 

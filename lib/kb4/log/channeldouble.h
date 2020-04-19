@@ -5,8 +5,8 @@
 
 #include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
 #include <lib/kb4/ui/realtimeqcp/graph.h>
-#include <lib/kb4/ui/plots/base/abstractplot.h>
-#include <lib/kb4/ui/plots/base/abstractgraph.h>
+#include <lib/kb4/ui/plots/realtimeplot.h>
+#include <lib/kb4/ui/plots/realtimegraph.h>
 
 class ChannelDouble : public ChannelT<double>
 {
@@ -24,7 +24,7 @@ public:
 //    ChannelDouble(QString name, QString postfix, QStringList &prefix, QObject *parent = nullptr);
 //    ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
 //  TODO DELETE LATER
-    void addGraphToPlot(RealTimeQCP *plot, bool visible=true);
+    void addGraphToPlot(RealTimePlot *plot, bool visible=true);
     //AbstractGraph *addGraphToPlot(AbstractPlot *plot, bool visible=true);
 
     bool scientificNotation();
@@ -39,11 +39,8 @@ public:
     void setToRawFunc(std::function<double(double)> f);
     double rawValue();
 
-    Graph *graph() const;
-
 private:
-    Graph *_graph = nullptr;
-    AbstractGraph *_abstractGraph = nullptr;
+    RealTimeGraph *_graphRealTimePlot = nullptr;
 
     int _precision;
     bool _scientificNotation = false;

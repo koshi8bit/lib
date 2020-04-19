@@ -42,7 +42,6 @@ private:
     bool _scientificNotation;
     int _precision;
     //ValueScaler valueScaler;
-    QCustomPlot *_plot;
     QCPAxis *_yAxis;
 
     QCPGraph *_graph;

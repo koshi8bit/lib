@@ -490,10 +490,10 @@ void RealTimePlot::autoScaleAxis(QCPAxis *axis)
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
-void RealTimePlot::setDayStyle(bool newValue, bool showTime)
+void RealTimePlot::setDayStyle(bool dayStyle, bool showTime)
 {
-    _dayStyle = newValue;
-    if (dayStyle())
+    _dayStyle = dayStyle;
+    if (dayStyle)
     {
         QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
         auto format = EasyLiving::formatDateUi();

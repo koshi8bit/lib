@@ -116,7 +116,7 @@ void RealTimeGraph::moveCursor2(double key)
 
 void RealTimeGraph::configureCursor(QCPItemTracer **cursor)
 {
-    (*cursor) = new QCPItemTracer(_plot);
+    (*cursor) = new QCPItemTracer(qcp());
     (*cursor)->setGraph(_graph);
     //(*cursor)->setInterpolating(true);
     (*cursor)->setStyle(QCPItemTracer::tsCircle); // tsCircle
