@@ -21,7 +21,7 @@
 #include <lib/kb4/qdebuglogger/qdebuglogger.h>
 #include <lib/kb4/worker/worker.h>
 #include <lib/kb4/log/simple/simplelog.h>
-#include <lib/kb4/ui/radarqcp/radargraph.h>
+#include <lib/kb4/ui/plots/radargraph.h>
 
 namespace Ui {
 class MainWindow;
@@ -113,7 +113,6 @@ private slots:
     void on_pushButtonNow_clicked();
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
-    void on_horizontalSlider_2_valueChanged(int value);
     void on_doubleSpinBoxRadarRadius_valueChanged(double arg1);
     void on_doubleSpinBoxRadarAngle_valueChanged(double arg1);
 };

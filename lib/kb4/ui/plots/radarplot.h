@@ -1,8 +1,8 @@
 #ifndef RADARPLOT_H
 #define RADARPLOT_H
 
-#include <lib/kb4/ui/radarqcp/abstractplot.h>
-#include <lib/kb4/ui/radarqcp/radargraph.h>
+#include <lib/kb4/ui/plots/abstractplot.h>
+#include <lib/kb4/ui/plots/radargraph.h>
 
 class RadarPlot : public AbstractPlot
 {

@@ -3,7 +3,7 @@
 
 #include <lib/qcustomplot/qcustomplot.h>
 
-#include <lib/kb4/ui/radarqcp/abstractgraph.h>
+#include <lib/kb4/ui/plots/abstractgraph.h>
 
 class RadarGraph : public AbstractGraph
 {

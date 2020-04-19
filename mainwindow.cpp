@@ -561,11 +561,6 @@ void MainWindow::on_pushButton_4_clicked()
     printDocument(printer, document);
 }
 
-void MainWindow::on_horizontalSlider_2_valueChanged(int value)
-{
-
-}
-
 void MainWindow::on_doubleSpinBoxRadarRadius_valueChanged(double arg1)
 {
     radarTestGraph->setRadius(arg1);
