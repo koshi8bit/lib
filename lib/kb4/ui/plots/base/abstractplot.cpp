@@ -26,7 +26,7 @@ AbstractGraph *AbstractPlot::addGraph(AbstractGraph *graph)
 }
 
 
-QVector<AbstractGraph *> AbstractPlot::graphs() const
+QVector<AbstractGraph *> AbstractPlot::graphs()
 {
     return _graphs;
 }

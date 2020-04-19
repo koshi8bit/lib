@@ -21,7 +21,20 @@ public:
     explicit AbstractPlot(QWidget *parent = nullptr);
     ~AbstractPlot();
 
-    QVector<AbstractGraph *> graphs() const;
+    QVector<AbstractGraph *> graphs();
+
+#define graphsCast(element, type) static_cast<type>(element)
+//    template < template <typename> class BinPred , typename T >
+//    QVector<T*> foo()
+//    {
+//        QVector<T*> result;
+//        foreach(auto element, graphs())
+//        {
+//            result.append(static_cast<T*>(element));
+//        }
+//        return result;
+//    }
+
     QCustomPlot *qcp() const;
 
 private slots:
