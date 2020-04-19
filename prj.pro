@@ -90,6 +90,7 @@ HEADERS += \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \
     lib/kb4/ui/gradientlineedit/minmax.h \
     lib/kb4/ui/label/qlabelext.h \
+    lib/kb4/ui/plots/realtmeplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
     lib/kb4/ui/plots/abstractgraph.h \
     lib/kb4/ui/plots/abstractplot.h \
@@ -131,6 +132,7 @@ SOURCES += \
     lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
     lib/kb4/ui/gradientlineedit/minmax.cpp \
     lib/kb4/ui/label/qlabelext.cpp \
+    lib/kb4/ui/plots/realtmeplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
     lib/kb4/ui/plots/abstractgraph.cpp \
     lib/kb4/ui/plots/abstractplot.cpp \

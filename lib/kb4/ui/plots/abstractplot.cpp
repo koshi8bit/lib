@@ -9,7 +9,7 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
     ui->widgetToolTip->setVisible(false);
     configureLegend();
 
-    _plot = ui->plot;
+    _qcp = ui->plot;
 
 }
 
@@ -55,5 +55,5 @@ void AbstractPlot::configureLegend()
 
 QCustomPlot *AbstractPlot::qcp() const
 {
-    return _plot;
+    return _qcp;
 }

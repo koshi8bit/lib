@@ -45,7 +45,7 @@ protected:
     AbstractGraph* addGraph(AbstractGraph *graph);
     ColorSetter colorSetter;
 
-    QCustomPlot *_plot;
+    QCustomPlot *_qcp;
     QVBoxLayout *legendLayout;
     QLabel *labelTime;
 
