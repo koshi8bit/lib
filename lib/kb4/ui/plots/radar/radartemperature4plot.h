@@ -15,7 +15,12 @@ public:
                          int precision = 1,
                          int lineWidth = 5);
 
+    void replot();
+
 private:
+    RadarTemperature4Graph* graphCast(AbstractGraph* graph);
+    double maxDiameter = 2;
+
     QCPItemEllipse *criticalCircle;
 
     QCPItemEllipse *drawCircle(double radius, QColor color);

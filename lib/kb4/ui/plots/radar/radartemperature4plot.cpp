@@ -7,7 +7,7 @@ RadarTemperature4Plot::RadarTemperature4Plot(QWidget *parent)
 //    plot->setInteraction(QCP::iRangeDrag, true);
 //    _qcp->axisRect()->setupFullAxesBox();
 
-    auto maxDiameter = 2;
+    maxDiameter = 2;
 
 
     criticalCircle = drawCircle(1, QColor("#FF0000"));
@@ -16,8 +16,8 @@ RadarTemperature4Plot::RadarTemperature4Plot(QWidget *parent)
     drawCircle(2, QColor("#AAFFAA"));
     drawCircle(1, QColor("#AAAAFF"));
 
-    _qcp->xAxis->setRange(-maxDiameter, maxDiameter);
-    _qcp->yAxis->setRange(-maxDiameter, maxDiameter);
+    qcp()->xAxis->setRange(-maxDiameter, maxDiameter);
+    qcp()->yAxis->setRange(-maxDiameter, maxDiameter);
 
     configureLines(maxDiameter);
 }
@@ -35,6 +35,30 @@ RadarTemperature4Graph *RadarTemperature4Plot::addGraph(const QString &label,
                                 lineWidth);
     AbstractPlot::addGraph(graph);
     return graph;
+}
+
+void RadarTemperature4Plot::replot()
+{
+    double max=0;
+    foreach(auto graph, graphs())
+    {
+        max = qMax(graphCast(graph)->radius(), max);
+    }
+
+    max = qMax(max, maxDiameter);
+
+    qcp()->xAxis->setRange(-max, max);
+    qcp()->yAxis->setRange(-max, max);
+
+    criticalCircle->topLeft->setCoords(-max, -max);
+    criticalCircle->bottomRight->setCoords(max, max);
+
+    qcp()->replot();
+}
+
+RadarTemperature4Graph *RadarTemperature4Plot::graphCast(AbstractGraph *graph)
+{
+    return static_cast<RadarTemperature4Graph *>(graph);
 }
 
 QCPItemEllipse *RadarTemperature4Plot::drawCircle(double radius, QColor color)

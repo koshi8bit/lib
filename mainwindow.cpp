@@ -590,5 +590,5 @@ void MainWindow::on_doubleSpinBoxRadarAngle_valueChanged(double arg1)
 void MainWindow::on_pushButtonRadarCalc_clicked()
 {
     radarTestGraph->calcDeviation();
-    ui->radarTemperature4Plot->qcp()->replot();
+    ui->radarTemperature4Plot->replot();
 }
