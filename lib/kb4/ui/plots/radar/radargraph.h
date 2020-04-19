@@ -1,29 +1,26 @@
 #ifndef RADARGRAPH_H
 #define RADARGRAPH_H
 
-#include <lib/qcustomplot/qcustomplot.h>
-
 #include <lib/kb4/ui/plots/base/abstractgraph.h>
 
 class RadarGraph : public AbstractGraph
 {
 public:
     static QPointF toPolar(double r, double angle);
-    RadarGraph(const QString &_label, const QString &postfix, QColor color,
+    RadarGraph(const QString &label, const QString &postfix, QColor color,
                QCustomPlot *qcp, int precision = 3,
                bool scientificNotation = false, int lineWidth = 1);
 
     double radius() const;
-    void setRadius(double radius);
-
     double angle() const;
-    void setAngle(double angle);
 
-    int width() const;
     void setWidth(int width);
+    int width() const;
 
 public slots:
     void setValue(double radius, double angle);
+    void setAngle(double angle);
+    void setRadius(double radius);
 
 private:
     //RadarPlot *plot;

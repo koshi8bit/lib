@@ -92,17 +92,31 @@ MainWindow::MainWindow(QWidget *parent) :
     //auto temperatureD1 = new RadarGraph("name", "postfix", this);
     //temperatureD1->addGraphToPlot(ui->radarQcp);
 
-    radarTestGraph = ui->radarQcp->addGraph("1 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
+    auto up = new ChannelDouble("Up", EasyLiving::postfixCelsius(), this);
+    connect(ui->dialUp, &QDial::valueChanged, up, &ChannelDouble::setValue);
+
+    auto right = new ChannelDouble("Right", EasyLiving::postfixCelsius(), this);
+    connect(ui->dialRight, &QDial::valueChanged, right, &ChannelDouble::setValue);
+
+    auto down = new ChannelDouble("Down", EasyLiving::postfixCelsius(), this);
+    connect(ui->dialDown, &QDial::valueChanged, down, &ChannelDouble::setValue);
+
+    auto left = new ChannelDouble("Left", EasyLiving::postfixCelsius(), this);
+    connect(ui->dialLeft, &QDial::valueChanged, left, &ChannelDouble::setValue);
+
+
+    radarTestGraph = ui->radarTemperature4Plot->addGraph("1 ДК", up, right, down, left);
+    radarTestGraph->setOffset(15);
     radarTestGraph->setColor(QColor("#CC0000"));
 
-    radarTestGraph = ui->radarQcp->addGraph("2 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
-    radarTestGraph->setColor(QColor("#00CC00"));
+//    radarTestGraph = ui->radarTemperature4Plot->addGraph("2 ДК", 1, false, 5);
+//    radarTestGraph->setColor(QColor("#00CC00"));
 
-    radarTestGraph = ui->radarQcp->addGraph("3 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
-    radarTestGraph->setColor(QColor("#0000CC"));
+//    radarTestGraph = ui->radarTemperature4Plot->addGraph("3 ДК", 1, false, 5);
+//    radarTestGraph->setColor(QColor("#0000CC"));
 
-    radarTestGraph = ui->radarQcp->addGraph("4 ДК", EasyLiving::postfixCelsius(), 1, false, 5);
-    radarTestGraph->setColor(QColor("#AA99AA"));
+//    radarTestGraph = ui->radarTemperature4Plot->addGraph("4 ДК", 1, false, 5);
+//    radarTestGraph->setColor(QColor("#AA99AA"));
 
 
 }
@@ -564,11 +578,17 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_doubleSpinBoxRadarRadius_valueChanged(double arg1)
 {
     radarTestGraph->setRadius(arg1);
-    ui->radarQcp->qcp()->replot();
+    ui->radarTemperature4Plot->qcp()->replot();
 }
 
 void MainWindow::on_doubleSpinBoxRadarAngle_valueChanged(double arg1)
 {
     radarTestGraph->setAngle(arg1);
-    ui->radarQcp->qcp()->replot();
+    ui->radarTemperature4Plot->qcp()->replot();
+}
+
+void MainWindow::on_pushButtonRadarCalc_clicked()
+{
+    radarTestGraph->calcDeviation();
+    ui->radarTemperature4Plot->qcp()->replot();
 }

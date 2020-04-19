@@ -1,0 +1,36 @@
+#include "radartemperature4graph.h"
+
+
+RadarTemperature4Graph::RadarTemperature4Graph(const QString &label, QColor color,
+    QCustomPlot *qcp, ChannelDouble *up, ChannelDouble *right, ChannelDouble *down,
+    ChannelDouble *left, int precision, bool scientificNotation, int lineWidth)
+    :RadarGraph(label, EasyLiving::postfixCelsius(), color, qcp, precision,
+                scientificNotation, lineWidth)
+{
+    this->up = up;
+    this->right = right;
+    this->down = down;
+    this->left = left;
+}
+
+void RadarTemperature4Graph::calcDeviation()
+{
+    auto dx = right->value() - left->value();
+    auto dy = up->value() - down->value();
+
+    auto radius = qSqrt(dx * dx + dy * dy);
+    auto angleRad = qAtan2(dy, dx);
+    auto angleDeg = (angleRad * 180 / M_PI - 90) + 90 + offset();
+
+    setValue(radius, angleDeg);
+}
+
+double RadarTemperature4Graph::offset() const
+{
+    return _offset;
+}
+
+void RadarTemperature4Graph::setOffset(double offset)
+{
+    _offset = offset;
+}

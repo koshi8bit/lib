@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1101</width>
-    <height>689</height>
+    <width>1129</width>
+    <height>778</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -79,9 +79,74 @@
        <attribute name="title">
         <string>RadarPlot</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,0">
+       <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,1,0,0">
         <item>
-         <widget class="RadarPlot" name="radarQcp" native="true"/>
+         <widget class="RadarPlot" name="radarPlot" native="true"/>
+        </item>
+        <item>
+         <widget class="RadarTemperature4Plot" name="radarTemperature4Plot" native="true"/>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QDial" name="dialUp"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="lcdNumber_4"/>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QDial" name="dialLeft"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="lcdNumber_5"/>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QDial" name="dialRight"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="lcdNumber_6"/>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QDial" name="dialDown"/>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="lcdNumber_7"/>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButtonRadarCalc">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>21</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Calc</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
@@ -419,7 +484,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1101</width>
+     <width>1129</width>
      <height>22</height>
     </rect>
    </property>
@@ -466,6 +531,12 @@
    <header>lib/kb4/ui/plots/realtime/realtimeplot.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>RadarTemperature4Plot</class>
+   <extends>QWidget</extends>
+   <header>lib/kb4/ui/plots/radar/radartemperature4plot.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="lib/kb4/pic/ui-res.qrc"/>
@@ -498,8 +569,8 @@
      <y>216</y>
     </hint>
     <hint type="destinationlabel">
-     <x>562</x>
-     <y>282</y>
+     <x>832</x>
+     <y>307</y>
     </hint>
    </hints>
   </connection>
@@ -516,6 +587,70 @@
     <hint type="destinationlabel">
      <x>215</x>
      <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialLeft</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber_5</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>551</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>544</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialUp</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber_4</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>487</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>651</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialRight</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber_6</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>843</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1005</x>
+     <y>558</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dialDown</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lcdNumber_7</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>483</x>
+     <y>648</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>664</x>
+     <y>664</y>
     </hint>
    </hints>
   </connection>

@@ -424,6 +424,8 @@ HEADERS += \
     lib/kb4/ui/plots/base/graphlegenditem.h \
     lib/kb4/ui/plots/radar/radargraph.h \
     lib/kb4/ui/plots/radar/radarplot.h \
+    lib/kb4/ui/plots/radar/radartemperature4graph.h \
+    lib/kb4/ui/plots/radar/radartemperature4plot.h \
     lib/kb4/ui/plots/realtime/realtimegraph.h \
     lib/kb4/ui/plots/realtime/realtimeplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
@@ -464,6 +466,8 @@ SOURCES += \
     lib/kb4/ui/plots/base/graphlegenditem.cpp \
     lib/kb4/ui/plots/radar/radargraph.cpp \
     lib/kb4/ui/plots/radar/radarplot.cpp \
+    lib/kb4/ui/plots/radar/radartemperature4graph.cpp \
+    lib/kb4/ui/plots/radar/radartemperature4plot.cpp \
     lib/kb4/ui/plots/realtime/realtimegraph.cpp \
     lib/kb4/ui/plots/realtime/realtimeplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \

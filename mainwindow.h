@@ -19,7 +19,7 @@
 #include <lib/kb4/qdebuglogger/qdebuglogger.h>
 #include <lib/kb4/worker/worker.h>
 #include <lib/kb4/log/simple/simplelog.h>
-#include <lib/kb4/ui/plots/radar/radargraph.h>
+#include <lib/kb4/ui/plots/radar/radartemperature4graph.h>
 
 namespace Ui {
 class MainWindow;
@@ -64,7 +64,7 @@ private:
     QSettings *settings;
     SimpleLog *simpleLog;
 
-    RadarGraph *radarTestGraph;
+    RadarTemperature4Graph *radarTestGraph;
 
 
     void configureRealTimeQcpPlot();
@@ -113,6 +113,7 @@ private slots:
     void on_pushButton_4_clicked();
     void on_doubleSpinBoxRadarRadius_valueChanged(double arg1);
     void on_doubleSpinBoxRadarAngle_valueChanged(double arg1);
+    void on_pushButtonRadarCalc_clicked();
 };
 
 #endif // MAINWINDOW_H
