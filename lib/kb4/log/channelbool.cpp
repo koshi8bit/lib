@@ -18,7 +18,7 @@ ChannelBool::ChannelBool(QString sharedVariableName, QObject *parent)
     configure();
 }
 
-void ChannelBool::addGraphToPlot(RealTimeQCP *plot, bool visible)
+void ChannelBool::addGraphToPlot(RealTimePlot *plot, bool visible)
 {
     _graph = plot->addGraph(plotName(), postfix(), 0);
     _graph->setVisible(visible);
@@ -27,7 +27,7 @@ void ChannelBool::addGraphToPlot(RealTimeQCP *plot, bool visible)
 }
 
 
-Graph *ChannelBool::graph() const
+RealTimeGraph *ChannelBool::graph() const
 {
     return _graph;
 }
@@ -39,7 +39,7 @@ void ChannelBool::configure()
 
 void ChannelBool::valueChangedChild()
 {
-    if (_graph != nullptr) { _graph->addData(RealTimeQCP::currentDateTime(), value()); }
+    if (_graph != nullptr) { _graph->addData(RealTimePlot::currentDateTime(), value()); }
 }
 
 void ChannelBool::_valueChanged()

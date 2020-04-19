@@ -386,7 +386,6 @@ FORMS += \
     lib/kb4/ui/plots/base/abstractplot.ui \
     lib/kb4/ui/plots/base/axisconfig.ui \
     lib/kb4/ui/plots/base/graphlegenditem.ui \
-    lib/kb4/ui/realtimeqcp/realtimeqcp.ui \
     lib/kb4/ui/value/double/valuedouble.ui \
     mainwindow.ui \
     progressbar.ui
@@ -428,9 +427,6 @@ HEADERS += \
     lib/kb4/ui/plots/realtimegraph.h \
     lib/kb4/ui/plots/realtimeplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
-    lib/kb4/ui/realtimeqcp/graph.h \
-    lib/kb4/ui/realtimeqcp/realtimeqcp.h \
-    lib/kb4/ui/realtimeqcp/realtimeqcpglobal.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/ui/value/double/valuedouble.h \
     lib/kb4/worker/worker.h \
@@ -471,8 +467,6 @@ SOURCES += \
     lib/kb4/ui/plots/realtimegraph.cpp \
     lib/kb4/ui/plots/realtimeplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
-    lib/kb4/ui/realtimeqcp/graph.cpp \
-    lib/kb4/ui/realtimeqcp/realtimeqcp.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
     lib/kb4/ui/value/double/valuedouble.cpp \
     lib/kb4/worker/worker.cpp \

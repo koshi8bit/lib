@@ -3,8 +3,8 @@
 
 #include "channelt.h"
 
-#include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
-#include <lib/kb4/ui/realtimeqcp/graph.h>
+#include <lib/kb4/ui/plots/realtimeplot.h>
+#include <lib/kb4/ui/plots/realtimegraph.h>
 
 class ChannelBool : public ChannelT<bool>
 {
@@ -14,11 +14,11 @@ public:
     ChannelBool(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
     ChannelBool(QString sharedVariableName, QObject *parent = nullptr);
 
-    void addGraphToPlot(RealTimeQCP *plot, bool visible=true);
-    Graph *graph() const;
+    void addGraphToPlot(RealTimePlot *plot, bool visible=true);
+    RealTimeGraph *graph() const;
 
 private:
-    Graph *_graph = nullptr;
+    RealTimeGraph *_graph = nullptr;
     void configure();
 
 signals:

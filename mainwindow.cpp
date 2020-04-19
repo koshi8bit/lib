@@ -198,7 +198,7 @@ void MainWindow::configureGradientLineEdit()
 
 void MainWindow::addData1()
 {
-    auto now = RealTimeQCP::currentDateTime();
+    auto now = RealTimePlot::currentDateTime();
 
     graphRealTimeQcpUa->addData(now, 1000+1000*sin(5.0/2*cos(now)));
     graphRealTimeQcpIa->addData(now, 5+5*sin(9.0/2*cos(now)));
@@ -206,7 +206,7 @@ void MainWindow::addData1()
 
 void MainWindow::addData2()
 {
-    auto now = RealTimeQCP::currentDateTime();
+    auto now = RealTimePlot::currentDateTime();
 
     graphRealTimeQcpUb->addData(now, 1000+1000*qPow(qSin(now), 2) - 2*qSin(now) - 2);
     graphRealTimeQcpBoola->addData(now, qrand() % 2);

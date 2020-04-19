@@ -3,8 +3,6 @@
 
 #include "channelt.h"
 
-#include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
-#include <lib/kb4/ui/realtimeqcp/graph.h>
 #include <lib/kb4/ui/plots/realtimeplot.h>
 #include <lib/kb4/ui/plots/realtimegraph.h>
 

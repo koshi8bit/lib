@@ -101,7 +101,7 @@ void ChannelDouble::valueChangedChild()
 {
     if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
 
-    if (_graphRealTimePlot != nullptr) { _graphRealTimePlot->addData(RealTimeQCP::currentDateTime(), value()); }
+    if (_graphRealTimePlot != nullptr) { _graphRealTimePlot->addData(RealTimePlot::currentDateTime(), value()); }
 
     //if (_abstractGraph != nullptr) { _abstractGraph->addData(RealTimeQCP::currentDateTime(), value()); }
 }

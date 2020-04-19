@@ -10,13 +10,8 @@
 
 
 #include <lib/kb4/ui/plots/base/axisconfig.h>
-//#include <lib/kb4/ui/realtimeqcp/axisconfig.h>
 #include <lib/kb4/ui/plots/base/colorsetter.h>
-//#include <lib/kb4/ui/realtimeqcp/colorsetter.h>
-#include <lib/kb4/ui/realtimeqcp/graph.h>
 #include <lib/kb4/ui/plots/base/graphlegenditem.h>
-//#include <lib/kb4/ui/realtimeqcp/graphlegenditem.h>
-#include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
 #include <lib/kb4/log/channeldouble.h>
 #include <lib/kb4/log/excel/timelog/timelog.h>
 #include <lib/qcustomplot/qcustomplot.h>
