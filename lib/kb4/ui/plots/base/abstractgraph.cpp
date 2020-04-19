@@ -52,6 +52,11 @@ void AbstractGraph::setColor(QColor newValue)
         _legendItem->setColor(newValue);
 }
 
+QCustomPlot *AbstractGraph::qcp()
+{
+    return _qcp;
+}
+
 bool AbstractGraph::visible() const
 {
     return _visible;

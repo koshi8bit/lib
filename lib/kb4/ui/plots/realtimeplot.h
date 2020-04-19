@@ -1,14 +1,16 @@
-#ifndef REALTMEPLOT_H
-#define REALTMEPLOT_H
+#ifndef REALTIMEPLOT_H
+#define REALTIMEPLOT_H
 
 #include <lib/kb4/ui/plots/base/abstractplot.h>
+#include <lib/kb4/ui/plots/base/axisconfig.h>
 #include <lib/kb4/ui/plots/realtimegraph.h>
 
-class RealTmePlot : public AbstractPlot
+class RealTimePlot : public AbstractPlot
 {
+    Q_OBJECT
 public:
-    RealTmePlot(QWidget *parent);
-    ~RealTmePlot();
+    RealTimePlot(QWidget *parent);
+    ~RealTimePlot() override;
     static double currentDateTime();
     static double dateTimeToKey(QDateTime dt);
     static QDateTime keyToDateTime(double key);
@@ -27,12 +29,12 @@ public:
 
     bool realTime() const;
     bool moveLineRealTime() const;
-    void setCursor2Visible(bool newValue, RealTmePlot *senderWidget);
-    void setCursor2Key(double key, RealTmePlot *senderWidget);
-    void setMoveLineRealTime(bool newValue, RealTmePlot *senderWidget);
-    void setRealTime(bool newValue, RealTmePlot *senderWidget);
-    void setCursorKey(double key, RealTmePlot *senderWidget);
-    void setTimeAxisRange(const QCPRange &newRange, RealTmePlot *senderWidget);
+    void setCursor2Visible(bool newValue, RealTimePlot *senderWidget);
+    void setCursor2Key(double key, RealTimePlot *senderWidget);
+    void setMoveLineRealTime(bool newValue, RealTimePlot *senderWidget);
+    void setRealTime(bool newValue, RealTimePlot *senderWidget);
+    void setCursorKey(double key, RealTimePlot *senderWidget);
+    void setTimeAxisRange(const QCPRange &newRange, RealTimePlot *senderWidget);
     //void moveCursor(double time, RealTimeQCP *senderWidget);
 
 
@@ -65,6 +67,8 @@ public slots:
     void setTimeAxisRange(const QCPRange &newValue);
 
 private:
+    RealTimeGraph* graphCast(AbstractGraph* graph);
+
     bool _realTime;
     bool _moveLineRealTime;
     bool _dayStyle = false;
@@ -126,12 +130,9 @@ private slots:
     void beforeReplot();
     void _setTimeAxisRange(const QCPRange &newRange);
 
-    void on_pushButtonPrintScreen_clicked();
-    void on_pushButtonHelp_clicked();
-
     // AbstractPlot interface
 protected:
     void configurePlot() override;
 };
 
-#endif // REALTMEPLOT_H
+#endif // REALTIMEPLOT_H

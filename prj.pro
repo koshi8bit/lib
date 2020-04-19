@@ -426,7 +426,7 @@ HEADERS += \
     lib/kb4/ui/plots/radargraph.h \
     lib/kb4/ui/plots/radarplot.h \
     lib/kb4/ui/plots/realtimegraph.h \
-    lib/kb4/ui/plots/realtmeplot.h \
+    lib/kb4/ui/plots/realtimeplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
     lib/kb4/ui/realtimeqcp/graph.h \
     lib/kb4/ui/realtimeqcp/realtimeqcp.h \
@@ -469,7 +469,7 @@ SOURCES += \
     lib/kb4/ui/plots/radargraph.cpp \
     lib/kb4/ui/plots/radarplot.cpp \
     lib/kb4/ui/plots/realtimegraph.cpp \
-    lib/kb4/ui/plots/realtmeplot.cpp \
+    lib/kb4/ui/plots/realtimeplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
     lib/kb4/ui/realtimeqcp/graph.cpp \
     lib/kb4/ui/realtimeqcp/realtimeqcp.cpp \

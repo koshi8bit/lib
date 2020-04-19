@@ -23,6 +23,8 @@ private:
     void configureLines(double maxDiameter);
 
 
+
+
 };
 
 #endif // RADARPLOT_H

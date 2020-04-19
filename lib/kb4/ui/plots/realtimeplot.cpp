@@ -1,32 +1,32 @@
-#include "realtmeplot.h"
+#include "realtimeplot.h"
 
-RealTmePlot::RealTmePlot(QWidget *parent)
+RealTimePlot::RealTimePlot(QWidget *parent)
     :AbstractPlot(parent)
 {
     configurePlot();
 }
 
-RealTmePlot::~RealTmePlot()
+RealTimePlot::~RealTimePlot()
 {
     //FIXME deleteLater
     //FIXME "FTH: (8440): *** Fault tolerant heap.."
     //delete ui;
 }
 
-void RealTmePlot::configurePlot()
+void RealTimePlot::configurePlot()
 {
 
-    connect(qcp(), &QCustomPlot::axisClick, this, &RealTmePlot::axisClick);
-    connect(qcp(), &QCustomPlot::axisDoubleClick, this, &RealTmePlot::axisDoubleClick);
+    connect(qcp(), &QCustomPlot::axisClick, this, &RealTimePlot::axisClick);
+    connect(qcp(), &QCustomPlot::axisDoubleClick, this, &RealTimePlot::axisDoubleClick);
 
     //connect(qcp(), &QCustomPlot::mouseMove, this, &RTPlotWithLegend::mouseMove);
     connect(qcp(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
-    connect(qcp(), &QCustomPlot::mousePress, this, &RealTmePlot::mousePress);
-    connect(qcp(), &QCustomPlot::mouseDoubleClick, this, &RealTmePlot::mouseDoubleClick);
-    connect(qcp(), &QCustomPlot::mouseWheel, this, &RealTmePlot::mouseWheel);
+    connect(qcp(), &QCustomPlot::mousePress, this, &RealTimePlot::mousePress);
+    connect(qcp(), &QCustomPlot::mouseDoubleClick, this, &RealTimePlot::mouseDoubleClick);
+    connect(qcp(), &QCustomPlot::mouseWheel, this, &RealTimePlot::mouseWheel);
     //connect(qcp(), SIGNAL(mouseWheel(QMouseEvent*)), this, SLOT(mouseWheel(QMouseEvent*)));
 
-    connect(qcp(), &QCustomPlot::beforeReplot, this, &RealTmePlot::beforeReplot);
+    connect(qcp(), &QCustomPlot::beforeReplot, this, &RealTimePlot::beforeReplot);
     connect(qcp()->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(setTimeAxisRange(QCPRange)));
 
     configureStatusLabel();
@@ -35,12 +35,12 @@ void RealTmePlot::configurePlot()
     updateStatusLabelFlag = true;
 }
 
-bool RealTmePlot::realTime() const
+bool RealTimePlot::realTime() const
 {
     return _realTime;
 }
 
-void RealTmePlot::configureStatusLabel()
+void RealTimePlot::configureStatusLabel()
 {
     statusLabel = new QCPItemText(qcp());
     statusLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
@@ -54,7 +54,7 @@ void RealTmePlot::configureStatusLabel()
     statusLabel->setVisible(false);
 }
 
-void RealTmePlot::updateStatusLabel()
+void RealTimePlot::updateStatusLabel()
 {
     if (updateStatusLabelFlag)
     {
@@ -69,7 +69,7 @@ void RealTmePlot::updateStatusLabel()
 
 
 
-void RealTmePlot::_configurePlot()
+void RealTimePlot::_configurePlot()
 {
     //WARNING dublicate configureAxesZoomAndDrag??
     qcp()->setInteraction(QCP::iRangeZoom, true);
@@ -86,7 +86,7 @@ void RealTmePlot::_configurePlot()
     configurePlotLine();
     setMoveLineRealTime(true);
     qcp()->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignLeft|Qt::AlignTop);
-    qcp()->xAxis->setRangeUpper(RealTmePlot::currentDateTime());
+    qcp()->xAxis->setRangeUpper(RealTimePlot::currentDateTime());
     setTimeAxisRange(60);
 
     // { Tests
@@ -99,7 +99,7 @@ void RealTmePlot::_configurePlot()
 }
 
 
-void RealTmePlot::_setRealTime(bool newValue)
+void RealTimePlot::_setRealTime(bool newValue)
 {
     _realTime = newValue;
     //configureAxesZoomAndDrag(!newValue);
@@ -107,46 +107,51 @@ void RealTmePlot::_setRealTime(bool newValue)
     updateStatusLabel();
 }
 
-void RealTmePlot::setRealTime(bool newValue)
+void RealTimePlot::setRealTime(bool newValue)
 {
     _setRealTime(newValue);
     emit realTimeChanged(newValue);
 }
 
-void RealTmePlot::setCursor2Visible(bool newValue)
+void RealTimePlot::setCursor2Visible(bool newValue)
 {
     _setCursor2Visible(newValue);
     emit cursor2VisibleValueChanged(newValue);
 }
 
-void RealTmePlot::setCursor2Key(double key)
+void RealTimePlot::setCursor2Key(double key)
 {
     _setCursor2Key(key);
     emit cursor2KeyChanged(key);
 }
 
-void RealTmePlot::setTimeAxisRange(const QCPRange &newValue)
+void RealTimePlot::setTimeAxisRange(const QCPRange &newValue)
 {
     _setTimeAxisRange(newValue);
     emit timeAxisRangeChanged(newValue);
 }
 
-bool RealTmePlot::dayStyle() const
+RealTimeGraph *RealTimePlot::graphCast(AbstractGraph *graph)
+{
+    return static_cast<RealTimeGraph *>(graph);
+}
+
+bool RealTimePlot::dayStyle() const
 {
     return _dayStyle;
 }
 
-QCPItemLine *RealTmePlot::cursor2() const
+QCPItemLine *RealTimePlot::cursor2() const
 {
     return _cursor2;
 }
 
-bool RealTmePlot::moveLineRealTime() const
+bool RealTimePlot::moveLineRealTime() const
 {
     return _moveLineRealTime;
 }
 
-void RealTmePlot::moveTimeAxisRealTime()
+void RealTimePlot::moveTimeAxisRealTime()
 {
 //    auto range = qcp()->xAxis->range();
 //    auto delta = range.upper - range.lower;
@@ -160,39 +165,39 @@ void RealTmePlot::moveTimeAxisRealTime()
     qcp()->replot();
 }
 
-void RealTmePlot::setTimeAxisRange(int newRangeMSEC)
+void RealTimePlot::setTimeAxisRange(int newRangeMSEC)
 {
     qcp()->xAxis->setRangeLower(qcp()->xAxis->range().upper - newRangeMSEC);
     updateTimeAxisLabel();
 }
 
-void RealTmePlot::setTimeLabelVisible(bool newValue)
+void RealTimePlot::setTimeLabelVisible(bool newValue)
 {
     labelTime->setVisible(newValue);
 }
 
-void RealTmePlot::setMarginGroup(QCPMarginGroup *mg)
+void RealTimePlot::setMarginGroup(QCPMarginGroup *mg)
 {
     qcp()->axisRect()->setMarginGroup(QCP::msLeft | QCP::msRight, mg);
 }
 
-double RealTmePlot::currentDateTime()
+double RealTimePlot::currentDateTime()
 {
     return dateTimeToKey(QDateTime::currentDateTime());
 }
 
-double RealTmePlot::dateTimeToKey(QDateTime dt)
+double RealTimePlot::dateTimeToKey(QDateTime dt)
 {
     return dt.toTime_t() + static_cast<double>(dt.time().msec())/1000;
 }
 
-QDateTime RealTmePlot::keyToDateTime(double key)
+QDateTime RealTimePlot::keyToDateTime(double key)
 {
     return QDateTime::fromTime_t(static_cast<uint>(key));
 }
 
 
-void RealTmePlot::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
+void RealTimePlot::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
 {
     if (postfix.isEmpty())
     {
@@ -210,12 +215,12 @@ void RealTmePlot::configureAxis(QCPAxis *axis, const QString &label, const QStri
 
 }
 
-RealTimeGraph *RealTmePlot::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
+RealTimeGraph *RealTimePlot::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
 {
     return addGraph(qcp()->yAxis, label, postfix, precision, scientificNotation);
 }
 
-RealTimeGraph *RealTmePlot::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, int precision, bool scientificNotation)
+RealTimeGraph *RealTimePlot::addGraph(QCPAxis *axis, const QString &label, const QString &postfix, int precision, bool scientificNotation)
 {
     auto graph = new RealTimeGraph( label,
                             postfix,
@@ -229,7 +234,7 @@ RealTimeGraph *RealTmePlot::addGraph(QCPAxis *axis, const QString &label, const 
     return graph;
 }
 
-void RealTmePlot::removeGraphs()
+void RealTimePlot::removeGraphs()
 {
     foreach(auto g , graphs())
     {
@@ -240,7 +245,7 @@ void RealTmePlot::removeGraphs()
 }
 
 
-void RealTmePlot::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
+void RealTimePlot::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
 {
     if (scaleType == QCPAxis::ScaleType::stLinear)
     {
@@ -261,14 +266,13 @@ void RealTmePlot::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
     }
 }
 
-void RealTmePlot::_setCursor2Visible(bool newValue)
+void RealTimePlot::_setCursor2Visible(bool newValue)
 {
     _cursor2->setVisible(newValue);
     //foreach (auto graphElement, foo<RealTimeGraph*>())
     foreach (auto graphElement, graphs())
     {
-        auto t = graphCast(graphElement, RealTimeGraph*);
-        t->setCursor2Visible(newValue);
+        graphCast(graphElement)->setCursor2Visible(newValue);
     }
 
     if (labelTime->isVisible())
@@ -277,11 +281,11 @@ void RealTmePlot::_setCursor2Visible(bool newValue)
     updateStatusLabel();
 }
 
-void RealTmePlot::_setCursor2Key(double key)
+void RealTimePlot::_setCursor2Key(double key)
 {
-    foreach (auto graphElement, _graphs)
+    foreach (auto graphElement, graphs())
     {
-        graphElement->moveCursor2(_cursor->start->key());
+        graphCast(graphElement)->moveCursor2(_cursor->start->key());
     }
 
     _cursor2->start->setCoords(key, _cursor->start->coords().y());
@@ -291,61 +295,61 @@ void RealTmePlot::_setCursor2Key(double key)
     updateStatusLabel();
 }
 
-double RealTmePlot::getYAxisUpper()
+double RealTimePlot::getYAxisUpper()
 {
     return qMax(qcp()->yAxis->range().upper,
                 qcp()->yAxis2->range().upper);
 }
 
-double RealTmePlot::getYAxisLower()
+double RealTimePlot::getYAxisLower()
 {
     return qMin(qcp()->yAxis->range().lower,
                 qcp()->yAxis2->range().lower);
 
 }
 
-bool RealTmePlot::cursor2Visible()
+bool RealTimePlot::cursor2Visible()
 {
     return _cursor2->visible();
 }
 
 
-void RealTmePlot::setCursor2Visible(bool newValue, RealTmePlot *senderWidget)
+void RealTimePlot::setCursor2Visible(bool newValue, RealTimePlot *senderWidget)
 {
     if (senderWidget == this) { return; }
 
     _setCursor2Visible(newValue);
 }
 
-void RealTmePlot::setCursor2Key(double key, RealTmePlot *senderWidget)
+void RealTimePlot::setCursor2Key(double key, RealTimePlot *senderWidget)
 {
     if (senderWidget == this) { return; }
 
     _setCursor2Key(key);
 }
 
-void RealTmePlot::setMoveLineRealTime(bool newValue, RealTmePlot *senderWidget)
+void RealTimePlot::setMoveLineRealTime(bool newValue, RealTimePlot *senderWidget)
 {
     if (senderWidget == this) { return; }
 
     _setMoveLineRealTime(newValue);
 }
 
-void RealTmePlot::setRealTime(bool newValue, RealTmePlot *senderWidget)
+void RealTimePlot::setRealTime(bool newValue, RealTimePlot *senderWidget)
 {
     if (senderWidget == this) { return; }
 
     _setRealTime(newValue);
 }
 
-void RealTmePlot::setCursorKey(double key, RealTmePlot *senderWidget)
+void RealTimePlot::setCursorKey(double key, RealTimePlot *senderWidget)
 {
     if (senderWidget == this) { return; }
 
     _setCursorKey(key);
 }
 
-void RealTmePlot::setTimeAxisRange(const QCPRange &newRange, RealTmePlot *senderWidget)
+void RealTimePlot::setTimeAxisRange(const QCPRange &newRange, RealTimePlot *senderWidget)
 {
     if (senderWidget == this) { return; }
 
@@ -353,20 +357,20 @@ void RealTmePlot::setTimeAxisRange(const QCPRange &newRange, RealTmePlot *sender
 }
 
 
-void RealTmePlot::_setMoveLineRealTime(bool newValue)
+void RealTimePlot::_setMoveLineRealTime(bool newValue)
 {
     _moveLineRealTime = newValue;
     updateStatusLabel();
 }
 
-void RealTmePlot::setMoveLineRealTime(bool newValue)
+void RealTimePlot::setMoveLineRealTime(bool newValue)
 {
     _setMoveLineRealTime(newValue);
     emit moveLineRealTimeChanged(newValue);
 }
 
 
-void RealTmePlot::configureAxesZoomAndDrag(bool configureYAxises)
+void RealTimePlot::configureAxesZoomAndDrag(bool configureYAxises)
 {
     auto axis = QList<QCPAxis*>()
             << qcp()->yAxis
@@ -397,7 +401,7 @@ void RealTmePlot::configureAxesZoomAndDrag(bool configureYAxises)
 
 }
 
-void RealTmePlot::configurePlotBackground()
+void RealTimePlot::configurePlotBackground()
 {
     configurePlotBackgroundAxis(qcp()->xAxis);
     configurePlotBackgroundAxis(qcp()->yAxis);
@@ -418,7 +422,7 @@ void RealTmePlot::configurePlotBackground()
     qcp()->axisRect()->setBackground(axisRectGradient);
 }
 
-void RealTmePlot::configurePlotBackgroundAxis(QCPAxis *axis)
+void RealTimePlot::configurePlotBackgroundAxis(QCPAxis *axis)
 {
     axis->setLabelColor(Qt::white);
     axis->setBasePen(QPen(Qt::white, 1));
@@ -431,7 +435,7 @@ void RealTmePlot::configurePlotBackgroundAxis(QCPAxis *axis)
     axis->grid()->setZeroLinePen(Qt::NoPen);
 }
 
-void RealTmePlot::configurePlotTimeAxis()
+void RealTimePlot::configurePlotTimeAxis()
 {
     qcp()->xAxis->setLabel(timeLabel);
     QSharedPointer<QCPAxisTickerDateTime> dateTicker(new QCPAxisTickerDateTime);
@@ -439,13 +443,13 @@ void RealTmePlot::configurePlotTimeAxis()
     qcp()->xAxis->setTicker(dateTicker);
 }
 
-void RealTmePlot::configurePlotLine()
+void RealTimePlot::configurePlotLine()
 {
     configurePlotLine(&_cursor);
     configurePlotLine(&_cursor2);
 }
 
-void RealTmePlot::configurePlotLine(QCPItemLine **line)
+void RealTimePlot::configurePlotLine(QCPItemLine **line)
 {
     (*line) = new QCPItemLine(qcp());
     auto pen = QPen();
@@ -457,7 +461,7 @@ void RealTmePlot::configurePlotLine(QCPItemLine **line)
     (*line)->end->setCoords(qcp()->xAxis->range().upper, qcp()->yAxis->range().lower);
 }
 
-void RealTmePlot::updateTimeAxisLabel()
+void RealTimePlot::updateTimeAxisLabel()
 {
     //auto delta = qcp()->xAxis->range().upper - qcp()->xAxis->range().lower;
     auto begin = keyToDateTime(qcp()->xAxis->range().upper);
@@ -479,37 +483,14 @@ void RealTmePlot::updateTimeAxisLabel()
 
 }
 
-void RealTmePlot::configureLegend()
-{
-    legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
-
-    labelTime = new QLabel(this);
-    labelTime->setText(timeLabel);
-    legendLayout->addWidget(labelTime);
-
-    auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    legendLayout->addItem(spacer);
-}
-
-void RealTmePlot::configureSplitter()
-{
-    splitter = new QSplitter(Qt::Vertical, this);
-    ui->horizontalLayout->insertWidget(1, splitter);
-}
-
-QVector<Graph *> RealTmePlot::graphs() const
-{
-    return _graphs;
-}
-
-void RealTmePlot::autoScaleAxis(QCPAxis *axis)
+void RealTimePlot::autoScaleAxis(QCPAxis *axis)
 {
     axis->rescale(true);
     auto delta = (axis->range().upper - axis->range().lower)*0.05; // 5%
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
-void RealTmePlot::setDayStyle(bool newValue, bool showTime)
+void RealTimePlot::setDayStyle(bool newValue, bool showTime)
 {
     _dayStyle = newValue;
     if (dayStyle())
@@ -523,9 +504,9 @@ void RealTmePlot::setDayStyle(bool newValue, bool showTime)
 
         setRealTime(false);
 
-        foreach(auto g, _graphs)
+        foreach(auto g, graphs())
         {
-            g->graph()->setLineStyle(QCPGraph::lsLine);
+            graphCast(g)->graph()->setLineStyle(QCPGraph::lsLine);
 //            g->graph()->setLineStyle(QCPGraph::lsNone);
 //            g->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 5));
         }
@@ -533,7 +514,7 @@ void RealTmePlot::setDayStyle(bool newValue, bool showTime)
 }
 
 
-void RealTmePlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+void RealTimePlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(axis)
     Q_UNUSED(part)
@@ -543,7 +524,7 @@ void RealTmePlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseE
     }
 }
 
-void RealTmePlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+void RealTimePlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(part)
     Q_UNUSED(event)
@@ -557,7 +538,7 @@ void RealTmePlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, Q
     }
 }
 
-void RealTmePlot::mouseMove(QMouseEvent *event)
+void RealTimePlot::mouseMove(QMouseEvent *event)
 {
     if (isInAxisRect(event->pos()))
     {
@@ -570,7 +551,7 @@ void RealTmePlot::mouseMove(QMouseEvent *event)
     setCursorKey(time);
 }
 
-void RealTmePlot::mousePress(QMouseEvent *event)
+void RealTimePlot::mousePress(QMouseEvent *event)
 {
     //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
     //qDebug() << isInAxisRect(event->pos());
@@ -593,9 +574,9 @@ void RealTmePlot::mousePress(QMouseEvent *event)
             }
 
 
-            foreach (auto graphElement, _graphs)
+            foreach (auto graphElement, graphs())
             {
-                graphElement->updateValue();
+                graphCast(graphElement)->updateValue();
             }
 
 
@@ -604,7 +585,7 @@ void RealTmePlot::mousePress(QMouseEvent *event)
     }
 }
 
-void RealTmePlot::mouseDoubleClick(QMouseEvent *event)
+void RealTimePlot::mouseDoubleClick(QMouseEvent *event)
 {
     if (isInAxisRect(event->pos()))
     {
@@ -619,14 +600,14 @@ void RealTmePlot::mouseDoubleClick(QMouseEvent *event)
     }
 }
 
-void RealTmePlot::mouseWheel(QWheelEvent *event)
+void RealTimePlot::mouseWheel(QWheelEvent *event)
 {
     qDebug() << "mouseWheel";
     //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
     //qDebug() << isInAxisRect(event->pos());
 }
 
-void RealTmePlot::beforeReplot()
+void RealTimePlot::beforeReplot()
 {
     //WARNING update values without dependence of _line position
     //next fix here
@@ -637,7 +618,7 @@ void RealTmePlot::beforeReplot()
     }
 }
 
-void RealTmePlot::_setTimeAxisRange(const QCPRange &newRange)
+void RealTimePlot::_setTimeAxisRange(const QCPRange &newRange)
 {
     qcp()->xAxis->setRange(newRange);
     auto delta = newRange.upper - newRange.lower;
@@ -650,15 +631,15 @@ void RealTmePlot::_setTimeAxisRange(const QCPRange &newRange)
 }
 
 
-void RealTmePlot::_setCursorKey(double time)
+void RealTimePlot::_setCursorKey(double time)
 {
     //BUG ?is this mouse move or regular move by timer?
     if (labelTime->isVisible())
         labelTime->setText(formatLabelTime(time));
 
-    foreach (auto graphElement, _graphs)
+    foreach (auto graphElement, graphs())
     {
-        graphElement->moveCursor(time);
+        graphCast(graphElement)->moveCursor(time);
     }
 
     //    auto lower = getYAxisLower();
@@ -678,7 +659,7 @@ void RealTmePlot::_setCursorKey(double time)
 //    }
 }
 
-void RealTmePlot::setCursorKey(double time)
+void RealTimePlot::setCursorKey(double time)
 {
     _setCursorKey(time);
     emit cursorKeyChanged(time);
@@ -686,7 +667,7 @@ void RealTmePlot::setCursorKey(double time)
 }
 
 
-QString RealTmePlot::formatLabelTime(double key)
+QString RealTimePlot::formatLabelTime(double key)
 {
     //TODO show MSEC ?formatTimeUi(true) and +07:00
     //auto mouseTimeQDT = QDateTime().fromString("1970-01-01T00:00:00", Qt::ISODate).addMSecs(static_cast<qint64>(time*1000));
@@ -722,21 +703,9 @@ QString RealTmePlot::formatLabelTime(double key)
 
         return QString("%1 (-%2)").arg(mouseTimeStr).arg(deltaTimeStr);
     }
-
-
 }
 
-bool RealTmePlot::isInAxisRect(QPoint pos)
+bool RealTimePlot::isInAxisRect(QPoint pos)
 {
     return qcp()->axisRect()->rect().contains(pos);
-}
-
-void RealTmePlot::on_pushButtonPrintScreen_clicked()
-{
-    PrintScreener::save(this);
-}
-
-void RealTmePlot::on_pushButtonHelp_clicked()
-{
-    QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
 }

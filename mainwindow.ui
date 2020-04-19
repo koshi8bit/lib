@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
@@ -26,28 +26,28 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="2" column="0">
-         <widget class="RealTimeQCP" name="realTimeQcpPersent" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpPersent" native="true"/>
         </item>
         <item row="3" column="0">
-         <widget class="RealTimeQCP" name="realTimeQcpVacuum" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpVacuum" native="true"/>
         </item>
         <item row="3" column="1">
-         <widget class="RealTimeQCP" name="realTimeQcpRadiation" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpRadiation" native="true"/>
         </item>
         <item row="0" column="0">
-         <widget class="RealTimeQCP" name="realTimeQcpU" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpU" native="true"/>
         </item>
         <item row="1" column="1">
-         <widget class="RealTimeQCP" name="realTimeQcpPower" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpPower" native="true"/>
         </item>
         <item row="1" column="0">
-         <widget class="RealTimeQCP" name="realTimeQcpTemperature" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpTemperature" native="true"/>
         </item>
         <item row="0" column="1">
-         <widget class="RealTimeQCP" name="realTimeQcpI" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpI" native="true"/>
         </item>
         <item row="2" column="1">
-         <widget class="RealTimeQCP" name="realTimeQcpBool" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpBool" native="true"/>
         </item>
         <item row="4" column="0">
          <widget class="QPushButton" name="pushButton_2">
@@ -71,7 +71,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="RealTimeQCP" name="realTimeQcpDayStyle" native="true"/>
+         <widget class="RealTimePlot" name="realTimeQcpDayStyle" native="true"/>
         </item>
        </layout>
       </widget>
@@ -455,15 +455,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>RealTimeQCP</class>
-   <extends>QWidget</extends>
-   <header>lib/kb4/ui/realtimeqcp/realtimeqcp.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>RadarPlot</class>
    <extends>QWidget</extends>
    <header>lib/kb4/ui/plots/radarplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RealTimePlot</class>
+   <extends>QWidget</extends>
+   <header>lib/kb4/ui/plots/realtimeplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

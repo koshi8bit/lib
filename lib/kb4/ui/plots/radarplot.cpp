@@ -48,6 +48,7 @@ void RadarPlot::configureLines(double maxDiameter)
     line135->end->setCoords(toPolar(maxDiameter, 180+135));
 }
 
+
 QPointF RadarPlot::toPolar(double r, double angle)
 {
     auto angleDegree = angle*M_PI/180.0;

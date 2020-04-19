@@ -18,6 +18,8 @@ public:
 
     bool visible() const;
 
+    QCustomPlot *qcp();
+
 signals:
     void visibleChanged(bool newValue);
     void colorChanged(QColor newValue);
