@@ -5,7 +5,7 @@
 #include <QColor>
 #include <lib/qcustomplot/qcustomplot.h>
 
-#include <lib/kb4/ui/realtimeqcp/graphlegenditem.h>
+#include "graphlegenditem.h"
 
 class AbstractGraph : public QObject
 {
