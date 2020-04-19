@@ -14,7 +14,7 @@ TARGET = prj
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
+# any feature raof Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -422,10 +422,10 @@ HEADERS += \
     lib/kb4/ui/plots/base/axisconfig.h \
     lib/kb4/ui/plots/base/colorsetter.h \
     lib/kb4/ui/plots/base/graphlegenditem.h \
-    lib/kb4/ui/plots/radargraph.h \
-    lib/kb4/ui/plots/radarplot.h \
-    lib/kb4/ui/plots/realtimegraph.h \
-    lib/kb4/ui/plots/realtimeplot.h \
+    lib/kb4/ui/plots/radar/radargraph.h \
+    lib/kb4/ui/plots/radar/radarplot.h \
+    lib/kb4/ui/plots/realtime/realtimegraph.h \
+    lib/kb4/ui/plots/realtime/realtimeplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/ui/value/double/valuedouble.h \
@@ -462,10 +462,10 @@ SOURCES += \
     lib/kb4/ui/plots/base/axisconfig.cpp \
     lib/kb4/ui/plots/base/colorsetter.cpp \
     lib/kb4/ui/plots/base/graphlegenditem.cpp \
-    lib/kb4/ui/plots/radargraph.cpp \
-    lib/kb4/ui/plots/radarplot.cpp \
-    lib/kb4/ui/plots/realtimegraph.cpp \
-    lib/kb4/ui/plots/realtimeplot.cpp \
+    lib/kb4/ui/plots/radar/radargraph.cpp \
+    lib/kb4/ui/plots/radar/radarplot.cpp \
+    lib/kb4/ui/plots/realtime/realtimegraph.cpp \
+    lib/kb4/ui/plots/realtime/realtimeplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
     lib/kb4/ui/value/double/valuedouble.cpp \

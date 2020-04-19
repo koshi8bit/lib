@@ -2,7 +2,7 @@
 #define RADARPLOT_H
 
 #include <lib/kb4/ui/plots/base/abstractplot.h>
-#include <lib/kb4/ui/plots/radargraph.h>
+#include <lib/kb4/ui/plots/radar/radargraph.h>
 
 class RadarPlot : public AbstractPlot
 {

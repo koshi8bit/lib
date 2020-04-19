@@ -457,13 +457,13 @@
   <customwidget>
    <class>RadarPlot</class>
    <extends>QWidget</extends>
-   <header>lib/kb4/ui/plots/radarplot.h</header>
+   <header>lib/kb4/ui/plots/radar/radarplot.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>RealTimePlot</class>
    <extends>QWidget</extends>
-   <header>lib/kb4/ui/plots/realtimeplot.h</header>
+   <header>lib/kb4/ui/plots/realtime/realtimeplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

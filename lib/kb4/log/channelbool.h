@@ -3,8 +3,8 @@
 
 #include "channelt.h"
 
-#include <lib/kb4/ui/plots/realtimeplot.h>
-#include <lib/kb4/ui/plots/realtimegraph.h>
+#include <lib/kb4/ui/plots/realtime/realtimeplot.h>
+#include <lib/kb4/ui/plots/realtime/realtimegraph.h>
 
 class ChannelBool : public ChannelT<bool>
 {
