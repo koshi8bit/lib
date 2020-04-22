@@ -278,6 +278,7 @@ void MainWindow::configureRealTimeQcpPlot()
 
     plot = ui->realTimeQcpU;
     plot->configureAxis(plot->qcp()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
+    plot->configureAxis(plot->qcp()->yAxis2, tr("Напр"), "mA", 0, 10);
     configureRealTimeQcpPlot(plot);
     connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpI->qcp(), SLOT(replot()));
     connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpTemperature->qcp(), SLOT(replot()));
@@ -336,8 +337,8 @@ void MainWindow::configureRealTimeQcpPlot(RealTimePlot *plot)
 
 void MainWindow::configureRealTimeQcpGraphs()
 {
-    graphRealTimeQcpUa = ui->realTimeQcpU->addGraph("ELV/E", EasyLiving::postfixVolt(), 2);
-    graphRealTimeQcpUb = ui->realTimeQcpU->addGraph("Ultravolt/-300", EasyLiving::postfixVolt());
+    graphRealTimeQcpUa = ui->realTimeQcpU->addGraph(ui->realTimeQcpU->qcp()->yAxis, "ELV/E", EasyLiving::postfixVolt(), 2);
+    graphRealTimeQcpUb = ui->realTimeQcpU->addGraph(ui->realTimeQcpU->qcp()->yAxis2, "Ultravolt/-300", EasyLiving::postfixVolt());
 
     graphRealTimeQcpIa = ui->realTimeQcpI->addGraph("Bergoz/Hebl", EasyLiving::postfixMilliAmpere(), 3);
 
