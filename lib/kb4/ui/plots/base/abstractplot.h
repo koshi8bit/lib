@@ -22,6 +22,9 @@ public:
     ~AbstractPlot();
 
     QVector<AbstractGraph *> graphs();
+    void addAbstractGraph(AbstractGraph *graph);
+
+
 
 //#define graphCast(element, type) static_cast<type>(element)
 //    template < template <typename> class BinPred , typename T >
@@ -35,7 +38,7 @@ public:
 //        return result;
 //    }
 
-    QCustomPlot *qcp() const;
+    QCustomPlot *qcp();
 
 private slots:
     void on_pushButtonPrintScreen_clicked();
@@ -49,7 +52,6 @@ private:
 
 protected:
     virtual void configurePlot() = 0;
-    AbstractGraph* addGraph(AbstractGraph *graph);
     ColorSetter colorSetter;
 
     QCustomPlot *_qcp;

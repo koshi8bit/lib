@@ -23,6 +23,7 @@ public:
 //    ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
 //  TODO DELETE LATER
     void addGraphToPlot(RealTimePlot *plot, bool visible=true);
+    void addGraphToPlot(RealTimePlot *plot, QCPAxis *axis, bool visible=true);
     //AbstractGraph *addGraphToPlot(AbstractPlot *plot, bool visible=true);
 
     bool scientificNotation();
@@ -36,6 +37,8 @@ public:
 
     void setToRawFunc(std::function<double(double)> f);
     double rawValue();
+
+    RealTimeGraph *graphRealTimePlot();
 
 private:
     RealTimeGraph *_graphRealTimePlot = nullptr;

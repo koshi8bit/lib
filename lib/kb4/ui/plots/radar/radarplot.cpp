@@ -26,6 +26,6 @@ RadarGraph *RadarPlot::addGraph(const QString &label, const QString &postfix, in
                                    precision,
                                    scientificNotation,
                                    width);
-    AbstractPlot::addGraph(graph);
+    addAbstractGraph(graph);
     return graph;
 }

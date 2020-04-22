@@ -109,6 +109,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //radarTestGraph->setOffset(15);
     radarTestGraph->setColor(QColor("#CC0000"));
 
+    ui->radarPlot->setVisible(false);
+
 //    radarTestGraph = ui->radarTemperature4Plot->addGraph("2 ДК", 1, false, 5);
 //    radarTestGraph->setColor(QColor("#00CC00"));
 
@@ -193,10 +195,10 @@ void MainWindow::configureTimers()
 //    connect(timerReplot, SIGNAL(timeout()), this, SLOT(plotReplotTimeout()));
 //    timerReplot->start();
 
-    timerrealTimeQcpReplot = new QTimer(this);
-    timerrealTimeQcpReplot->setInterval(plotUpdateIntervalMSEC);
-    connect(timerrealTimeQcpReplot, &QTimer::timeout, ui->realTimeQcpU, &RealTimePlot::moveTimeAxisRealTime);
-    timerrealTimeQcpReplot->start();
+    timerRealTimeQcpReplot = new QTimer(this);
+    timerRealTimeQcpReplot->setInterval(plotUpdateIntervalMSEC);
+    connect(timerRealTimeQcpReplot, &QTimer::timeout, ui->realTimeQcpU, &RealTimePlot::moveTimeAxisRealTime);
+    timerRealTimeQcpReplot->start();
 }
 
 void MainWindow::configureGradientLineEdit()
@@ -560,7 +562,8 @@ void MainWindow::on_pushButton_4_clicked()
     QTextBlockFormat blockFormat;
 
 
-    for(int i=0; i < 10; i++){
+    for(int i=0; i < 10; i++)
+    {
        cursor.insertBlock(blockFormat);
        cursor.insertHtml(QString("<h1>This is the %1 page</h1>").arg(i+1));
        blockFormat.setPageBreakPolicy(QTextFormat::PageBreak_AlwaysBefore);
@@ -592,3 +595,4 @@ void MainWindow::on_pushButtonRadarCalc_clicked()
     radarTestGraph->calcDeviation();
     ui->radarTemperature4Plot->replot();
 }
+

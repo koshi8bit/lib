@@ -7,14 +7,14 @@ RadarTemperature4Plot::RadarTemperature4Plot(QWidget *parent)
 //    plot->setInteraction(QCP::iRangeDrag, true);
 //    _qcp->axisRect()->setupFullAxesBox();
 
-    maxDiameter = 2;
+    maxDiameter = 4;
 
 
-    criticalCircle = drawCircle(1, QColor("#FF0000"));
-    drawCircle(maxDiameter*maxDiameter, QColor("#FFAAAA"));
-    drawCircle(3, QColor("#AAFFAA"));
-    drawCircle(2, QColor("#AAFFAA"));
-    drawCircle(1, QColor("#AAAAFF"));
+    criticalCircle = drawCircle(maxDiameter, QColor("#FF0000"));
+    drawCircle(maxDiameter, QColor("#FFAAAA"));
+    drawCircle(maxDiameter*0.75, QColor("#AAFFAA"));
+    drawCircle(maxDiameter*0.50, QColor("#AAFFAA"));
+    drawCircle(maxDiameter*0.25, QColor("#AAAAFF"));
 
     qcp()->xAxis->setRange(-maxDiameter, maxDiameter);
     qcp()->yAxis->setRange(-maxDiameter, maxDiameter);
@@ -33,7 +33,7 @@ RadarTemperature4Graph *RadarTemperature4Plot::addGraph(const QString &label,
                                 precision,
                                 false,
                                 lineWidth);
-    AbstractPlot::addGraph(graph);
+    addAbstractGraph(graph);
     return graph;
 }
 
@@ -64,8 +64,8 @@ RadarTemperature4Graph *RadarTemperature4Plot::graphCast(AbstractGraph *graph)
 QCPItemEllipse *RadarTemperature4Plot::drawCircle(double radius, QColor color)
 {
     auto ellipse = new QCPItemEllipse(_qcp);
-    ellipse->topLeft->setCoords(-radius/2.0, -radius/2.0);
-    ellipse->bottomRight->setCoords(radius/2.0, radius/2.0);
+    ellipse->topLeft->setCoords(-radius, -radius);
+    ellipse->bottomRight->setCoords(radius, radius);
     ellipse->setBrush(color);
     return ellipse;
 }

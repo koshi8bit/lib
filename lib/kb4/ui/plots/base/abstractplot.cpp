@@ -15,6 +15,7 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
     ui->splitter->setStretchFactor(1, 1);
 
     ui->splitter->widget(1)->setMinimumWidth(200);
+    ui->splitter->widget(1)->setMaximumWidth(200);
 
 }
 
@@ -23,11 +24,10 @@ AbstractPlot::~AbstractPlot()
     delete ui;
 }
 
-AbstractGraph *AbstractPlot::addGraph(AbstractGraph *graph)
+void AbstractPlot::addAbstractGraph(AbstractGraph *graph)
 {
     _graphs.append(graph);
     legendLayout->insertWidget(legendLayout->count()-1, graph->legendItem());
-    return graph;
 }
 
 
@@ -54,7 +54,7 @@ void AbstractPlot::configureLegend()
     legendLayout->addItem(spacer);
 }
 
-QCustomPlot *AbstractPlot::qcp() const
+QCustomPlot *AbstractPlot::qcp()
 {
     return _qcp;
 }

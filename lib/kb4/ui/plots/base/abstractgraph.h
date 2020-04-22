@@ -52,8 +52,9 @@ private:
 protected:
     GraphLegendItem *_legendItem;
 
-    virtual void abstractSetVisible(bool newValue) = 0;
-    virtual void abstractSetColor(QColor newValue) = 0;
+    virtual void updateLegendItem() = 0;
+    virtual void abstractSetVisible() = 0;
+    virtual void abstractSetColor() = 0;
 
 };
 

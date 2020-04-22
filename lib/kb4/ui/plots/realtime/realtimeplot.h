@@ -15,7 +15,7 @@ public:
     static double dateTimeToKey(QDateTime dt);
     static QDateTime keyToDateTime(double key);
 
-    void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+    void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix = "", double min=0, double max=100, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
     RealTimeGraph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     RealTimeGraph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     //Graph* addGraph(ChannelDouble *channel, bool visible = true);
@@ -36,6 +36,7 @@ public:
     void setCursorKey(double key, RealTimePlot *senderWidget);
     void setTimeAxisRange(const QCPRange &newRange, RealTimePlot *senderWidget);
     //void moveCursor(double time, RealTimeQCP *senderWidget);
+    void configureTimerReplot(int intervalMSEC = 100);
 
 
 
@@ -74,6 +75,7 @@ private:
     bool _dayStyle = false;
 
     QCPItemText *statusLabel;
+    QTimer *timerReplot;
 
     //TODO make 2 lines same as oscillograph switching by Mouse wheel button
     QCPItemLine *_cursor;

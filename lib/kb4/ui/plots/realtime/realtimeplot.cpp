@@ -234,7 +234,7 @@ RealTimeGraph *RealTimePlot::addGraph(QCPAxis *axis, const QString &label, const
                             precision,
                             scientificNotation);
 
-    AbstractPlot::addGraph(graph);
+    addAbstractGraph(graph);
     return graph;
 }
 
@@ -358,6 +358,14 @@ void RealTimePlot::setTimeAxisRange(const QCPRange &newRange, RealTimePlot *send
     if (senderWidget == this) { return; }
 
     _setTimeAxisRange(newRange);
+}
+
+void RealTimePlot::configureTimerReplot(int intervalMSEC)
+{
+    timerReplot = new QTimer(this);
+    timerReplot->setInterval(intervalMSEC);
+    connect(timerReplot, &QTimer::timeout, this, &RealTimePlot::moveTimeAxisRealTime);
+    timerReplot->start();
 }
 
 
@@ -606,6 +614,7 @@ void RealTimePlot::mouseDoubleClick(QMouseEvent *event)
 
 void RealTimePlot::mouseWheel(QWheelEvent *event)
 {
+    Q_UNUSED(event)
     qDebug() << "mouseWheel";
     //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
     //qDebug() << isInAxisRect(event->pos());

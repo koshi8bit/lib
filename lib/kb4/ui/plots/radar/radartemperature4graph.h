@@ -11,7 +11,7 @@ public:
                            ChannelDouble *up, ChannelDouble *right,
                            ChannelDouble *down, ChannelDouble *left,
                            int precision = 3, bool scientificNotation = false,
-                           int lineWidth = 1);
+                           int lineWidth = 5);
 
     ChannelDouble *up, *right, *down, *left;
 

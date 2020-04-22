@@ -110,6 +110,11 @@ void RealTimeGraph::configureCursor(QCPItemTracer **cursor)
     (*cursor)->setSize(5);
 }
 
+void RealTimeGraph::updateLegendItem()
+{
+
+}
+
 void RealTimeGraph::setCursor2Visible(bool newValue)
 {
     if (visible()) {
@@ -117,20 +122,20 @@ void RealTimeGraph::setCursor2Visible(bool newValue)
     }
 }
 
-void RealTimeGraph::abstractSetVisible(bool newValue)
+void RealTimeGraph::abstractSetVisible()
 {
-    _graph->setVisible(newValue);
-    _cursor->setVisible(newValue);
-    if (!newValue)
+    _graph->setVisible(visible());
+    _cursor->setVisible(visible());
+    if (!visible())
         _cursor2->setVisible(false);
 }
 
-void RealTimeGraph::abstractSetColor(QColor newValue)
+void RealTimeGraph::abstractSetColor()
 {
-    _graph->setPen(newValue);
+    _graph->setPen(color());
     _cursor->setPen(_graph->pen());
-    _cursor->setBrush(newValue);
+    _cursor->setBrush(color());
 
     _cursor2->setPen(_graph->pen());
-    _cursor2->setBrush(newValue);
+    _cursor2->setBrush(color());
 }

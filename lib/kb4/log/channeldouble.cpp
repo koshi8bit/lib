@@ -26,6 +26,14 @@ void ChannelDouble::addGraphToPlot(RealTimePlot *plot, bool visible)
         _graphRealTimePlot->setColor(color());
 }
 
+void ChannelDouble::addGraphToPlot(RealTimePlot *plot, QCPAxis *axis, bool visible)
+{
+    _graphRealTimePlot = plot->addGraph(axis, plotName(), postfix(), precision(), scientificNotation());
+    _graphRealTimePlot->setVisible(visible);
+    if (color().isValid())
+        _graphRealTimePlot->setColor(color());
+}
+
 //AbstractGraph *ChannelDouble::addGraphToPlot(AbstractPlot *plot, bool visible)
 //{
 //    _abstractGraph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
@@ -78,6 +86,11 @@ double ChannelDouble::rawValue()
     }
 
     return _rawValue;
+}
+
+RealTimeGraph *ChannelDouble::graphRealTimePlot()
+{
+    return _graphRealTimePlot;
 }
 
 int ChannelDouble::precision() const

@@ -6,21 +6,14 @@ RadarGraph::RadarGraph(const QString &label, const QString &postfix,
     :AbstractGraph(label, postfix, color, qcp, precision, scientificNotation)
 {
     arrow = new QCPItemLine(qcp);
+    //arrow->start->setAxes()
     arrow->start->setCoords(0, 0);
     setValue(0, 0);
 
     arrow->setHead(QCPLineEnding::esSpikeArrow);
 
-    _setColor(color);
+    setPen();
     setWidth(lineWidth);
-}
-
-void RadarGraph::_setColor(QColor color)
-{
-    QPen pen;
-    pen.setColor(color);
-    pen.setWidth(width());
-    arrow->setPen(pen);
 }
 
 QPointF RadarGraph::toPolar(double r, double angle)
@@ -50,9 +43,19 @@ int RadarGraph::width() const
     return _width;
 }
 
+void RadarGraph::setPen()
+{
+    QPen pen;
+    pen.setColor(color());
+    pen.setWidth(width());
+    arrow->setPen(pen);
+}
+
 void RadarGraph::setWidth(int width)
 {
     _width = width;
+    setPen();
+
 }
 
 void RadarGraph::redrawArrow()
@@ -65,15 +68,15 @@ void RadarGraph::redrawArrow()
     arrow->end->setCoords(toPolar(radius(), angle()));
 }
 
-void RadarGraph::abstractSetVisible(bool newValue)
+void RadarGraph::abstractSetVisible()
 {
-    arrow->setVisible(newValue);
+    arrow->setVisible(visible());
     updateLegendItem();
 }
 
-void RadarGraph::abstractSetColor(QColor color)
+void RadarGraph::abstractSetColor()
 {
-    _setColor(color);
+    setPen();
 }
 
 double RadarGraph::angle() const

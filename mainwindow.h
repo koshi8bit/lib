@@ -62,6 +62,7 @@ private:
     ChannelT<QDateTime> *t;
 
     QSettings *settings;
+    QTimer *timerRealTimeQcpReplot;
     SimpleLog *simpleLog;
 
     RadarTemperature4Graph *radarTestGraph;

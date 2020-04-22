@@ -40,8 +40,9 @@ private:
 
     // AbstractGraph interface
 protected:
-    void abstractSetVisible(bool newValue) override;
-    void abstractSetColor(QColor newValue) override;
+    void updateLegendItem() override;
+    void abstractSetVisible() override;
+    void abstractSetColor() override;
 };
 
 #endif // REALTIMEGRAPH_H

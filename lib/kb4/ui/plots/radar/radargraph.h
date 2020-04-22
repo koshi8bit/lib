@@ -17,6 +17,8 @@ public:
     void setWidth(int width);
     int width() const;
 
+    void setPen();
+
 public slots:
     void setValue(double radius, double angle);
     void setAngle(double angle);
@@ -29,14 +31,11 @@ private:
     int _width=1;
     void redrawArrow();
 
-    // AbstractGraph interface
-    void _setColor(QColor color);
-
-    virtual void updateLegendItem();
 
 protected:
-    void abstractSetVisible(bool newValue) override;
-    void abstractSetColor(QColor newValue) override;
+    void updateLegendItem() override;
+    void abstractSetVisible() override;
+    void abstractSetColor() override;
 };
 
 #endif // RADARGRAPH_H

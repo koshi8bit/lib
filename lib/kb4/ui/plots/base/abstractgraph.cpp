@@ -92,13 +92,13 @@ bool AbstractGraph::visible() const
 void AbstractGraph::_setVisible(bool newValue)
 {
     _visible = newValue;
-    abstractSetVisible(newValue);
+    abstractSetVisible();
     _qcp->replot();
 }
 
 void AbstractGraph::_setColor(QColor newValue)
 {
     _color = newValue;
-    abstractSetColor(newValue);
+    abstractSetColor();
     _qcp->replot();
 }
