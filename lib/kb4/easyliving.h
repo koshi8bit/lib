@@ -74,6 +74,7 @@ public:
     static QString postfixSievertPerHourEn();
     static QString postfixFluence();
     static QString postfixFluenceEn();
+    static QString postfixPiece();
 
     static QString postfixMilli();
     static QString postfixMilliEn();

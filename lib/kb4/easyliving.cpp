@@ -226,7 +226,12 @@ QString EasyLiving::postfixFluence()
 
 QString EasyLiving::postfixFluenceEn()
 {
-    return "C";
+    return tr("C");
+}
+
+QString EasyLiving::postfixPiece()
+{
+    return tr("шт.");
 }
 
 QString EasyLiving::postfixMilli()

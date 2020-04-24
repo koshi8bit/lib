@@ -267,18 +267,23 @@ MainWindow::~MainWindow()
 
 
     delete ui;
-    delete mg;//->deleteLater();
+    delete mgColumn0;//->deleteLater();
+    delete mgColumn1;//->deleteLater();
 }
 
 void MainWindow::configureRealTimeQcpPlot()
 {
-    mg = new QCPMarginGroup(ui->realTimeQcpU->qcp());
+    mgColumn0 = new QCPMarginGroup(ui->realTimeQcpU->qcp());
+    mgColumn1 = new QCPMarginGroup(ui->realTimeQcpI->qcp());
+
 
     RealTimePlot * plot;
 
     plot = ui->realTimeQcpU;
     plot->configureAxis(plot->qcp()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
     plot->configureAxis(plot->qcp()->yAxis2, tr("Напр"), "mA", 0, 10);
+    plot->setMarginGroup(mgColumn0);
+
     configureRealTimeQcpPlot(plot);
     connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpI->qcp(), SLOT(replot()));
     connect(plot->qcp(), SIGNAL(afterReplot()), ui->realTimeQcpTemperature->qcp(), SLOT(replot()));
@@ -290,22 +295,31 @@ void MainWindow::configureRealTimeQcpPlot()
 
     plot = ui->realTimeQcpI;
     plot->configureAxis(plot->qcp()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10, 2);
+    plot->setMarginGroup(mgColumn1);
+
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpTemperature;
     plot->configureAxis(plot->qcp()->yAxis, tr("Температурим"), EasyLiving::postfixCelsius(), 0, 200);
+    plot->setMarginGroup(mgColumn0);
+
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpPower;
     plot->configureAxis(plot->qcp()->yAxis, tr("МОООЩА!"), EasyLiving::postfixWatt(), 0, 700);
+    plot->setMarginGroup(mgColumn1);
+
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpPersent;
     plot->configureAxis(plot->qcp()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
+    plot->setMarginGroup(mgColumn0);
+
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpBool;
     plot->configureAxis(plot->qcp()->yAxis, tr("True/False"), "", -0.2, 1.2);
+    plot->setMarginGroup(mgColumn1);
     QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
     textTicker->addTick(0, "False\nOff");
     textTicker->addTick(1, "True\nOn");
@@ -315,17 +329,19 @@ void MainWindow::configureRealTimeQcpPlot()
 
     plot = ui->realTimeQcpVacuum;
     plot->configureAxis(plot->qcp()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, 0, QCPAxis::stLogarithmic);
+    plot->setMarginGroup(mgColumn0);
+
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpRadiation;
     plot->configureAxis(plot->qcp()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, 0, QCPAxis::stLogarithmic);
+    plot->setMarginGroup(mgColumn1);
+
     configureRealTimeQcpPlot(plot);
 }
 
 void MainWindow::configureRealTimeQcpPlot(RealTimePlot *plot)
 {
-    plot->setMarginGroup(mg);
-
     connect(plot, &RealTimePlot::timeAxisRangeChanged, this, &MainWindow::realTimeQcpSetTimeAxisRange);
     connect(plot, &RealTimePlot::cursorKeyChanged, this, &MainWindow::realTimeQcpSetCursorKey);
     connect(plot, &RealTimePlot::realTimeChanged, this, &MainWindow::realTimeQcpSetRealTime);

@@ -53,7 +53,7 @@ private:
 
     RealTimeGraph *graphRealTimeQcpUa, *graphRealTimeQcpUb, *graphRealTimeQcpIa, *graphRealTimeQcpBoola;
 
-    QCPMarginGroup *mg;
+    QCPMarginGroup *mgColumn0, *mgColumn1;
     //double now;
     QDateTime time;
 
