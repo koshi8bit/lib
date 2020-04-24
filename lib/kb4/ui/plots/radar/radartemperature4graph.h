@@ -17,14 +17,14 @@ public:
 
     void calcDeviation();
 
-    double offset() const;
-    void setOffset(double offset);
+    double rotationOffset() const;
+    void setRrotationOffset(double rotationOffset);
 
     int legendPrecision() const;
     void setLegendPrecision(int legendPrecision);
 
 private:
-    double _offset=0;
+    double _rotationOffset=0;
     int _legendPrecision=0;
 
 

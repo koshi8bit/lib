@@ -36,7 +36,8 @@ public:
     void setCursorKey(double key, RealTimePlot *senderWidget);
     void setTimeAxisRange(const QCPRange &newRange, RealTimePlot *senderWidget);
     //void moveCursor(double time, RealTimeQCP *senderWidget);
-    void configureTimerReplot(int intervalMSEC = 100);
+
+    void configureTimerReplot(int intervalMSEC = 10);
 
 
 
@@ -46,6 +47,8 @@ public:
 
     bool dayStyle() const;
     void setDayStyle(bool dayStyle, bool showTime = true);
+
+
 
 
 
@@ -83,12 +86,14 @@ private:
     //bool _cursor2CanMove = false;
 
     void _configurePlot();
-    void configureAxesZoomAndDrag(bool configureYAxises);
     void configurePlotBackground();
     void configurePlotBackgroundAxis(QCPAxis *axis);
     void configurePlotTimeAxis();
     void configurePlotLine();
     void configurePlotLine(QCPItemLine **line);
+
+    void configureAxesZoomAndDrag(bool configureYAxises);
+
 
     void updateTimeAxisLabel();
 

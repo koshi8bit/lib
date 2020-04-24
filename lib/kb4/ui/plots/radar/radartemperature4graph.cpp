@@ -22,19 +22,19 @@ void RadarTemperature4Graph::calcDeviation()
 
     auto radius = qSqrt(dx * dx + dy * dy);
     auto angleRad = qAtan2(dy, dx);
-    auto angleDeg = (angleRad * 180 / M_PI - 90) + 90 + offset();
+    auto angleDeg = (angleRad * 180 / M_PI - 90) + 90 + rotationOffset();
 
     setValue(radius, angleDeg);
 }
 
-double RadarTemperature4Graph::offset() const
+double RadarTemperature4Graph::rotationOffset() const
 {
-    return _offset;
+    return _rotationOffset;
 }
 
-void RadarTemperature4Graph::setOffset(double offset)
+void RadarTemperature4Graph::setRrotationOffset(double rotationOffset)
 {
-    _offset = offset;
+    _rotationOffset = rotationOffset;
 }
 
 int RadarTemperature4Graph::legendPrecision() const

@@ -42,6 +42,15 @@ void RadarTemperature4Plot::replot()
     double max=0;
     foreach(auto graph, graphs())
     {
+        if (!graph->visible())
+            continue;
+
+        auto isRadarTemperature4Graph =
+                dynamic_cast<RadarTemperature4Graph*>(graph) != nullptr;
+
+        if (!isRadarTemperature4Graph)
+            continue;
+
         max = qMax(graphCast(graph)->radius(), max);
     }
 
