@@ -17,7 +17,7 @@ class ValueDouble : public QWidget
 
 public:
     explicit ValueDouble(QWidget *parent = nullptr);
-    ~ValueDouble();
+    ~ValueDouble() override;
 
     void configure(QString name, QString postfix, int precision = 3, bool hideSetWidget = true, bool scientificNotation = false, int fontSize = 10);
     void configure(ChannelDouble *getChannel, int fontSize = 10);
@@ -35,30 +35,34 @@ public:
 
     double value() const;
 
-    void setNameAndPostfix(QString name, QString postfix);
     void setFontSize(int newValue);
     void setTrusted(bool newValue);
 
-    QLineEdit *valueWidget();
+    QLineEdit *valueGet();
+    QLabel *labelPostfix();
 
     const static QString trustedColor;
     const static QString notTrustedColor;
 
+    QString postfix() const;
+    void setPostfix(const QString &postfix);
 
-
-
+    void syncAligment(ValueDouble *sample, bool syncValueGet=true);
 
 private:
     int _precision;
     bool _scientificNotation;
     double _value;
     QString _name;
+    QString _postfix;
     Ui::ValueDouble *ui;
     void _setFontSize(QWidget *widget, int newValue);
 
     void setColor(QWidget *widget, QString newColor);
-
     void setMaxWidth();
+
+    void syncAligment(QWidget *w1, QWidget *w2);
+
     
 signals:
     void valueChanged(double newValue);

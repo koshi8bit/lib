@@ -23,7 +23,8 @@ ValueDouble::~ValueDouble()
 
 void ValueDouble::configure(QString name, QString postfix, int precision, bool hideSetWidget, bool scientificNotation, int fontSize)
 {
-    setNameAndPostfix(name, postfix);
+    setName(name);
+    setPostfix(postfix);
     setPrecision(precision);
 
     ui->doubleSpinBoxValueSet->setVisible(!hideSetWidget);
@@ -57,7 +58,8 @@ void ValueDouble::configure(ChannelDouble *getChannel, ChannelDouble *setChannel
 
 void ValueDouble::setFontSize(int newValue)
 {
-    _setFontSize(ui->labelNameAndPostfix, newValue);
+    _setFontSize(ui->labelName, newValue);
+    _setFontSize(ui->labelPostfix, newValue);
     _setFontSize(ui->lineEditValueGet, newValue);
     _setFontSize(ui->doubleSpinBoxValueSet, newValue);
     _setFontSize(ui->pushButtonSet, newValue);
@@ -108,13 +110,49 @@ void ValueDouble::setTrusted(bool newValue)
         color = notTrustedColor;
     }
 
-    setColor(ui->labelNameAndPostfix, color);
+    setColor(ui->labelName, color);
+    setColor(ui->labelPostfix, color);
     setColor(ui->lineEditValueGet, color);
 }
 
-QLineEdit *ValueDouble::valueWidget()
+QLineEdit *ValueDouble::valueGet()
 {
     return ui->lineEditValueGet;
+}
+
+QLabel *ValueDouble::labelPostfix()
+{
+    return ui->labelPostfix;
+}
+
+QString ValueDouble::postfix() const
+{
+    return _postfix;
+}
+
+void ValueDouble::setPostfix(const QString &postfix)
+{
+    ui->labelPostfix->setText(postfix);
+    _postfix = postfix;
+}
+
+void ValueDouble::syncAligment(ValueDouble *sample, bool syncValueGet)
+{
+    syncAligment(labelPostfix(), sample->labelPostfix());
+    if (syncValueGet)
+    {
+        syncAligment(valueGet(), sample->valueGet());
+    }
+}
+
+void ValueDouble::syncAligment(QWidget *w1, QWidget *w2)
+{
+    auto w1Wwidth = w1->width();
+    auto w2Wwidth = w2->width();
+    auto max = qMax(w1Wwidth, w2Wwidth);
+
+    w1->setMinimumWidth(max);
+    w2->setMinimumWidth(max);
 }
 
 double ValueDouble::value() const
@@ -129,6 +167,7 @@ QString ValueDouble::name() const
 
 void ValueDouble::setName(const QString &name)
 {
+    ui->labelName->setText(name);
     _name = name;
 }
 
@@ -150,13 +189,6 @@ int ValueDouble::precision() const
 void ValueDouble::setPrecision(int precision)
 {
     _precision = precision;
-}
-
-void ValueDouble::setNameAndPostfix(QString name, QString postfix)
-{
-    setName(name);
-    auto s = QString("%1 (%2):").arg(name, postfix);
-    ui->labelNameAndPostfix->setText(s);
 }
 
 void ValueDouble::setValue(double newValue)
