@@ -64,25 +64,25 @@ void ValueDouble::setFontSize(int newValue)
     _setFontSize(ui->doubleSpinBoxValueSet, newValue);
     _setFontSize(ui->pushButtonSet, newValue);
 
-    if (newValue == 30)
-    {
-        this->setMinimumHeight(71);
-    }
+//    if (newValue == 30)
+//    {
+//        this->setMinimumHeight(71);
+//    }
 
     if (newValue == 25)
     {
-        this->setMinimumHeight(62);
+        this->setMinimumHeight(44);
     }
 
-    if (newValue == 14)
-    {
-        this->setMinimumHeight(36);
-    }
+//    if (newValue == 14)
+//    {
+//        this->setMinimumHeight(36);
+//    }
 
-    if (newValue == 8)
-    {
-        this->setMinimumHeight(38);
-    }
+//    if (newValue == 8)
+//    {
+//        this->setMinimumHeight(38);
+//    }
 }
 
 void ValueDouble::setMaxWidth()
@@ -143,6 +143,16 @@ void ValueDouble::syncAligment(ValueDouble *sample, bool syncValueGet)
     {
         syncAligment(valueGet(), sample->valueGet());
     }
+}
+
+void ValueDouble::showOnlyValueGet(bool newValue)
+{
+    Q_UNUSED(newValue)
+    ui->labelName->setVisible(false);
+    ui->horizontalLayout->removeItem(ui->horizontalSpacer);
+    ui->doubleSpinBoxValueSet->setVisible(false);
+    ui->pushButtonSet->setVisible(false);
+    ui->labelPostfix->setVisible(false);
 }
 
 void ValueDouble::syncAligment(QWidget *w1, QWidget *w2)

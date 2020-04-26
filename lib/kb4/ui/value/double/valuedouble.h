@@ -48,6 +48,7 @@ public:
     void setPostfix(const QString &postfix);
 
     void syncAligment(ValueDouble *sample, bool syncValueGet=true);
+    void showOnlyValueGet(bool newValue);
 
 private:
     int _precision;
