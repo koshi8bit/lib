@@ -148,6 +148,7 @@ void ValueDouble::syncAligment(ValueDouble *sample, bool syncValueGet)
 void ValueDouble::showOnlyValueGet(bool newValue)
 {
     Q_UNUSED(newValue)
+
     ui->labelName->setVisible(false);
     ui->horizontalLayout->removeItem(ui->horizontalSpacer);
     ui->doubleSpinBoxValueSet->setVisible(false);

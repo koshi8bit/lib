@@ -43,6 +43,14 @@ void Worker::start(int intervalMSEC)
     timer->start();
 }
 
+void Worker::stop(bool waitOnePeriod)
+{
+    Q_UNUSED(waitOnePeriod)
+    qCritical() << EL_FORMAT_ERR("Not implemented yet");
+
+    timer->stop();
+}
+
 void Worker::timerTimeout()
 {
     heavyWork();

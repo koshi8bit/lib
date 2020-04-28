@@ -231,7 +231,22 @@ QString EasyLiving::postfixFluenceEn()
 
 QString EasyLiving::postfixPiece()
 {
-    return tr("шт.");
+    return tr("шт");
+}
+
+QString EasyLiving::postfixSecond()
+{
+    return tr("сек");
+}
+
+QString EasyLiving::postfixHour()
+{
+    return tr("час");
+}
+
+QString EasyLiving::postfixPiecePerSecond()
+{
+    return postfixPiece() +tr("/") + postfixSecond();
 }
 
 QString EasyLiving::postfixMilli()

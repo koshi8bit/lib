@@ -59,7 +59,7 @@ public:
 
     }
 
-    void configureSharedVariable(bool enableWriteFromNet = false)
+    QString configureSharedVariable(bool enableWriteFromNet = false)
     {
         sharedVariable = new NetVar<T>(logName());
 
@@ -67,6 +67,7 @@ public:
         qDebug() << "sharedVariable" << logName() << "created";
 #endif
         setSharedVariableEnableReadFromNet(enableWriteFromNet);
+        return logName();
     }
 
     void askSharedVariable()

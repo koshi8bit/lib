@@ -5,6 +5,8 @@
 #include <QThread>
 #include <QTimer>
 
+#include <lib/kb4/easyliving.h>
+
 
 class Worker : public QObject
 {
@@ -26,6 +28,8 @@ signals:
 public slots:
     void start();
     void start(int intervalMSEC);
+
+    void stop(bool waitOnePeriod = true);
 
 private slots:
     void timerTimeout();
