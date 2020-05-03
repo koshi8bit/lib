@@ -39,6 +39,12 @@ public:
         configureSharedVariable(true);
     }
 
+    ~ChannelT()
+    {
+        if (sharedVariable)
+            sharedVariable->deleteLater();
+    }
+
     T value()
     {
         return _value;

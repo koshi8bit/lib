@@ -13,18 +13,10 @@ public:
     ChannelDouble(QString name, QString postfix, QObject *parent = nullptr);
     ChannelDouble(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
     ChannelDouble(QString sharedVariableName, QObject *parent = nullptr);
+    ~ChannelDouble() override;
 
-
-
-
-//    ChannelDouble(QString sharedVariableName, QString postfix, bool connectWrite=false, QObject *parent = nullptr);
-
-//    ChannelDouble(QString name, QString postfix, QStringList &prefix, QObject *parent = nullptr);
-//    ChannelDouble(QString name, QString postfix, QStringList *prefix, QObject *parent = nullptr);
-//  TODO DELETE LATER
     void addGraphToPlot(RealTimePlot *plot, bool visible=true);
     void addGraphToPlot(RealTimePlot *plot, QCPAxis *axis, bool visible=true);
-    //AbstractGraph *addGraphToPlot(AbstractPlot *plot, bool visible=true);
 
     bool scientificNotation();
     void setScientificNotation(bool newValue);

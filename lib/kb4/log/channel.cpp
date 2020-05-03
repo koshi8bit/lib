@@ -24,6 +24,11 @@ Channel::Channel(QString name, QString postfix, QStringList &path, QObject *pare
     setLogName(logName);
 }
 
+Channel::~Channel()
+{
+
+}
+
 Channel::Channel(QString plotName, QString widgetName, QString postfix, QObject *parent)
     : QObject(parent)
 {

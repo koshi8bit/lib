@@ -120,6 +120,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //    radarTestGraph = ui->radarTemperature4Plot->addGraph("4 ДК", 1, false, 5);
 //    radarTestGraph->setColor(QColor("#AA99AA"));
 
+    auto tst = new ChannelDouble("1");
+    delete tst;
+
 
 }
 

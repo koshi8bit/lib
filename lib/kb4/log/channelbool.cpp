@@ -18,6 +18,11 @@ ChannelBool::ChannelBool(QString sharedVariableName, QObject *parent)
     configure();
 }
 
+ChannelBool::~ChannelBool()
+{
+
+}
+
 void ChannelBool::addGraphToPlot(RealTimePlot *plot, bool visible)
 {
     _graph = plot->addGraph(plotName(), postfix(), 0);

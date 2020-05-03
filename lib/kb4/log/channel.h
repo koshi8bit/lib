@@ -14,6 +14,8 @@ public:
     explicit Channel(QString name, QString postfix, QObject *parent = nullptr);
     explicit Channel(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
 
+    virtual ~Channel();
+
 
     QString plotName() const;
     void setPlotName(const QString plotName);

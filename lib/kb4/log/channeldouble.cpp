@@ -18,6 +18,11 @@ ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
     configure();
 }
 
+ChannelDouble::~ChannelDouble()
+{
+
+}
+
 void ChannelDouble::addGraphToPlot(RealTimePlot *plot, bool visible)
 {
     _graphRealTimePlot = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());

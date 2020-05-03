@@ -13,6 +13,7 @@ public:
     ChannelBool(QString name, QString postfix, QObject *parent = nullptr);
     ChannelBool(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
     ChannelBool(QString sharedVariableName, QObject *parent = nullptr);
+    ~ChannelBool() override;
 
     void addGraphToPlot(RealTimePlot *plot, bool visible=true);
     RealTimeGraph *graph() const;
