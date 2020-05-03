@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -9,16 +10,14 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle(EasyLiving::setWindowTitle("Tests"));
 
     settings = new QSettings("settings.ini", QSettings::IniFormat, this);
-
     if(settings->value("qDebug/saveToFile", false).toBool())
         configureQDebug();
 
     configureRealTimeQcpPlot();
     configureRealTimeQcpGraphs();
+    configureTimers();
 
     configureRealTimeQcpPlotDayStyle();
-
-    configureTimers();
 
     configureGradientLineEdit();
 
@@ -26,6 +25,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
     configureWorker();
 
+    configureValueDouble();
+
+    writeFileTest();
+
+    eh.checkForErrors();
+
+    qLocaleTest();
+
+    simpleLogTest();
+
+    dateTimeDeltaTests();
+    pathConcatTest();
+    radarPlotTest();
+
+    auto tst = new ChannelDouble("1");
+    delete tst;
+}
+
+void MainWindow::configureValueDouble()
+{
     ui->valuedoubleTest->configure("Ток", EasyLiving::postfixMilliAmpere());
     connect(ui->valuedoubleTest, &ValueDouble::valueCopyedToClipboard, this, &MainWindow::valueDoubleCopyedToClipboard);
     ui->valuedoubleTest->setValue(8.7);
@@ -37,61 +56,37 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [](double a) { qDebug() << a; });
+}
 
-//    qDebug() << "writeFile" << EasyLiving::writeFile("D:/123-.txt", "sup bro\nsup buddy", false);
-//    qDebug() << "readFile" << EasyLiving::readFile("D:/123-.txt");
-
-
-
-    eh.checkForErrors();
-
+void MainWindow::qLocaleTest()
+{
     auto a = QLocale(QLocale::Russian);
     qDebug() << "Разделитель тчк/зпт" << a.decimalPoint();
     qDebug() << "Разделитель группы" << QString(a.groupSeparator());
     //qDebug() << QString::number(1300.2, 'f', 2);
     a.setNumberOptions(QLocale::OmitGroupSeparator);
     qDebug() << a.toString(1300.2, 'f', 2);
+}
 
-
-//    QTime t1(15, 23, 16);
-//    QTime t2(12, 11, 02);
-
-//    qDebug() << t2.secsTo(t1);
-//    QTime t3 = QTime(0, 0, 0).addSecs(t2.secsTo(t1));
-
-//    qDebug() << t3;
-
-    simpleLog = new SimpleLog("log.txt", true, this);
-    simpleLog->append("afds");
-    simpleLog->append("agg");
+void MainWindow::writeFileTest()
+{
+    //    qDebug() << "writeFile" << EasyLiving::writeFile("D:/123-.txt", "sup bro\nsup buddy", false);
+    //    qDebug() << "readFile" << EasyLiving::readFile("D:/123-.txt");
 
     EasyLiving::writeFile("1.txt", "aaaaaa");
     //simpleLog << "1";
     //sl << "asd";
+}
 
-    qDebug() << EasyLiving::pathConcat("C:/1", "2\\3");
+void MainWindow::simpleLogTest()
+{
+    simpleLog = new SimpleLog("log.txt", true, this);
+    simpleLog->append("afds");
+    simpleLog->append("agg");
+}
 
-    QDateTime begin(QDate(2020, 3, 1), QTime(9, 0, 0));
-    QDateTime end(QDate(2021, 3, 1), QTime(9, 0, 0));
-
-    qDebug() << EasyLiving::dateTimeDelta(begin, end);
-
-//    QDateTime interval = QDateTime::fromMSecsSinceEpoch(begin.toMSecsSinceEpoch() - end.toMSecsSinceEpoch());
-//    interval = interval.addYears(-1970);
-//    qDebug() << interval.toString(EasyLiving::formatDateTimeUi());
-//    int years;
-//    int month;
-//    int days;
-//    int hours;
-//    int minutes;
-//    int seconds;
-//    int milliseconds;
-//    EasyLiving::dateTimeDelta(begin, end, years, month, days, hours, minutes, seconds, milliseconds);
-//    qDebug() << years << month << days << hours;// << minutes << seconds << milliseconds;
-
-    //auto temperatureD1 = new RadarGraph("name", "postfix", this);
-    //temperatureD1->addGraphToPlot(ui->radarQcp);
-
+void MainWindow::radarPlotTest()
+{
     auto up = new ChannelDouble("Up", EasyLiving::postfixCelsius(), this);
     connect(ui->dialUp, &QDial::valueChanged, up, &ChannelDouble::setValue);
 
@@ -119,11 +114,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    radarTestGraph = ui->radarTemperature4Plot->addGraph("4 ДК", 1, false, 5);
 //    radarTestGraph->setColor(QColor("#AA99AA"));
+}
 
-    auto tst = new ChannelDouble("1");
-    delete tst;
-
-
+void MainWindow::pathConcatTest()
+{
+    qDebug() << EasyLiving::pathConcat("C:/1", "2\\3");
 }
 
 
@@ -156,11 +151,6 @@ void MainWindow::configureExcelLog()
     excelLog->addChannel(t);
 
     excelLog->finishConfigure();
-
-
-
-
-
 }
 
 void MainWindow::configureWorker()
@@ -272,6 +262,35 @@ MainWindow::~MainWindow()
     delete ui;
     delete mgColumn0;//->deleteLater();
     delete mgColumn1;//->deleteLater();
+}
+
+void MainWindow::dateTimeDeltaTests()
+{
+    //    QTime t1(15, 23, 16);
+    //    QTime t2(12, 11, 02);
+
+    //    qDebug() << t2.secsTo(t1);
+    //    QTime t3 = QTime(0, 0, 0).addSecs(t2.secsTo(t1));
+
+    //    qDebug() << t3;
+
+    QDateTime begin(QDate(2020, 3, 1), QTime(9, 0, 0));
+    QDateTime end(QDate(2021, 3, 1), QTime(9, 0, 0));
+
+    qDebug() << EasyLiving::dateTimeDelta(begin, end);
+
+//    QDateTime interval = QDateTime::fromMSecsSinceEpoch(begin.toMSecsSinceEpoch() - end.toMSecsSinceEpoch());
+//    interval = interval.addYears(-1970);
+//    qDebug() << interval.toString(EasyLiving::formatDateTimeUi());
+//    int years;
+//    int month;
+//    int days;
+//    int hours;
+//    int minutes;
+//    int seconds;
+//    int milliseconds;
+//    EasyLiving::dateTimeDelta(begin, end, years, month, days, hours, minutes, seconds, milliseconds);
+//    qDebug() << years << month << days << hours;// << minutes << seconds << milliseconds;
 }
 
 void MainWindow::configureRealTimeQcpPlot()

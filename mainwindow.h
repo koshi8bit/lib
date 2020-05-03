@@ -67,6 +67,8 @@ private:
 
     RadarTemperature4Graph *radarTestGraph;
 
+    void dateTimeDeltaTests();
+
 
     void configureRealTimeQcpPlot();
     void configureRealTimeQcpPlot(RealTimePlot *plot);
@@ -83,6 +85,18 @@ private:
     Worker *w;
     void configureWorker();
     void heavyWork();
+
+    void configureValueDouble();
+
+    void qLocaleTest();
+
+    void writeFileTest();
+
+    void simpleLogTest();
+
+    void radarPlotTest();
+
+    void pathConcatTest();
 
 public slots:
     void valueDoubleCopyedToClipboard(QString newValue, QString message);
