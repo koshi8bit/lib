@@ -32,7 +32,7 @@ public:
 
     ~ChannelRealTimeGraph()
     {
-        _realTimePlot->removeGraph(realTimeGraph());
+        //TODO _realTimePlot->removeGraph(realTimeGraph());
         if (realTimeGraph())
             delete realTimeGraph();
     }

@@ -227,7 +227,7 @@ void MainWindow::addData2()
 {
     auto now = RealTimePlot::currentDateTime();
 
-    graphRealTimeQcpUb->addData(now, 1000+1000*qPow(qSin(now), 2) - 2*qSin(now) - 2);
+    graphRealTimeQcpUb->addData(now, 5+5*qPow(qSin(now), 2) - 2*qSin(now) - 2);
     graphRealTimeQcpBoola->addData(now, qrand() % 2);
 }
 
@@ -283,8 +283,8 @@ void MainWindow::configureRealTimeQcpPlot()
     RealTimePlot * plot;
 
     plot = ui->realTimeQcpU;
-    plot->configureAxis(plot->qcp()->yAxis, tr("Напруга"), EasyLiving::postfixVolt(), 0, 2300);
-    plot->configureAxis(plot->qcp()->yAxis2, tr("Напр"), "mA", 0, 10);
+    plot->configureAxis(plot->qcp()->yAxis, tr("Напруга"), EasyLiving::postfixKiloVolt(), 0, 2300);
+    plot->configureAxis(plot->qcp()->yAxis2, tr("Напруга"), EasyLiving::postfixVolt(), 0, 10);
     plot->setMarginGroup(mgColumn0);
 
     configureRealTimeQcpPlot(plot);
@@ -356,7 +356,7 @@ void MainWindow::configureRealTimeQcpPlot(RealTimePlot *plot)
 
 void MainWindow::configureRealTimeQcpGraphs()
 {
-    graphRealTimeQcpUa = ui->realTimeQcpU->addGraph(ui->realTimeQcpU->qcp()->yAxis, "ELV/E", EasyLiving::postfixVolt(), 2);
+    graphRealTimeQcpUa = ui->realTimeQcpU->addGraph(ui->realTimeQcpU->qcp()->yAxis, "ELV/E", EasyLiving::postfixVolt(), 1);
     graphRealTimeQcpUb = ui->realTimeQcpU->addGraph(ui->realTimeQcpU->qcp()->yAxis2, "Ultravolt/-300", EasyLiving::postfixVolt());
 
     graphRealTimeQcpIa = ui->realTimeQcpI->addGraph("Bergoz/Hebl", EasyLiving::postfixMilliAmpere(), 3);
