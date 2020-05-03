@@ -59,6 +59,7 @@ private:
 
     TimeLog *excelLog;
     ChannelDouble *a, *b, *c;
+    ChannelDouble *deletingTest;
     ChannelT<QDateTime> *t;
 
     QSettings *settings;
@@ -129,6 +130,8 @@ private slots:
     void on_doubleSpinBoxRadarRadius_valueChanged(double arg1);
     void on_doubleSpinBoxRadarAngle_valueChanged(double arg1);
     void on_pushButtonRadarCalc_clicked();
+    void on_pushButtonAddPlot_clicked();
+    void on_pushButtonDeletePlot_clicked();
 };
 
 #endif // MAINWINDOW_H

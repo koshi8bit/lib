@@ -21,6 +21,11 @@ AbstractGraph::AbstractGraph(const QString &label, const QString &postfix, QColo
 
 }
 
+AbstractGraph::~AbstractGraph()
+{
+
+}
+
 GraphLegendItem *AbstractGraph::legendItem()
 {
     return _legendItem;

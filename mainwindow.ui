@@ -24,24 +24,21 @@
        <attribute name="title">
         <string>RealTimePlot</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="2" column="0">
-         <widget class="RealTimePlot" name="realTimeQcpPersent" native="true"/>
-        </item>
-        <item row="3" column="0">
-         <widget class="RealTimePlot" name="realTimeQcpVacuum" native="true"/>
-        </item>
-        <item row="3" column="1">
-         <widget class="RealTimePlot" name="realTimeQcpRadiation" native="true"/>
+       <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,1,1,1,0">
+        <item row="1" column="0">
+         <widget class="RealTimePlot" name="realTimeQcpTemperature" native="true"/>
         </item>
         <item row="0" column="0">
          <widget class="RealTimePlot" name="realTimeQcpU" native="true"/>
         </item>
+        <item row="3" column="1">
+         <widget class="RealTimePlot" name="realTimeQcpRadiation" native="true"/>
+        </item>
         <item row="1" column="1">
          <widget class="RealTimePlot" name="realTimeQcpPower" native="true"/>
         </item>
-        <item row="1" column="0">
-         <widget class="RealTimePlot" name="realTimeQcpTemperature" native="true"/>
+        <item row="3" column="0">
+         <widget class="RealTimePlot" name="realTimeQcpVacuum" native="true"/>
         </item>
         <item row="0" column="1">
          <widget class="RealTimePlot" name="realTimeQcpI" native="true"/>
@@ -49,19 +46,56 @@
         <item row="2" column="1">
          <widget class="RealTimePlot" name="realTimeQcpBool" native="true"/>
         </item>
-        <item row="4" column="0">
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>PushButton</string>
-          </property>
-         </widget>
+        <item row="2" column="0">
+         <widget class="RealTimePlot" name="realTimeQcpPersent" native="true"/>
         </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="text">
-           <string>PushButton</string>
-          </property>
-         </widget>
+        <item row="4" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1,0,0,5">
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>Change one graph visibility</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="text">
+             <string>Resize to manual</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonAddPlot">
+            <property name="text">
+             <string>Add plot</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonDeletePlot">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Delete plot</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>

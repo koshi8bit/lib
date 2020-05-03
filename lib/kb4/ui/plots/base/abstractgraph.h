@@ -14,6 +14,7 @@ public:
     explicit AbstractGraph(const QString &label, const QString &postfix, QColor color,
                            QCustomPlot *qcp = nullptr, int precision = 3,
                            bool scientificNotation = false);
+    virtual ~AbstractGraph();
 
     QString label() const;
     QString postfix() const;

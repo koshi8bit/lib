@@ -11,7 +11,7 @@ public:
     RealTimeGraph(const QString &_label, const QString &postfix, QColor color,
                   QCustomPlot *qcp, QCPAxis *yAxis, int precision = 3,
                   bool scientificNotation = false);
-    virtual ~RealTimeGraph();
+    ~RealTimeGraph() override;
 
     //TODO ?rename to qcpGraph
     QCPGraph *graph();

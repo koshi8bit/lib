@@ -39,8 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pathConcatTest();
     radarPlotTest();
 
-    auto tst = new ChannelDouble("1");
-    delete tst;
+
 }
 
 void MainWindow::configureValueDouble()
@@ -635,3 +634,19 @@ void MainWindow::on_pushButtonRadarCalc_clicked()
     ui->radarTemperature4Plot->replot();
 }
 
+
+void MainWindow::on_pushButtonAddPlot_clicked()
+{
+    qDebug() << "under constraction..";
+    deletingTest = new ChannelDouble("deletingTest");
+    deletingTest->addGraphToPlot(ui->realTimeQcpVacuum);
+
+    ui->pushButtonDeletePlot->setEnabled(true);
+}
+
+void MainWindow::on_pushButtonDeletePlot_clicked()
+{
+    qDebug() << "under constraction..";
+    delete deletingTest;
+    ui->pushButtonDeletePlot->setEnabled(false);
+}

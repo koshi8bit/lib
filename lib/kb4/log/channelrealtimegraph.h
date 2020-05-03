@@ -32,7 +32,9 @@ public:
 
     ~ChannelRealTimeGraph()
     {
-        //TODO _realTimePlot->removeGraph(realTimeGraph());
+        if (realTimeGraph())
+            realTimePlot()->removeGraph(realTimeGraph());
+
         if (realTimeGraph())
             delete realTimeGraph();
     }
@@ -44,6 +46,7 @@ public:
 
     void addGraphToPlot(RealTimePlot *plot, QCPAxis *axis, bool visible=true)
     {
+        _realTimePlot = plot;
         _realTimeGraph = plot->addGraph(axis, this->plotName(), this->postfix(),
                                         precision(), scientificNotation());
         _realTimeGraph->setVisible(visible);
