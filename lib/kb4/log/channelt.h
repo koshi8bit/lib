@@ -119,12 +119,13 @@ private slots:
 
 
 
-private:
+protected:
     static QString getName(QString sharedVariableName)
     {
         return sharedVariableName.split("/").last();
     }
 
+private:
     T _value;
     bool _multithreading = false;
 

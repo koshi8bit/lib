@@ -25,16 +25,16 @@ ChannelBool::~ChannelBool()
 
 void ChannelBool::addGraphToPlot(RealTimePlot *plot, bool visible)
 {
-    _graph = plot->addGraph(plotName(), postfix(), 0);
-    _graph->setVisible(visible);
+    _realTimeGraph = plot->addGraph(plotName(), postfix(), 0);
+    _realTimeGraph->setVisible(visible);
     if (color().isValid())
-        _graph->setColor(color());
+        _realTimeGraph->setColor(color());
 }
 
 
-RealTimeGraph *ChannelBool::graph() const
+RealTimeGraph *ChannelBool::realTimeGraph() const
 {
-    return _graph;
+    return _realTimeGraph;
 }
 
 void ChannelBool::configure()
@@ -44,7 +44,7 @@ void ChannelBool::configure()
 
 void ChannelBool::valueChangedChild()
 {
-    if (_graph != nullptr) { _graph->addData(RealTimePlot::currentDateTime(), value()); }
+    if (_realTimeGraph != nullptr) { _realTimeGraph->addData(RealTimePlot::currentDateTime(), value()); }
 }
 
 void ChannelBool::_valueChanged()

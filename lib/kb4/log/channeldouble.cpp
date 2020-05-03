@@ -25,18 +25,18 @@ ChannelDouble::~ChannelDouble()
 
 void ChannelDouble::addGraphToPlot(RealTimePlot *plot, bool visible)
 {
-    _graphRealTimePlot = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
-    _graphRealTimePlot->setVisible(visible);
+    _realTimeGraph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
+    _realTimeGraph->setVisible(visible);
     if (color().isValid())
-        _graphRealTimePlot->setColor(color());
+        _realTimeGraph->setColor(color());
 }
 
 void ChannelDouble::addGraphToPlot(RealTimePlot *plot, QCPAxis *axis, bool visible)
 {
-    _graphRealTimePlot = plot->addGraph(axis, plotName(), postfix(), precision(), scientificNotation());
-    _graphRealTimePlot->setVisible(visible);
+    _realTimeGraph = plot->addGraph(axis, plotName(), postfix(), precision(), scientificNotation());
+    _realTimeGraph->setVisible(visible);
     if (color().isValid())
-        _graphRealTimePlot->setColor(color());
+        _realTimeGraph->setColor(color());
 }
 
 //AbstractGraph *ChannelDouble::addGraphToPlot(AbstractPlot *plot, bool visible)
@@ -93,9 +93,9 @@ double ChannelDouble::rawValue()
     return _rawValue;
 }
 
-RealTimeGraph *ChannelDouble::graphRealTimePlot()
+RealTimeGraph *ChannelDouble::realTimeGraph()
 {
-    return _graphRealTimePlot;
+    return _realTimeGraph;
 }
 
 int ChannelDouble::precision() const
@@ -119,7 +119,7 @@ void ChannelDouble::valueChangedChild()
 {
     if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
 
-    if (_graphRealTimePlot != nullptr) { _graphRealTimePlot->addData(RealTimePlot::currentDateTime(), value()); }
+    if (_realTimeGraph != nullptr) { _realTimeGraph->addData(RealTimePlot::currentDateTime(), value()); }
 
     //if (_abstractGraph != nullptr) { _abstractGraph->addData(RealTimeQCP::currentDateTime(), value()); }
 }

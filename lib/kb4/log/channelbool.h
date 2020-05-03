@@ -16,10 +16,10 @@ public:
     ~ChannelBool() override;
 
     void addGraphToPlot(RealTimePlot *plot, bool visible=true);
-    RealTimeGraph *graph() const;
+    RealTimeGraph *realTimeGraph() const;
 
 private:
-    RealTimeGraph *_graph = nullptr;
+    RealTimeGraph *_realTimeGraph = nullptr;
     void configure();
 
 signals:

@@ -30,10 +30,10 @@ public:
     void setToRawFunc(std::function<double(double)> f);
     double rawValue();
 
-    RealTimeGraph *graphRealTimePlot();
+    RealTimeGraph *realTimeGraph();
 
 private:
-    RealTimeGraph *_graphRealTimePlot = nullptr;
+    RealTimeGraph *_realTimeGraph = nullptr;
 
     int _precision;
     bool _scientificNotation = false;

@@ -397,6 +397,7 @@ HEADERS += \
     lib/kb4/log/channelbool.h \
     lib/kb4/log/channeldouble.h \
     lib/kb4/log/channelqstring.h \
+    lib/kb4/log/channelrealtimegraph.h \
     lib/kb4/log/channelt.h \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
