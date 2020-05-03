@@ -1,12 +1,9 @@
 #ifndef CHANNELDOUBLE_H
 #define CHANNELDOUBLE_H
 
-#include "channelt.h"
+#include "channelrealtimegraph.h"
 
-#include <lib/kb4/ui/plots/realtime/realtimeplot.h>
-#include <lib/kb4/ui/plots/realtime/realtimegraph.h>
-
-class ChannelDouble : public ChannelT<double>
+class ChannelDouble : public ChannelRealTimeGraph<double>
 {
     Q_OBJECT
 public:
@@ -15,28 +12,13 @@ public:
     ChannelDouble(QString sharedVariableName, QObject *parent = nullptr);
     ~ChannelDouble() override;
 
-    void addGraphToPlot(RealTimePlot *plot, bool visible=true);
-    void addGraphToPlot(RealTimePlot *plot, QCPAxis *axis, bool visible=true);
-
-    bool scientificNotation();
-    void setScientificNotation(bool newValue);
-
-    int precision() const;
-    void setPrecision(int precision);
-
     void setToScaledFunc(std::function<double(double)> f);
     void setRawValue(double newValue);
 
     void setToRawFunc(std::function<double(double)> f);
     double rawValue();
 
-    RealTimeGraph *realTimeGraph();
-
 private:
-    RealTimeGraph *_realTimeGraph = nullptr;
-
-    int _precision;
-    bool _scientificNotation = false;
 
     //double (*toScaledFunc)(double) = nullptr;
     std::function<double(double)> toScaledFunc = nullptr;

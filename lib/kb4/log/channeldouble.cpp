@@ -1,63 +1,25 @@
 #include "channeldouble.h"
 
 ChannelDouble::ChannelDouble(QString name, QString postfix, QObject *parent)
-    :ChannelT<double>(name, postfix, parent)
+    :ChannelRealTimeGraph<double>(name, postfix, parent)
 {
     configure();
 }
 
 ChannelDouble::ChannelDouble(QString name, QString postfix, QStringList &path, QObject *parent)
-    :ChannelT<double>(name, postfix, path, parent)
+    :ChannelRealTimeGraph<double>(name, postfix, path, parent)
 {
     configure();
 }
 
 ChannelDouble::ChannelDouble(QString sharedVariableName, QObject *parent)
-    :ChannelT<double>(sharedVariableName, parent)
+    :ChannelRealTimeGraph<double>(sharedVariableName, parent)
 {
     configure();
 }
 
 ChannelDouble::~ChannelDouble()
 {
-
-}
-
-void ChannelDouble::addGraphToPlot(RealTimePlot *plot, bool visible)
-{
-    _realTimeGraph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
-    _realTimeGraph->setVisible(visible);
-    if (color().isValid())
-        _realTimeGraph->setColor(color());
-}
-
-void ChannelDouble::addGraphToPlot(RealTimePlot *plot, QCPAxis *axis, bool visible)
-{
-    _realTimeGraph = plot->addGraph(axis, plotName(), postfix(), precision(), scientificNotation());
-    _realTimeGraph->setVisible(visible);
-    if (color().isValid())
-        _realTimeGraph->setColor(color());
-}
-
-//AbstractGraph *ChannelDouble::addGraphToPlot(AbstractPlot *plot, bool visible)
-//{
-//    _abstractGraph = plot->addGraph(plotName(), postfix(), precision(), scientificNotation());
-//    _abstractGraph->setVisible(visible);
-//    if (color().isValid())
-//        _abstractGraph->setColor(color());
-
-//    return _abstractGraph;
-//}
-
-
-bool ChannelDouble::scientificNotation()
-{
-    return _scientificNotation;
-}
-
-void ChannelDouble::setScientificNotation(bool newValue)
-{
-    _scientificNotation = newValue;
 }
 
 
@@ -93,21 +55,6 @@ double ChannelDouble::rawValue()
     return _rawValue;
 }
 
-RealTimeGraph *ChannelDouble::realTimeGraph()
-{
-    return _realTimeGraph;
-}
-
-int ChannelDouble::precision() const
-{
-    return _precision;
-}
-
-void ChannelDouble::setPrecision(int precision)
-{
-    _precision = precision;
-}
-
 void ChannelDouble::configure()
 {
     connect(this, &Channel::valueChanged, [this]() { emit valueChangedDouble(value()); } );
@@ -119,9 +66,7 @@ void ChannelDouble::valueChangedChild()
 {
     if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
 
-    if (_realTimeGraph != nullptr) { _realTimeGraph->addData(RealTimePlot::currentDateTime(), value()); }
-
-    //if (_abstractGraph != nullptr) { _abstractGraph->addData(RealTimeQCP::currentDateTime(), value()); }
+    if (realTimeGraph() != nullptr) { realTimeGraph()->addData(RealTimePlot::currentDateTime(), this->value()); }
 }
 
 void ChannelDouble::_valueChanged()

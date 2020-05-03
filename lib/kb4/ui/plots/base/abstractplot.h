@@ -48,7 +48,6 @@ private slots:
 private:
     Ui::AbstractPlot *ui;
     void configureLegend();
-    QVector<AbstractGraph *> _graphs;
 
 protected:
     virtual void configurePlot() = 0;
@@ -56,6 +55,7 @@ protected:
 
     QCustomPlot *_qcp;
     QVBoxLayout *legendLayout;
+    QVector<AbstractGraph *> _graphs;
 
 
 };

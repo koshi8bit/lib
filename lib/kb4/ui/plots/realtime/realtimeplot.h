@@ -21,6 +21,7 @@ public:
     //Graph* addGraph(ChannelDouble *channel, bool visible = true);
     //void removeGraph(QCPGraph *graph);
     void removeGraphs();
+    void removeGraph(RealTimeGraph *graph);
 
     void setTimeAxisRange(int newRangeMSEC);
     void setTimeLabelVisible(bool newValue);

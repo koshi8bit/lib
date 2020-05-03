@@ -244,8 +244,15 @@ void RealTimePlot::removeGraphs()
     {
         g->deleteLater();
     }
-    graphs().clear();
+    _graphs.clear();
     colorSetter.resetColors();
+}
+
+void RealTimePlot::removeGraph(RealTimeGraph *graph)
+{
+    _graphs.removeOne(graph);
+    legendLayout->removeWidget(graph->legendItem());
+    graph->deleteLater();
 }
 
 

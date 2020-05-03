@@ -32,6 +32,7 @@ public:
 
     ~ChannelRealTimeGraph()
     {
+        _realTimePlot->removeGraph(realTimeGraph());
         if (realTimeGraph())
             delete realTimeGraph();
     }
@@ -75,12 +76,18 @@ public:
         return _realTimeGraph;
     }
 
+    RealTimePlot *realTimePlot()
+    {
+        return _realTimePlot;
+    }
+
 private:
     RealTimeGraph *_realTimeGraph = nullptr;
+    RealTimePlot *_realTimePlot = nullptr;
 
     int _precision;
     bool _scientificNotation = false;
-
 };
+
 
 #endif // CHANNELREALTIMEGRAPH_H
