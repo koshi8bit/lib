@@ -471,7 +471,7 @@
          <string>Print</string>
         </property>
         <property name="icon">
-         <iconset resource="lib/kb4/pic/ui-res.qrc">
+         <iconset>
           <normaloff>:/ico/ico/print.png</normaloff>:/ico/ico/print.png</iconset>
         </property>
         <property name="iconSize">
@@ -572,9 +572,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="lib/kb4/pic/ui-res.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>dialB</sender>

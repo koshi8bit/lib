@@ -2,7 +2,7 @@
 #define AXISCONFIG_H
 
 #include <QDialog>
-#include <lib/qcustomplot/qcustomplot.h>
+#include <lib/kb4/ui/qcustomplot/qcustomplot.h>
 
 //#include <lib/kb4/ui/realtimeqcp/realtimeqcp.h>
 #include <lib/kb4/easyliving.h>

@@ -14,7 +14,6 @@
 #include <lib/kb4/ui/plots/base/graphlegenditem.h>
 #include <lib/kb4/log/channeldouble.h>
 #include <lib/kb4/log/excel/timelog/timelog.h>
-#include <lib/qcustomplot/qcustomplot.h>
 #include <lib/kb4/errorhandler/errorhandler.h>
 #include <lib/kb4/qdebuglogger/qdebuglogger.h>
 #include <lib/kb4/worker/worker.h>

@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QColor>
-#include <lib/qcustomplot/qcustomplot.h>
+#include <lib/kb4/ui/qcustomplot/qcustomplot.h>
 
 #include "graphlegenditem.h"
 

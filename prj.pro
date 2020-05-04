@@ -38,7 +38,6 @@ RESOURCES += \
     lib/kb4/pic/ui-res.qrc
 
 DISTFILES += \
-    README.md \
     lib/kb4/pic/ico/016/icons8-about-16.png \
     lib/kb4/pic/ico/016/icons8-add-16-2.png \
     lib/kb4/pic/ico/016/icons8-add-16-3.png \
@@ -373,6 +372,7 @@ DISTFILES += \
     lib/kb4/pic/ui-realtimeqcp-realtime.PNG \
     lib/kb4/pic/ui-realtimeqcp.PNG \
     lib/kb4/shared-variable/tcp/netvars/example/example.7z \
+    lib/kb4/ui/qcustomplot/qcustomplot.7z \
     lib/update-kb4.bat \
     readme-pic/gradientlineedit01.png \
     readme-pic/realtimeqcp01.png \
@@ -430,10 +430,10 @@ HEADERS += \
     lib/kb4/ui/plots/realtime/realtimegraph.h \
     lib/kb4/ui/plots/realtime/realtimeplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
+    lib/kb4/ui/qcustomplot/qcustomplot.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
     lib/kb4/ui/value/double/valuedouble.h \
     lib/kb4/worker/worker.h \
-    lib/qcustomplot/qcustomplot.h \
     mainwindow.h
 
 SOURCES += \
@@ -472,9 +472,9 @@ SOURCES += \
     lib/kb4/ui/plots/realtime/realtimegraph.cpp \
     lib/kb4/ui/plots/realtime/realtimeplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
+    lib/kb4/ui/qcustomplot/qcustomplot.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \
     lib/kb4/ui/value/double/valuedouble.cpp \
     lib/kb4/worker/worker.cpp \
-    lib/qcustomplot/qcustomplot.cpp \
     main.cpp \
     mainwindow.cpp

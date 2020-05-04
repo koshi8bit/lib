@@ -2,7 +2,7 @@
 #define ABSTRACTPLOT_H
 
 #include <QWidget>
-#include <lib/qcustomplot/qcustomplot.h>
+#include <lib/kb4/ui/qcustomplot/qcustomplot.h>
 
 #include <lib/kb4/ui/printscreener/printscreener.h>
 
