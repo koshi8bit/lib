@@ -68,10 +68,3 @@ void ChannelDouble::valueChangedChild()
 
     if (realTimeGraph() != nullptr) { realTimeGraph()->addData(RealTimePlot::currentDateTime(), this->value()); }
 }
-
-void ChannelDouble::_valueChanged()
-{
-    //TODO: template fuck
-    //emit valueChangedDouble(value());
-}
-

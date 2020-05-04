@@ -75,10 +75,14 @@ public:
     static QString postfixFluence();
     static QString postfixFluenceEn();
     static QString postfixPiece();
+    static QString postfixVolume();
 
     static QString postfixSecond();
+    static QString postfixMinute();
     static QString postfixHour();
+
     static QString postfixPiecePerSecond();
+    static QString postfixVolumePerMinute();
 
     static QString postfixMilli();
     static QString postfixMilliEn();

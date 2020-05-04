@@ -234,9 +234,19 @@ QString EasyLiving::postfixPiece()
     return tr("шт");
 }
 
+QString EasyLiving::postfixVolume()
+{
+    return tr("л");
+}
+
 QString EasyLiving::postfixSecond()
 {
     return tr("сек");
+}
+
+QString EasyLiving::postfixMinute()
+{
+    return tr("мин");
 }
 
 QString EasyLiving::postfixHour()
@@ -247,6 +257,11 @@ QString EasyLiving::postfixHour()
 QString EasyLiving::postfixPiecePerSecond()
 {
     return postfixPiece() +tr("/") + postfixSecond();
+}
+
+QString EasyLiving::postfixVolumePerMinute()
+{
+    return postfixVolume() +tr("/") + postfixMinute();
 }
 
 QString EasyLiving::postfixMilli()

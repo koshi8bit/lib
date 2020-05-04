@@ -34,7 +34,6 @@ signals:
 
 protected:
     void valueChangedChild() override;
-    void _valueChanged();
 private slots:
 };
 

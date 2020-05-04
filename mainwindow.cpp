@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     if(settings->value("qDebug/saveToFile", false).toBool())
         configureQDebug();
 
+    qDebug() << EL_FORMAT_ERR("ашибка");
     configureRealTimeQcpPlot();
     configureRealTimeQcpGraphs();
     configureTimers();
