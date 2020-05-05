@@ -12,6 +12,8 @@ public:
     ChannelDouble(QString sharedVariableName, QObject *parent = nullptr);
     ~ChannelDouble() override;
 
+    void setScaling(double minValue, double maxValue, double minRaw, double maxRaw);
+
     void setToScaledFunc(std::function<double(double)> f);
     void setRawValue(double newValue);
 
@@ -26,6 +28,7 @@ private:
     double _rawValue;
     //double (*toRawFunc)(double) = nullptr;
     std::function<double(double)> toRawFunc = nullptr;
+    double minValue=0, maxValue=0, minRaw=0, maxRaw=0;
 
     void configure();
 signals:

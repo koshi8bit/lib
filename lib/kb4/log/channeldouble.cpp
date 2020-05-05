@@ -38,6 +38,26 @@ void ChannelDouble::setToScaledFunc(std::function<double(double)> f)
     toScaledFunc = f;
 }
 
+void ChannelDouble::setScaling(double minValue, double maxValue, double minRaw, double maxRaw)
+{
+    this->minValue = minValue;
+    this->maxValue = maxValue;
+    this->minRaw = minRaw;
+    this->maxRaw = maxRaw;
+
+    setToScaledFunc([this](double raw)
+    {
+        return (raw - this->minRaw) / (this->maxRaw - this->minRaw) *
+                (this->maxValue - this->minValue) + this->minValue;
+    });
+
+    setToRawFunc([this](double scaled)
+    {
+        return (scaled - this->minValue) / (this->maxValue - this->minValue) *
+                (this->maxRaw - this->minRaw) + this->minRaw;
+    });
+}
+
 void ChannelDouble::setToRawFunc(std::function<double(double)> f)
 {
     toRawFunc = f;

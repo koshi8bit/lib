@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     if(settings->value("qDebug/saveToFile", false).toBool())
         configureQDebug();
 
-    qDebug() << EL_FORMAT_ERR("ашибка");
     configureRealTimeQcpPlot();
     configureRealTimeQcpGraphs();
     configureTimers();
@@ -39,6 +38,13 @@ MainWindow::MainWindow(QWidget *parent) :
     dateTimeDeltaTests();
     pathConcatTest();
     radarPlotTest();
+
+    auto a = new ChannelDouble("a");
+    a->setScaling(-300, 300, 4, 20);
+    a->setRawValue(12);
+    qDebug() << "raw=12, must be=0, value=" <<a->value();
+    a->setValue(0);
+    qDebug() << "value=0, must be=12, raw=" <<a->rawValue();
 
 
 }
