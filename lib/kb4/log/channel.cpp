@@ -4,6 +4,11 @@ const QString Channel::seporator = "/";
 
 
 
+QString Channel::pathJoin(QStringList &path)
+{
+    return path.join(seporator);
+}
+
 Channel::Channel(QString name, QString postfix, QObject *parent)
     : Channel(name, name, postfix, parent)
 {
@@ -17,7 +22,7 @@ Channel::Channel(QString name, QString postfix, QStringList &path, QObject *pare
     //_logName = path.join(seporator);
 
     auto logName = QString("%1%2%3")
-            .arg(path.join(seporator))
+            .arg(pathJoin(path))
             .arg(seporator)
             .arg(name);
 

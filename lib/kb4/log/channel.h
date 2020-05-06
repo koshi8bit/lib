@@ -9,6 +9,7 @@ class Channel : public QObject
 {
     Q_OBJECT
 public:
+    static QString pathJoin(QStringList &path);
 
     //TODO move to dir ./channel
     explicit Channel(QString name, QString postfix, QObject *parent = nullptr);
