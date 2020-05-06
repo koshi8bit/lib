@@ -25,7 +25,7 @@ public:
     }
 
     ChannelRealTimeGraph(QString sharedVariableName, QObject *parent = nullptr)
-        :ChannelT<T>(ChannelT<T>::getName(sharedVariableName), "", parent)
+        :ChannelT<T>(sharedVariableName, parent)
     {
 
     }

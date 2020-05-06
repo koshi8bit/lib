@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -26,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     configureWorker();
 
     configureValueDouble();
+    doubleValueScaleTest();
 
     writeFileTest();
 
@@ -39,14 +39,16 @@ MainWindow::MainWindow(QWidget *parent) :
     pathConcatTest();
     radarPlotTest();
 
+}
+
+void MainWindow::doubleValueScaleTest()
+{
     auto a = new ChannelDouble("a");
-    a->setScaling(-300, 300, 4, 20);
-    a->setRawValue(12);
-    qDebug() << "raw=12, must be=0, value=" <<a->value();
-    a->setValue(0);
-    qDebug() << "value=0, must be=12, raw=" <<a->rawValue();
-
-
+    a->setScaling(0, 24, 0, 10);
+    a->setRawValue(2);
+    qDebug() << "value" <<a->value();
+    a->setValue(8);
+    qDebug() << "rawValue" <<a->rawValue();
 }
 
 void MainWindow::configureValueDouble()
@@ -58,7 +60,6 @@ void MainWindow::configureValueDouble()
     ui->valuedoubleTest_2->configure("Ток", EasyLiving::postfixMilliAmpere(), 2, false, true);
     connect(ui->valuedoubleTest_2, &ValueDouble::valueCopyedToClipboard, this, &MainWindow::valueDoubleCopyedToClipboard);
     ui->valuedoubleTest_2->setValue(8.7654);
-
 
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, ui->valuedoubleTest_2, &ValueDouble::setValue);
     connect(ui->valuedoubleTest_2, &ValueDouble::valueChanged, [](double a) { qDebug() << a; });

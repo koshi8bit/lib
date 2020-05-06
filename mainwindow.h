@@ -98,6 +98,8 @@ private:
 
     void pathConcatTest();
 
+    void doubleValueScaleTest();
+
 public slots:
     void valueDoubleCopyedToClipboard(QString newValue, QString message);
 
