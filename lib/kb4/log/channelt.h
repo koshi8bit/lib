@@ -120,10 +120,6 @@ private slots:
 
 
 protected:
-    static QString getName(QString sharedVariableName)
-    {
-        return sharedVariableName.split("/").last();
-    }
 
 private:
     T _value;
@@ -139,6 +135,11 @@ private:
         //qDebug() << "valueChanged" << logName() << newValue;
         emit valueChanged();
 //      emit valueChanged777(_value);
+    }
+
+    static QString getName(QString sharedVariableName)
+    {
+        return sharedVariableName.split("/").last();
     }
 
     void sharedVariableUpdated()
