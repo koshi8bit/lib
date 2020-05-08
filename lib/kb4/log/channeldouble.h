@@ -36,7 +36,7 @@ signals:
     //void valueChangedDouble(double newValue);
 
 protected:
-    void valueChangedChild() override;
+    void valueSetChild() override;
 private slots:
 };
 

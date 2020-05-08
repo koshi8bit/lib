@@ -82,7 +82,7 @@ void ChannelDouble::configure()
     setPrecision(3);
 }
 
-void ChannelDouble::valueChangedChild()
+void ChannelDouble::valueSetChild()
 {
     if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
 

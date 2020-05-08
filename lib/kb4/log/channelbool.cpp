@@ -23,6 +23,7 @@ ChannelBool::~ChannelBool()
 
 }
 
+
 void ChannelBool::configure()
 {
     connect(this, &Channel::valueChanged, [this]() { emit valueChangedDouble(value()); } );
@@ -30,9 +31,7 @@ void ChannelBool::configure()
     setPrecision(0);
 }
 
-void ChannelBool::valueChangedChild()
+void ChannelBool::valueSetChild()
 {
     if (realTimeGraph() != nullptr) { realTimeGraph()->addData(RealTimePlot::currentDateTime(), this->value()); }
 }
-
-

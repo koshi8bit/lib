@@ -10,8 +10,16 @@ Worker::Worker(QString name)
     thread->start();
 
     timer = new QTimer();
+    timer->setSingleShot(false);
     connect(timer, &QTimer::timeout,
             this, &Worker::timerTimeout);
+
+    timerSingleTime = new QTimer();
+    timerSingleTime->setInterval(0);
+    timerSingleTime->setSingleShot(true);
+    connect(timerSingleTime, &QTimer::timeout,
+            this, &Worker::timerTimeoutSingleTime);
+
 }
 
 Worker::~Worker()
@@ -20,14 +28,13 @@ Worker::~Worker()
     thread->terminate(); //TODO quit
 
     timer->deleteLater();
+    timerSingleTime->deleteLater();
     thread->deleteLater();
 }
 
-void Worker::start()
+void Worker::startSingleTime()
 {
-    timer->setInterval(0);
-    timer->setSingleShot(true);
-    timer->start();
+    timerSingleTime->start();
 
 //    heavyWork();
 //    emit heavyWorkFinished();
@@ -46,16 +53,24 @@ void Worker::start(int intervalMSEC)
 void Worker::stop(bool waitOnePeriod)
 {
     Q_UNUSED(waitOnePeriod)
-    qCritical() << EL_FORMAT_ERR("Not implemented yet");
+    //qCritical() << EL_FORMAT_ERR("Not implemented yet");
 
     timer->stop();
+    timerSingleTime->stop();
 }
 
 void Worker::timerTimeout()
 {
     heavyWork();
     emit heavyWorkFinished();
+
     //timer->start();
+}
+
+void Worker::timerTimeoutSingleTime()
+{
+    heavyWork();
+    emit heavyWorkSingleTimeFinished();
 }
 
 

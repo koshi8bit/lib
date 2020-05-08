@@ -21,7 +21,7 @@ private:
 
     // ChannelT interface
 protected:
-    void valueChangedChild() override;
+    void valueSetChild() override;
 
 };
 

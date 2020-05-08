@@ -25,7 +25,7 @@ void ChannelQString::valueReadByLogger()
     _isLogged = true;
 }
 
-void ChannelQString::valueChangedChild()
+void ChannelQString::valueSetChild()
 {
     _isLogged = false;
 }

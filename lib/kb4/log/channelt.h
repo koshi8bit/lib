@@ -45,7 +45,7 @@ public:
             sharedVariable->deleteLater();
     }
 
-    T value()
+    virtual T value()
     {
         return _value;
     }
@@ -130,7 +130,7 @@ private:
     void _setValue(T newValue)
     {
         _value = newValue;
-        valueChangedChild();
+        valueSetChild();
 
         //qDebug() << "valueChanged" << logName() << newValue;
         emit valueChanged();
@@ -149,10 +149,11 @@ private:
     }
 
 protected:
-    virtual void valueChangedChild()
+    virtual void valueSetChild()
     {
 
     }
+
 
 //    void valueChanged777(T newValue);
 

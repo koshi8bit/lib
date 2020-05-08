@@ -13,6 +13,8 @@ public:
     ~ChannelBool() override;
 
 private:
+
+    bool _inverted = false;
     void configure();
 
 signals:
@@ -20,8 +22,7 @@ signals:
     //void valueChangedDouble(double newValue);
 
 protected:
-    void valueChangedChild() override;
-private slots:
+    void valueSetChild() override;
 };
 
 #endif // CHANNELBOOL_H

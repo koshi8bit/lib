@@ -20,20 +20,22 @@ public:
 private:
     QThread *thread;
     QTimer *timer;
+    QTimer *timerSingleTime;
     QString name;
 
 signals:
+    void heavyWorkSingleTimeFinished();
     void heavyWorkFinished();
 
 public slots:
-    void start();
+    void startSingleTime();
     void start(int intervalMSEC);
 
     void stop(bool waitOnePeriod = true);
 
 private slots:
     void timerTimeout();
-
+    void timerTimeoutSingleTime();
 
 };
 

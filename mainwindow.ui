@@ -24,9 +24,15 @@
        <attribute name="title">
         <string>RealTimePlot</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,1,1,1,0">
-        <item row="1" column="0">
-         <widget class="RealTimePlot" name="realTimeQcpTemperature" native="true"/>
+       <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,1,1,1,0" columnstretch="1,1">
+        <item row="1" column="1">
+         <widget class="RealTimePlot" name="realTimeQcpPower" native="true"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="RealTimePlot" name="realTimeQcpVacuum" native="true"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="RealTimePlot" name="realTimeQcpBool" native="true"/>
         </item>
         <item row="0" column="0">
          <widget class="RealTimePlot" name="realTimeQcpU" native="true"/>
@@ -34,22 +40,16 @@
         <item row="3" column="1">
          <widget class="RealTimePlot" name="realTimeQcpRadiation" native="true"/>
         </item>
-        <item row="1" column="1">
-         <widget class="RealTimePlot" name="realTimeQcpPower" native="true"/>
-        </item>
-        <item row="3" column="0">
-         <widget class="RealTimePlot" name="realTimeQcpVacuum" native="true"/>
-        </item>
         <item row="0" column="1">
          <widget class="RealTimePlot" name="realTimeQcpI" native="true"/>
         </item>
-        <item row="2" column="1">
-         <widget class="RealTimePlot" name="realTimeQcpBool" native="true"/>
+        <item row="1" column="0">
+         <widget class="RealTimePlot" name="realTimeQcpTemperature" native="true"/>
         </item>
         <item row="2" column="0">
          <widget class="RealTimePlot" name="realTimeQcpPersent" native="true"/>
         </item>
-        <item row="4" column="0" colspan="2">
+        <item row="4" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1,0,0,5">
           <item>
            <widget class="QPushButton" name="pushButton_2">
@@ -471,7 +471,7 @@
          <string>Print</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="lib/kb4/pic/ui-res.qrc">
           <normaloff>:/ico/ico/print.png</normaloff>:/ico/ico/print.png</iconset>
         </property>
         <property name="iconSize">
@@ -572,7 +572,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="lib/kb4/pic/ui-res.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>dialB</sender>
