@@ -17,11 +17,14 @@ public:
     ~Worker();
     std::function<void()> heavyWork;
 
+    bool isCycleFinished() const;
+
 private:
     QThread *thread;
     QTimer *timer;
     QTimer *timerSingleTime;
     QString name;
+    bool _isCycleFinished = true;
 
 signals:
     void heavyWorkSingleTimeFinished();

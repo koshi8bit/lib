@@ -408,6 +408,7 @@ HEADERS += \
     lib/kb4/log/simple/simplelog.h \
     lib/kb4/log/sql/sql.h \
     lib/kb4/qdebuglogger/qdebuglogger.h \
+    lib/kb4/settings/settings.h \
     lib/kb4/shared-variable/tcp/netvars.h \
     lib/kb4/shared-variable/tcp/netvars/initnvclient.h \
     lib/kb4/shared-variable/tcp/netvars/initnvserver.h \
@@ -452,6 +453,7 @@ SOURCES += \
     lib/kb4/log/simple/simplelog.cpp \
     lib/kb4/log/sql/sql.cpp \
     lib/kb4/qdebuglogger/qdebuglogger.cpp \
+    lib/kb4/settings/settings.cpp \
     lib/kb4/shared-variable/tcp/netvars/initnvclient.cpp \
     lib/kb4/shared-variable/tcp/netvars/initnvserver.cpp \
     lib/kb4/shared-variable/tcp/netvars/netclient.cpp \

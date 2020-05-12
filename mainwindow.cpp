@@ -39,6 +39,15 @@ MainWindow::MainWindow(QWidget *parent) :
     pathConcatTest();
     radarPlotTest();
 
+    auto thread = new QThread();
+    timer = new QTimer();
+    timer->setInterval(0);
+    timer->setSingleShot(true);
+    timer->moveToThread(thread);
+    thread->start();
+    connect(timer, &QTimer::timeout,
+            this, &MainWindow::timerTimeout);
+
 }
 
 void MainWindow::doubleValueScaleTest()
@@ -164,18 +173,26 @@ void MainWindow::configureWorker()
 {
     w = new Worker("test");
     w->heavyWork = [this]() { this->heavyWork();};
-    w->start(1000);
+
+    //w->start(1000);
 }
 
 void MainWindow::heavyWork()
 {
-    qDebug() << "heavyWork";
+    qDebug() << QDateTime::currentDateTime().toString(EasyLiving::formatTimeUi(true)) << "heavyWork started";
+    QThread::msleep(2000);
+    qDebug() << QDateTime::currentDateTime().toString(EasyLiving::formatTimeUi(true)) << "heavyWork stopped";
 }
 
 void MainWindow::valueDoubleCopyedToClipboard(QString newValue, QString message)
 {
     Q_UNUSED(newValue)
     ui->statusBar->showMessage(message, 5000);
+}
+
+void MainWindow::timerTimeout()
+{
+    this->heavyWork();
 }
 
 void MainWindow::configureTimers()
@@ -657,4 +674,15 @@ void MainWindow::on_pushButtonDeletePlot_clicked()
     qDebug() << "under constraction..";
     delete deletingTest;
     ui->pushButtonDeletePlot->setEnabled(false);
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    w->startSingleTime();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    qDebug() << timer->isActive();
+    timer->start();
 }

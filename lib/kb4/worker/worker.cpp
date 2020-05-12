@@ -32,12 +32,20 @@ Worker::~Worker()
     thread->deleteLater();
 }
 
+bool Worker::isCycleFinished() const
+{
+    return _isCycleFinished;
+}
+
 void Worker::startSingleTime()
 {
-    timerSingleTime->start();
+    if (!isCycleFinished())
+    {
+        qWarning() << EL_FORMAT_ERR("Cycle is not finished yet. Abort.");
+        return;
+    }
 
-//    heavyWork();
-//    emit heavyWorkFinished();
+    timerSingleTime->start();
 }
 
 void Worker::start(int intervalMSEC)
@@ -69,7 +77,9 @@ void Worker::timerTimeout()
 
 void Worker::timerTimeoutSingleTime()
 {
+    _isCycleFinished = false;
     heavyWork();
+    _isCycleFinished = true;
     emit heavyWorkSingleTimeFinished();
 }
 

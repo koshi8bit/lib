@@ -1,0 +1,18 @@
+#ifndef SETTINGS_H
+#define SETTINGS_H
+
+#include <QSettings>
+
+#include <lib/kb4/easyliving.h>
+
+class Settings
+{
+private:
+    Settings();
+
+public:
+    static int iniReadInt(QSettings *settings, QString path, int defaultValue=0,
+                          bool *okFind=nullptr, bool *okParce=nullptr);
+};
+
+#endif // SETTINGS_H

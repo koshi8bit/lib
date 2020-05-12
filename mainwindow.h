@@ -43,8 +43,7 @@ private:
     int addData1MSEC = 50;
     int addData2MSEC = 1000;
 
-
-    QTimer *timerAddData1, *timerAddData2, *timerrealTimeQcpReplot;
+    QTimer *timerAddData1, *timerAddData2, *timerrealTimeQcpReplot, *timer;
 
     RealTimeGraph *graphHighVoltageElvFull, *graphHighVoltageElvFirstSection, *graphCurrentBergozHebt;
     RealTimeGraph *graphTemperaturePyrometer;
@@ -105,6 +104,7 @@ public slots:
 
     
 private slots:
+    void timerTimeout();
     void addData1();
     void addData2();
 
@@ -133,6 +133,8 @@ private slots:
     void on_pushButtonRadarCalc_clicked();
     void on_pushButtonAddPlot_clicked();
     void on_pushButtonDeletePlot_clicked();
+    void on_pushButton_7_clicked();
+    void on_pushButton_8_clicked();
 };
 
 #endif // MAINWINDOW_H
