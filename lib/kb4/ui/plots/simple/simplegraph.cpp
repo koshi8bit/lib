@@ -5,3 +5,23 @@ SimpleGraph::SimpleGraph(const QString &label, const QString &postfix, QColor co
 {
 
 }
+
+SimpleGraph::~SimpleGraph()
+{
+
+}
+
+void SimpleGraph::updateLegendItem()
+{
+
+}
+
+void SimpleGraph::abstractSetVisible()
+{
+
+}
+
+void SimpleGraph::abstractSetColor()
+{
+
+}

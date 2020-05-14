@@ -1,6 +1,7 @@
 #include "simpleplot.h"
 
 SimplePlot::SimplePlot(QWidget *parent)
+    :AbstractPlot(parent)
 {
     configurePlot();
 }

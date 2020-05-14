@@ -20,6 +20,9 @@
 #include <lib/kb4/log/simple/simplelog.h>
 #include <lib/kb4/ui/plots/radar/radartemperature4graph.h>
 
+#include <lib/kb4/ui/plots/simple/simpleplot.h>
+#include <lib/kb4/ui/plots/simple/simplegraph.h>
+
 namespace Ui {
 class MainWindow;
 }
@@ -104,7 +107,6 @@ public slots:
 
     
 private slots:
-    void timerTimeout();
     void addData1();
     void addData2();
 

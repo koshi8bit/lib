@@ -39,15 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     pathConcatTest();
     radarPlotTest();
 
-    auto thread = new QThread();
-    timer = new QTimer();
-    timer->setInterval(0);
-    timer->setSingleShot(true);
-    timer->moveToThread(thread);
-    thread->start();
-    connect(timer, &QTimer::timeout,
-            this, &MainWindow::timerTimeout);
-
+//    auto sp = new SimplePlot(this);
+//    auto sg = new SimpleGraph("", "", QColor(), nullptr, nullptr);
 }
 
 void MainWindow::doubleValueScaleTest()
@@ -188,11 +181,6 @@ void MainWindow::valueDoubleCopyedToClipboard(QString newValue, QString message)
 {
     Q_UNUSED(newValue)
     ui->statusBar->showMessage(message, 5000);
-}
-
-void MainWindow::timerTimeout()
-{
-    this->heavyWork();
 }
 
 void MainWindow::configureTimers()

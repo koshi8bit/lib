@@ -217,7 +217,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
-         <widget class="SimplePlot" name="widget_2" native="true"/>
+         <widget class="QWidget" name="widget_2" native="true"/>
         </item>
        </layout>
       </widget>
@@ -605,12 +605,6 @@
    <class>RadarTemperature4Plot</class>
    <extends>QWidget</extends>
    <header>lib/kb4/ui/plots/radar/radartemperature4plot.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>SimplePlot</class>
-   <extends>QWidget</extends>
-   <header>lib/kb4/ui/plots/simple/simpleplot.cpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

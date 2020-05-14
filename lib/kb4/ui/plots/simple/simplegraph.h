@@ -11,6 +11,12 @@ public:
                 bool scientificNotation = false);
 
     ~SimpleGraph() override;
+
+    // AbstractGraph interface
+protected:
+    void updateLegendItem() override;
+    void abstractSetVisible() override;
+    void abstractSetColor() override;
 };
 
 
