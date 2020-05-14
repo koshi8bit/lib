@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>8</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
@@ -208,6 +208,16 @@
            </widget>
           </item>
          </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_11">
+       <attribute name="title">
+        <string>Simple plot</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <widget class="SimplePlot" name="widget_2" native="true"/>
         </item>
        </layout>
       </widget>
@@ -595,6 +605,12 @@
    <class>RadarTemperature4Plot</class>
    <extends>QWidget</extends>
    <header>lib/kb4/ui/plots/radar/radartemperature4plot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SimplePlot</class>
+   <extends>QWidget</extends>
+   <header>lib/kb4/ui/plots/simple/simpleplot.cpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

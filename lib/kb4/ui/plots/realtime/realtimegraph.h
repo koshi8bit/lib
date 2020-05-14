@@ -1,14 +1,12 @@
 #ifndef REALTIMEGRAPH_H
 #define REALTIMEGRAPH_H
 
-#include <lib/kb4/ui/qcustomplot/qcustomplot.h>
-
 #include <lib/kb4/ui/plots/base/abstractgraph.h>
 
 class RealTimeGraph: public AbstractGraph
 {
 public:
-    RealTimeGraph(const QString &_label, const QString &postfix, QColor color,
+    RealTimeGraph(const QString &label, const QString &postfix, QColor color,
                   QCustomPlot *qcp, QCPAxis *yAxis, int precision = 3,
                   bool scientificNotation = false);
     ~RealTimeGraph() override;

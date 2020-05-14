@@ -421,39 +421,8 @@ void RealTimePlot::configureAxesZoomAndDrag(bool configureYAxises)
 
 }
 
-void RealTimePlot::configurePlotBackground()
-{
-    configurePlotBackgroundAxis(qcp()->xAxis);
-    configurePlotBackgroundAxis(qcp()->yAxis);
-    configurePlotBackgroundAxis(qcp()->yAxis2);
 
 
-    QLinearGradient plotGradient;
-    plotGradient.setStart(0, 0);
-    plotGradient.setFinalStop(0, 350);
-    plotGradient.setColorAt(0, QColor(80, 80, 80));
-    plotGradient.setColorAt(1, QColor(50, 50, 50));
-    qcp()->setBackground(plotGradient);
-    QLinearGradient axisRectGradient;
-    axisRectGradient.setStart(0, 0);
-    axisRectGradient.setFinalStop(0, 350);
-    axisRectGradient.setColorAt(0, QColor(60, 60, 60));
-    axisRectGradient.setColorAt(1, QColor(30, 30, 30));
-    qcp()->axisRect()->setBackground(axisRectGradient);
-}
-
-void RealTimePlot::configurePlotBackgroundAxis(QCPAxis *axis)
-{
-    axis->setLabelColor(Qt::white);
-    axis->setBasePen(QPen(Qt::white, 1));
-    axis->setSubTickPen(QPen(Qt::white, 1));
-    axis->setTickLabelColor(Qt::white);
-    axis->setTickPen(QPen(Qt::white, 1));
-    axis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
-    axis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
-    axis->grid()->setSubGridVisible(true);
-    axis->grid()->setZeroLinePen(Qt::NoPen);
-}
 
 void RealTimePlot::configurePlotTimeAxis()
 {

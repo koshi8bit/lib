@@ -87,8 +87,6 @@ private:
     //bool _cursor2CanMove = false;
 
     void _configurePlot();
-    void configurePlotBackground();
-    void configurePlotBackgroundAxis(QCPAxis *axis);
     void configurePlotTimeAxis();
     void configurePlotLine();
     void configurePlotLine(QCPItemLine **line);

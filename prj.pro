@@ -432,6 +432,8 @@ HEADERS += \
     lib/kb4/ui/plots/radar/radartemperature4plot.h \
     lib/kb4/ui/plots/realtime/realtimegraph.h \
     lib/kb4/ui/plots/realtime/realtimeplot.h \
+    lib/kb4/ui/plots/simple/simplegraph.h \
+    lib/kb4/ui/plots/simple/simpleplot.h \
     lib/kb4/ui/printscreener/printscreener.h \
     lib/kb4/ui/qcustomplot/qcustomplot.h \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.h \
@@ -475,6 +477,8 @@ SOURCES += \
     lib/kb4/ui/plots/radar/radartemperature4plot.cpp \
     lib/kb4/ui/plots/realtime/realtimegraph.cpp \
     lib/kb4/ui/plots/realtime/realtimeplot.cpp \
+    lib/kb4/ui/plots/simple/simplegraph.cpp \
+    lib/kb4/ui/plots/simple/simpleplot.cpp \
     lib/kb4/ui/printscreener/printscreener.cpp \
     lib/kb4/ui/qcustomplot/qcustomplot.cpp \
     lib/kb4/ui/scientificnotationedit/scientificnotationedit.cpp \

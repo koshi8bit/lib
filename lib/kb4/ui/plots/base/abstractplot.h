@@ -50,8 +50,12 @@ private:
     void configureLegend();
 
 protected:
-    virtual void configurePlot() = 0;
+    virtual void configurePlot();
     ColorSetter colorSetter;
+
+    void configurePlotBackground();
+    void configurePlotBackgroundAxis(QCPAxis *axis);
+
 
     QCustomPlot *_qcp;
     QVBoxLayout *legendLayout;
