@@ -24,6 +24,8 @@ public:
     QVector<AbstractGraph *> graphs();
     void addAbstractGraph(AbstractGraph *graph);
 
+    void setLegendVisible(bool visible);
+
 
 
 //#define graphCast(element, type) static_cast<type>(element)
@@ -53,12 +55,12 @@ protected:
     virtual void configurePlot();
     ColorSetter colorSetter;
 
-    void configurePlotBackground();
-    void configurePlotBackgroundAxis(QCPAxis *axis);
+    void configurePlotBackground(bool excelStyle);
+    void configurePlotBackgroundAxis(QCPAxis *axis, bool excelStyle);
 
 
     QCustomPlot *_qcp;
-    QVBoxLayout *legendLayout;
+    QVBoxLayout *_legendLayout;
     QVector<AbstractGraph *> _graphs;
 
 

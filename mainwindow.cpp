@@ -41,9 +41,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     auto sg = ui->simplePLot->addGraph("tst");
-    sg->addData(0, 3);
-    sg->addData(5, 2);
-    sg->addData(-2, 1);
+//    sg->addData(0, 3);
+//    sg->addData(5, 2);
+//    sg->addData(-2, 1);
+    sg->addData(0, 0, 0, 0);
+    sg->addData(1, 1, 0.5, 0.7);
+    sg->addData(2, 2, 1, 0.6);
+    sg->addData(3, 3, 1, 2);
 }
 
 void MainWindow::doubleValueScaleTest()

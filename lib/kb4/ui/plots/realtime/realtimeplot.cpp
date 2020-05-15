@@ -5,7 +5,7 @@ RealTimePlot::RealTimePlot(QWidget *parent)
 {
     labelTime = new QLabel(this);
     labelTime->setText(timeLabel);
-    legendLayout->insertWidget(0, labelTime);
+    _legendLayout->insertWidget(0, labelTime);
 
     configurePlot();
 }
@@ -84,7 +84,7 @@ void RealTimePlot::_configurePlot()
     //WARNING dublicate exec in setRealTime
     //configureAxesZoomAndDrag(false);
 
-    configurePlotBackground();
+    configurePlotBackground(false);
 
     configurePlotTimeAxis();
     configurePlotLine();
@@ -251,7 +251,7 @@ void RealTimePlot::removeGraphs()
 void RealTimePlot::removeGraph(RealTimeGraph *graph)
 {
     _graphs.removeOne(graph);
-    legendLayout->removeWidget(graph->legendItem());
+    _legendLayout->removeWidget(graph->legendItem());
     graph->deleteLater();
 }
 

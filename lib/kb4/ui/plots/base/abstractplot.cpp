@@ -27,7 +27,12 @@ AbstractPlot::~AbstractPlot()
 void AbstractPlot::addAbstractGraph(AbstractGraph *graph)
 {
     _graphs.append(graph);
-    legendLayout->insertWidget(legendLayout->count()-1, graph->legendItem());
+    _legendLayout->insertWidget(_legendLayout->count()-1, graph->legendItem());
+}
+
+void AbstractPlot::setLegendVisible(bool visible)
+{
+    ui->scrollAreaLegend->setVisible(visible);
 }
 
 
@@ -48,10 +53,10 @@ void AbstractPlot::on_pushButtonHelp_clicked()
 
 void AbstractPlot::configureLegend()
 {
-    legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());    
+    _legendLayout = new QVBoxLayout(ui->scrollAreaLegend->widget());
 
     auto spacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    legendLayout->addItem(spacer);
+    _legendLayout->addItem(spacer);
 }
 
 void AbstractPlot::configurePlot()
@@ -59,11 +64,11 @@ void AbstractPlot::configurePlot()
 
 }
 
-void AbstractPlot::configurePlotBackground()
+void AbstractPlot::configurePlotBackground(bool excelStyle)
 {
-    configurePlotBackgroundAxis(qcp()->xAxis);
-    configurePlotBackgroundAxis(qcp()->yAxis);
-    configurePlotBackgroundAxis(qcp()->yAxis2);
+    configurePlotBackgroundAxis(qcp()->xAxis, excelStyle);
+    configurePlotBackgroundAxis(qcp()->yAxis, excelStyle);
+    configurePlotBackgroundAxis(qcp()->yAxis2, excelStyle);
 
 
     QLinearGradient plotGradient;
@@ -80,19 +85,25 @@ void AbstractPlot::configurePlotBackground()
     qcp()->axisRect()->setBackground(axisRectGradient);
 }
 
-void AbstractPlot::configurePlotBackgroundAxis(QCPAxis *axis)
+void AbstractPlot::configurePlotBackgroundAxis(QCPAxis *axis, bool excelStyle)
 {
     axis->setLabelColor(Qt::white);
     axis->setBasePen(QPen(Qt::white, 1));
     axis->setSubTickPen(QPen(Qt::white, 1));
     axis->setTickLabelColor(Qt::white);
     axis->setTickPen(QPen(Qt::white, 1));
-    axis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
-    axis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
-    axis->grid()->setSubGridVisible(true);
+    if (excelStyle)
+    {
+        axis->grid()->setPen(QPen(QColor(80, 80, 80), 1, Qt::SolidLine));
+    }
+    else
+    {
+        axis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+        axis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+        axis->grid()->setSubGridVisible(true);
+    }
     axis->grid()->setZeroLinePen(Qt::NoPen);
 }
-
 
 QCustomPlot *AbstractPlot::qcp()
 {

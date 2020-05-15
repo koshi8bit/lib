@@ -12,10 +12,15 @@ public:
     SimpleGraph *addGraph(const QString &label, const QString &postfix = "", bool yAxis2 = false,
                          int precision = 3, bool scientificNotation = false);
 
+    void configureAxis(bool yAxis2, const QString &label, const QString &postfix = "", double min=0, double max=100, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+    void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix = "", double min=0, double max=100, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
 
     // AbstractPlot interface
 protected:
     void configurePlot() override;
+
+private:
+    void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
 };
 
 #endif // SIMPLEPLOT_H
