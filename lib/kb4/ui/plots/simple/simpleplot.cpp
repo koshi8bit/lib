@@ -19,6 +19,32 @@ SimpleGraph *SimplePlot::addGraph(const QString &label, const QString &postfix, 
     return graph;
 }
 
+ErrorYGraph *SimplePlot::addGraphErrorY(const QString &label, const QString &postfix, bool yAxis2, int precision, bool scientificNotation)
+{
+    auto graph = new ErrorYGraph(label,
+                                 postfix,
+                                 colorSetter.getColor(),
+                                 qcp(),
+                                 yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,
+                                 precision,
+                                 scientificNotation);
+    addAbstractGraph(graph);
+    return graph;
+}
+
+ErrorXYGraph *SimplePlot::addGraphErrorXY(const QString &label, const QString &postfix, bool yAxis2, int precision, bool scientificNotation)
+{
+    auto graph = new ErrorXYGraph(label,
+                                 postfix,
+                                 colorSetter.getColor(),
+                                 qcp(),
+                                 yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,
+                                 precision,
+                                 scientificNotation);
+    addAbstractGraph(graph);
+    return graph;
+}
+
 void SimplePlot::configureAxis(bool yAxis2, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
 {
     configureAxis(yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,

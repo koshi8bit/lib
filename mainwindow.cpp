@@ -40,14 +40,15 @@ MainWindow::MainWindow(QWidget *parent) :
     radarPlotTest();
 
 
-    auto sg = ui->simplePLot->addGraph("tst");
+    auto sg = ui->simplePLot->addGraphErrorXY("tst");
 //    sg->addData(0, 3);
 //    sg->addData(5, 2);
 //    sg->addData(-2, 1);
-    sg->addData(0, 0, 0, 0);
-    sg->addData(1, 1, 0.5, 0.7);
-    sg->addData(2, 2, 1, 0.6);
-    sg->addData(3, 3, 1, 2);
+//    sg->addData(0, 0, 0, 0);
+//    sg->addData(1, 1, 0.5, 0.7);
+//    sg->addData(2, 2, 1, 0.6);
+//    sg->addData(3, 3, 1, 2);
+    sg->addData(1, 1, 0.1, 0.3, 0.2, 0.4);
 }
 
 void MainWindow::doubleValueScaleTest()
@@ -172,7 +173,7 @@ void MainWindow::configureExcelLog()
 void MainWindow::configureWorker()
 {
     w = new Worker("test");
-    w->heavyWork = [this]() { this->heavyWork();};
+    w->heavyWork = [this]() { this->heavyWork(); };
 
     //w->start(1000);
 }

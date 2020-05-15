@@ -12,16 +12,16 @@ public:
 
     //~SimpleGraph() override;
     void addData(double x, double y);
-    void addData(double x, double y, double errorMin, double errorMax);
+
 
 private:
-    QCPAxis *_yAxis;
-    QCPGraph *_graph;
-    QCPErrorBars *_errorBars;
 
 
     // AbstractGraph interface
 protected:
+    QCPAxis *_yAxis;
+    QCPGraph *_graph;
+
     void updateLegendItem() override;
     void abstractSetVisible() override;
     void abstractSetColor() override;

@@ -11,7 +11,7 @@ GraphLegendItem::GraphLegendItem(const QString &label, const QString &postfix, Q
     setColor(color);
     this->precision = precision;
     ui->checkBoxVisible->setChecked(true);
-    setValue(0);
+    setLabelText(label);
     this->scientificNotation = scientificNotation;
 
 }
