@@ -39,8 +39,11 @@ MainWindow::MainWindow(QWidget *parent) :
     pathConcatTest();
     radarPlotTest();
 
-//    auto sp = new SimplePlot(this);
-//    auto sg = new SimpleGraph("", "", QColor(), nullptr, nullptr);
+
+    auto sg = ui->simplePLot->addGraph("tst");
+    sg->addData(0, 3);
+    sg->addData(5, 2);
+    sg->addData(-2, 1);
 }
 
 void MainWindow::doubleValueScaleTest()

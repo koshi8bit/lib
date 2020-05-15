@@ -10,7 +10,13 @@ public:
                 QCustomPlot *qcp, QCPAxis *yAxis, int precision = 3,
                 bool scientificNotation = false);
 
-    ~SimpleGraph() override;
+    //~SimpleGraph() override;
+    void addData(double x, double y);
+
+private:
+    QCPAxis *_yAxis;
+    QCPGraph *_graph;
+
 
     // AbstractGraph interface
 protected:
