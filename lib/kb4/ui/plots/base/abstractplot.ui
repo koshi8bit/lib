@@ -178,7 +178,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Скопировать картинку графика</string>
+        <string>Настройки</string>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
