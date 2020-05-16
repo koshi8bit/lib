@@ -40,6 +40,7 @@ RESOURCES += \
     lib/kb4/pic/ui-res.qrc
 
 DISTFILES += \
+    README.md \
     lib/kb4/pic/ico/016/icons8-about-16.png \
     lib/kb4/pic/ico/016/icons8-add-16-2.png \
     lib/kb4/pic/ico/016/icons8-add-16-3.png \
@@ -374,7 +375,8 @@ DISTFILES += \
     lib/kb4/pic/ui-realtimeqcp-realtime.PNG \
     lib/kb4/pic/ui-realtimeqcp.PNG \
     lib/kb4/shared-variable/tcp/netvars/example/example.7z \
-    lib/kb4/ui/qcustomplot/qcustomplot.7z \
+    lib/kb4/ui/plots/base/base.7z \
+    lib/kb4/ui/qcustomplot/qcustomplot-original.7z \
     lib/update-kb4.bat \
     readme-pic/gradientlineedit01.png \
     readme-pic/realtimeqcp01.png \
@@ -386,8 +388,8 @@ DISTFILES += \
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
     lib/kb4/ui/plots/base/abstractplot.ui \
-    lib/kb4/ui/plots/base/axistimeconfig.ui \
     lib/kb4/ui/plots/base/graphlegenditem.ui \
+    lib/kb4/ui/plots/realtime/axistimeconfig.ui \
     lib/kb4/ui/value/double/valuedouble.ui \
     mainwindow.ui \
     progressbar.ui
@@ -423,13 +425,13 @@ HEADERS += \
     lib/kb4/ui/label/qlabelext.h \
     lib/kb4/ui/plots/base/abstractgraph.h \
     lib/kb4/ui/plots/base/abstractplot.h \
-    lib/kb4/ui/plots/base/axistimeconfig.h \
     lib/kb4/ui/plots/base/colorsetter.h \
     lib/kb4/ui/plots/base/graphlegenditem.h \
     lib/kb4/ui/plots/radar/radargraph.h \
     lib/kb4/ui/plots/radar/radarplot.h \
     lib/kb4/ui/plots/radar/radartemperature4graph.h \
     lib/kb4/ui/plots/radar/radartemperature4plot.h \
+    lib/kb4/ui/plots/realtime/axistimeconfig.h \
     lib/kb4/ui/plots/realtime/realtimegraph.h \
     lib/kb4/ui/plots/realtime/realtimeplot.h \
     lib/kb4/ui/plots/simple/errorxygraph.h \
@@ -470,13 +472,13 @@ SOURCES += \
     lib/kb4/ui/label/qlabelext.cpp \
     lib/kb4/ui/plots/base/abstractgraph.cpp \
     lib/kb4/ui/plots/base/abstractplot.cpp \
-    lib/kb4/ui/plots/base/axistimeconfig.cpp \
     lib/kb4/ui/plots/base/colorsetter.cpp \
     lib/kb4/ui/plots/base/graphlegenditem.cpp \
     lib/kb4/ui/plots/radar/radargraph.cpp \
     lib/kb4/ui/plots/radar/radarplot.cpp \
     lib/kb4/ui/plots/radar/radartemperature4graph.cpp \
     lib/kb4/ui/plots/radar/radartemperature4plot.cpp \
+    lib/kb4/ui/plots/realtime/axistimeconfig.cpp \
     lib/kb4/ui/plots/realtime/realtimegraph.cpp \
     lib/kb4/ui/plots/realtime/realtimeplot.cpp \
     lib/kb4/ui/plots/simple/errorxygraph.cpp \
