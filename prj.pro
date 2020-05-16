@@ -386,7 +386,7 @@ DISTFILES += \
 FORMS += \
     lib/kb4/ui/gradientlineedit/minmax.ui \
     lib/kb4/ui/plots/base/abstractplot.ui \
-    lib/kb4/ui/plots/base/axisconfig.ui \
+    lib/kb4/ui/plots/base/axistimeconfig.ui \
     lib/kb4/ui/plots/base/graphlegenditem.ui \
     lib/kb4/ui/value/double/valuedouble.ui \
     mainwindow.ui \
@@ -423,7 +423,7 @@ HEADERS += \
     lib/kb4/ui/label/qlabelext.h \
     lib/kb4/ui/plots/base/abstractgraph.h \
     lib/kb4/ui/plots/base/abstractplot.h \
-    lib/kb4/ui/plots/base/axisconfig.h \
+    lib/kb4/ui/plots/base/axistimeconfig.h \
     lib/kb4/ui/plots/base/colorsetter.h \
     lib/kb4/ui/plots/base/graphlegenditem.h \
     lib/kb4/ui/plots/radar/radargraph.h \
@@ -470,7 +470,7 @@ SOURCES += \
     lib/kb4/ui/label/qlabelext.cpp \
     lib/kb4/ui/plots/base/abstractgraph.cpp \
     lib/kb4/ui/plots/base/abstractplot.cpp \
-    lib/kb4/ui/plots/base/axisconfig.cpp \
+    lib/kb4/ui/plots/base/axistimeconfig.cpp \
     lib/kb4/ui/plots/base/colorsetter.cpp \
     lib/kb4/ui/plots/base/graphlegenditem.cpp \
     lib/kb4/ui/plots/radar/radargraph.cpp \

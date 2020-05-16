@@ -11,7 +11,7 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
 
     _qcp = ui->plot;
     connect(qcp(), &QCustomPlot::axisClick, this, &AbstractPlot::axisClick);
-    connect(qcp(), &QCustomPlot::axisDoubleClick, this, &RealTimePlot::axisDoubleClick);
+    connect(qcp(), &QCustomPlot::axisDoubleClick, this, &AbstractPlot::axisDoubleClick);
 
     ui->splitter->setStretchFactor(0, 5);
     ui->splitter->setStretchFactor(1, 1);
@@ -33,6 +33,19 @@ void AbstractPlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouse
     {
         autoScaleAxis(axis);
         qcp()->replot();
+    }
+}
+
+void AbstractPlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    Q_UNUSED(part)
+    if (event->button() == Qt::MouseButton::LeftButton)
+    {
+        auto plot = static_cast<QCustomPlot *>(sender());
+//        AxisConfig ac(axis, plot->xAxis == axis, this);
+//        ac.setModal(true);
+//        ac.exec();
+        plot->replot();
     }
 }
 

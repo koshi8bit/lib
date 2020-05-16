@@ -505,7 +505,7 @@ void RealTimePlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, 
     if (event->button() == Qt::MouseButton::LeftButton)
     {
         auto plot = static_cast<QCustomPlot *>(sender());
-        AxisConfig ac(axis, plot->xAxis == axis, this);
+        AxisTimeConfig ac(axis, plot->xAxis == axis, this);
         ac.setModal(true);
         ac.exec();
         plot->replot();

@@ -2,7 +2,7 @@
 #define REALTIMEPLOT_H
 
 #include <lib/kb4/ui/plots/base/abstractplot.h>
-#include <lib/kb4/ui/plots/base/axisconfig.h>
+#include <lib/kb4/ui/plots/base/axistimeconfig.h>
 #include <lib/kb4/ui/plots/realtime/realtimegraph.h>
 
 class RealTimePlot : public AbstractPlot

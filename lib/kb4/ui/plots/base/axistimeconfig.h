@@ -1,5 +1,5 @@
-#ifndef AXISCONFIG_H
-#define AXISCONFIG_H
+#ifndef AXISTIMECONFIG_H
+#define AXISTIMECONFIG_H
 
 #include <QDialog>
 #include <lib/kb4/ui/qcustomplot/qcustomplot.h>
@@ -8,18 +8,18 @@
 #include <lib/kb4/easyliving.h>
 
 namespace Ui {
-class AxisConfig;
+class AxisTimeConfig;
 }
 
-class AxisConfig : public QDialog
+class AxisTimeConfig : public QDialog
 {
     Q_OBJECT
 
 
 
 public:
-    explicit AxisConfig(QCPAxis *axis, bool isXAxis, QWidget *parent = nullptr);
-    ~AxisConfig();
+    explicit AxisTimeConfig(QCPAxis *axis, bool isXAxis, QWidget *parent = nullptr);
+    ~AxisTimeConfig();
 
 
     enum AxisType
@@ -51,7 +51,7 @@ private slots:
 
 
 private:
-    Ui::AxisConfig *ui;
+    Ui::AxisTimeConfig *ui;
     QCPAxis *axis;
     AxisType axisType;
     const int dayToSecond = 24 * 60 * 60;
@@ -60,4 +60,4 @@ private:
 
 };
 
-#endif // AXISCONFIG_H
+#endif // AXISTIMECONFIG_H

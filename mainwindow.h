@@ -9,7 +9,7 @@
 #include <QDateTime>
 
 
-#include <lib/kb4/ui/plots/base/axisconfig.h>
+#include <lib/kb4/ui/plots/base/axistimeconfig.h>
 #include <lib/kb4/ui/plots/base/colorsetter.h>
 #include <lib/kb4/ui/plots/base/graphlegenditem.h>
 #include <lib/kb4/log/channeldouble.h>
