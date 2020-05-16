@@ -36,7 +36,7 @@ public slots:
     void startSingleTime();
     void start(int intervalMSEC);
 
-    void stop(bool waitOnePeriod = true);
+    void stop(bool forseStop = false);
 
 private slots:
     void timerTimeout();
