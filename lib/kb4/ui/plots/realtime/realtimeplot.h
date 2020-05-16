@@ -40,11 +40,8 @@ public:
 
     void configureTimerReplot(int intervalMSEC = 10);
 
-
-
-
     QCPItemLine *cursor2() const;
-    void autoScaleAxis(QCPAxis *axis);
+
 
     bool dayStyle() const;
     void setDayStyle(bool dayStyle, bool showTime = true);
@@ -127,7 +124,7 @@ private:
     bool updateStatusLabelFlag = false;
 
 private slots:
-    void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+
     void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
 
     void mouseMove(QMouseEvent *event);

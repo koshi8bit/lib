@@ -43,6 +43,9 @@ public:
     QCustomPlot *qcp();
 
 private slots:
+    void axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+    void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
+
     void on_pushButtonPrintScreen_clicked();
 
     void on_pushButtonHelp_clicked();
@@ -50,6 +53,7 @@ private slots:
 private:
     Ui::AbstractPlot *ui;
     void configureLegend();
+    void autoScaleAxis(QCPAxis *axis);
 
 protected:
     virtual void configurePlot();

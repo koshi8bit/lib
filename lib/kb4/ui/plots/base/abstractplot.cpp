@@ -10,6 +10,8 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
     configureLegend();
 
     _qcp = ui->plot;
+    connect(qcp(), &QCustomPlot::axisClick, this, &AbstractPlot::axisClick);
+    connect(qcp(), &QCustomPlot::axisDoubleClick, this, &RealTimePlot::axisDoubleClick);
 
     ui->splitter->setStretchFactor(0, 5);
     ui->splitter->setStretchFactor(1, 1);
@@ -22,6 +24,23 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
 AbstractPlot::~AbstractPlot()
 {
     delete ui;
+}
+
+void AbstractPlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    Q_UNUSED(part)
+    if (event->button() == Qt::MouseButton::RightButton)
+    {
+        autoScaleAxis(axis);
+        qcp()->replot();
+    }
+}
+
+void AbstractPlot::autoScaleAxis(QCPAxis *axis)
+{
+    axis->rescale(true);
+    auto delta = (axis->range().upper - axis->range().lower)*0.05; // 5%
+    axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
 void AbstractPlot::addAbstractGraph(AbstractGraph *graph)

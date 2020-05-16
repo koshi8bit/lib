@@ -20,7 +20,6 @@ RealTimePlot::~RealTimePlot()
 void RealTimePlot::configurePlot()
 {
 
-    connect(qcp(), &QCustomPlot::axisClick, this, &RealTimePlot::axisClick);
     connect(qcp(), &QCustomPlot::axisDoubleClick, this, &RealTimePlot::axisDoubleClick);
 
     //connect(qcp(), &QCustomPlot::mouseMove, this, &RTPlotWithLegend::mouseMove);
@@ -472,12 +471,7 @@ void RealTimePlot::updateTimeAxisLabel()
 
 }
 
-void RealTimePlot::autoScaleAxis(QCPAxis *axis)
-{
-    axis->rescale(true);
-    auto delta = (axis->range().upper - axis->range().lower)*0.05; // 5%
-    axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
-}
+
 
 void RealTimePlot::setDayStyle(bool dayStyle, bool showTime)
 {
@@ -503,20 +497,11 @@ void RealTimePlot::setDayStyle(bool dayStyle, bool showTime)
 }
 
 
-void RealTimePlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
-{
-    Q_UNUSED(axis)
-    Q_UNUSED(part)
-    if (event->button() == Qt::MouseButton::RightButton)
-    {
-        autoScaleAxis(axis);
-    }
-}
+
 
 void RealTimePlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(part)
-    Q_UNUSED(event)
     if (event->button() == Qt::MouseButton::LeftButton)
     {
         auto plot = static_cast<QCustomPlot *>(sender());
