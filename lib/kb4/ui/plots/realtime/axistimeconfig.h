@@ -18,26 +18,12 @@ class AxisTimeConfig : public QDialog
 
 
 public:
-    explicit AxisTimeConfig(QCPAxis *axis, bool isXAxis, QWidget *parent = nullptr);
+    explicit AxisTimeConfig(QCPAxis *axis, QWidget *parent = nullptr);
     ~AxisTimeConfig();
-
-
-    enum AxisType
-    {
-        NumericStandardNotation,
-        NumericScientificNotation,
-        DateTime
-    };
-    Q_ENUM(AxisType)
 
 
 private slots:
     void on_buttonBox_accepted();
-
-    void on_radioButtonAuto_toggled(bool checked);
-
-    void on_checkBoxLog10_stateChanged(int arg1);
-
 
 
     void on_spinBoxFullSec_valueChanged(int arg1);
@@ -53,7 +39,6 @@ private slots:
 private:
     Ui::AxisTimeConfig *ui;
     QCPAxis *axis;
-    AxisType axisType;
     const int dayToSecond = 24 * 60 * 60;
     //RealTimeQCP *plot;
 
