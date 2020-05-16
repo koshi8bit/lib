@@ -19,6 +19,8 @@ public:
 
     bool isCycleFinished() const;
 
+    bool isBusy() const;
+
 private:
     QThread *thread;
     QTimer *timer;

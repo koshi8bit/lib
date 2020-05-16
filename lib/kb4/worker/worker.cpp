@@ -37,6 +37,11 @@ bool Worker::isCycleFinished() const
     return _isCycleFinished;
 }
 
+bool Worker::isBusy() const
+{
+    return isCycleFinished() || timer->isActive();
+}
+
 void Worker::startSingleTime()
 {
     if (!isCycleFinished())
