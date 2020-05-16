@@ -15,7 +15,7 @@ class Log : public QObject
 {
     Q_OBJECT
 public:
-    explicit Log();
+    explicit Log(QObject *parent = nullptr);
     ~Log();
 
     void addChannel(Channel *channel);

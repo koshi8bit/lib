@@ -28,7 +28,7 @@ public:
     };
     Q_DECLARE_FLAGS(HeaderMode, HeaderModeFlag)
 
-    Excel();
+    Excel(QObject *parent = nullptr);
     ~Excel();
 
     void configure(QString path, HeaderMode headerMode);
@@ -36,9 +36,11 @@ public:
     void push() override;
     void commit() override;
 
-protected:
     static const QString elementDelimeter;
     static const QString lineDelimeter;
+
+
+protected:
     static QString formatDoubleValue(double value);
 
     HeaderMode headerMode;

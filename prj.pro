@@ -406,6 +406,7 @@ HEADERS += \
     lib/kb4/log/channelt.h \
     lib/kb4/log/excel/excel.h \
     lib/kb4/log/excel/excelfile.h \
+    lib/kb4/log/excel/excelsimple.h \
     lib/kb4/log/excel/timelog/timelog.h \
     lib/kb4/log/log.h \
     lib/kb4/log/simple/simplelog.h \
@@ -456,6 +457,7 @@ SOURCES += \
     lib/kb4/log/channelqstring.cpp \
     lib/kb4/log/excel/excel.cpp \
     lib/kb4/log/excel/excelfile.cpp \
+    lib/kb4/log/excel/excelsimple.cpp \
     lib/kb4/log/excel/timelog/timelog.cpp \
     lib/kb4/log/log.cpp \
     lib/kb4/log/simple/simplelog.cpp \
