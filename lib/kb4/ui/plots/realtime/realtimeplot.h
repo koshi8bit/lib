@@ -125,8 +125,6 @@ private:
 
 private slots:
 
-    void axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
-
     void mouseMove(QMouseEvent *event);
     void mousePress(QMouseEvent *event);
     void mouseDoubleClick(QMouseEvent *event);
@@ -137,7 +135,7 @@ private slots:
 
     // AbstractPlot interface
 protected:
-    void configurePlot() override;
+    void abstractAxisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event) override;
 };
 
 #endif // REALTIMEPLOT_H

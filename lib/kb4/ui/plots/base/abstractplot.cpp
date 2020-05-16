@@ -38,15 +38,7 @@ void AbstractPlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouse
 
 void AbstractPlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
-    Q_UNUSED(part)
-    if (event->button() == Qt::MouseButton::LeftButton)
-    {
-        auto plot = static_cast<QCustomPlot *>(sender());
-//        AxisConfig ac(axis, plot->xAxis == axis, this);
-//        ac.setModal(true);
-//        ac.exec();
-        plot->replot();
-    }
+    abstractAxisDoubleClick(axis, part, event);
 }
 
 void AbstractPlot::autoScaleAxis(QCPAxis *axis)
@@ -91,11 +83,6 @@ void AbstractPlot::configureLegend()
     _legendLayout->addItem(spacer);
 }
 
-void AbstractPlot::configurePlot()
-{
-
-}
-
 void AbstractPlot::configurePlotBackground(bool excelStyle)
 {
     configurePlotBackgroundAxis(qcp()->xAxis, excelStyle);
@@ -135,6 +122,19 @@ void AbstractPlot::configurePlotBackgroundAxis(QCPAxis *axis, bool excelStyle)
         axis->grid()->setSubGridVisible(true);
     }
     axis->grid()->setZeroLinePen(Qt::NoPen);
+}
+
+void AbstractPlot::abstractAxisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    Q_UNUSED(part)
+    if (event->button() == Qt::MouseButton::LeftButton)
+    {
+        auto plot = static_cast<QCustomPlot *>(sender());
+        AxisValueConfig ac(axis, this);
+        //ac.setModal(true);
+        ac.exec();
+        plot->replot();
+    }
 }
 
 QCustomPlot *AbstractPlot::qcp()

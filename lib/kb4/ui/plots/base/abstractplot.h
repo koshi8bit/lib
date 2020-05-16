@@ -8,6 +8,7 @@
 
 #include "abstractgraph.h"
 #include "colorsetter.h"
+#include "axisvalueconfig.h"
 
 namespace Ui {
 class AbstractPlot;
@@ -56,11 +57,12 @@ private:
     void autoScaleAxis(QCPAxis *axis);
 
 protected:
-    virtual void configurePlot();
     ColorSetter colorSetter;
 
     void configurePlotBackground(bool excelStyle);
     void configurePlotBackgroundAxis(QCPAxis *axis, bool excelStyle);
+
+    virtual void abstractAxisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event);
 
 
     QCustomPlot *_qcp;

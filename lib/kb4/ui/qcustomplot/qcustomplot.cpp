@@ -14424,8 +14424,8 @@ void QCustomPlot::deselectAll()
 */
 void QCustomPlot::replot(QCustomPlot::RefreshPriority refreshPriority)
 {
-  if (!this->isVisible())
-      return;
+//  if (!this->isVisible())
+//      return;
 
   if (refreshPriority == QCustomPlot::rpQueuedReplot)
   {

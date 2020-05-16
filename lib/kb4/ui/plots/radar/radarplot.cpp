@@ -3,12 +3,7 @@
 RadarPlot::RadarPlot(QWidget *parent)
     :AbstractPlot(parent)
 {
-    configurePlot();
-}
-
-void RadarPlot::configurePlot()
-{
-
+    qcp()->replot();
 }
 
 QPointF RadarPlot::toPolar(double r, double angle)

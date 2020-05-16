@@ -1,7 +1,7 @@
 #include "axisvalueconfig.h"
 #include "ui_axisvalueconfig.h"
 
-AxisValueConfig::AxisValueConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
+AxisValueConfig::AxisValueConfig(QCPAxis *axis, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AxisValueConfig)
 {
@@ -16,29 +16,6 @@ AxisValueConfig::AxisValueConfig(QCPAxis *axis, bool isXAxis, QWidget *parent) :
 
 
     // } TESTS
-
-
-    if (isXAxis)
-    {
-        axisType = AxisType::DateTime;
-
-        ui->groupBoxNumeric->setVisible(false);
-        ui->labelLabel->setVisible(false);
-        ui->lineEditLabel->setVisible(false);
-
-        ui->spinBoxFullSec->setValue(static_cast<int>(axis->range().upper - axis->range().lower));
-        connect(ui->spinBoxDays, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
-        connect(ui->spinBoxHours, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
-        connect(ui->spinBoxMinutes, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
-        connect(ui->spinBoxSeconds, SIGNAL(valueChanged(int)), this, SLOT(spinBoxDaysHoursMinutesSecondsValueChanged(int)));
-
-        resize(450, 110);
-
-        return;
-
-    }
-
-    ui->groupBoxTime->setVisible(false);
 
     ui->scientificNotationEditMin->setValue(axis->range().lower);
     ui->scientificNotationEditMax->setValue(axis->range().upper);
@@ -122,15 +99,6 @@ void AxisValueConfig::on_buttonBox_accepted()
 
         return;
     }
-
-
-    if (axisType == AxisType::DateTime)
-    {
-
-        axis->setRangeLower(axis->range().upper - ui->spinBoxFullSec->value());
-
-        return;
-    }
 }
 
 
@@ -166,53 +134,5 @@ void AxisValueConfig::on_checkBoxLog10_stateChanged(int arg1)
         ui->spinBoxNumberPrecision->setValue(1);
     }
 
-}
-
-
-void AxisValueConfig::on_spinBoxFullSec_valueChanged(int arg1)
-{
-    QTime t = QTime(0, 0, 0).addSecs(arg1);
-    ui->spinBoxDays->setValue(arg1 / dayToSecond);
-    ui->spinBoxHours->setValue(t.hour());
-    ui->spinBoxMinutes->setValue(t.minute());
-    ui->spinBoxSeconds->setValue(t.second());
-}
-
-void AxisValueConfig::spinBoxDaysHoursMinutesSecondsValueChanged(int arg1)
-{
-    Q_UNUSED(arg1)
-    QTime t = QTime(ui->spinBoxHours->value(),
-                    ui->spinBoxMinutes->value(),
-                    ui->spinBoxSeconds->value());
-
-    auto sec = -t.secsTo(QTime(0, 0, 0));
-    sec += ui->spinBoxDays->value() * dayToSecond;
-
-    ui->spinBoxFullSec->setValue(sec);
-}
-
-void AxisValueConfig::on_pushButtonTime010000_clicked()
-{
-    ui->spinBoxFullSec->setValue(3600);
-}
-
-void AxisValueConfig::on_pushButtonTime001000_clicked()
-{
-    ui->spinBoxFullSec->setValue(600);
-}
-
-void AxisValueConfig::on_pushButtonTime000500_clicked()
-{
-    ui->spinBoxFullSec->setValue(300);
-}
-
-void AxisValueConfig::on_pushButtonTime000100_clicked()
-{
-    ui->spinBoxFullSec->setValue(60);
-}
-
-void AxisValueConfig::on_pushButtonTime000030_clicked()
-{
-    ui->spinBoxFullSec->setValue(30);
 }
 

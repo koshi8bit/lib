@@ -20,6 +20,7 @@ RadarTemperature4Plot::RadarTemperature4Plot(QWidget *parent)
     qcp()->yAxis->setRange(-maxDiameter, maxDiameter);
 
     configureLines(maxDiameter);
+    qcp()->replot();
 }
 
 RadarTemperature4Graph *RadarTemperature4Plot::addGraph(const QString &label,

@@ -7,21 +7,6 @@ RealTimePlot::RealTimePlot(QWidget *parent)
     labelTime->setText(timeLabel);
     _legendLayout->insertWidget(0, labelTime);
 
-    configurePlot();
-}
-
-RealTimePlot::~RealTimePlot()
-{
-    //FIXME deleteLater
-    //FIXME "FTH: (8440): *** Fault tolerant heap.."
-    //delete ui;
-}
-
-void RealTimePlot::configurePlot()
-{
-
-    connect(qcp(), &QCustomPlot::axisDoubleClick, this, &RealTimePlot::axisDoubleClick);
-
     //connect(qcp(), &QCustomPlot::mouseMove, this, &RTPlotWithLegend::mouseMove);
     connect(qcp(), SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseMove(QMouseEvent*)));
     connect(qcp(), &QCustomPlot::mousePress, this, &RealTimePlot::mousePress);
@@ -36,6 +21,37 @@ void RealTimePlot::configurePlot()
     _configurePlot();
     _setCursor2Visible(false);
     updateStatusLabelFlag = true;
+    qcp()->replot();
+}
+
+RealTimePlot::~RealTimePlot()
+{
+    //FIXME deleteLater
+    //FIXME "FTH: (8440): *** Fault tolerant heap.."
+    //delete ui;
+}
+
+void RealTimePlot::abstractAxisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
+{
+    Q_UNUSED(part)
+    if (event->button() == Qt::MouseButton::LeftButton)
+    {
+        auto plot = static_cast<QCustomPlot *>(sender());
+        if (qcp()->xAxis == axis)
+        {
+            AxisTimeConfig ac(axis, this);
+            ac.setModal(true);
+            ac.exec();
+        }
+        else
+        {
+            AxisValueConfig ac(axis, this);
+            ac.setModal(true);
+            ac.exec();
+        }
+
+        plot->replot();
+    }
 }
 
 bool RealTimePlot::realTime() const
@@ -215,6 +231,8 @@ void RealTimePlot::configureAxis(QCPAxis *axis, const QString &label, const QStr
     setAxisType(axis, scaleType);
     axis->setNumberPrecision(precision);
     //axis->setLabelPadding(20);
+    qcp()->replot();
+
 
 }
 
@@ -493,23 +511,6 @@ void RealTimePlot::setDayStyle(bool dayStyle, bool showTime)
 //            g->graph()->setLineStyle(QCPGraph::lsNone);
 //            g->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 5));
         }
-    }
-}
-
-
-
-
-void RealTimePlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
-{
-    Q_UNUSED(part)
-    if (event->button() == Qt::MouseButton::LeftButton)
-    {
-        //plot->xAxis == axis
-        auto plot = static_cast<QCustomPlot *>(sender());
-        AxisTimeConfig ac(axis, this);
-        ac.setModal(true);
-        ac.exec();
-        plot->replot();
     }
 }
 

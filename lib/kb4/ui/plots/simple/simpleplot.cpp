@@ -3,7 +3,9 @@
 SimplePlot::SimplePlot(QWidget *parent)
     :AbstractPlot(parent)
 {
-    configurePlot();
+    qcp()->setInteraction(QCP::iRangeZoom, true);
+    qcp()->setInteraction(QCP::iRangeDrag, true);
+    configurePlotBackground(true);
 }
 
 SimpleGraph *SimplePlot::addGraph(const QString &label, const QString &postfix, bool yAxis2, int precision, bool scientificNotation)
@@ -70,13 +72,8 @@ void SimplePlot::configureAxis(QCPAxis *axis, const QString &label, const QStrin
     axis->setRange(min, max);
     setAxisType(axis, scaleType);
     axis->setNumberPrecision(precision);
-}
+    qcp()->replot();
 
-void SimplePlot::configurePlot()
-{
-    qcp()->setInteraction(QCP::iRangeZoom, true);
-    qcp()->setInteraction(QCP::iRangeDrag, true);
-    configurePlotBackground(true);
 }
 
 void SimplePlot::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
