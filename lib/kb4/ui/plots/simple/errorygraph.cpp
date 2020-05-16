@@ -23,7 +23,7 @@ void ErrorYGraph::addData(double x, double y, double errorBottom, double errorTo
     errorsYBottom.append(errorBottom);
 
     _graph->setData(valuesX, valuesY, true);
-    errorBarsY->setData(errorsYTop, errorsYBottom);
+    errorBarsY->setData(errorsYBottom, errorsYTop);
 
 }
 
