@@ -55,6 +55,8 @@ private slots:
 
     void on_pushButtonPrintScreenCopy_clicked();
 
+    void on_pushButtonPrintScreenPaint_clicked();
+
 private:
     Ui::AbstractPlot *ui;
     void configureLegend();

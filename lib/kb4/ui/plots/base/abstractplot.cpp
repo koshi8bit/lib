@@ -55,6 +55,7 @@ void AbstractPlot::setButtonsVisible(bool visible, bool options)
     ui->pushButtonHelp->setVisible(visible);
     ui->pushButtonPrintScreen->setVisible(visible);
     ui->pushButtonPrintScreenCopy->setVisible(visible);
+    ui->pushButtonPrintScreenPaint->setVisible(visible);
 
     if (options)
         ui->pushButtonOptions->setVisible(visible);
@@ -166,4 +167,23 @@ void AbstractPlot::on_pushButtonPrintScreenCopy_clicked()
     setButtonsVisible(false, true);
     PrintScreener::copy(this);
     setButtonsVisible(true, true);
+    ui->pushButtonOptions->setChecked(false);
+}
+
+void AbstractPlot::on_pushButtonPrintScreenPaint_clicked()
+{
+    setButtonsVisible(false, true);
+    auto path = PrintScreener::save(this, "", true);
+    setButtonsVisible(true, true);
+    ui->pushButtonOptions->setChecked(false);
+
+    if (path.isEmpty())
+        return;
+
+    //QThread::msleep(100);
+
+    QProcess process;
+    process.setProgram("mspaint.exe");
+    process.setArguments( { path.replace("/", "\\") } );
+    process.startDetached();
 }

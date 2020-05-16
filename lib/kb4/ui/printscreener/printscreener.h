@@ -17,7 +17,7 @@ class PrintScreener
 {
 public:
     PrintScreener();
-    static bool save(QWidget *widget, QString defaultFileName = "");
+    static QString save(QWidget *widget, QString defaultFileName = "", bool autosave = false);
     static void copy(QWidget *widget);
 };
 

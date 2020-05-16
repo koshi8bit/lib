@@ -43,7 +43,7 @@
        <property name="geometry">
         <rect>
          <x>3</x>
-         <y>29</y>
+         <y>30</y>
          <width>25</width>
          <height>25</height>
         </rect>
@@ -84,7 +84,7 @@
        <property name="geometry">
         <rect>
          <x>3</x>
-         <y>79</y>
+         <y>80</y>
          <width>25</width>
          <height>25</height>
         </rect>
@@ -125,7 +125,7 @@
        <property name="geometry">
         <rect>
          <x>3</x>
-         <y>54</y>
+         <y>55</y>
          <width>25</width>
          <height>25</height>
         </rect>
@@ -160,7 +160,7 @@
        <property name="geometry">
         <rect>
          <x>3</x>
-         <y>4</y>
+         <y>5</y>
          <width>25</width>
          <height>25</height>
         </rect>
@@ -198,6 +198,47 @@
        </property>
        <property name="checkable">
         <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonPrintScreenPaint">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>105</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Сохранить и открыть в &quot;Paint&quot;</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ui/paint.png</normaloff>:/ui/paint.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
        </property>
       </widget>
      </widget>

@@ -5,6 +5,7 @@
         <file>ui-realtimeqcp-cursor01.PNG</file>
         <file>ui-realtimeqcp-cursor0102.PNG</file>
         <file>ui-realtimeqcp-mouse-area.PNG</file>
+        <file>paint.png</file>
     </qresource>
     <qresource prefix="/ico">
         <file>ico/about.png</file>
@@ -52,5 +53,6 @@
         <file>ico/window-settings.png</file>
         <file>ico/gears.png</file>
         <file>ico/gears-white.png</file>
+        <file>ico/gears2.png</file>
     </qresource>
 </RCC>
