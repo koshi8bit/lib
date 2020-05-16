@@ -17,7 +17,7 @@ public:
     ~Worker();
     std::function<void()> heavyWork;
 
-    bool isCycleFinished() const;
+    bool isCycleBusy() const;
 
     bool isBusy() const;
 
@@ -26,7 +26,7 @@ private:
     QTimer *timer;
     QTimer *timerSingleTime;
     QString name;
-    bool _isCycleFinished = true;
+    bool _isCycleBusy = false;
 
 signals:
     void heavyWorkSingleTimeFinished();

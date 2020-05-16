@@ -32,19 +32,19 @@ Worker::~Worker()
     thread->deleteLater();
 }
 
-bool Worker::isCycleFinished() const
+bool Worker::isCycleBusy() const
 {
-    return _isCycleFinished;
+    return _isCycleBusy;
 }
 
 bool Worker::isBusy() const
 {
-    return isCycleFinished() || timer->isActive();
+    return isCycleBusy() || timer->isActive();
 }
 
 void Worker::startSingleTime()
 {
-    if (!isCycleFinished())
+    if (isCycleBusy())
     {
         qWarning() << EL_FORMAT_ERR("Cycle is not finished yet. Abort.");
         return;
@@ -77,9 +77,9 @@ void Worker::timerTimeout()
 //    if (!isCycleFinished())
 //        return;
 
-    _isCycleFinished = false;
+    _isCycleBusy = true;
     heavyWork();
-    _isCycleFinished = true;
+    _isCycleBusy = false;
     emit heavyWorkFinished();
 
     //timer->start();
@@ -87,9 +87,9 @@ void Worker::timerTimeout()
 
 void Worker::timerTimeoutSingleTime()
 {
-    _isCycleFinished = false;
+    _isCycleBusy = true;
     heavyWork();
-    _isCycleFinished = true;
+    _isCycleBusy = false;
     emit heavyWorkSingleTimeFinished();
 }
 
