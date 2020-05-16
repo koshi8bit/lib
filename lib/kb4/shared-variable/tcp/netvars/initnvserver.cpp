@@ -59,6 +59,7 @@ void InitNVServer::askAll(QString varName)
 void InitNVServer::saveNewClient()
 {
     QTcpSocket *clientSocket = tcpserver->nextPendingConnection();
+
     nvDebug << "New client" << clientSocket->peerAddress().toString() << clientSocket->peerPort();
     NetClient *newClient = new NetClient(lastId,clientSocket);
     lastId++;

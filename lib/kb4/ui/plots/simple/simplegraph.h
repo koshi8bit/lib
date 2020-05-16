@@ -12,6 +12,7 @@ public:
 
     //~SimpleGraph() override;
     void addData(double x, double y);
+    int count() const;
 
 
 private:

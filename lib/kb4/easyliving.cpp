@@ -337,6 +337,7 @@ bool EasyLiving::createDir(QString path)
 bool EasyLiving::writeFile(QString path, QString text, bool append)
 {
     QFile file(path);
+
     QIODevice::OpenMode flags = QIODevice::WriteOnly;
     if (append) {
         flags |= QIODevice::Append;

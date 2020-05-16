@@ -132,7 +132,11 @@ void InitNVClient::getError(QAbstractSocket::SocketError socketError)
              nvDebug << "The connection was refused by the peer.";
              break;
          default:
-             nvDebug << "wait oh shee";
+            #ifdef K8B_LIB_SHARED_VARIABLE_ENABLE_NVDEBUG
+            nvDebug << "wait oh shee";
+            #endif
+            ;
+
     }
     nvDebug << tcpclient->errorString();
     emit disConnected();

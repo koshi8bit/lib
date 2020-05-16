@@ -20,7 +20,7 @@ void ExcelSimple::addLine(QList<double> list)
 
     foreach (auto element, list)
     {
-        l.append(EasyLiving::formatDouble(element));
+        l.append(EasyLiving::formatDouble(element, 3, true, EasyLiving::Comma, false));
     }
 
     addLine(l);

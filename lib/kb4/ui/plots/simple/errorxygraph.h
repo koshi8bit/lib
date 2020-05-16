@@ -11,6 +11,7 @@ public:
                  bool scientificNotation = false);
 
     void addData(double x, double y, double errorBottom, double errorTop, double errorLeft, double errorRight);
+    QList<double> value(int index);
 
 protected:
     QCPErrorBars *_errorBarsX;

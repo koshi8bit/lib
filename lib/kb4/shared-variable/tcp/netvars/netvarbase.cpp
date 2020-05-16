@@ -52,7 +52,9 @@ void NetVarBase::ask()
         if(InitNVClient::tcpclient->state() == QAbstractSocket::ConnectedState){
             InitNVClient::ask(name);
         }else{
+            #ifdef K8B_LIB_SHARED_VARIABLE_ENABLE_NVDEBUG
             nvDebug << "Could not ask. Client socket is not connected";
+            #endif
         }
         return;
     }
@@ -68,7 +70,9 @@ void NetVarBase::send()
         if(InitNVClient::tcpclient->state() == QAbstractSocket::ConnectedState){
             InitNVClient::sendValue(name,_value);
         }else{
+            #ifdef K8B_LIB_SHARED_VARIABLE_ENABLE_NVDEBUG
             nvDebug << "Could not send. Client socket is not connected";
+            #endif
         }
     }else{
         //TODO:

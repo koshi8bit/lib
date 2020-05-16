@@ -48,8 +48,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //    sg->addData(1, 1, 0.5, 0.7);
 //    sg->addData(2, 2, 1, 0.6);
 //    sg->addData(3, 3, 1, 2);
+    sg->addData(2, 2, 0.5, 0.7, 0.6, 0.8);
     sg->addData(1, 1, 0.1, 0.3, 0.2, 0.4);
-    sg->addData(2, 2, 0.5, 0.1, 0.3, 1);
+
 }
 
 void MainWindow::doubleValueScaleTest()
