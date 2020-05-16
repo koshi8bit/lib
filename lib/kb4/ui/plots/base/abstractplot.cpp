@@ -19,6 +19,8 @@ AbstractPlot::AbstractPlot(QWidget *parent) :
     ui->splitter->widget(1)->setMinimumWidth(200);
     ui->splitter->widget(1)->setMaximumWidth(200);
 
+    setButtonsVisible(false, false);
+
 }
 
 AbstractPlot::~AbstractPlot()
@@ -48,6 +50,16 @@ void AbstractPlot::autoScaleAxis(QCPAxis *axis)
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);
 }
 
+void AbstractPlot::setButtonsVisible(bool visible, bool options)
+{
+    ui->pushButtonHelp->setVisible(visible);
+    ui->pushButtonPrintScreen->setVisible(visible);
+    ui->pushButtonPrintScreenCopy->setVisible(visible);
+
+    if (options)
+        ui->pushButtonOptions->setVisible(visible);
+}
+
 void AbstractPlot::addAbstractGraph(AbstractGraph *graph)
 {
     _graphs.append(graph);
@@ -67,7 +79,9 @@ QVector<AbstractGraph *> AbstractPlot::graphs()
 
 void AbstractPlot::on_pushButtonPrintScreen_clicked()
 {
+    setButtonsVisible(false, true);
     PrintScreener::save(this);
+    setButtonsVisible(true, true);
 }
 
 void AbstractPlot::on_pushButtonHelp_clicked()
@@ -140,4 +154,16 @@ void AbstractPlot::abstractAxisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePar
 QCustomPlot *AbstractPlot::qcp()
 {
     return _qcp;
+}
+
+void AbstractPlot::on_pushButtonOptions_toggled(bool checked)
+{
+    setButtonsVisible(checked, false);
+}
+
+void AbstractPlot::on_pushButtonPrintScreenCopy_clicked()
+{
+    setButtonsVisible(false, true);
+    PrintScreener::copy(this);
+    setButtonsVisible(true, true);
 }

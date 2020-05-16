@@ -31,3 +31,9 @@ bool PrintScreener::save(QWidget *widget, QString fileName)
     return result;
 
 }
+
+void PrintScreener::copy(QWidget *widget)
+{
+    auto pic = widget->grab();
+    QApplication::clipboard()->setPixmap(pic);
+}

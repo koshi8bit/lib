@@ -42,8 +42,8 @@
       <widget class="QPushButton" name="pushButtonHelp">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
+         <x>3</x>
+         <y>29</y>
          <width>25</width>
          <height>25</height>
         </rect>
@@ -71,7 +71,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../pic/ui-res.qrc">
-         <normaloff>:/ico/ico/032/icons8-ask-question-32.png</normaloff>:/ico/ico/032/icons8-ask-question-32.png</iconset>
+         <normaloff>:/ico/ico/ask-question.png</normaloff>:/ico/ico/ask-question.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -80,14 +80,20 @@
         </size>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButtonPrintScreen">
+      <widget class="QPushButton" name="pushButtonPrintScreenCopy">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>25</y>
+         <x>3</x>
+         <y>79</y>
          <width>25</width>
          <height>25</height>
         </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
@@ -96,7 +102,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Сделать скриншот</string>
+        <string>Копировать скриншот в буфер обмена</string>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
@@ -113,6 +119,85 @@
          <width>25</width>
          <height>25</height>
         </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonPrintScreen">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>54</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Сделать скриншот</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ico/ico/camera.png</normaloff>:/ico/ico/camera.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonOptions">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>4</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Скопировать картинку графика</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ico/ico/gears-white.png</normaloff>:/ico/ico/gears-white.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>

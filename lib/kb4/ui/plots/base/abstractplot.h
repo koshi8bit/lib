@@ -51,10 +51,16 @@ private slots:
 
     void on_pushButtonHelp_clicked();
 
+    void on_pushButtonOptions_toggled(bool checked);
+
+    void on_pushButtonPrintScreenCopy_clicked();
+
 private:
     Ui::AbstractPlot *ui;
     void configureLegend();
     void autoScaleAxis(QCPAxis *axis);
+
+    void setButtonsVisible(bool visible, bool options);
 
 protected:
     ColorSetter colorSetter;
