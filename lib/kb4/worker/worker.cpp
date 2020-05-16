@@ -74,7 +74,12 @@ void Worker::stop(bool waitOnePeriod)
 
 void Worker::timerTimeout()
 {
+//    if (!isCycleFinished())
+//        return;
+
+    _isCycleFinished = false;
     heavyWork();
+    _isCycleFinished = true;
     emit heavyWorkFinished();
 
     //timer->start();
