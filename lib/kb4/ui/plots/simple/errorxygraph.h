@@ -14,7 +14,8 @@ public:
     QList<double> value(int index);
 
 protected:
-    QCPErrorBars *_errorBarsX;
+    QCPErrorBars *errorBarsX;
+    QVector<double> errorsXLeft, errorsXRight;
 
     // AbstractGraph interface
 protected:

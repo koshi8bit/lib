@@ -41,15 +41,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     auto sg = ui->simplePLot->addGraphErrorXY("tst");
-//    sg->addData(0, 3);
-//    sg->addData(5, 2);
-//    sg->addData(-2, 1);
-//    sg->addData(0, 0, 0, 0);
-//    sg->addData(1, 1, 0.5, 0.7);
-//    sg->addData(2, 2, 1, 0.6);
-//    sg->addData(3, 3, 1, 2);
-    sg->addData(2, 2, 0.5, 0.7, 0.6, 0.8);
-    sg->addData(1, 1, 0.1, 0.3, 0.2, 0.4);
+    qDebug() << "started test";
+    sg->addData(2, 2, 0.2, 0.2, 0.2, 0.2);
+    sg->addData(1, 1, 0.1, 0.1, 0.1, 0.1);
+    sg->addData(3, 3, 0.3, 0.3, 0.3, 0.3);
+    //sg->addData(0, 0, 0.5, 0.5, 0.6, 0.6);
+
+
+//    auto sg = ui->simplePLot->addGraph("tst");
+//    qDebug() << "started test";
+//    sg->addData(2, 2);
+//    sg->addData(1, 1);
+//    sg->addData(5, 5);
+//    sg->addData(4, 4);
+//    sg->addData(3, 3);
+
 
 }
 

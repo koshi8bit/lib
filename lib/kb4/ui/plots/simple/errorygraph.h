@@ -17,7 +17,9 @@ private:
 
     // AbstractGraph interface
 protected:
-    QCPErrorBars *_errorBarsY;
+    QCPErrorBars *errorBarsY;
+    QVector<double> valuesX, valuesY, errorsYTop, errorsYBottom;
+
 
     void updateLegendItem() override;
     void abstractSetVisible() override;

@@ -27396,6 +27396,12 @@ void QCPErrorBars::addData(double errorMinus, double errorPlus)
   mDataContainer->append(QCPErrorBarsData(errorMinus, errorPlus));
 }
 
+void QCPErrorBars::insertData(int index, double errorMinus, double errorPlus)
+{
+  mDataContainer->insert(index, QCPErrorBarsData(errorMinus, errorPlus));
+}
+
+
 /* inherits documentation from base class */
 int QCPErrorBars::dataCount() const
 {
@@ -30217,5 +30223,4 @@ QPen QCPItemBracket::mainPen() const
     return mSelected ? mSelectedPen : mPen;
 }
 /* end of 'src/items/item-bracket.cpp' */
-
 

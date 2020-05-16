@@ -27,6 +27,7 @@
 #define QCUSTOMPLOT_H
 
 #include <QtCore/qglobal.h>
+#include <lib/kb4/easyliving.h>
 
 
 // some Qt version/configuration dependent macros to include or exclude certain code paths:
@@ -2422,6 +2423,9 @@ public:
   int size() const { return mData.size()-mPreallocSize; }
   bool isEmpty() const { return size() == 0; }
   bool autoSqueeze() const { return mAutoSqueeze; }
+
+  QVector<DataType> data() const { return mData; }
+
   
   // setters:
   void setAutoSqueeze(bool enabled);
@@ -2451,7 +2455,8 @@ public:
   QCPRange valueRange(bool &foundRange, QCP::SignDomain signDomain=QCP::sdBoth, const QCPRange &inKeyRange=QCPRange());
   QCPDataRange dataRange() const { return QCPDataRange(0, size()); }
   void limitIteratorsToDataRange(const_iterator &begin, const_iterator &end, const QCPDataRange &dataRange) const;
-  
+   
+
 protected:
   // property members:
   bool mAutoSqueeze;
@@ -5146,8 +5151,18 @@ public:
   inline QCPRange valueRange() const { return QCPRange(value, value); }
   
   double key, value;
+
+  bool operator==(const QCPGraphData& other) const
+  { return EasyLiving::isEqualDouble(key, other.key) && EasyLiving::isEqualDouble(value, other.value); }
+
 };
 Q_DECLARE_TYPEINFO(QCPGraphData, Q_PRIMITIVE_TYPE);
+
+inline QDebug operator<< (QDebug d, const QCPGraphData &data)
+{
+    d.nospace() << "QCPGraphData(" << data.key << ", " << data.value << ")";
+    return d.nospace();
+}
 
 
 /*! \typedef QCPGraphDataContainer
@@ -6039,6 +6054,7 @@ public:
   void addData(const QVector<double> &errorMinus, const QVector<double> &errorPlus);
   void addData(double error);
   void addData(double errorMinus, double errorPlus);
+  void insertData(int index, double errorMinus, double errorPlus);
   
   // virtual methods of 1d plottable interface:
   virtual int dataCount() const Q_DECL_OVERRIDE;
