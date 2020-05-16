@@ -18,13 +18,18 @@ ErrorYGraph::ErrorYGraph(const QString &label, const QString &postfix, QColor co
 void ErrorYGraph::addData(double x, double y, double errorBottom, double errorTop)
 {
     valuesX.append(x);
-    valuesY.append(x);
+    valuesY.append(y);
     errorsYTop.append(errorTop);
     errorsYBottom.append(errorBottom);
 
     _graph->setData(valuesX, valuesY, true);
     errorBarsY->setData(errorsYBottom, errorsYTop);
 
+}
+
+int ErrorYGraph::count() const
+{
+    return valuesX.count();
 }
 
 void ErrorYGraph::updateLegendItem()

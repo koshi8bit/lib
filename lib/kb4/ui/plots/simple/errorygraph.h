@@ -11,6 +11,7 @@ public:
                  bool scientificNotation = false);
     void addData(double x, double y, double errorBottom, double errorTop);
 
+    int count() const;
 
 private:
 

@@ -31,11 +31,6 @@ void SimpleGraph::addData(double x, double y)
         _graph->addData(x, y);
 }
 
-int SimpleGraph::count() const
-{
-    return _graph->dataCount();
-}
-
 void SimpleGraph::updateLegendItem()
 {
 }
