@@ -66,7 +66,7 @@ void SimplePlot::configureAxis(QCPAxis *axis, const QString &label, const QStrin
     }
     else
     {
-        axis->setLabel(QString("%1 (%2)").arg(label).arg(postfix));
+        axis->setLabel(QString("%1 [%2]").arg(label).arg(postfix));
     }
     axis->setVisible(true);
     axis->setRange(min, max);
