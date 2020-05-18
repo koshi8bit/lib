@@ -215,27 +215,6 @@ QDateTime RealTimePlot::keyToDateTime(double key)
     return QDateTime::fromTime_t(static_cast<uint>(key));
 }
 
-
-void RealTimePlot::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
-{
-    if (postfix.isEmpty())
-    {
-        axis->setLabel(label);
-    }
-    else
-    {
-        axis->setLabel(QString("%1 [%2]").arg(label).arg(postfix));
-    }
-    axis->setVisible(true);
-    axis->setRange(min, max);
-    setAxisType(axis, scaleType);
-    axis->setNumberPrecision(precision);
-    //axis->setLabelPadding(20);
-    qcp()->replot();
-
-
-}
-
 RealTimeGraph *RealTimePlot::addGraph(const QString &label, const QString &postfix, int precision, bool scientificNotation)
 {
     return addGraph(qcp()->yAxis, label, postfix, precision, scientificNotation);
@@ -273,26 +252,7 @@ void RealTimePlot::removeGraph(RealTimeGraph *graph)
 }
 
 
-void RealTimePlot::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
-{
-    if (scaleType == QCPAxis::ScaleType::stLinear)
-    {
-        axis->setScaleType(QCPAxis::stLinear);
-        QSharedPointer<QCPAxisTicker> ticker(new QCPAxisTicker);
-        axis->setTicker(ticker);
-        axis->setNumberFormat("f");
-        axis->setNumberPrecision(1);
-    }
 
-    if (scaleType == QCPAxis::ScaleType::stLogarithmic)
-    {
-        axis->setScaleType(QCPAxis::stLogarithmic);
-        QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
-        axis->setTicker(logTicker);
-        axis->setNumberFormat("eb");
-        axis->setNumberPrecision(0);
-    }
-}
 
 void RealTimePlot::_setCursor2Visible(bool newValue)
 {

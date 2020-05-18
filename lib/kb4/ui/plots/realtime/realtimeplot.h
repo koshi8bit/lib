@@ -15,7 +15,6 @@ public:
     static double dateTimeToKey(QDateTime dt);
     static QDateTime keyToDateTime(double key);
 
-    void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix = "", double min=0, double max=100, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
     RealTimeGraph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     RealTimeGraph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     //Graph* addGraph(ChannelDouble *channel, bool visible = true);
@@ -104,8 +103,6 @@ private:
     bool isInAxisRect(QPoint pos);
 
     double timeAxisOldRange;
-
-    void setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType);
 
     void _setCursor2Visible(bool newValue);
     void _setCursor2Key(double key);

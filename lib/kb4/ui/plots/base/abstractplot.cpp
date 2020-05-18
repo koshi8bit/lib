@@ -190,3 +190,56 @@ void AbstractPlot::on_pushButtonHelp_clicked()
     ui->pushButtonOptions->setChecked(false);
     QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
 }
+
+
+void AbstractPlot::configureAxis(bool yAxis2, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
+{
+    configureAxis(yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,
+                  label,
+                  postfix,
+                  min,
+                  max,
+                  precision,
+                  scaleType);
+}
+
+void AbstractPlot::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
+{
+    if (postfix.isEmpty())
+    {
+        axis->setLabel(label);
+    }
+    else
+    {
+        axis->setLabel(QString("%1 [%2]").arg(label).arg(postfix));
+    }
+    axis->setVisible(true);
+    axis->setRange(min, max);
+    setAxisType(axis, scaleType);
+    axis->setNumberPrecision(precision);
+    //axis->setLabelPadding(20);
+    qcp()->replot();
+
+}
+
+void AbstractPlot::setAxisType(QCPAxis *axis, QCPAxis::ScaleType scaleType)
+{
+    //TODO DRY see AxisValueConfig, may be make static method from there
+    if (scaleType == QCPAxis::ScaleType::stLinear)
+    {
+        axis->setScaleType(QCPAxis::stLinear);
+        QSharedPointer<QCPAxisTicker> ticker(new QCPAxisTicker);
+        axis->setTicker(ticker);
+        axis->setNumberFormat("f");
+        axis->setNumberPrecision(1);
+    }
+
+    if (scaleType == QCPAxis::ScaleType::stLogarithmic)
+    {
+        axis->setScaleType(QCPAxis::stLogarithmic);
+        QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
+        axis->setTicker(logTicker);
+        axis->setNumberFormat("eb");
+        axis->setNumberPrecision(0);
+    }
+}
