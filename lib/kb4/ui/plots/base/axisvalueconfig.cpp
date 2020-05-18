@@ -45,7 +45,7 @@ AxisValueConfig::AxisValueConfig(QCPAxis *axis, QWidget *parent) :
 
     }
     ui->spinBoxNumberPrecision->setValue(axis->numberPrecision());
-    resize(300, 200);
+    //resize(300, 200);
 
 }
 
