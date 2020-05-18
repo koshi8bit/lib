@@ -14,6 +14,7 @@
         <file>ico/custom/gears.png</file>
         <file>ico/custom/gears2.png</file>
         <file>ico/custom/gears-white.png</file>
+        <file>ico/custom/ask-question_002.png</file>
     </qresource>
     <qresource prefix="/ico/web">
         <file>ico/web/about.png</file>
@@ -132,8 +133,6 @@
         <file>ico/web/translation.png</file>
         <file>ico/web/unlock.png</file>
         <file>ico/web/upload.png</file>
-        <file>ico/web/user-female.png</file>
-        <file>ico/web/user-male.png</file>
         <file>ico/web/visible.png</file>
         <file>ico/web/visible_002.png</file>
         <file>ico/web/xi.png</file>

@@ -8,8 +8,7 @@ ExcelSimple::ExcelSimple(QString filename, QObject *parent)
 
 void ExcelSimple::addLine(QStringList list)
 {
-    auto line = list.join(Excel::elementDelimeter)
-            .append(Excel::lineDelimeter);
+    auto line = list.join(Excel::elementDelimeter);
 
     addLine(line);
 }
@@ -28,5 +27,6 @@ void ExcelSimple::addLine(QList<double> list)
 
 void ExcelSimple::addLine(QString line)
 {
+    line = line.append(Excel::lineDelimeter);
     EasyLiving::writeFile(filename, line, true);
 }

@@ -71,7 +71,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../pic/ui-res.qrc">
-         <normaloff>:/ico/web/ico/web/sos_002.png</normaloff>:/ico/web/ico/web/sos_002.png</iconset>
+         <normaloff>:/ico-custom/ico/custom/ask-question_002.png</normaloff>:/ico-custom/ico/custom/ask-question_002.png</iconset>
        </property>
        <property name="iconSize">
         <size>
