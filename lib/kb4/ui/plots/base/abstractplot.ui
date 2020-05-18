@@ -71,7 +71,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../pic/ui-res.qrc">
-         <normaloff>:/ico/ico/ask-question.png</normaloff>:/ico/ico/ask-question.png</iconset>
+         <normaloff>:/ico/web/ico/web/sos_002.png</normaloff>:/ico/web/ico/web/sos_002.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -112,7 +112,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../pic/ui-res.qrc">
-         <normaloff>:/ico/ico/screenshot.png</normaloff>:/ico/ico/screenshot.png</iconset>
+         <normaloff>:/ico/web/ico/web/screenshot_002.png</normaloff>:/ico/web/ico/web/screenshot_002.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -147,7 +147,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../pic/ui-res.qrc">
-         <normaloff>:/ico/ico/camera.png</normaloff>:/ico/ico/camera.png</iconset>
+         <normaloff>:/ico/web/ico/web/camera.png</normaloff>:/ico/web/ico/web/camera.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -188,7 +188,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../pic/ui-res.qrc">
-         <normaloff>:/ico/ico/gears-white.png</normaloff>:/ico/ico/gears-white.png</iconset>
+         <normaloff>:/ico-custom/ico/custom/gears-white.png</normaloff>:/ico-custom/ico/custom/gears-white.png</iconset>
        </property>
        <property name="iconSize">
         <size>
