@@ -78,17 +78,7 @@ QVector<AbstractGraph *> AbstractPlot::graphs()
     return _graphs;
 }
 
-void AbstractPlot::on_pushButtonPrintScreen_clicked()
-{
-    setButtonsVisible(false, true);
-    PrintScreener::save(this);
-    setButtonsVisible(true, true);
-}
 
-void AbstractPlot::on_pushButtonHelp_clicked()
-{
-    QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
-}
 
 void AbstractPlot::configureLegend()
 {
@@ -166,21 +156,37 @@ void AbstractPlot::on_pushButtonPrintScreenCopy_clicked()
 {
     setButtonsVisible(false, true);
     PrintScreener::copy(this);
-    setButtonsVisible(true, true);
+    ui->pushButtonOptions->setVisible(true);
     ui->pushButtonOptions->setChecked(false);
+
 }
 
 void AbstractPlot::on_pushButtonPrintScreenPaint_clicked()
 {
     setButtonsVisible(false, true);
     auto path = PrintScreener::save(this, "", true);
-    setButtonsVisible(true, true);
+    //setButtonsVisible(true, true);
+    ui->pushButtonOptions->setVisible(true);
     ui->pushButtonOptions->setChecked(false);
 
     if (path.isEmpty())
         return;
 
-    //QThread::msleep(100);
-
     EasyLiving::exec("mspaint.exe", path.replace("/", "\\"));
+}
+
+void AbstractPlot::on_pushButtonPrintScreen_clicked()
+{
+    setButtonsVisible(false, true);
+    PrintScreener::save(this);
+    ui->pushButtonOptions->setVisible(true);
+    ui->pushButtonOptions->setChecked(false);
+
+}
+
+void AbstractPlot::on_pushButtonHelp_clicked()
+{
+    setButtonsVisible(false, false);
+    ui->pushButtonOptions->setChecked(false);
+    QMessageBox::about(this, "Help", ui->widgetToolTip->toolTip());
 }

@@ -6,6 +6,9 @@
         <file>ui-realtimeqcp-cursor0102.PNG</file>
         <file>ui-realtimeqcp-mouse-area.PNG</file>
         <file>paint.png</file>
+        <file>ui-plot-axis-value-01.png</file>
+        <file>ui-plot-axis-value-02.png</file>
+        <file>ui-plot-axis-value-03.png</file>
     </qresource>
     <qresource prefix="/ico">
         <file>ico/about.png</file>

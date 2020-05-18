@@ -22,12 +22,15 @@ AxisValueConfig::AxisValueConfig(QCPAxis *axis, QWidget *parent) :
     ui->doubleSpinBoxMin->setValue(axis->range().lower);
     ui->doubleSpinBoxMax->setValue(axis->range().upper);
 
+    ui->checkBoxScientificNotationTick->setChecked(
+                axis->numberFormat() == scientificNotationFormat);
+
 
     if (axis->scaleType() == QCPAxis::ScaleType::stLogarithmic)
     {
         axisType = AxisType::NumericScientificNotation;
 
-        ui->checkBoxLog10->setChecked(true);
+        ui->checkBoxScientificNotationAxis->setChecked(true);
 
         ui->doubleSpinBoxMin->setVisible(false);
         ui->doubleSpinBoxMax->setVisible(false);
@@ -37,7 +40,7 @@ AxisValueConfig::AxisValueConfig(QCPAxis *axis, QWidget *parent) :
     {
         axisType = AxisType::NumericStandardNotation;
 
-        ui->checkBoxLog10->setChecked(false);
+        ui->checkBoxScientificNotationAxis->setChecked(false);
 
 
         ui->scientificNotationEditMin->setVisible(false);
@@ -60,7 +63,7 @@ void AxisValueConfig::on_buttonBox_accepted()
 
     axis->setLabel(ui->lineEditLabel->text());
 
-    if (ui->radioButtonAuto->isChecked())
+    if (ui->checkBoxAutoscale->isChecked())
     {
         foreach(auto graph, axis->graphs())
         {
@@ -68,6 +71,10 @@ void AxisValueConfig::on_buttonBox_accepted()
         }
         return;
     }
+
+    axis->setNumberFormat(ui->checkBoxScientificNotationTick->isChecked()
+                          ? scientificNotationFormat
+                          : standatrFormat);
 
     if (axisType == AxisType::NumericStandardNotation)
     {
@@ -78,7 +85,6 @@ void AxisValueConfig::on_buttonBox_accepted()
         axis->setScaleType(QCPAxis::stLinear);
         QSharedPointer<QCPAxisTicker> ticker(new QCPAxisTicker);
         axis->setTicker(ticker);
-        axis->setNumberFormat("f");
         axis->setNumberPrecision(ui->spinBoxNumberPrecision->value());
 
 
@@ -94,28 +100,21 @@ void AxisValueConfig::on_buttonBox_accepted()
         axis->setScaleType(QCPAxis::stLogarithmic);
         QSharedPointer<QCPAxisTickerLog> logTicker(new QCPAxisTickerLog);
         axis->setTicker(logTicker);
-        axis->setNumberFormat("eb");
         axis->setNumberPrecision(ui->spinBoxNumberPrecision->value());
 
         return;
     }
+
+
 }
 
 
-void AxisValueConfig::on_radioButtonAuto_toggled(bool checked)
+void AxisValueConfig::on_checkBoxScientificNotationAxis_toggled(bool checked)
 {
-    ui->doubleSpinBoxMin->setEnabled(!checked);
-    ui->doubleSpinBoxMax->setEnabled(!checked);
+    ui->checkBoxScientificNotationTick->setChecked(checked);
+    ui->checkBoxScientificNotationTick->setEnabled(!checked);
 
-    ui->scientificNotationEditMin->setEnabled(!checked);
-    ui->scientificNotationEditMax->setEnabled(!checked);
-}
-
-void AxisValueConfig::on_checkBoxLog10_stateChanged(int arg1)
-{
-    auto log10 = static_cast<bool>(arg1);
-
-    if (log10)
+    if (checked)
     {
         axisType = AxisType::NumericScientificNotation;
         ui->doubleSpinBoxMin->setVisible(false);
@@ -136,3 +135,11 @@ void AxisValueConfig::on_checkBoxLog10_stateChanged(int arg1)
 
 }
 
+void AxisValueConfig::on_checkBoxAutoscale_toggled(bool checked)
+{
+    ui->doubleSpinBoxMin->setEnabled(!checked);
+    ui->doubleSpinBoxMax->setEnabled(!checked);
+
+    ui->scientificNotationEditMin->setEnabled(!checked);
+    ui->scientificNotationEditMax->setEnabled(!checked);
+}

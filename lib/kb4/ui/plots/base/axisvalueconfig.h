@@ -32,13 +32,13 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
-    void on_radioButtonAuto_toggled(bool checked);
+    void on_checkBoxScientificNotationAxis_toggled(bool checked);
 
-    void on_checkBoxLog10_stateChanged(int arg1);
-
+    void on_checkBoxAutoscale_toggled(bool checked);
 
 private:
     Ui::AxisValueConfig *ui;
+    const QString scientificNotationFormat = "eb", standatrFormat = "f";
     QCPAxis *axis;
     AxisType axisType;
 
