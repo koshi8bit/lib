@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QDir>
+#include <QProcess>
 
 //errors
 #define EL_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
@@ -107,6 +108,8 @@ public:
     static bool writeFile(QString path, QString text, bool append = false);
     static QString readFile(QString path);
     static QString pathConcat(QString path1, QString path2);
+
+    static bool exec(QString exe, QString arguments = "");
 
     //ui
     static QString setWindowTitle(QString text);

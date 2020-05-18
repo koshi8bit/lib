@@ -380,6 +380,15 @@ QString EasyLiving::pathConcat(QString path1, QString path2)
     return finalPath;
 }
 
+bool EasyLiving::exec(QString exe, QString arguments)
+{
+    QProcess process;
+    process.setProgram(exe);
+    if (!arguments.isEmpty())
+        process.setArguments( { arguments } );
+    return process.startDetached();
+}
+
 QString EasyLiving::setWindowTitle(QString text)
 {
     return QString("%1 /// Aleksey K. [koshi8bit]").arg(text);

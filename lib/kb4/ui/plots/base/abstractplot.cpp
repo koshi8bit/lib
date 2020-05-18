@@ -182,8 +182,5 @@ void AbstractPlot::on_pushButtonPrintScreenPaint_clicked()
 
     //QThread::msleep(100);
 
-    QProcess process;
-    process.setProgram("mspaint.exe");
-    process.setArguments( { path.replace("/", "\\") } );
-    process.startDetached();
+    EasyLiving::exec("mspaint.exe", path.replace("/", "\\"));
 }
