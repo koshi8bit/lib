@@ -75,6 +75,20 @@ double ChannelDouble::rawValue()
     return _rawValue;
 }
 
+double ChannelDouble::valueBuffered() const
+{
+    if (bufferSize == 0)
+        return 0;
+
+    auto result = 0.0;
+    foreach(auto element, buffer)
+    {
+        result += element;
+    }
+    result /= buffer.count();
+    return result;
+}
+
 void ChannelDouble::configure()
 {
     connect(this, &Channel::valueChanged, [this]() { emit valueChangedDouble(value()); } );
@@ -84,6 +98,13 @@ void ChannelDouble::configure()
 
 void ChannelDouble::valueSetChild()
 {
+    if (bufferSize > 0)
+    {
+        buffer.push_back(value());
+        if (buffer.size() > bufferSize)
+            buffer.pop_front();
+    }
+
     if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
 
     if (realTimeGraph() != nullptr) { realTimeGraph()->addData(RealTimePlot::currentDateTime(), this->value()); }

@@ -1,6 +1,29 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+void MainWindow::testingValueBuffered()
+{
+    auto a = new ChannelDouble("1");
+    a->bufferSize = 10;
+
+    a->setValue(1.1);
+    qDebug() << a->valueBuffered(); // 1.1
+    a->setValue(2);
+    qDebug() << a->valueBuffered(); // 1.55
+    a->setValue(3);
+    a->setValue(3);
+    a->setValue(3);
+    a->setValue(6.2);
+    a->setValue(3);
+    a->setValue(1);
+    a->setValue(3);
+    a->setValue(3);
+    qDebug() << a->valueBuffered(); // 2.83
+    a->setValue(2.2);
+    qDebug() << a->valueBuffered(); // 2.94
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -39,25 +62,24 @@ MainWindow::MainWindow(QWidget *parent) :
     pathConcatTest();
     radarPlotTest();
 
+    testingGraphErrorXY();
 
+    testingValueBuffered();
+
+
+
+}
+
+void MainWindow::testingGraphErrorXY()
+{
     auto sg = ui->simplePLot->addGraphErrorXY("tst");
     qDebug() << "started test";
     sg->addData(2, 2, 0.2, 0.2, 0.2, 0.2);
     sg->addData(1, 1, 0.1, 0.1, 0.1, 0.1);
     sg->addData(3, 3, 0.3, 0.3, 0.3, 0.3);
     //sg->addData(0, 0, 0.5, 0.5, 0.6, 0.6);
-
-
-//    auto sg = ui->simplePLot->addGraph("tst");
-//    qDebug() << "started test";
-//    sg->addData(2, 2);
-//    sg->addData(1, 1);
-//    sg->addData(5, 5);
-//    sg->addData(4, 4);
-//    sg->addData(3, 3);
-
-
 }
+
 
 void MainWindow::doubleValueScaleTest()
 {

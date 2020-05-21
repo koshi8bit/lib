@@ -101,6 +101,10 @@ private:
 
     void doubleValueScaleTest();
 
+    void testingGraphErrorXY();
+    
+    void testingValueBuffered();
+    
 public slots:
     void valueDoubleCopyedToClipboard(QString newValue, QString message);
 

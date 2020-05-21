@@ -20,6 +20,9 @@ public:
     void setToRawFunc(std::function<double(double)> f);
     double rawValue();
 
+    int bufferSize = 0;
+    double valueBuffered() const;
+
 private:
 
     //double (*toScaledFunc)(double) = nullptr;
@@ -29,6 +32,8 @@ private:
     //double (*toRawFunc)(double) = nullptr;
     std::function<double(double)> toRawFunc = nullptr;
     double minValue=0, maxValue=0, minRaw=0, maxRaw=0;
+
+    QQueue<double> buffer;
 
     void configure();
 signals:
