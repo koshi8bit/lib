@@ -194,6 +194,17 @@ void MainWindow::configureExcelLog()
     c->setValue(3.009);
     excelLog->addChannel(c);
 
+
+
+    d = new ChannelDouble("DDD", EasyLiving::postfixSievertPerHour(), this);
+    connect(ui->valuedoubleD, &ValueDouble::valueChanged, d, &ChannelDouble::valueChanged);
+    d->setScientificNotation(true);
+    excelLog->addChannel(d);
+
+    ui->valuedoubleD->configure(d, d);
+    //ui->valuedoubleD->setValue(8.7654);
+    //connect(ui->valuedoubleD, &ValueDouble::valueChanged, ui->valuedoubleD, &ValueDouble::setValue);
+
     t = new ChannelT<QDateTime>("time", "", this);
     excelLog->addChannel(t);
 

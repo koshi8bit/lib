@@ -58,7 +58,7 @@ private:
     QDateTime time;
 
     TimeLog *excelLog;
-    ChannelDouble *a, *b, *c;
+    ChannelDouble *a, *b, *c, *d;
     ChannelDouble *deletingTest;
     ChannelT<QDateTime> *t;
 

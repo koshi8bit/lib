@@ -41,7 +41,7 @@ public:
 
 
 protected:
-    static QString formatDoubleValue(double value);
+    static QString formatDoubleValue(ChannelDouble *channel);
 
     HeaderMode headerMode;
     void finishConfigureChild() override;

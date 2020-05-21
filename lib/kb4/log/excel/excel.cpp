@@ -111,21 +111,28 @@ void Excel::push()
     currentDay->push();
 }
 
-QString Excel::formatDoubleValue(double value)
+QString Excel::formatDoubleValue(ChannelDouble *channel)
 {
-    if (EasyLiving::isEqualDouble(value, 0))
-    {
-        return QString("0");
-    }
 
-    if ((0.001 < value) && (value < 2000))
-    {
-        return  EasyLiving::formatDouble(value, 3, true, EasyLiving::Comma, false);
-    }
-    else
-    {
-        return  EasyLiving::formatDouble(value, 3, true, EasyLiving::Comma, false);
-    }
+    return  EasyLiving::formatDouble(channel->value(),
+                                     3,
+                                     channel->scientificNotation(),
+                                     EasyLiving::Comma,
+                                     false);
+
+//    if (EasyLiving::isEqualDouble(value, 0))
+//    {
+//        return QString("0");
+//    }
+
+//    if ((0.001 < value) && (value < 2000))
+//    {
+
+//    }
+//    else
+//    {
+//        return  EasyLiving::formatDouble(value, 3, true, EasyLiving::Comma, false);
+//    }
 }
 
 void Excel::commit()
@@ -142,7 +149,7 @@ void Excel::commit()
         auto channel_double = dynamic_cast<ChannelDouble *>(channel);
         if (channel_double)
         {
-            value = formatDoubleValue(channel_double->value());
+            value = formatDoubleValue(channel_double);
 
 
             //value = QString("%1").arg(channel_double->value(), 0, 'e', 2, '0');
