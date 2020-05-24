@@ -75,10 +75,10 @@ double ChannelDouble::rawValue()
     return _rawValue;
 }
 
-double ChannelDouble::valueBuffered() const
+double ChannelDouble::valueBuffered()
 {
-    if (bufferSize == 0)
-        return 0;
+    if (bufferSize() < 2)
+        return value();
 
     auto result = 0.0;
     foreach(auto element, buffer)
@@ -87,6 +87,16 @@ double ChannelDouble::valueBuffered() const
     }
     result /= buffer.count();
     return result;
+}
+
+int ChannelDouble::bufferSize() const
+{
+    return _bufferSize;
+}
+
+void ChannelDouble::setBufferSize(int bufferSize)
+{
+    _bufferSize = bufferSize;
 }
 
 void ChannelDouble::configure()
@@ -98,10 +108,10 @@ void ChannelDouble::configure()
 
 void ChannelDouble::valueSetChild()
 {
-    if (bufferSize > 0)
+    if (bufferSize() >= 2)
     {
         buffer.push_back(value());
-        if (buffer.size() > bufferSize)
+        if (buffer.size() > _bufferSize)
             buffer.pop_front();
     }
 

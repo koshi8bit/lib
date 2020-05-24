@@ -5,7 +5,7 @@
 void MainWindow::testingValueBuffered()
 {
     auto a = new ChannelDouble("1");
-    a->bufferSize = 10;
+    a->setBufferSize(10);
 
     a->setValue(1.1);
     qDebug() << a->valueBuffered(); // 1.1
