@@ -109,7 +109,8 @@ public:
     static QString readFile(QString path);
     static QString pathConcat(QString path1, QString path2);
 
-    static bool exec(QString exe, QString arguments = "");
+    static bool exec(QString exe, QStringList arguments);
+    static bool exec(QString cmdLine);
 
     //ui
     static QString setWindowTitle(QString text);

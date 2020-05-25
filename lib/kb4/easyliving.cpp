@@ -380,13 +380,17 @@ QString EasyLiving::pathConcat(QString path1, QString path2)
     return finalPath;
 }
 
-bool EasyLiving::exec(QString exe, QString arguments)
+bool EasyLiving::exec(QString exe, QStringList arguments)
 {
     QProcess process;
     process.setProgram(exe);
-    if (!arguments.isEmpty())
-        process.setArguments( { arguments } );
+    process.setArguments(arguments);
     return process.startDetached();
+}
+
+bool EasyLiving::exec(QString cmdLine)
+{
+    return QProcess::startDetached(cmdLine);
 }
 
 QString EasyLiving::setWindowTitle(QString text)
