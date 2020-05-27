@@ -12,7 +12,7 @@ public:
     ChannelDouble(QString sharedVariableName, QObject *parent = nullptr);
     ~ChannelDouble() override;
 
-    void setScaling(double minValue, double maxValue, double minRaw, double maxRaw);
+    void setScaling(double scalingMinValue, double scalingMaxValue, double scalingMinRaw, double scalingMaxRaw);
 
     void setToScaledFunc(std::function<double(double)> f);
     void setRawValue(double newValue);
@@ -26,6 +26,10 @@ public:
     int bufferSize() const;
     void setBufferSize(int bufferSize);
 
+    void setRange(double min, double max);
+    void setRange(bool emitSignal);
+    bool inRange();
+
 private:
 
     //double (*toScaledFunc)(double) = nullptr;
@@ -34,7 +38,9 @@ private:
     double _rawValue;
     //double (*toRawFunc)(double) = nullptr;
     std::function<double(double)> toRawFunc = nullptr;
-    double minValue=0, maxValue=0, minRaw=0, maxRaw=0;
+    double scalingMinValue=0, scalingMaxValue=0, scalingMinRaw=0, scalingMaxRaw=0;
+    double rangeMin=0, rangeMax=0;
+    bool rangeEmitSignal = false, inRangePrev = false;
 
     //QQueue<double> buffer;
     QLinkedList<double> buffer;
@@ -44,6 +50,7 @@ private:
 signals:
     //TODO: template fuck
     //void valueChangedDouble(double newValue);
+    void inRangeChanged(bool inRange);
 
 protected:
     void valueSetChild() override;

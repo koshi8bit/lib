@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 
+
 void MainWindow::testingValueBuffered()
 {
     auto a = new ChannelDouble("1");
@@ -186,6 +187,10 @@ void MainWindow::configureExcelLog()
     b = new ChannelDouble("BBB", EasyLiving::postfixMilli() + EasyLiving::postfixAmpere(), QStringList() << "b/middle2", this);
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
+    b->setRange(1, 33.3);
+    connect(b, &ChannelDouble::inRangeChanged, [this](bool val) {
+       qDebug() << val;
+    });
 
     c = new ChannelDouble("ЭЛВ/EnergyU get", this);
     //FIXME !tima45!

@@ -40,21 +40,21 @@ void ChannelDouble::setToScaledFunc(std::function<double(double)> f)
 
 void ChannelDouble::setScaling(double minValue, double maxValue, double minRaw, double maxRaw)
 {
-    this->minValue = minValue;
-    this->maxValue = maxValue;
-    this->minRaw = minRaw;
-    this->maxRaw = maxRaw;
+    this->scalingMinValue = minValue;
+    this->scalingMaxValue = maxValue;
+    this->scalingMinRaw = minRaw;
+    this->scalingMaxRaw = maxRaw;
 
     setToScaledFunc([this](double raw)
     {
-        return (raw - this->minRaw) / (this->maxRaw - this->minRaw) *
-                (this->maxValue - this->minValue) + this->minValue;
+        return (raw - this->scalingMinRaw) / (this->scalingMaxRaw - this->scalingMinRaw) *
+                (this->scalingMaxValue - this->scalingMinValue) + this->scalingMinValue;
     });
 
     setToRawFunc([this](double scaled)
     {
-        return (scaled - this->minValue) / (this->maxValue - this->minValue) *
-                (this->maxRaw - this->minRaw) + this->minRaw;
+        return (scaled - this->scalingMinValue) / (this->scalingMaxValue - this->scalingMinValue) *
+                (this->scalingMaxRaw - this->scalingMinRaw) + this->scalingMinRaw;
     });
 }
 
@@ -99,6 +99,23 @@ void ChannelDouble::setBufferSize(int bufferSize)
     _bufferSize = bufferSize;
 }
 
+void ChannelDouble::setRange(double min, double max)
+{
+    rangeMin = min;
+    rangeMax = max;
+    setRange(true);
+}
+
+void ChannelDouble::setRange(bool emitSignal)
+{
+    rangeEmitSignal = emitSignal;
+}
+
+bool ChannelDouble::inRange()
+{
+    return EasyLiving::isBetween(value(), rangeMin, rangeMax);
+}
+
 void ChannelDouble::configure()
 {
     connect(this, &Channel::valueChanged, [this]() { emit valueChangedDouble(value()); } );
@@ -108,6 +125,16 @@ void ChannelDouble::configure()
 
 void ChannelDouble::valueSetChild()
 {
+    if (rangeEmitSignal)
+    {
+        auto current = inRange();
+
+        if (current != inRangePrev)
+            emit inRangeChanged(current);
+
+        inRangePrev = current;
+    }
+
     if (bufferSize() >= 2)
     {
         buffer.push_back(value());

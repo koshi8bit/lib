@@ -81,22 +81,6 @@ public:
         sharedVariable->ask();
     }
 
-//    void setMultithreading(bool enable)
-//    {
-//        _multithreading = enable;
-//        if (enable)
-//        {
-//            connect(this, &Channel::valueChanged,
-//                    this, &ChannelT<T>::updateSharedVariable, Qt::QueuedConnection);
-//        }
-//        else
-//        {
-//            disconnect(this, &Channel::valueChanged,
-//                    this, &ChannelT<T>::updateSharedVariable);
-//        }
-//    }
-
-
 public slots:
     void setValue(T newValue)
     {
@@ -116,14 +100,10 @@ private slots:
         sharedVariable->send();
     }
 
-
-
-
 protected:
 
 private:
     T _value;
-    bool _multithreading = false;
 
     NetVar<T> *sharedVariable = nullptr;
 

@@ -172,7 +172,7 @@ void AbstractPlot::on_pushButtonPrintScreenPaint_clicked()
     if (path.isEmpty())
         return;
 
-    EasyLiving::exec("mspaint.exe", path.replace("/", "\\"));
+    EasyLiving::exec("mspaint.exe", { path.replace("/", "\\") });
 }
 
 void AbstractPlot::on_pushButtonPrintScreen_clicked()
