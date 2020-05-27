@@ -188,8 +188,8 @@ void MainWindow::configureExcelLog()
     connect(ui->dialB, &QDial::valueChanged, b, &ChannelDouble::setValue);
     excelLog->addChannel(b);
     b->setRange(1, 33.3);
-    connect(b, &ChannelDouble::inRangeChanged, [this](bool val) {
-       qDebug() << val;
+    connect(b, &ChannelDouble::inRangeChanged, [this](bool inRange) {
+       qDebug() << inRange;
     });
 
     c = new ChannelDouble("ЭЛВ/EnergyU get", this);

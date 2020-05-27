@@ -47,10 +47,13 @@ private:
     int _bufferSize = 1;
 
     void configure();
+    void processInRange();
+    
 signals:
     //TODO: template fuck
     //void valueChangedDouble(double newValue);
     void inRangeChanged(bool inRange);
+    void inRangeChangedInverted(bool notInRange);
 
 protected:
     void valueSetChild() override;
