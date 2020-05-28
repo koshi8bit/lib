@@ -19,7 +19,7 @@ public:
     explicit FaultsWidget(QScrollArea *widget = nullptr);
     void addFault(Fault *fault);
 
-    void configureBorder(QLabel* tl, QLabel* t, QLabel* tr, QLabel* l, QLabel* r, QLabel* bl, QLabel* b, QLabel* br);
+    void configureBorder(QLabel* top, QLabel* left, QLabel* right, QLabel* bottom);
     void showFaultBorder(QString str);
     void showFaultBorder(QStringList faults);
     void hideFaultBorder();

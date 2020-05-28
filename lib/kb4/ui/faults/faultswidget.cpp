@@ -24,19 +24,15 @@ void FaultsWidget::addFault(Fault *fault)
     });
 }
 
-void FaultsWidget::configureBorder(QLabel *tl, QLabel *t, QLabel *tr, QLabel *l, QLabel *r, QLabel *bl, QLabel *b, QLabel *br)
+void FaultsWidget::configureBorder(QLabel *top, QLabel *left, QLabel *right, QLabel *bottom)
 {
-    border.append(tl);
-    border.append(t);
-    border.append(tr);
-    border.append(l);
-    border.append(r);
-    border.append(bl);
-    border.append(b);
-    border.append(br);
+    border.append(top);
+    border.append(left);
+    border.append(right);
+    border.append(bottom);
 
-    borderMessage.append(t);
-    borderMessage.append(b);
+    borderMessage.append(top);
+    borderMessage.append(bottom);
 
     foreach(auto lbl, border)
     {

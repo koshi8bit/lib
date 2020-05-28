@@ -363,14 +363,10 @@ void MainWindow::dateTimeDeltaTests()
 void MainWindow::configureFaults()
 {
     faultsWidget = new FaultsWidget(ui->scrollAreaFaults);
-    faultsWidget->configureBorder(ui->labelFaultBorderTL,
-                                 ui->labelFaultBorderT,
-                                 ui->labelFaultBorderTR,
-                                 ui->labelFaultBorderL,
-                                 ui->labelFaultBorderR,
-                                 ui->labelFaultBorderBL,
-                                 ui->labelFaultBorderB,
-                                 ui->labelFaultBorderBR);
+    faultsWidget->configureBorder(ui->labelFaultBorderTop,
+                                 ui->labelFaultBorderLeft,
+                                 ui->labelFaultBorderRight,
+                                 ui->labelFaultBorderBottom);
     connect(faultsWidget, &FaultsWidget::faultTriggered,
             ui->checkBoxFaults, &QCheckBox::setChecked);
 

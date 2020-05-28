@@ -25,7 +25,9 @@ public:
     ChannelT(QString sharedVariableName, QObject *parent = nullptr)
         :Channel(getName(sharedVariableName), "", parent)
     {
+        //FIXME for what?? parent do same thing??
         setLogName(sharedVariableName);
+
         _value = T();
 
         //configure and get postfix
@@ -37,6 +39,7 @@ public:
 
 
         configureSharedVariable(true);
+        askSharedVariable();
     }
 
     ~ChannelT()
