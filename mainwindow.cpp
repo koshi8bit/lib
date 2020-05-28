@@ -362,8 +362,8 @@ void MainWindow::dateTimeDeltaTests()
 
 void MainWindow::configureFaults()
 {
-    auto faultWidget = new FaultsWidget(ui->scrollAreaFaults);
-    faultWidget->configureBorder(ui->labelFaultBorderTL,
+    faultsWidget = new FaultsWidget(ui->scrollAreaFaults);
+    faultsWidget->configureBorder(ui->labelFaultBorderTL,
                                  ui->labelFaultBorderT,
                                  ui->labelFaultBorderTR,
                                  ui->labelFaultBorderL,
@@ -371,16 +371,16 @@ void MainWindow::configureFaults()
                                  ui->labelFaultBorderBL,
                                  ui->labelFaultBorderB,
                                  ui->labelFaultBorderBR);
-    faultWidget->configureSharedVariable(false);
+    faultsWidget->configureSharedVariable(false);
 
-    connect(faultWidget, &FaultsWidget::faultTriggered,
+    connect(faultsWidget, &FaultsWidget::faultTriggered,
             ui->checkBoxFaults, &QCheckBox::setChecked);
 
     fault1 = new Fault("fault1", this);
-    faultWidget->addFault(fault1);
+    faultsWidget->addFault(fault1);
 
     fault2 = new Fault("fault2", this);
-    faultWidget->addFault(fault2);
+    faultsWidget->addFault(fault2);
 
 
 }

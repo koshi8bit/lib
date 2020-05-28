@@ -72,6 +72,7 @@ private:
     void dateTimeDeltaTests();
 
     Fault *fault1, *fault2;
+    FaultsWidget *faultsWidget;
     void configureFaults();
 
 
