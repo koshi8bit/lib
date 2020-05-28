@@ -50,9 +50,17 @@ public:
         return _value;
     }
 
-    void setSharedVariableEnableReadFromNet(bool enable)
+    bool enableWriteFromNet() const
     {
-        if (enable)
+        return _enableWriteFromNet;
+    }
+
+    QString configureSharedVariable(bool enableWriteFromNet = false)
+    {
+        sharedVariable = new NetVar<T>(logName());
+        _enableWriteFromNet = enableWriteFromNet;
+
+        if (enableWriteFromNet)
         {
             connect(sharedVariable, &NetVarBase::valueChanged,
                     this, &ChannelT::sharedVariableUpdated);
@@ -63,16 +71,9 @@ public:
                        this, &ChannelT::sharedVariableUpdated);
         }
 
-    }
-
-    QString configureSharedVariable(bool enableWriteFromNet = false)
-    {
-        sharedVariable = new NetVar<T>(logName());
-
 #ifdef K8B_LIB_CHANNELS_SHOW_SV_CREATED
         qDebug() << "sharedVariable" << logName() << "created";
 #endif
-        setSharedVariableEnableReadFromNet(enableWriteFromNet);
         return logName();
     }
 
@@ -80,6 +81,8 @@ public:
     {
         sharedVariable->ask();
     }
+
+    bool getEnableWriteFromNet() const;
 
 public slots:
     void setValue(T newValue)
@@ -106,6 +109,7 @@ private:
     T _value;
 
     NetVar<T> *sharedVariable = nullptr;
+    bool _enableWriteFromNet = false;
 
     void _setValue(T newValue)
     {
@@ -141,3 +145,5 @@ protected:
 
 
 #endif // CHANNEL_H
+
+

@@ -371,12 +371,18 @@ void MainWindow::configureFaults()
                                  ui->labelFaultBorderBL,
                                  ui->labelFaultBorderB,
                                  ui->labelFaultBorderBR);
+    faultWidget->configureSharedVariable(false);
+
+    connect(faultWidget, &FaultsWidget::faultTriggered,
+            ui->checkBoxFaults, &QCheckBox::setChecked);
 
     fault1 = new Fault("fault1", this);
     faultWidget->addFault(fault1);
 
     fault2 = new Fault("fault2", this);
     faultWidget->addFault(fault2);
+
+
 }
 
 void MainWindow::configureRealTimeQcpPlot()

@@ -19,22 +19,8 @@ void FaultsWidget::addFault(Fault *fault)
     _faults.append(fault);
 
     connect(fault, &Fault::visibleChanged, [this](bool visible) {
-        if (visible)
-        {
-            triggerFault(true);
-        }
-        else
-        {
-            foreach(auto elemnt, _faults)
-            {
-                if (elemnt->isVisible())
-                {
-                    triggerFault(true);
-                    return;
-                }
-            }
-            triggerFault(false);
-        }
+        Q_UNUSED(visible)
+        triggerFaults(faults());
     });
 }
 
@@ -68,6 +54,7 @@ void FaultsWidget::configureBorder(QLabel *tl, QLabel *t, QLabel *tr, QLabel *l,
 
 void FaultsWidget::showFaultBorder(QString str)
 {
+    _isFaultTriggered = true;
     auto tooltip = _template.arg(str);
 
     foreach(auto lbl, border)
@@ -77,13 +64,9 @@ void FaultsWidget::showFaultBorder(QString str)
     }
 }
 
-void FaultsWidget::showFaultBorder(QStringList faults)
-{
-    showFaultBorder(faults.join(joiner));
-}
-
 void FaultsWidget::hideFaultBorder()
 {
+    _isFaultTriggered = false;
     foreach(auto lbl, border)
     {
         lbl->setVisible(false);
@@ -94,20 +77,12 @@ void FaultsWidget::configureSharedVariable(bool enableWriteFromNet)
 {
     sharedVariable = new ChannelQString("faults", "", this);
     sharedVariable->configureSharedVariable(enableWriteFromNet);
-    connect(sharedVariable, &Channel::valueChanged, [this]() {
-        auto str = sharedVariable->value();
-        if(str.isEmpty())
-        {
-            hideFaultBorder();
-        }
-        else
-        {
-            showFaultBorder(str);
-        }
+    connect(sharedVariable, &Channel::valueChangedByNet, [this]() {
+        triggerFaults(sharedVariable->value());
     });
 }
 
-QStringList FaultsWidget::faults()
+QString FaultsWidget::faults()
 {
     QStringList result;
     foreach(auto elemnt, _faults)
@@ -117,7 +92,7 @@ QStringList FaultsWidget::faults()
             result.append(elemnt->message());
         }
     }
-    return result;
+    return result.join(joiner);
 }
 
 bool FaultsWidget::isFaultTriggered() const
@@ -125,23 +100,26 @@ bool FaultsWidget::isFaultTriggered() const
     return _isFaultTriggered;
 }
 
-void FaultsWidget::triggerFault(bool triggered, bool updateSharedVariable)
+void FaultsWidget::triggerFaults(QString faults)
 {
-    _isFaultTriggered = triggered;
-    if (triggered)
-    {
-        showFaultBorder(faults());
-
-        if (sharedVariable || updateSharedVariable)
-            sharedVariable->setValue(faults().join(joiner));
-    }
-    else
+    if (faults.isEmpty())
     {
         hideFaultBorder();
 
-        if (sharedVariable || updateSharedVariable)
+        if (sharedVariable && !sharedVariable->enableWriteFromNet())
             sharedVariable->setValue("");
+
+        emit faultTriggered(false);
+    }
+    else
+    {
+        showFaultBorder(faults);
+
+        if (sharedVariable && !sharedVariable->enableWriteFromNet())
+            sharedVariable->setValue(faults);
+
+        emit faultTriggered(true);
     }
 
-    emit faultTriggered(triggered);
+
 }
