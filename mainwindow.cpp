@@ -190,7 +190,7 @@ void MainWindow::configureExcelLog()
     excelLog->addChannel(b);
     b->setRange(1, 33.3);
     connect(b, &ChannelDouble::inRangeChanged, [this](bool inRange) {
-       qDebug() << inRange;
+       qDebug() << inRange << this;
     });
 
     c = new ChannelDouble("ЭЛВ/EnergyU get", this);
@@ -371,8 +371,6 @@ void MainWindow::configureFaults()
                                  ui->labelFaultBorderBL,
                                  ui->labelFaultBorderB,
                                  ui->labelFaultBorderBR);
-    faultsWidget->configureSharedVariable(false);
-
     connect(faultsWidget, &FaultsWidget::faultTriggered,
             ui->checkBoxFaults, &QCheckBox::setChecked);
 

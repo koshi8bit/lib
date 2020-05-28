@@ -73,15 +73,6 @@ void FaultsWidget::hideFaultBorder()
     }
 }
 
-void FaultsWidget::configureSharedVariable(bool enableWriteFromNet)
-{
-    sharedVariable = new ChannelQString("faults", "", this);
-    sharedVariable->configureSharedVariable(enableWriteFromNet);
-    connect(sharedVariable, &Channel::valueChangedByNet, [this]() {
-        triggerFaults(sharedVariable->value());
-    });
-}
-
 QString FaultsWidget::faults()
 {
     QStringList result;
@@ -106,19 +97,13 @@ void FaultsWidget::triggerFaults(QString faults)
     {
         hideFaultBorder();
 
-        if (sharedVariable && !sharedVariable->enableWriteFromNet())
-            sharedVariable->setValue("");
-
-        emit faultTriggered(false);
+        emit faultTriggered(false, faults);
     }
     else
     {
         showFaultBorder(faults);
 
-        if (sharedVariable && !sharedVariable->enableWriteFromNet())
-            sharedVariable->setValue(faults);
-
-        emit faultTriggered(true);
+        emit faultTriggered(true, faults);
     }
 
 

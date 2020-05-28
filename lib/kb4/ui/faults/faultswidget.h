@@ -23,20 +23,20 @@ public:
     void showFaultBorder(QString str);
     void showFaultBorder(QStringList faults);
     void hideFaultBorder();
-    void configureSharedVariable(bool enableWriteFromNet);
 
     QString faults();
 
     bool isFaultTriggered() const;
+
+
+
 
 private:
     const QString joiner = "<br/>";
     QVBoxLayout *layoutFaults;
     QVector<Fault*> _faults;
     bool _isFaultTriggered = false;
-    ChannelQString *sharedVariable = nullptr;
 
-    void triggerFaults(QString faults);
 
     QVector<QLabel*> border;
     QVector<QLabel*> borderMessage;
@@ -44,7 +44,10 @@ private:
     QString _template;
 
 signals:
-    void faultTriggered(bool fault);
+    void faultTriggered(bool fault, QString faults);
+
+public slots:
+    void triggerFaults(QString faults);
 
 };
 
