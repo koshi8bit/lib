@@ -18,6 +18,7 @@
 #include <lib/kb4/worker/worker.h>
 #include <lib/kb4/log/simple/simplelog.h>
 #include <lib/kb4/ui/plots/radar/radartemperature4graph.h>
+#include <lib/kb4/ui/faults/faultswidget.h>
 
 #include <lib/kb4/ui/plots/simple/simpleplot.h>
 #include <lib/kb4/ui/plots/simple/simplegraph.h>
@@ -69,6 +70,10 @@ private:
     RadarTemperature4Graph *radarTestGraph;
 
     void dateTimeDeltaTests();
+
+    Fault *fault1, *fault2;
+    void configureFaults();
+
 
 
     void configureRealTimeQcpPlot();
@@ -140,6 +145,8 @@ private slots:
     void on_pushButtonDeletePlot_clicked();
     void on_pushButton_7_clicked();
     void on_pushButton_8_clicked();
+    void on_checkBoxFault1_toggled(bool checked);
+    void on_checkBoxFault2_toggled(bool checked);
 };
 
 #endif // MAINWINDOW_H

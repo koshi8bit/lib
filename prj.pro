@@ -37,6 +37,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 ###################################################
 
 RESOURCES += \
+    lib/kb4/lib.qrc \
     lib/kb4/pic/ui-res.qrc
 
 DISTFILES += \
@@ -93,6 +94,7 @@ DISTFILES += \
     lib/kb4/pic/ui-realtimeqcp-realtime.PNG \
     lib/kb4/pic/ui-realtimeqcp.PNG \
     lib/kb4/shared-variable/tcp/netvars/example/example.7z \
+    lib/kb4/ui/faults/template.html \
     lib/kb4/ui/plots/base/base.7z \
     lib/kb4/ui/qcustomplot/qcustomplot-original.7z \
     lib/update-kb4.bat \
@@ -140,6 +142,8 @@ HEADERS += \
     lib/kb4/shared-variable/tcp/netvars/nvDebug.h \
     lib/kb4/shared-variable/tcp/netvars/varscontainer.h \
     lib/kb4/shared-variable/udp/shared-variable.h \
+    lib/kb4/ui/faults/fault.h \
+    lib/kb4/ui/faults/faultswidget.h \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \
     lib/kb4/ui/gradientlineedit/minmax.h \
     lib/kb4/ui/label/qlabelext.h \
@@ -189,6 +193,8 @@ SOURCES += \
     lib/kb4/shared-variable/tcp/netvars/netvarbase.cpp \
     lib/kb4/shared-variable/tcp/netvars/varscontainer.cpp \
     lib/kb4/shared-variable/udp/shared-variable.cpp \
+    lib/kb4/ui/faults/fault.cpp \
+    lib/kb4/ui/faults/faultswidget.cpp \
     lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
     lib/kb4/ui/gradientlineedit/minmax.cpp \
     lib/kb4/ui/label/qlabelext.cpp \

@@ -3,27 +3,6 @@
 
 
 
-void MainWindow::testingValueBuffered()
-{
-    auto a = new ChannelDouble("1");
-    a->setBufferSize(10);
-
-    a->setValue(1.1);
-    qDebug() << a->valueBuffered(); // 1.1
-    a->setValue(2);
-    qDebug() << a->valueBuffered(); // 1.55
-    a->setValue(3);
-    a->setValue(3);
-    a->setValue(3);
-    a->setValue(6.2);
-    a->setValue(3);
-    a->setValue(1);
-    a->setValue(3);
-    a->setValue(3);
-    qDebug() << a->valueBuffered(); // 2.83
-    a->setValue(2.2);
-    qDebug() << a->valueBuffered(); // 2.94
-}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -67,8 +46,30 @@ MainWindow::MainWindow(QWidget *parent) :
 
     testingValueBuffered();
 
+    configureFaults();
+}
 
 
+void MainWindow::testingValueBuffered()
+{
+    auto a = new ChannelDouble("1");
+    a->setBufferSize(10);
+
+    a->setValue(1.1);
+    qDebug() << a->valueBuffered(); // 1.1
+    a->setValue(2);
+    qDebug() << a->valueBuffered(); // 1.55
+    a->setValue(3);
+    a->setValue(3);
+    a->setValue(3);
+    a->setValue(6.2);
+    a->setValue(3);
+    a->setValue(1);
+    a->setValue(3);
+    a->setValue(3);
+    qDebug() << a->valueBuffered(); // 2.83
+    a->setValue(2.2);
+    qDebug() << a->valueBuffered(); // 2.94
 }
 
 void MainWindow::testingGraphErrorXY()
@@ -356,7 +357,26 @@ void MainWindow::dateTimeDeltaTests()
 //    int seconds;
 //    int milliseconds;
 //    EasyLiving::dateTimeDelta(begin, end, years, month, days, hours, minutes, seconds, milliseconds);
-//    qDebug() << years << month << days << hours;// << minutes << seconds << milliseconds;
+    //    qDebug() << years << month << days << hours;// << minutes << seconds << milliseconds;
+}
+
+void MainWindow::configureFaults()
+{
+    auto faultWidget = new FaultsWidget(ui->scrollAreaFaults);
+    faultWidget->configureBorder(ui->labelFaultBorderTL,
+                                 ui->labelFaultBorderT,
+                                 ui->labelFaultBorderTR,
+                                 ui->labelFaultBorderL,
+                                 ui->labelFaultBorderR,
+                                 ui->labelFaultBorderBL,
+                                 ui->labelFaultBorderB,
+                                 ui->labelFaultBorderBR);
+
+    fault1 = new Fault("fault1", this);
+    faultWidget->addFault(fault1);
+
+    fault2 = new Fault("fault2", this);
+    faultWidget->addFault(fault2);
 }
 
 void MainWindow::configureRealTimeQcpPlot()
@@ -727,4 +747,14 @@ void MainWindow::on_pushButton_8_clicked()
 {
     qDebug() << timer->isActive();
     timer->start();
+}
+
+void MainWindow::on_checkBoxFault1_toggled(bool checked)
+{
+    fault1->setVisible(checked);
+}
+
+void MainWindow::on_checkBoxFault2_toggled(bool checked)
+{
+    fault2->setVisible(checked);
 }

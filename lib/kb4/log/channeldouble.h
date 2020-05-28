@@ -47,7 +47,6 @@ private:
     int _bufferSize = 1;
 
     void configure();
-    void processInRange();
     
 signals:
     //TODO: template fuck

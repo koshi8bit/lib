@@ -110,7 +110,14 @@ void ChannelDouble::setRange(bool emitSignal)
 {
     rangeEmitSignal = emitSignal;
     if (emitSignal)
-        processInRange();
+    {
+        auto current = inRange();
+
+        emit inRangeChanged(current);
+        emit inRangeChangedInverted(!current);
+
+        inRangePrev = current;
+    }
 }
 
 bool ChannelDouble::inRange()
@@ -125,7 +132,7 @@ void ChannelDouble::configure()
     setPrecision(3);
 }
 
-void ChannelDouble::processInRange()
+void ChannelDouble::valueSetChild()
 {
     if (rangeEmitSignal)
     {
@@ -139,11 +146,6 @@ void ChannelDouble::processInRange()
 
         inRangePrev = current;
     }
-}
-
-void ChannelDouble::valueSetChild()
-{
-    processInRange();
 
     if (bufferSize() >= 2)
     {
