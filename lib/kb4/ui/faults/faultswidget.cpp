@@ -63,27 +63,48 @@ void FaultsWidget::configureBorder(QLabel *tl, QLabel *t, QLabel *tr, QLabel *l,
         lbl->setText(QObject::tr("Обнаружены неисправности!"));
     }
 
-    showFaultBorder(false);
+    hideFaultBorder();
 }
 
-void FaultsWidget::showFaultBorder(bool fault, QStringList faults)
+void FaultsWidget::showFaultBorder(QString str)
 {
-    QString tmp;
-
-    if (fault)
-    {
-        tmp = _template.arg(faults.join("<br/>"));
-    }
+    auto tooltip = _template.arg(str);
 
     foreach(auto lbl, border)
     {
-        lbl->setVisible(fault);
-
-        if (fault)
-        {
-            lbl->setToolTip(tmp);
-        }
+        lbl->setVisible(true);
+        lbl->setToolTip(tooltip);
     }
+}
+
+void FaultsWidget::showFaultBorder(QStringList faults)
+{
+    showFaultBorder(faults.join(joiner));
+}
+
+void FaultsWidget::hideFaultBorder()
+{
+    foreach(auto lbl, border)
+    {
+        lbl->setVisible(false);
+    }
+}
+
+void FaultsWidget::configureSharedVariable(bool enableWriteFromNet)
+{
+    sharedVariable = new ChannelQString("faults", "", this);
+    sharedVariable->configureSharedVariable(enableWriteFromNet);
+    connect(sharedVariable, &Channel::valueChanged, [this]() {
+        auto str = sharedVariable->value();
+        if(str.isEmpty())
+        {
+            hideFaultBorder();
+        }
+        else
+        {
+            showFaultBorder(str);
+        }
+    });
 }
 
 QStringList FaultsWidget::faults()
@@ -104,9 +125,23 @@ bool FaultsWidget::isFaultTriggered() const
     return _isFaultTriggered;
 }
 
-void FaultsWidget::triggerFault(bool triggered)
+void FaultsWidget::triggerFault(bool triggered, bool updateSharedVariable)
 {
     _isFaultTriggered = triggered;
-    showFaultBorder(triggered, faults());
+    if (triggered)
+    {
+        showFaultBorder(faults());
+
+        if (sharedVariable || updateSharedVariable)
+            sharedVariable->setValue(faults().join(joiner));
+    }
+    else
+    {
+        hideFaultBorder();
+
+        if (sharedVariable || updateSharedVariable)
+            sharedVariable->setValue("");
+    }
+
     emit faultTriggered(triggered);
 }

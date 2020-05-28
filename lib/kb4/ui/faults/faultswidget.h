@@ -7,6 +7,7 @@
 #include <QScrollArea>
 
 #include <lib/kb4/easyliving.h>
+#include <lib/kb4/log/channelqstring.h>
 
 #include "fault.h"
 
@@ -19,18 +20,23 @@ public:
     void addFault(Fault *fault);
 
     void configureBorder(QLabel* tl, QLabel* t, QLabel* tr, QLabel* l, QLabel* r, QLabel* bl, QLabel* b, QLabel* br);
-    void showFaultBorder(bool fault, QStringList faults = {});
+    void showFaultBorder(QString str);
+    void showFaultBorder(QStringList faults);
+    void hideFaultBorder();
+    void configureSharedVariable(bool enableWriteFromNet);
 
     QStringList faults();
 
     bool isFaultTriggered() const;
 
 private:
+    const QString joiner = "<br/>";
     QVBoxLayout *layoutFaults;
     QVector<Fault*> _faults;
     bool _isFaultTriggered = false;
+    ChannelQString *sharedVariable;
 
-    void triggerFault(bool triggered);
+    void triggerFault(bool triggered, bool updateSharedVariable = true);
 
     QVector<QLabel*> border;
     QVector<QLabel*> borderMessage;
