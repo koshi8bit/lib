@@ -192,16 +192,26 @@ void AbstractPlot::on_pushButtonHelp_clicked()
 }
 
 
-void AbstractPlot::configureAxis(bool yAxis2, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
-{
-    configureAxis(yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,
-                  label,
-                  postfix,
-                  min,
-                  max,
-                  precision,
-                  scaleType);
-}
+//void AbstractPlot::configureAxis(bool yAxis2, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
+//{
+//    configureAxis(yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,
+//                  label,
+//                  postfix,
+//                  min,
+//                  max,
+//                  precision,
+//                  scaleType);
+//}
+
+//void AbstractPlot::configureAxis(QCPAxis *axis, ChannelDouble *channel, double min, double max)
+//{
+//    configureAxis(axis,
+//                  channel->plotName(),
+//                  channel->postfix(),
+//                  min, max,
+//                  channel->precision(),
+//                  channel->scientificNotation() ? QCPAxis::ScaleType::stLogarithmic : QCPAxis::ScaleType::stLinear);
+//}
 
 void AbstractPlot::configureAxis(QCPAxis *axis, const QString &label, const QString &postfix, double min, double max, int precision, QCPAxis::ScaleType scaleType)
 {

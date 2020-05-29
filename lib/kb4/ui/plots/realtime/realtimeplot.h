@@ -3,6 +3,8 @@
 
 #include <lib/kb4/ui/plots/base/abstractplot.h>
 #include <lib/kb4/ui/plots/realtime/realtimegraph.h>
+#include <lib/kb4/ui/plots/simple/errorxygraph.h>
+
 #include "axistimeconfig.h"
 
 class RealTimePlot : public AbstractPlot
@@ -17,6 +19,12 @@ public:
 
     RealTimeGraph* addGraph(const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
     RealTimeGraph* addGraph(QCPAxis *axis, const QString &label, const QString &postfix = "", int precision = 3, bool scientificNotation = false);
+    ErrorYGraph *addGraphErrorY(const QString &label, const QString &postfix = "", bool yAxis2 = false,
+                         int precision = 3, bool scientificNotation = false);
+    ErrorXYGraph *addGraphErrorXY(const QString &label, const QString &postfix = "", bool yAxis2 = false,
+                         int precision = 3, bool scientificNotation = false);
+
+
     //Graph* addGraph(ChannelDouble *channel, bool visible = true);
     //void removeGraph(QCPGraph *graph);
     void removeGraphs();

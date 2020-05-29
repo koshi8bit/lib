@@ -5,6 +5,7 @@
 #include <lib/kb4/ui/qcustomplot/qcustomplot.h>
 
 #include <lib/kb4/ui/printscreener/printscreener.h>
+//#include <lib/kb4/log/channeldouble.h>
 
 #include "abstractgraph.h"
 #include "colorsetter.h"
@@ -44,7 +45,8 @@ public:
     QCustomPlot *qcp();
 
     //TODO delete method
-    void configureAxis(bool yAxis2, const QString &label, const QString &postfix = "", double min=0, double max=100, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+    //void configureAxis(bool yAxis2, const QString &label, const QString &postfix = "", double min=0, double max=100, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
+    //void configureAxis(QCPAxis *axis, ChannelDouble *channel, double min=0, double max=100);
     void configureAxis(QCPAxis *axis, const QString &label, const QString &postfix = "", double min=0, double max=100, int precision = 0, QCPAxis::ScaleType scaleType = QCPAxis::stLinear);
 
 

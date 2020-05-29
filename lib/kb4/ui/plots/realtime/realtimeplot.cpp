@@ -152,7 +152,7 @@ void RealTimePlot::setTimeAxisRange(const QCPRange &newValue)
 
 RealTimeGraph *RealTimePlot::graphCast(AbstractGraph *graph)
 {
-    return static_cast<RealTimeGraph *>(graph);
+    return dynamic_cast<RealTimeGraph *>(graph);
 }
 
 bool RealTimePlot::dayStyle() const
@@ -230,6 +230,32 @@ RealTimeGraph *RealTimePlot::addGraph(QCPAxis *axis, const QString &label, const
                             precision,
                             scientificNotation);
 
+    addAbstractGraph(graph);
+    return graph;
+}
+
+ErrorYGraph *RealTimePlot::addGraphErrorY(const QString &label, const QString &postfix, bool yAxis2, int precision, bool scientificNotation)
+{
+    auto graph = new ErrorYGraph(label,
+                                 postfix,
+                                 colorSetter.getColor(),
+                                 qcp(),
+                                 yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,
+                                 precision,
+                                 scientificNotation);
+    addAbstractGraph(graph);
+    return graph;
+}
+
+ErrorXYGraph *RealTimePlot::addGraphErrorXY(const QString &label, const QString &postfix, bool yAxis2, int precision, bool scientificNotation)
+{
+    auto graph = new ErrorXYGraph(label,
+                                 postfix,
+                                 colorSetter.getColor(),
+                                 qcp(),
+                                 yAxis2 ? qcp()->yAxis2 : qcp()->yAxis,
+                                 precision,
+                                 scientificNotation);
     addAbstractGraph(graph);
     return graph;
 }
@@ -576,7 +602,9 @@ void RealTimePlot::_setCursorKey(double time)
 
     foreach (auto graphElement, graphs())
     {
-        graphCast(graphElement)->moveCursor(time);
+        auto tmp = graphCast(graphElement);
+        if (tmp)
+            tmp->moveCursor(time);
     }
 
     //    auto lower = getYAxisLower();
