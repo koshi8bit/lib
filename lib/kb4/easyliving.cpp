@@ -219,6 +219,11 @@ QString EasyLiving::postfixSievertPerHourEn()
     return postfixSievertEn() + "/h";
 }
 
+QString EasyLiving::postfixPascal()
+{
+    return tr("Па");
+}
+
 QString EasyLiving::postfixFluence()
 {
     return tr("Кл");

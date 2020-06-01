@@ -51,7 +51,7 @@ void GraphLegendItem::setValue(const QString &value, bool showDelta)
     if (!postfix.isEmpty())
     {
         //text.append(" (" + postfix + ")");
-        text.append(" " + postfix);
+        text.append(" [" + postfix + "]");
     }
 
     ui->label->setText(text);
