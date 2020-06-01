@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>294</width>
+    <width>330</width>
     <height>195</height>
    </rect>
   </property>
@@ -22,33 +22,13 @@
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="1">
-      <widget class="QCheckBox" name="checkBoxScientificNotationAxis">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;При &lt;span style=&quot; font-weight:600;&quot;&gt;наличии&lt;/span&gt; галочки - цифгры на оси будут в записи вида 1.0e+01, a ось будет в логарифмическом масштабе.&lt;br/&gt;&lt;img src=&quot;:/ui/ui-plot-axis-value-03.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;При &lt;span style=&quot; font-weight:600;&quot;&gt;отсутствии&lt;/span&gt; галочки - цифгры на оси будут в стандартной записи, а ось будет в линейном масштабе.&lt;br/&gt;&lt;img src=&quot;:/ui/ui-plot-axis-value-01.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>Ось</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
+     <item row="5" column="2">
       <widget class="QCheckBox" name="checkBoxScientificNotationTick">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;При &lt;span style=&quot; font-weight:600;&quot;&gt;наличии&lt;/span&gt; галочки - цифгры на оси будут в записи вида 1.0e+01, однако ось будет в линейном масштабе.&lt;br/&gt;&lt;img src=&quot;:/ui/ui-plot-axis-value-02.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;При &lt;span style=&quot; font-weight:600;&quot;&gt;отсутствии&lt;/span&gt; галочки - цифгры на оси будут в стандартной записи. &lt;br/&gt;&lt;img src=&quot;:/ui/ui-plot-axis-value-01.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>Значение</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelMin">
-       <property name="text">
-        <string>Минимум:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -59,54 +39,7 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="labelNumberPrecision">
-       <property name="text">
-        <string>Знаков после запятой:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelMax">
-       <property name="text">
-        <string>Максимум:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Автомасштаб</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Смотри подсказку на галочках&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="text">
-        <string>Экспоненциальная зaпись:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QSpinBox" name="spinBoxNumberPrecision"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelLabel">
-       <property name="text">
-        <string>Подпись оси</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" colspan="2">
-      <widget class="QLineEdit" name="lineEditLabel"/>
-     </item>
-     <item row="3" column="1" colspan="2">
+     <item row="4" column="1" colspan="2">
       <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <widget class="ScientificNotationEdit" name="scientificNotationEditMax" native="true"/>
@@ -132,7 +65,7 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="1" colspan="2">
+     <item row="3" column="1" colspan="2">
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
         <widget class="ScientificNotationEdit" name="scientificNotationEditMin" native="true"/>
@@ -157,6 +90,73 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QLineEdit" name="lineEditLabel"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelMin">
+       <property name="text">
+        <string>Минимум:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Автомасштаб</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Смотри подсказку на галочках&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Экспоненциальная зaпись:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelLabel">
+       <property name="text">
+        <string>Подпись оси</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QCheckBox" name="checkBoxScientificNotationAxis">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;При &lt;span style=&quot; font-weight:600;&quot;&gt;наличии&lt;/span&gt; галочки - цифгры на оси будут в записи вида 1.0e+01, a ось будет в логарифмическом масштабе.&lt;br/&gt;&lt;img src=&quot;:/ui/ui-plot-axis-value-03.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;При &lt;span style=&quot; font-weight:600;&quot;&gt;отсутствии&lt;/span&gt; галочки - цифгры на оси будут в стандартной записи, а ось будет в линейном масштабе.&lt;br/&gt;&lt;img src=&quot;:/ui/ui-plot-axis-value-01.png&quot;/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="text">
+        <string>Ось</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="labelMax">
+       <property name="text">
+        <string>Максимум:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSpinBox" name="spinBoxNumberPrecision"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelNumberPrecision">
+       <property name="text">
+        <string>Колличество знаков после запятой:</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

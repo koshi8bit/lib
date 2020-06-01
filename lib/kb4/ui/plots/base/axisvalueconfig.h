@@ -36,6 +36,8 @@ private slots:
 
     void on_checkBoxAutoscale_toggled(bool checked);
 
+    void on_spinBoxNumberPrecision_valueChanged(int arg1);
+
 private:
     Ui::AxisValueConfig *ui;
     const QString scientificNotationFormat = "eb", standatrFormat = "f";

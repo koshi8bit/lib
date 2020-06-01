@@ -143,3 +143,9 @@ void AxisValueConfig::on_checkBoxAutoscale_toggled(bool checked)
     ui->scientificNotationEditMin->setEnabled(!checked);
     ui->scientificNotationEditMax->setEnabled(!checked);
 }
+
+void AxisValueConfig::on_spinBoxNumberPrecision_valueChanged(int arg1)
+{
+    ui->doubleSpinBoxMin->setDecimals(arg1);
+    ui->doubleSpinBoxMax->setDecimals(arg1);
+}

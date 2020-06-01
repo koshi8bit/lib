@@ -286,7 +286,9 @@ void RealTimePlot::_setCursor2Visible(bool newValue)
     //foreach (auto graphElement, foo<RealTimeGraph*>())
     foreach (auto graphElement, graphs())
     {
-        graphCast(graphElement)->setCursor2Visible(newValue);
+        auto tmp = graphCast(graphElement);
+        if (tmp)
+            tmp->setCursor2Visible(newValue);
     }
 
     if (labelTime->isVisible())
@@ -299,7 +301,9 @@ void RealTimePlot::_setCursor2Key(double key)
 {
     foreach (auto graphElement, graphs())
     {
-        graphCast(graphElement)->moveCursor2(_cursor->start->key());
+        auto tmp = graphCast(graphElement);
+        if (tmp)
+            tmp->moveCursor2(_cursor->start->key());
     }
 
     _cursor2->start->setCoords(key, _cursor->start->coords().y());
@@ -493,7 +497,9 @@ void RealTimePlot::setDayStyle(bool dayStyle, bool showTime)
 
         foreach(auto g, graphs())
         {
-            graphCast(g)->graph()->setLineStyle(QCPGraph::lsLine);
+            auto tmp = graphCast(g);
+            if (tmp)
+                tmp->graph()->setLineStyle(QCPGraph::lsLine);
 //            g->graph()->setLineStyle(QCPGraph::lsNone);
 //            g->graph()->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 5));
         }
@@ -538,7 +544,9 @@ void RealTimePlot::mousePress(QMouseEvent *event)
 
             foreach (auto graphElement, graphs())
             {
-                graphCast(graphElement)->updateValue();
+                auto tmp = graphCast(graphElement);
+                if (tmp)
+                    tmp->updateValue();
             }
 
 
