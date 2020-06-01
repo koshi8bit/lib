@@ -29,9 +29,9 @@ public slots:
     void setColor(QColor &color);
 
 private slots:
-    void on_checkBoxVisible_stateChanged(int arg1);
-
     void on_pushButtonColor_clicked();
+
+    void on_checkBoxVisible_toggled(bool checked);
 
 signals:
     void visibleChanged(bool newValue);
@@ -44,8 +44,9 @@ private:
     QColor color;
     bool scientificNotation = false;
     int precision;
+    bool visible = true;
 
-    const QString noValueText = "---";
+    void _setVisibleValue(bool newValue);
 
 };
 

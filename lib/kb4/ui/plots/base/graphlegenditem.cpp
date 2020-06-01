@@ -42,13 +42,19 @@ void GraphLegendItem::setValue(double value, bool showDelta)
 
 void GraphLegendItem::setValue(const QString &value, bool showDelta)
 {
+    if (!visible)
+    {
+        ui->label->setText(label);
+        return;
+    }
+
     auto _template = QString("%1: ") + (showDelta ? "Δ" : "") + "%2";
 
     auto text = QString(_template)
                        .arg(label)
                        .arg(value);
 
-    if (!postfix.isEmpty())
+    if (!postfix.isEmpty() && visible)
     {
         //text.append(" (" + postfix + ")");
         text.append(" [" + postfix + "]");
@@ -60,16 +66,6 @@ void GraphLegendItem::setValue(const QString &value, bool showDelta)
 void GraphLegendItem::setLabelText(const QString &string)
 {
     ui->label->setText(string);
-}
-
-void GraphLegendItem::on_checkBoxVisible_stateChanged(int arg1)
-{
-    auto visible = EasyLiving::isChecked(arg1);
-    if (!visible)
-    {
-        setValue(noValueText);
-    }
-    emit visibleChanged(visible);
 }
 
 void GraphLegendItem::on_pushButtonColor_clicked()
@@ -86,9 +82,22 @@ void GraphLegendItem::on_pushButtonColor_clicked()
 
 void GraphLegendItem::setVisibleValue(bool newValue)
 {
+    _setVisibleValue(newValue);
     ui->checkBoxVisible->setChecked(newValue);
+
+}
+
+void GraphLegendItem::on_checkBoxVisible_toggled(bool checked)
+{
+    _setVisibleValue(checked);
+    emit visibleChanged(checked);
+}
+
+void GraphLegendItem::_setVisibleValue(bool newValue)
+{
+    visible = newValue;
     if (!newValue)
     {
-        setValue(noValueText);
+        setValue("");
     }
 }
