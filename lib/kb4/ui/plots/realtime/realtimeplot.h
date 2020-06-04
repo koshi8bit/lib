@@ -95,7 +95,7 @@ private:
     void configurePlotLine();
     void configurePlotLine(QCPItemLine **line);
 
-    void configureAxesZoomAndDrag(bool configureYAxises);
+    void configureAxesZoomAndDrag(bool configureXAxises);
 
 
     void updateTimeAxisLabel();

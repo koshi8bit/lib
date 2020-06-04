@@ -396,14 +396,14 @@ void RealTimePlot::setMoveLineRealTime(bool newValue)
 }
 
 
-void RealTimePlot::configureAxesZoomAndDrag(bool configureYAxises)
+void RealTimePlot::configureAxesZoomAndDrag(bool configureXAxises)
 {
     auto axis = QList<QCPAxis*>()
             << qcp()->yAxis
             << qcp()->yAxis2;
 
-    Q_UNUSED(configureYAxises)
-    //if (configureTimeAxis)
+    Q_UNUSED(configureXAxises)
+    if (configureXAxises)
         axis << qcp()->xAxis;
     qcp()->axisRect()->setRangeZoomAxes(axis);
     qcp()->axisRect()->setRangeDragAxes(axis);
@@ -573,7 +573,8 @@ void RealTimePlot::mouseDoubleClick(QMouseEvent *event)
 void RealTimePlot::mouseWheel(QWheelEvent *event)
 {
     Q_UNUSED(event)
-    qDebug() << "mouseWheel";
+    //qDebug() << "mouseWheel";
+    configureAxesZoomAndDrag(!isInAxisRect(event->pos()));
     //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
     //qDebug() << isInAxisRect(event->pos());
 }
