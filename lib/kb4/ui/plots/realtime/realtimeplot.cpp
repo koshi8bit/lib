@@ -573,7 +573,7 @@ void RealTimePlot::mouseDoubleClick(QMouseEvent *event)
 void RealTimePlot::mouseWheel(QWheelEvent *event)
 {
     Q_UNUSED(event)
-    qDebug() << "mouseWheel";
+    qDebug() << "mouseWheel" << isInAxisRect(event->pos());
     //configureAxesZoomAndDrag(isInAxisRect(event->pos()));
     //qDebug() << isInAxisRect(event->pos());
 }
