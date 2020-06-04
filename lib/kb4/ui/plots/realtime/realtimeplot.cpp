@@ -402,7 +402,6 @@ void RealTimePlot::configureAxesZoomAndDrag(bool configureXAxises)
             << qcp()->yAxis
             << qcp()->yAxis2;
 
-    Q_UNUSED(configureXAxises)
     if (configureXAxises)
         axis << qcp()->xAxis;
     qcp()->axisRect()->setRangeZoomAxes(axis);
