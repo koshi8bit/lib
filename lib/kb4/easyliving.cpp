@@ -11,7 +11,7 @@ EasyLiving::EasyLiving()
 
 
 //double
-QString EasyLiving::formatDouble(double value, int precision, bool scientificNotation, EasyLiving::DoubleSeporatorSign seporatorSign, bool showGroupSeparator)
+QString EasyLiving::formatDouble(double value, int precision, bool scientificNotation, bool showGroupSeparator, EasyLiving::DoubleSeporatorSign seporatorSign)
 {
     char _format= scientificNotation ? 'e' : 'f';
 
@@ -397,6 +397,8 @@ bool EasyLiving::exec(QString cmdLine)
 {
     return QProcess::startDetached(cmdLine);
 }
+
+
 
 QString EasyLiving::setWindowTitle(QString text)
 {

@@ -117,7 +117,6 @@ QString Excel::formatDoubleValue(ChannelDouble *channel)
     return  EasyLiving::formatDouble(channel->value(),
                                      3,
                                      channel->scientificNotation(),
-                                     EasyLiving::Comma,
                                      false);
 
 //    if (EasyLiving::isEqualDouble(value, 0))

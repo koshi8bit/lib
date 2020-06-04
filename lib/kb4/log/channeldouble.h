@@ -1,7 +1,9 @@
 #ifndef CHANNELDOUBLE_H
 #define CHANNELDOUBLE_H
 
+
 #include "channelrealtimegraph.h"
+
 
 class ChannelDouble : public ChannelRealTimeGraph<double>
 {

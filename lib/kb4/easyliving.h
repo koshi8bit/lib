@@ -10,6 +10,7 @@
 #include <QDateTime>
 #include <QDir>
 #include <QProcess>
+#include <QTimer>
 
 //errors
 #define EL_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
@@ -36,7 +37,7 @@ public:
     //double
     static QLocale localeMy;
     //fixme double value, int precision = 3, bool scientificNotation = false, bool showGroupSeparator = false, bool seporatorPoint = false)
-    static QString formatDouble(double value, int precision = 3, bool scientificNotation = false, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma, bool showGroupSeparator = true);
+    static QString formatDouble(double value, int precision = 3, bool scientificNotation = false, bool showGroupSeparator = true, DoubleSeporatorSign seporatorSign = DoubleSeporatorSign::Comma);
     static bool isBetween(double value, double min, double max);
     static bool isEqualDouble(double a, double b);
 
