@@ -73,6 +73,12 @@ void AxisTimeConfig::on_pushButtonTime010000_clicked()
     on_buttonBox_accepted();
 }
 
+void AxisTimeConfig::on_pushButtonTime003000_clicked()
+{
+    ui->spinBoxFullSec->setValue(1800);
+    on_buttonBox_accepted();
+}
+
 void AxisTimeConfig::on_pushButtonTime001000_clicked()
 {
     ui->spinBoxFullSec->setValue(600);
@@ -96,4 +102,6 @@ void AxisTimeConfig::on_pushButtonTime000030_clicked()
     ui->spinBoxFullSec->setValue(30);
     on_buttonBox_accepted();
 }
+
+
 

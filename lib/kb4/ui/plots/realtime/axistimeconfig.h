@@ -36,6 +36,8 @@ private slots:
     void on_pushButtonTime000030_clicked();
 
 
+    void on_pushButtonTime003000_clicked();
+
 private:
     Ui::AxisTimeConfig *ui;
     QCPAxis *axis;
