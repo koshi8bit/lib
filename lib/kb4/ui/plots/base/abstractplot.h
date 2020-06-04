@@ -20,6 +20,7 @@ class AbstractPlot : public QWidget
     Q_OBJECT
 
 public:
+    static void autoScaleAxis(QCPAxis *axis);
     explicit AbstractPlot(QWidget *parent = nullptr);
     ~AbstractPlot();
 
@@ -27,6 +28,8 @@ public:
     void addAbstractGraph(AbstractGraph *graph);
 
     void setLegendVisible(bool visible);
+
+
 
 
 
@@ -67,7 +70,6 @@ private slots:
 private:
     Ui::AbstractPlot *ui;
     void configureLegend();
-    void autoScaleAxis(QCPAxis *axis);
 
     void setButtonsVisible(bool visible, bool options);
 
