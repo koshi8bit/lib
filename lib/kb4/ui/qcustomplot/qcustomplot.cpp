@@ -17931,6 +17931,7 @@ void QCPAxisRect::mouseReleaseEvent(QMouseEvent *event, const QPointF &startPos)
 */
 void QCPAxisRect::wheelEvent(QWheelEvent *event)
 {
+  emit _wheelEvent(event);
   // Mouse range zooming interaction:
   if (mParentPlot->interactions().testFlag(QCP::iRangeZoom))
   {

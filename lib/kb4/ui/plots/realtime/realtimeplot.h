@@ -6,6 +6,7 @@
 #include <lib/kb4/ui/plots/simple/errorxygraph.h>
 
 #include "axistimeconfig.h"
+#include "filterxaxis.h"
 
 class RealTimePlot : public AbstractPlot
 {
@@ -95,7 +96,8 @@ private:
     void configurePlotLine();
     void configurePlotLine(QCPItemLine **line);
 
-    void configureAxesZoomAndDrag(bool configureYAxises);
+    bool configureXAxises = false, prevConfigureYAxises = false;
+
 
 
     void updateTimeAxisLabel();
@@ -134,6 +136,8 @@ private slots:
     void mousePress(QMouseEvent *event);
     void mouseDoubleClick(QMouseEvent *event);
     void mouseWheel(QWheelEvent *event);
+
+    void configureAxesZoomAndDrag(bool configureXAxises);
 
     void beforeReplot();
     void _setTimeAxisRange(const QCPRange &newRange);

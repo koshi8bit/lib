@@ -23,6 +23,8 @@
 #include <lib/kb4/ui/plots/simple/simpleplot.h>
 #include <lib/kb4/ui/plots/simple/simplegraph.h>
 
+#include <lib/kb4/ui/plots/realtime/filterxaxis.h>
+
 namespace Ui {
 class MainWindow;
 }

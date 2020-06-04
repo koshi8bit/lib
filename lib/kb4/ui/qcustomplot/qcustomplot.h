@@ -2105,7 +2105,7 @@ public:
   
   // reimplemented virtual methods:
   virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const Q_DECL_OVERRIDE;
-  
+
   // non-property methods:
   Qt::Orientation orientation() const { return mOrientation; }
   int pixelOrientation() const { return rangeReversed() != (orientation()==Qt::Vertical) ? -1 : 1; }
@@ -4674,6 +4674,9 @@ public:
   // reimplemented virtual methods:
   virtual void update(UpdatePhase phase) Q_DECL_OVERRIDE;
   virtual QList<QCPLayoutElement*> elements(bool recursive) const Q_DECL_OVERRIDE;
+
+signals:
+  void _wheelEvent(QWheelEvent *event);
 
 protected:
   // property members:

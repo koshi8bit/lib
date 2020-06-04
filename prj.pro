@@ -157,6 +157,7 @@ HEADERS += \
     lib/kb4/ui/plots/radar/radartemperature4graph.h \
     lib/kb4/ui/plots/radar/radartemperature4plot.h \
     lib/kb4/ui/plots/realtime/axistimeconfig.h \
+    lib/kb4/ui/plots/realtime/filterxaxis.h \
     lib/kb4/ui/plots/realtime/realtimegraph.h \
     lib/kb4/ui/plots/realtime/realtimeplot.h \
     lib/kb4/ui/plots/simple/errorxygraph.h \
@@ -208,6 +209,7 @@ SOURCES += \
     lib/kb4/ui/plots/radar/radartemperature4graph.cpp \
     lib/kb4/ui/plots/radar/radartemperature4plot.cpp \
     lib/kb4/ui/plots/realtime/axistimeconfig.cpp \
+    lib/kb4/ui/plots/realtime/filterxaxis.cpp \
     lib/kb4/ui/plots/realtime/realtimegraph.cpp \
     lib/kb4/ui/plots/realtime/realtimeplot.cpp \
     lib/kb4/ui/plots/simple/errorxygraph.cpp \
