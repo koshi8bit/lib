@@ -43,7 +43,7 @@ void ValueDouble::configure(QString name, QString postfix, int precision, bool h
 void ValueDouble::configure(ChannelDouble *getChannel, int fontSize)
 {
     connect(getChannel, &ChannelDouble::valueChangedDouble, this, &ValueDouble::setValue);
-    configure(getChannel->widgetName(), getChannel->postfix(), getChannel->precision(),
+    configure(getChannel->widgetName(), getChannel->postfix(), getChannel->precisionWidget(),
               true, getChannel->scientificNotation(), fontSize);
 }
 
@@ -51,7 +51,7 @@ void ValueDouble::configure(ChannelDouble *getChannel, ChannelDouble *setChannel
 {
     connect(getChannel, &ChannelDouble::valueChangedDouble, this, &ValueDouble::setValue);
     connect(this, &ValueDouble::valueChanged, setChannel, &ChannelDouble::setValue);
-    configure(getChannel->widgetName(), getChannel->postfix(), getChannel->precision(),
+    configure(getChannel->widgetName(), getChannel->postfix(), getChannel->precisionWidget(),
               false, getChannel->scientificNotation(), fontSize);
 }
 

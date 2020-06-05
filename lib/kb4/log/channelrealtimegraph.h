@@ -48,7 +48,7 @@ public:
     {
         _realTimePlot = plot;
         _realTimeGraph = plot->addGraph(axis, this->plotName(), this->postfix(),
-                                        precision(), scientificNotation());
+                                        precisionPlot(), scientificNotation());
         _realTimeGraph->setVisible(visible);
         if (this->color().isValid())
             _realTimeGraph->setColor(this->color());
@@ -64,24 +64,43 @@ public:
         _scientificNotation = newValue;
     }
 
-    int precision() const
-    {
-        return _precision;
-    }
+
 
     void setPrecision(int precision)
     {
-        _precision = precision;
+        setPrecisionPlot(precision);
+        setPrecisionLog(precision);
+        setPrecisionWidget(precision);
+    }
+
+    int precisionPlot() const
+    {
+        return _precisionPlot;
+    }
+
+    void setPrecisionPlot(int precision)
+    {
+        _precisionPlot = precision;
     }
 
     int precisionLog() const
     {
-        return _precision;
+        return _precisionLog;
     }
 
     void setPrecisionLog(int precision)
     {
-        _precision = precision;
+        _precisionLog = precision;
+    }
+
+    int precisionWidget() const
+    {
+        return _precisionWidget;
+    }
+
+    void setPrecisionWidget(int precision)
+    {
+        _precisionWidget = precision;
     }
 
     RealTimeGraph *realTimeGraph()
@@ -98,7 +117,7 @@ private:
     RealTimeGraph *_realTimeGraph = nullptr;
     RealTimePlot *_realTimePlot = nullptr;
 
-    int _precision, _precisionLog;
+    int _precisionPlot, _precisionLog, _precisionWidget;
     bool _scientificNotation = false;
 };
 

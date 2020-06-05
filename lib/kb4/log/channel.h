@@ -18,16 +18,17 @@ public:
     virtual ~Channel();
 
 
+    QString logName() const;
     QString plotName() const;
     void setPlotName(const QString plotName);
     QString widgetName() const;
     void setWidgetName(const QString widgetName);
+
     QColor color() const;
     void setColor(const QColor &color);
     QString postfix() const;
     void setPostfix(const QString &postfix);
 
-    QString logName() const;
 
     const static QString seporator;
 
