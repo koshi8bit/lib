@@ -339,9 +339,18 @@ bool EasyLiving::createDir(QString path)
     return dir.exists();
 }
 
-bool EasyLiving::writeFile(QString path, QString text, bool append)
+bool EasyLiving::writeFile(QString path, QString text, bool append, bool addDateTime)
 {
     QFile file(path);
+
+
+    if (addDateTime)
+    {
+        auto time = QDateTime::currentDateTime().toString(EasyLiving::formatDateTimeUi(true));
+        text = QString("%1: %2\n")
+                .arg(time)
+                .arg(text);
+    }
 
     QIODevice::OpenMode flags = QIODevice::WriteOnly;
     if (append) {
@@ -350,6 +359,7 @@ bool EasyLiving::writeFile(QString path, QString text, bool append)
 
     if (file.open(flags)) {
         QTextStream stream(&file);
+
         stream << text;
         return true;
     }

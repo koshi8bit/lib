@@ -47,6 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     testingValueBuffered();
 
     configureFaults();
+
+    EasyLiving::writeFile("test.log", "123", true, true);
+    EasyLiving::writeFile("test.log", "456", true, true);
 }
 
 
