@@ -33,11 +33,6 @@ public:
         //configure and get postfix
         //setPostfix=???
 
-        //child
-        //setPrecision(??);
-        //setScientificNotation(??);
-
-
         configureSharedVariable(true);
         askSharedVariable();
     }
