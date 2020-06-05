@@ -74,6 +74,16 @@ public:
         _precision = precision;
     }
 
+    int precisionLog() const
+    {
+        return _precision;
+    }
+
+    void setPrecisionLog(int precision)
+    {
+        _precision = precision;
+    }
+
     RealTimeGraph *realTimeGraph()
     {
         return _realTimeGraph;
@@ -88,7 +98,7 @@ private:
     RealTimeGraph *_realTimeGraph = nullptr;
     RealTimePlot *_realTimePlot = nullptr;
 
-    int _precision;
+    int _precision, _precisionLog;
     bool _scientificNotation = false;
 };
 
