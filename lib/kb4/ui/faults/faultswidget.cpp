@@ -59,7 +59,7 @@ void FaultsWidget::showFaultBorder(QString str)
         lbl->setToolTip(tooltip);
     }
 
-    auto shortMessage = str.split(joiner).join("; ");
+    auto shortMessage = str.split(joiner).join("; "); //TODO убрать замену каждый раз. Передавать в функцию стринглист и только для тултипа делать джоин <br/>
 
     foreach(auto lbl, borderMessage)
     {
