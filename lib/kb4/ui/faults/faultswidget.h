@@ -32,7 +32,7 @@ public:
 
 
 private:
-    const QString joiner = "<br/>";
+    const QString joiner = "<br/>", borderMessageText=QObject::tr("Обнаружены неисправности!");
     QVBoxLayout *layoutFaults;
     QVector<Fault*> _faults;
     bool _isFaultTriggered = false;

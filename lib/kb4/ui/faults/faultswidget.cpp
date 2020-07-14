@@ -40,10 +40,10 @@ void FaultsWidget::configureBorder(QLabel *top, QLabel *left, QLabel *right, QLa
         lbl->setStyleSheet("background-color: red; color: yellow;");
     }
 
-    foreach(auto lbl, borderMessage)
-    {
-        lbl->setText(QObject::tr("Обнаружены неисправности!"));
-    }
+//    foreach(auto lbl, borderMessage)
+//    {
+//        lbl->setText(borderMessageText);
+//    }
 
     hideFaultBorder();
 }
@@ -57,6 +57,13 @@ void FaultsWidget::showFaultBorder(QString str)
     {
         lbl->setVisible(true);
         lbl->setToolTip(tooltip);
+    }
+
+    auto shortMessage = str.split(joiner).join("; ");
+
+    foreach(auto lbl, borderMessage)
+    {
+        lbl->setText(borderMessageText + " " + shortMessage);
     }
 }
 
