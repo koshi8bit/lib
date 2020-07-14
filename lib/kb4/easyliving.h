@@ -16,7 +16,8 @@
 #define EL_FORMAT_ERR(message) (QStringList() << "ACHTUNG! " << Q_FUNC_INFO << ": " << message).join("")
 
 //variables
-#define EL_GET_VARIABLE_NAME(Variable) (#Variable)
+#define EL_GET_VARIABLE_NAME(Variable) EL_NAME(Variable) //TODO delete later
+#define EL_NAME(Variable) (#Variable)
 
 //raw string
 //R"(raw\string)"
