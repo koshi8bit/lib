@@ -103,13 +103,13 @@ void ChannelDouble::setRange(double min, double max)
 {
     rangeMin = min;
     rangeMax = max;
-    setRange(true);
+    setRangeEnable(true);
 }
 
-void ChannelDouble::setRange(bool emitSignal)
+void ChannelDouble::setRangeEnable(bool rangeEnable)
 {
-    rangeEmitSignal = emitSignal;
-    if (emitSignal)
+    this->rangeEnable = rangeEnable;
+    if (rangeEnable)
     {
         auto current = inRange();
 
@@ -134,7 +134,7 @@ void ChannelDouble::configure()
 
 void ChannelDouble::valueSetChild()
 {
-    if (rangeEmitSignal)
+    if (rangeEnable)
     {
         auto current = inRange();
 

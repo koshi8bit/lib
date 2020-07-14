@@ -29,7 +29,7 @@ public:
     void setBufferSize(int bufferSize);
 
     void setRange(double min, double max);
-    void setRange(bool emitSignal);
+    void setRangeEnable(bool emitSignal);
     bool inRange();
 
 private:
@@ -42,7 +42,7 @@ private:
     std::function<double(double)> toRawFunc = nullptr;
     double scalingMinValue=0, scalingMaxValue=0, scalingMinRaw=0, scalingMaxRaw=0;
     double rangeMin=0, rangeMax=0;
-    bool rangeEmitSignal = false, inRangePrev = false;
+    bool rangeEnable = false, inRangePrev = true;
 
     //QQueue<double> buffer;
     QLinkedList<double> buffer;

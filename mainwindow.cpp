@@ -48,8 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     configureFaults();
 
-    EasyLiving::writeFile("test.log", "123", true, true);
-    EasyLiving::writeFile("test.log", "456", true, true);
+    qDebug() << EasyLiving::isBetween(5.2e-10, 1.0e-05, 1.0e-02);
 }
 
 
