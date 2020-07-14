@@ -13,6 +13,9 @@ private:
 public:
     static int iniReadInt(QSettings *settings, QString path, int defaultValue=0,
                           bool *okFind=nullptr, bool *okParce=nullptr);
+
+    static double iniReadDouble(QSettings *settings, QString path, double defaultValue=0,
+                          bool *okFind=nullptr, bool *okParce=nullptr);
 };
 
 #endif // SETTINGS_H
