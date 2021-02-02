@@ -64,7 +64,7 @@ void RealTimePlot::configureStatusLabel()
     statusLabel = new QCPItemText(qcp());
     statusLabel->position->setType(QCPItemPosition::ptAxisRectRatio);
     statusLabel->setPositionAlignment(Qt::AlignRight|Qt::AlignBottom);
-    statusLabel->position->setCoords(1.0, 0.95); // lower right corner of axis rect
+    statusLabel->position->setCoords(1, 0.95); // lower right corner of axis rect
 
     statusLabel->setTextAlignment(Qt::AlignLeft);
     statusLabel->setFont(QFont(font().family(), 10));
