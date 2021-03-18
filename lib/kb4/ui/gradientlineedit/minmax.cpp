@@ -14,6 +14,16 @@ MinMax::~MinMax()
     delete ui;
 }
 
+void MinMax::setComponentsEnabled(bool enabled)
+{
+    ui->pushButtonConfig->setEnabled(enabled);
+    if (!enabled)
+    {
+        ui->pushButtonConfig->setChecked(false);
+        //setVisibleEdits(false);
+    }
+}
+
 void MinMax::setRange(double min, double max)
 {
     ui->doubleSpinBoxMin->setValue(min);

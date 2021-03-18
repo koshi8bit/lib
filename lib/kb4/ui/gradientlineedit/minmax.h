@@ -17,6 +17,8 @@ public:
     explicit MinMax(QWidget *parent = nullptr);
     ~MinMax();
 
+    void setComponentsEnabled(bool enabled);
+
 
 
 signals:
