@@ -40,9 +40,6 @@ public:
     void setRangeEnable(bool emitSignal);
     bool inRange();
 
-    QLinkedList<double> buffer;
-    int _bufferSize = 1;
-
 private:
 
     //double (*toScaledFunc)(double) = nullptr;
@@ -56,8 +53,8 @@ private:
     bool rangeEnable = false, inRangePrev = true;
 
     //QQueue<double> buffer;
-//    QLinkedList<double> buffer;
-//    int _bufferSize = 1;
+    QLinkedList<double> buffer;
+    int _bufferSize = 1;
 
     void configure();
 
