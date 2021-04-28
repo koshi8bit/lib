@@ -9,6 +9,14 @@ class ChannelDouble : public ChannelRealTimeGraph<double>
 {
     Q_OBJECT
 public:
+    enum AvgFunc{
+        ArithmeticMean,
+        StandardDeviation
+        //Median,
+    };
+    Q_ENUM(AvgFunc)
+
+
     ChannelDouble(QString name, QString postfix, QObject *parent = nullptr);
     ChannelDouble(QString name, QString postfix, QStringList &path, QObject *parent = nullptr);
     ChannelDouble(QString sharedVariableName, QObject *parent = nullptr);
@@ -23,7 +31,7 @@ public:
     double rawValue();
 
 
-    double valueBuffered();
+    double calcAvg(AvgFunc func = AvgFunc::ArithmeticMean, double *error = nullptr);
 
     int bufferSize() const;
     void setBufferSize(int bufferSize);
@@ -31,6 +39,9 @@ public:
     void setRange(double min, double max);
     void setRangeEnable(bool emitSignal);
     bool inRange();
+
+    QLinkedList<double> buffer;
+    int _bufferSize = 1;
 
 private:
 
@@ -45,10 +56,14 @@ private:
     bool rangeEnable = false, inRangePrev = true;
 
     //QQueue<double> buffer;
-    QLinkedList<double> buffer;
-    int _bufferSize = 1;
+//    QLinkedList<double> buffer;
+//    int _bufferSize = 1;
 
     void configure();
+
+    double calcArithmeticMean();
+    double calcStandardDeviation(double *error);
+
     
 signals:
     //TODO: template fuck

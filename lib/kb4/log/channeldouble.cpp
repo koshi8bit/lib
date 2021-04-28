@@ -75,11 +75,23 @@ double ChannelDouble::rawValue()
     return _rawValue;
 }
 
-double ChannelDouble::valueBuffered()
+double ChannelDouble::calcAvg(AvgFunc func, double *error)
 {
     if (bufferSize() < 2)
         return value();
 
+    if (func == AvgFunc::ArithmeticMean)
+        return calcArithmeticMean();
+
+    if (func == AvgFunc::StandardDeviation)
+    {
+        return calcStandardDeviation(error);
+    }
+
+}
+
+double ChannelDouble::calcArithmeticMean()
+{
     auto result = 0.0;
     foreach(auto element, buffer)
     {
@@ -87,6 +99,25 @@ double ChannelDouble::valueBuffered()
     }
     result /= buffer.count();
     return result;
+}
+
+double ChannelDouble::calcStandardDeviation(double *error)
+{
+
+    double avarage_mu = calcArithmeticMean();
+
+    if (error == nullptr)
+        return avarage_mu;
+
+    double summ=0;
+    foreach(auto element, buffer)
+    {
+        summ += qPow(element - avarage_mu, 2);
+    }
+    auto sigma_pow_2 = summ/(buffer.count() - 1); // -1 is not bug, watch here https://ru.wikipedia.org/wiki/%D0%A1%D1%80%D0%B5%D0%B4%D0%BD%D0%B5%D0%BA%D0%B2%D0%B0%D0%B4%D1%80%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5_%D0%BE%D1%82%D0%BA%D0%BB%D0%BE%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5#%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80_%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BD%D0%BE%D0%B3%D0%BE_%D0%BE%D1%82%D0%BA%D0%BB%D0%BE%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F_%D0%BE%D1%86%D0%B5%D0%BD%D0%BE%D0%BA_%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2
+    *error = qSqrt(sigma_pow_2);
+
+    return avarage_mu;
 }
 
 int ChannelDouble::bufferSize() const

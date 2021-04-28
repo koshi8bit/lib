@@ -13,7 +13,7 @@ class Worker : public QObject
     Q_OBJECT
 
 public:
-    explicit Worker(QString name);
+    explicit Worker(QString name, Qt::ConnectionType connectionType=Qt::ConnectionType::AutoConnection);
     ~Worker();
     std::function<void()> heavyWork;
 

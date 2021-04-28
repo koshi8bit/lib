@@ -1,7 +1,7 @@
 #include "worker.h"
 
 
-Worker::Worker(QString name)
+Worker::Worker(QString name, Qt::ConnectionType connectionType)
     :QObject()
 {
     this->name = name;
@@ -12,13 +12,15 @@ Worker::Worker(QString name)
     timer = new QTimer();
     timer->setSingleShot(false);
     connect(timer, &QTimer::timeout,
-            this, &Worker::timerTimeout);
+            this, &Worker::timerTimeout,
+            connectionType);
 
     timerSingleTime = new QTimer();
     timerSingleTime->setInterval(0);
     timerSingleTime->setSingleShot(true);
     connect(timerSingleTime, &QTimer::timeout,
-            this, &Worker::timerTimeoutSingleTime);
+            this, &Worker::timerTimeoutSingleTime,
+            connectionType);
 
 }
 

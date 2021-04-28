@@ -11,6 +11,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(EasyLiving::setWindowTitle("Tests"));
 
+
+//    QMessageBox::critical(this, "Потерять данные?",
+//                         "SQL база данных не подключена. Данные не запишуться на сервер!\n\nВы согласны потерять данные об эксперементе?",
+//                          QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
+
     settings = new QSettings("settings.ini", QSettings::IniFormat, this);
     if(settings->value("qDebug/saveToFile", false).toBool())
         configureQDebug();
@@ -49,6 +54,25 @@ MainWindow::MainWindow(QWidget *parent) :
     configureFaults();
 
     qDebug() << EasyLiving::isBetween(5.2e-10, 1.0e-05, 1.0e-02);
+
+    ChannelDouble f("aaa");
+    f.setBufferSize(8);
+    f.setValue(2);
+    f.setValue(4);
+    f.setValue(4);
+    f.setValue(4);
+    f.setValue(5);
+    f.setValue(5);
+    f.setValue(7);
+    f.setValue(9);
+    double err, avg;
+    avg = f.calcAvg(ChannelDouble::StandardDeviation, &err);
+    qDebug() << avg << err;
+//    foreach(auto e, f.buffer)
+//    {
+//        qDebug() << e;
+//    }
+
 }
 
 
@@ -58,9 +82,9 @@ void MainWindow::testingValueBuffered()
     a->setBufferSize(10);
 
     a->setValue(1.1);
-    qDebug() << a->valueBuffered(); // 1.1
+    qDebug() << a->calcAvg(); // 1.1
     a->setValue(2);
-    qDebug() << a->valueBuffered(); // 1.55
+    qDebug() << a->calcAvg(); // 1.55
     a->setValue(3);
     a->setValue(3);
     a->setValue(3);
@@ -69,19 +93,28 @@ void MainWindow::testingValueBuffered()
     a->setValue(1);
     a->setValue(3);
     a->setValue(3);
-    qDebug() << a->valueBuffered(); // 2.83
+    qDebug() << a->calcAvg(); // 2.83
     a->setValue(2.2);
-    qDebug() << a->valueBuffered(); // 2.94
+    qDebug() << a->calcAvg(); // 2.94
 }
 
 void MainWindow::testingGraphErrorXY()
 {
     auto sg = ui->simplePLot->addGraphErrorXY("tst");
     qDebug() << "started test";
-    sg->addData(2, 2, 0.2, 0.2, 0.2, 0.2);
-    sg->addData(1, 1, 0.1, 0.1, 0.1, 0.1);
-    sg->addData(3, 3, 0.3, 0.3, 0.3, 0.3);
+//    sg->addData(2, 2, 0.2, 0.2, 0.2, 0.2);
+//    sg->addData(1, 1, 0.1, 0.1, 0.1, 0.1);
+//    sg->addData(3, 3, 0.3, 0.3, 0.3, 0.3);
     //sg->addData(0, 0, 0.5, 0.5, 0.6, 0.6);
+    sg->addData(1880, 1, 0, 0, 0, 0);
+    sg->addData(1883, 0.99, 0.12, 0.12, 1.581, 1.581);
+    sg->addData(1899, 2.58, 1.12, 1.12, 2.681, 2.681);
+    sg = ui->simplePLot->addGraphErrorXY("tst2");
+    //sg->addData(1, 2, 4, 4, 3, 3);
+    sg->addData(1901, 3.0, 0.75, 0.75, 1.35, 1.35);
+    sg->addData(1900.5, 3.614, 0.155, 0.155, 0, 0);
+    sg->addData(1893, 4.379, 0.35, 0.35, 4.05, 4.05);
+
 }
 
 
@@ -405,25 +438,28 @@ void MainWindow::configureRealTimeQcpPlot()
 
     plot = ui->realTimeQcpI;
     plot->configureAxis(plot->qcp()->yAxis, tr("Тоооок"), EasyLiving::postfixMilliAmpere(), 0, 10, 2);
-    plot->setMarginGroup(mgColumn1);
+    plot->setMarginGroup(mgColumn0);
 
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpTemperature;
     plot->configureAxis(plot->qcp()->yAxis, tr("Температурим"), EasyLiving::postfixCelsius(), 0, 200);
     plot->setMarginGroup(mgColumn0);
+    plot->setVisible(false);
 
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpPower;
     plot->configureAxis(plot->qcp()->yAxis, tr("МОООЩА!"), EasyLiving::postfixWatt(), 0, 700);
     plot->setMarginGroup(mgColumn1);
+    plot->setVisible(false);
 
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpPersent;
     plot->configureAxis(plot->qcp()->yAxis, tr("Процентики"), EasyLiving::postfixPersent(), 0, 100);
     plot->setMarginGroup(mgColumn0);
+    plot->setVisible(false);
 
     configureRealTimeQcpPlot(plot);
 
@@ -436,16 +472,19 @@ void MainWindow::configureRealTimeQcpPlot()
     plot->qcp()->yAxis->setTicker(textTicker);
     //plot->plot()->yAxis->setSubTicks(false);
     configureRealTimeQcpPlot(plot);
+    plot->setVisible(false);
 
     plot = ui->realTimeQcpVacuum;
     plot->configureAxis(plot->qcp()->yAxis, tr("Вакуум"), "Pa", 1.0e-04, 1.0e+01, 0, QCPAxis::stLogarithmic);
     plot->setMarginGroup(mgColumn0);
+    plot->setVisible(false);
 
     configureRealTimeQcpPlot(plot);
 
     plot = ui->realTimeQcpRadiation;
     plot->configureAxis(plot->qcp()->yAxis, tr("Радиашн"), EasyLiving::postfixSievertPerHour(), 1.0e-07, 1.0e-01, 0, QCPAxis::stLogarithmic);
     plot->setMarginGroup(mgColumn1);
+    plot->setVisible(false);
 
     configureRealTimeQcpPlot(plot);
 }

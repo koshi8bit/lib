@@ -41,7 +41,6 @@ RESOURCES += \
     lib/kb4/pic/ui-res.qrc
 
 DISTFILES += \
-    README.md \
     lib/kb4/pic/ico/clean-web.bat \
     lib/kb4/pic/ico/custom/ask-question_002.png \
     lib/kb4/pic/ico/custom/gears-white.png \
@@ -237,6 +236,8 @@ HEADERS += \
     lib/kb4/ui/faults/faultswidget.h \
     lib/kb4/ui/gradientlineedit/gradientlineedit.h \
     lib/kb4/ui/gradientlineedit/minmax.h \
+    lib/kb4/ui/hotcolormap/hotspot.h \
+    lib/kb4/ui/hotcolormap/hotspotmap.h \
     lib/kb4/ui/label/qlabelext.h \
     lib/kb4/ui/plots/base/abstractgraph.h \
     lib/kb4/ui/plots/base/abstractplot.h \
@@ -288,6 +289,8 @@ SOURCES += \
     lib/kb4/ui/faults/faultswidget.cpp \
     lib/kb4/ui/gradientlineedit/gradientlineedit.cpp \
     lib/kb4/ui/gradientlineedit/minmax.cpp \
+    lib/kb4/ui/hotcolormap/hotspot.cpp \
+    lib/kb4/ui/hotcolormap/hotspotmap.cpp \
     lib/kb4/ui/label/qlabelext.cpp \
     lib/kb4/ui/plots/base/abstractgraph.cpp \
     lib/kb4/ui/plots/base/abstractplot.cpp \
