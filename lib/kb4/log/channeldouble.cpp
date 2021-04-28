@@ -173,6 +173,11 @@ void ChannelDouble::appendToAvgBuffer()
         avgBuffer.pop_front();
 }
 
+void ChannelDouble::clearAvgBuffer()
+{
+    avgBuffer.clear();
+}
+
 void ChannelDouble::configure()
 {
     connect(this, &Channel::valueChanged, [this]() { emit valueChangedDouble(value()); } );

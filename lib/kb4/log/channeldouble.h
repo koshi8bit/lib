@@ -33,8 +33,8 @@ public:
 
     double calcAvg(AvgFunc func = AvgFunc::ArithmeticMean, double *error = nullptr);
 
-    int bufferSize() const;
-    void setBufferSize(int bufferSize);
+    int avgBufferMaxSize() const;
+    void setAvgBufferMaxSize(int bufferSize);
 
     void setRange(double min, double max);
     void setRangeEnable(bool emitSignal);
@@ -44,6 +44,7 @@ public:
     void setAddToBufferOnEveryChange(bool addToBufferOnEveryChange);
 
     void appendToAvgBuffer();
+    void clearAvgBuffer();
 
 private:
 
@@ -59,7 +60,7 @@ private:
 
     //QQueue<double> buffer;
     QLinkedList<double> avgBuffer;
-    int _avgBufferSize = 0;
+    int _avgBufferMaxSize = 0;
     bool _addToBufferOnEveryChange = false;
 
 

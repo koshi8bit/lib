@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << EasyLiving::isBetween(5.2e-10, 1.0e-05, 1.0e-02);
 
     ChannelDouble f("aaa");
-    f.setBufferSize(8);
+    f.setAvgBufferMaxSize(8);
     f.setValue(2);
     f.setValue(4);
     f.setValue(4);
@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::testingValueBuffered()
 {
     auto a = new ChannelDouble("1");
-    a->setBufferSize(10);
+    a->setAvgBufferMaxSize(10);
 
     a->setValue(1.1);
     qDebug() << a->calcAvg(); // 1.1
