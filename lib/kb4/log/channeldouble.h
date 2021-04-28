@@ -40,6 +40,11 @@ public:
     void setRangeEnable(bool emitSignal);
     bool inRange();
 
+    bool addToBufferOnEveryChange() const;
+    void setAddToBufferOnEveryChange(bool addToBufferOnEveryChange);
+
+    void appendToAvgBuffer(double value);
+
 private:
 
     //double (*toScaledFunc)(double) = nullptr;
@@ -53,8 +58,10 @@ private:
     bool rangeEnable = false, inRangePrev = true;
 
     //QQueue<double> buffer;
-    QLinkedList<double> buffer;
-    int _bufferSize = 1;
+    QLinkedList<double> avgBuffer;
+    int _avgBufferSize = 0;
+    bool _addToBufferOnEveryChange = false;
+
 
     void configure();
 
