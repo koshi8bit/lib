@@ -43,7 +43,7 @@ public:
     bool addToBufferOnEveryChange() const;
     void setAddToBufferOnEveryChange(bool addToBufferOnEveryChange);
 
-    void appendToAvgBuffer(double value);
+    void appendToAvgBuffer();
 
 private:
 

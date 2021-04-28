@@ -77,7 +77,7 @@ double ChannelDouble::rawValue()
 
 double ChannelDouble::calcAvg(AvgFunc func, double *error)
 {
-    if (bufferSize() < 2)
+    if (avgBufferMaxSize() < 2)
         return value();
 
     if (func == AvgFunc::ArithmeticMean)
@@ -120,14 +120,14 @@ double ChannelDouble::calcStandardDeviation(double *error)
     return avarage_mu;
 }
 
-int ChannelDouble::bufferSize() const
+int ChannelDouble::avgBufferMaxSize() const
 {
-    return _avgBufferSize;
+    return _avgBufferMaxSize;
 }
 
-void ChannelDouble::setBufferSize(int bufferSize)
+void ChannelDouble::setAvgBufferMaxSize(int bufferSize)
 {
-    _avgBufferSize = bufferSize;
+    _avgBufferMaxSize = bufferSize;
 }
 
 void ChannelDouble::setRange(double min, double max)
@@ -166,10 +166,10 @@ void ChannelDouble::setAddToBufferOnEveryChange(bool addToBufferOnEveryChange)
     _addToBufferOnEveryChange = addToBufferOnEveryChange;
 }
 
-void ChannelDouble::appendToAvgBuffer(double value)
+void ChannelDouble::appendToAvgBuffer()
 {
-    avgBuffer.push_back(value);
-    if (avgBuffer.size() > _avgBufferSize)
+    avgBuffer.push_back(value());
+    if (avgBuffer.size() > _avgBufferMaxSize)
         avgBuffer.pop_front();
 }
 
@@ -195,9 +195,9 @@ void ChannelDouble::valueSetChild()
         inRangePrev = current;
     }
 
-    if (addToBufferOnEveryChange() & (bufferSize() >= 2))
+    if (addToBufferOnEveryChange() & (avgBufferMaxSize() >= 2))
     {
-        appendToAvgBuffer(value());
+        appendToAvgBuffer();
     }
 
     if (toRawFunc != nullptr) { _rawValue = toRawFunc(value()); }
