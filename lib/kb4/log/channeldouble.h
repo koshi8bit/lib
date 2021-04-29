@@ -32,6 +32,7 @@ public:
 
 
     double calcAvg(AvgFunc func = AvgFunc::ArithmeticMean, double *error = nullptr);
+    bool calcAvgEnabled();
 
     int avgBufferMaxSize() const;
     void setAvgBufferMaxSize(int bufferSize);
@@ -45,6 +46,7 @@ public:
 
     void appendToAvgBuffer();
     void clearAvgBuffer();
+    int avgBufferSize();
 
 private:
 

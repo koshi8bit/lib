@@ -77,8 +77,8 @@ double ChannelDouble::rawValue()
 
 double ChannelDouble::calcAvg(AvgFunc func, double *error)
 {
-    if (avgBufferMaxSize() < 2)
-        return value();
+    if (!calcAvgEnabled())
+        return 0;
 
     if (func == AvgFunc::ArithmeticMean)
         return calcArithmeticMean();
@@ -88,6 +88,11 @@ double ChannelDouble::calcAvg(AvgFunc func, double *error)
         return calcStandardDeviation(error);
     }
 
+}
+
+bool ChannelDouble::calcAvgEnabled()
+{
+    return avgBufferMaxSize() >= 2;
 }
 
 double ChannelDouble::calcArithmeticMean()
@@ -205,7 +210,7 @@ void ChannelDouble::valueSetChild()
         inRangePrev = current;
     }
 
-    if (addToBufferOnEveryChange() & (avgBufferMaxSize() >= 2))
+    if (addToBufferOnEveryChange() & calcAvgEnabled())
     {
         appendToAvgBuffer();
     }
