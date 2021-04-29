@@ -31,6 +31,7 @@ private:
 signals:
     void heavyWorkSingleTimeFinished();
     void heavyWorkFinished();
+    //void progressChanged(int progress);
 
 public slots:
     void startSingleTime();
