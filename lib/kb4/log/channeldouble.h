@@ -50,7 +50,7 @@ public:
     int avgBufferSize();
 
 private:
-    double _avg=0;
+    double _avg=0, _avgError=0;
     //double (*toScaledFunc)(double) = nullptr;
     std::function<double(double)> toScaledFunc = nullptr;
 
@@ -70,7 +70,7 @@ private:
     void configure();
 
     double calcArithmeticMean();
-    double calcStandardDeviation(double *error);
+    double calcStandardDeviation();
 
     
 signals:
