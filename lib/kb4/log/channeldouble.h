@@ -32,7 +32,8 @@ public:
 
 
     double calcAvg(AvgFunc func = AvgFunc::ArithmeticMean, double *error = nullptr);
-    bool calcAvgEnabled();
+    double avg();
+    bool isCalcAvgEnabled();
 
     int avgBufferMaxSize() const;
     void setAvgBufferMaxSize(int bufferSize);
@@ -49,7 +50,7 @@ public:
     int avgBufferSize();
 
 private:
-
+    double _avg=0;
     //double (*toScaledFunc)(double) = nullptr;
     std::function<double(double)> toScaledFunc = nullptr;
 
