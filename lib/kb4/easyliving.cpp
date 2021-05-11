@@ -349,6 +349,11 @@ bool EasyLiving::isWritable(QString path)
     result &= writeFile(tmpFile, testStr);
     result &= readFile(tmpFile) == testStr;
 
+    QFile file1(tmpFile);
+
+    if (file1.exists())
+        file1.remove();
+
     return result;
 }
 
