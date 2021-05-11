@@ -73,8 +73,13 @@ MainWindow::MainWindow(QWidget *parent) :
 //        qDebug() << e;
 //    }
 
-    qDebug() << EasyLiving::isWritable("Y:/");
-    qDebug() << EasyLiving::isWritable("Z:/");
+//    qDebug() << EasyLiving::isWritable("Y:/");
+//    qDebug() << EasyLiving::isWritable("Z:/");
+
+    auto now = QDateTime::currentDateTime();
+    auto date = now.toString(EasyLiving::formatDateFile());
+    auto folder = EasyLiving::pathConcat("./13/logs/integrator/table", date);
+    qDebug() << EasyLiving::createDir(folder);
 
 }
 

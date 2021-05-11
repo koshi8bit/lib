@@ -331,12 +331,20 @@ bool EasyLiving::isChecked(int arg1)
 
 bool EasyLiving::createDir(QString path)
 {
-    QDir dir(path);
-    if (!dir.exists()){
-      dir.mkdir(".");
-    }
+//    auto tmp = new QDir(path);
+//    return tmp->mkpath(path);
 
-    return dir.exists();
+//    QDir dir(path);
+//    if (!dir.exists()){
+//      dir.mkdir(".");
+//    }
+
+//    return dir.exists();
+
+
+    QDir dir(path);
+    return dir.mkpath(".");
+
 }
 
 bool EasyLiving::isWritable(QString path)
