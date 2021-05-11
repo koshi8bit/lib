@@ -1,6 +1,6 @@
 #include "excelsimple.h"
 
-ExcelSimple::ExcelSimple(QString filename, QObject *parent, bool pushOnCommit)
+ExcelSimple::ExcelSimple(QString filename, bool pushOnCommit, QObject *parent)
     : QObject(parent)
 {
     this->filename = filename;
