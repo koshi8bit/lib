@@ -343,7 +343,6 @@ bool EasyLiving::isWritable(QString path)
 {
     auto file = QDateTime::currentDateTime().toString(formatDateTimeFile()) + ".txt";
     auto tmpFile = pathConcat(path, file);
-    qDebug() << tmpFile;
 
     auto result = true;
     auto testStr = "I love my dog Cooper!";
@@ -383,13 +382,15 @@ bool EasyLiving::writeFile(QString path, QString text, bool append, bool addDate
     }
 }
 
-QString EasyLiving::readFile(QString path)
+QString EasyLiving::readFile(QString path, bool *ok)
 {
     QFile file(path);
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        qCritical() << EL_FORMAT_ERR("error opening file: ") << file.error();
+        qCritical() << EL_FORMAT_ERR("error opening file:") << file.error();
+        if (ok != nullptr)
+            *ok = false;
         return "";
     }
 
@@ -397,6 +398,10 @@ QString EasyLiving::readFile(QString path)
     QString line = instream.readAll();
 
     file.close();
+
+    if (ok != nullptr)
+        *ok = true;
+
     return line;
 
 }

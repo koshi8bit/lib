@@ -110,7 +110,7 @@ public:
     static bool createDir(QString path);
     static bool isWritable(QString path);
     static bool writeFile(QString path, QString text, bool append = false, bool addDateTime = false);
-    static QString readFile(QString path);
+    static QString readFile(QString path, bool *ok=nullptr);
     static QString pathConcat(QString path1, QString path2);
 
     static bool exec(QString exe, QStringList arguments);
