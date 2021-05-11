@@ -6,7 +6,8 @@
 class ExcelSimple : public QObject
 {
 public:
-    ExcelSimple(QString filename, bool pushOnCommit=true, QObject *parent = nullptr);
+    ExcelSimple(QString filename, QObject *parent = nullptr);
+    ExcelSimple(QString filename, bool pushOnCommit, bool clearBeforeStart, QObject *parent = nullptr);
 
     void configure(QString filename);
 
