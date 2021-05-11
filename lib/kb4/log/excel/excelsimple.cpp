@@ -65,7 +65,7 @@ bool ExcelSimple::push()
     if (writeOk)
         buffer.clear();
     else
-        qCritical() << EL_FORMAT_ERR("Ошибка сохранения");
+        qCritical() << EL_FORMAT_ERR("Ошибка сохранения") << buffer;
 
     return writeOk;
 }
