@@ -6,16 +6,25 @@
 class ExcelSimple : public QObject
 {
 public:
-    ExcelSimple(QString filename, QObject *parent = nullptr);
+    ExcelSimple(QString filename, QObject *parent = nullptr, bool pushOnCommit=true);
 
     void configure(QString filename);
 
-    void addLine(QStringList list);
-    void addLine(QList<double> list);
-    void addLine(QString line);
+    void commit(QStringList list);
+    void commit(QList<double> list);
+    void commit(QList<QString> list);
+    void commit(QString line);
+
+    bool push();
+
+    bool pushOnCommit() const;
+    void setPushOnCommit(bool pushOnCommit);
 
 private:
     QString filename;
+    bool _pushOnCommit;
+
+    QString buffer;
 };
 
 #endif // EXCELSIMPLE_H

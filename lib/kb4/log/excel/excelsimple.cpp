@@ -1,19 +1,20 @@
 #include "excelsimple.h"
 
-ExcelSimple::ExcelSimple(QString filename, QObject *parent)
+ExcelSimple::ExcelSimple(QString filename, QObject *parent, bool pushOnCommit)
     : QObject(parent)
 {
     this->filename = filename;
+    this->_pushOnCommit = pushOnCommit;
 }
 
-void ExcelSimple::addLine(QStringList list)
+void ExcelSimple::commit(QStringList list)
 {
     auto line = list.join(Excel::elementDelimeter);
 
-    addLine(line);
+    commit(line);
 }
 
-void ExcelSimple::addLine(QList<double> list)
+void ExcelSimple::commit(QList<double> list)
 {
     QStringList l;
 
@@ -22,11 +23,45 @@ void ExcelSimple::addLine(QList<double> list)
         l.append(EasyLiving::formatDouble(element, 3, true, false));
     }
 
-    addLine(l);
+    commit(l);
 }
 
-void ExcelSimple::addLine(QString line)
+void ExcelSimple::commit(QList<QString> list)
+{
+    QStringList l(list);
+    commit(l);
+}
+
+void ExcelSimple::commit(QString line)
 {
     line = line.append(Excel::lineDelimeter);
-    EasyLiving::writeFile(filename, line, true);
+    if (pushOnCommit())
+    {
+        EasyLiving::writeFile(filename, line, true);
+    }
+    else
+    {
+        buffer.append(line);
+    }
+}
+
+bool ExcelSimple::push()
+{
+    auto writeOk = EasyLiving::writeFile(filename, buffer, true);
+    if (writeOk)
+        buffer.clear();
+    else
+        qCritical() << EL_FORMAT_ERR("Ошибка сохранения");
+
+    return writeOk;
+}
+
+bool ExcelSimple::pushOnCommit() const
+{
+    return _pushOnCommit;
+}
+
+void ExcelSimple::setPushOnCommit(bool pushOnCommit)
+{
+    _pushOnCommit = pushOnCommit;
 }

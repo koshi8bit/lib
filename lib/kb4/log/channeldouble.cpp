@@ -88,7 +88,9 @@ double ChannelDouble::calcAvg(AvgFunc func, double *error)
         _avg = calcStandardDeviation();
     }
 
-    *error = _avgError;
+    if (error)
+        *error = _avgError;
+
     return _avg;
 }
 
@@ -120,7 +122,6 @@ double ChannelDouble::calcArithmeticMean()
 
 double ChannelDouble::calcStandardDeviation()
 {
-
     double avarage_mu = calcArithmeticMean();
 
     double summ=0;
