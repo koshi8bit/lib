@@ -1,10 +1,24 @@
 #include "excelsimple.h"
 
-ExcelSimple::ExcelSimple(QString filename, bool pushOnCommit, QObject *parent)
+ExcelSimple::ExcelSimple(QString filename, QObject *parent)
+    :ExcelSimple(filename, true, false, parent)
+{
+
+}
+
+ExcelSimple::ExcelSimple(QString filename, bool pushOnCommit, bool clearBeforeStart, QObject *parent)
     : QObject(parent)
 {
     this->filename = filename;
     this->_pushOnCommit = pushOnCommit;
+
+    if (clearBeforeStart)
+    {
+        QFile file(filename);
+
+        if (file.exists())
+            file.remove();
+    }
 }
 
 void ExcelSimple::commit(QStringList list)
