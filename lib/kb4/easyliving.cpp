@@ -339,6 +339,20 @@ bool EasyLiving::createDir(QString path)
     return dir.exists();
 }
 
+bool EasyLiving::isWritable(QString path)
+{
+    auto file = QDateTime::currentDateTime().toString(formatDateTimeFile()) + ".txt";
+    auto tmpFile = pathConcat(path, file);
+    qDebug() << tmpFile;
+
+    auto result = true;
+    auto testStr = "I love my dog Cooper!";
+    result &= writeFile(tmpFile, testStr);
+    result &= readFile(tmpFile) == testStr;
+
+    return result;
+}
+
 bool EasyLiving::writeFile(QString path, QString text, bool append, bool addDateTime)
 {
     QFile file(path);

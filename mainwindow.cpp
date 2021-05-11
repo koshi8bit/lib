@@ -73,6 +73,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //        qDebug() << e;
 //    }
 
+    qDebug() << EasyLiving::isWritable("Y:/");
+    qDebug() << EasyLiving::isWritable("Z:/");
+
 }
 
 
